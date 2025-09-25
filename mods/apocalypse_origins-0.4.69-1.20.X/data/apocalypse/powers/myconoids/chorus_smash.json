@@ -1,0 +1,551 @@
+{
+	"type": "origins:multiple",
+	"oofouchmybones":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+				  "type": "origins:execute_command",
+				  "command": "particle minecraft:dripping_obsidian_tear ~ ~0 ~ 0.3 7 0.3 1 50"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:entity.guardian.death master @a ~ ~ ~ 2 1.5"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:block.glass.break master @s ~ ~ ~ 1 1"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "particle minecraft:reverse_portal ~ ~2 ~ 0 5 0 2 0"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "particle minecraft:reverse_portal ~1 ~2 ~ 0 5 0 2 0"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "particle minecraft:reverse_portal ~ ~2 ~1 0 5 0 2 0"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "particle minecraft:reverse_portal ~1 ~2 ~1 0 5 0 2 0"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "particle minecraft:reverse_portal ~ ~2 ~-1 0 5 0 2 0"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "particle minecraft:reverse_portal ~-1 ~2 ~ 0 5 0 2 0"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "particle minecraft:reverse_portal ~-1 ~2 ~-1 0 5 0 2 0"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "particle minecraft:reverse_portal ~ ~2 ~ 0 5 0 2 0"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "particle minecraft:reverse_portal ~1 ~2 ~ 0 5 0 2 0"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "particle minecraft:reverse_portal ~ ~2 ~1 0 5 0 2 0"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "particle minecraft:reverse_portal ~1 ~2 ~1 0 5 0 2 0"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "particle minecraft:reverse_portal ~ ~2 ~-1 0 5 0 2 0"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "particle minecraft:reverse_portal ~-1 ~2 ~ 0 5 0 2 0"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "particle minecraft:reverse_portal ~-1 ~2 ~-1 0 5 0 2 0"
+				},
+				{
+					"type": "origins:add_velocity",
+					"y": 2,
+					"space": "world"
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 40,
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:if_else_list",
+								"actions": [
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:enchantment",
+													"enchantment": "minecraft:protection",
+													"calculation": "sum",
+													"comparison": "<",
+													"compare_to": 8
+												}
+											]
+										},
+										"action": {
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "playsound minecraft:entity.phantom.bite master @a ~ ~ ~ 2 0.5"
+												},
+												{
+													"type": "origins:damage",
+													"amount": 4,
+													"source": {
+														"name": "outOfWorld",
+														"bypasses_armor": true
+													}
+												}
+											]
+										}
+									},
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:enchantment",
+													"enchantment": "minecraft:protection",
+													"calculation": "sum",
+													"comparison": ">=",
+													"compare_to": 8
+												},
+												{
+													"type": "origins:enchantment",
+													"enchantment": "minecraft:protection",
+													"calculation": "sum",
+													"comparison": "<",
+													"compare_to": 12
+												}
+											]
+										},
+										"action": {
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "playsound minecraft:entity.phantom.bite master @a ~ ~ ~ 2 0.5"
+												},
+												{
+													"type": "origins:damage",
+													"amount": 5,
+													"source": {
+														"name": "outOfWorld",
+														"bypasses_armor": true
+													}
+												}
+											]
+										}
+									},
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:enchantment",
+													"enchantment": "minecraft:protection",
+													"calculation": "sum",
+													"comparison": ">=",
+													"compare_to": 12
+												},
+												{
+													"type": "origins:enchantment",
+													"enchantment": "minecraft:protection",
+													"calculation": "sum",
+													"comparison": "<",
+													"compare_to": 16
+												}
+											]
+										},
+										"action": {
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "playsound minecraft:entity.phantom.bite master @a ~ ~ ~ 2 0.5"
+												},
+												{
+													"type": "origins:damage",
+													"amount": 7,
+													"source": {
+														"name": "outOfWorld",
+														"bypasses_armor": true
+													}
+												}
+											]
+										}
+									},
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:enchantment",
+													"enchantment": "minecraft:protection",
+													"calculation": "sum",
+													"comparison": ">=",
+													"compare_to": 16
+												}
+											]
+										},
+										"action": {
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "playsound minecraft:entity.phantom.bite master @a ~ ~ ~ 2 0.5"
+												},
+												{
+													"type": "origins:damage",
+													"amount": 10,
+													"source": {
+														"name": "outOfWorld",
+														"bypasses_armor": true
+													}
+												}
+											]
+										}
+									}
+								]
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 60,
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/chorus_smash_resource -1"
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 65,
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:item.totem.use master @a ~ ~ ~ 1 2"
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 71,
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "power revoke @s apocalypse:myconoids/chorus_smash afungus"
+							}
+						]
+					}
+				}
+			]
+		}
+	},
+	"resource":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 1,
+		"hidden": true,
+		"name": "Smash?",
+		"description": "If 0, smash.",
+		"hud_render": {
+			"should_render": false,
+			"sprite_location":"apocalypse:textures/gui/mycomoss.png",
+			"bar_index": 0
+		}
+	},
+	"pain_one":
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": 0.15,
+			"operation":"multiply_total"
+		},
+		"damage_condition": {
+			"type": "origins:name",
+			"name": "fall"
+		},
+		"condition":{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:enchantment",
+					"enchantment": "minecraft:protection",
+					"calculation": "sum",
+					"comparison": ">=",
+					"compare_to": 8
+				},
+				{
+					"type": "origins:enchantment",
+					"enchantment": "minecraft:protection",
+					"calculation": "sum",
+					"comparison": "<",
+					"compare_to": 12
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "apocalypse:myconoids/chorus_smash_resource",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"pain_two":
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": 0.4,
+			"operation":"multiply_total"
+		},
+		"damage_condition": {
+			"type": "origins:name",
+			"name": "fall"
+		},
+		"condition":{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:enchantment",
+					"enchantment": "minecraft:protection",
+					"calculation": "sum",
+					"comparison": ">=",
+					"compare_to": 12
+				},
+				{
+					"type": "origins:enchantment",
+					"enchantment": "minecraft:protection",
+					"calculation": "sum",
+					"comparison": "<",
+					"compare_to": 16
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "apocalypse:myconoids/chorus_smash_resource",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"pain_three":
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": 0.9,
+			"operation":"multiply_total"
+		},
+		"damage_condition": {
+			"type": "origins:name",
+			"name": "fall"
+		},
+		"condition":{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:enchantment",
+					"enchantment": "minecraft:protection",
+					"calculation": "sum",
+					"comparison": ">=",
+					"compare_to": 16
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "apocalypse:myconoids/chorus_smash_resource",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"pain_four":
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": 1,
+			"operation":"multiply_total"
+		},
+		"damage_condition": {
+			"type": "origins:name",
+			"name": "fall"
+		},
+		"condition":{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:enchantment",
+					"enchantment": "minecraft:protection",
+					"calculation": "sum",
+					"comparison": ">=",
+					"compare_to": 16
+				},
+				{
+					"type": "origins:enchantment",
+					"enchantment": "minecraft:feather_falling",
+					"calculation": "sum",
+					"comparison": "<",
+					"compare_to": 4
+				},
+				{
+					"type": "origins:enchantment",
+					"enchantment": "minecraft:feather_falling",
+					"calculation": "sum",
+					"comparison": ">",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "apocalypse:myconoids/chorus_smash_resource",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"pain_five":
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": 2.5,
+			"operation":"multiply_total"
+		},
+		"damage_condition": {
+			"type": "origins:name",
+			"name": "fall"
+		},
+		"condition":{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:enchantment",
+					"enchantment": "minecraft:protection",
+					"calculation": "sum",
+					"comparison": ">=",
+					"compare_to": 16
+				},
+				{
+					"type": "origins:enchantment",
+					"enchantment": "minecraft:feather_falling",
+					"calculation": "sum",
+					"comparison": ">=",
+					"compare_to": 4
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "apocalypse:myconoids/chorus_smash_resource",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"smackdown":
+	{
+		"type": "origins:self_action_when_hit",
+		"cooldown": 0,
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "power grant @s[type=!player] apocalypse:myconoids/chorus_stomped_status afungus"
+				}
+			]
+		},
+		"damage_condition": {
+			"type": "origins:name",
+			"name": "fall"
+		}
+	},
+	"slow_falling":
+	{
+		"type": "origins:modify_falling",
+		"velocity": 0,
+		"take_fall_damage": false,
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "apocalypse:myconoids/chorus_smash_resource",
+					"compare_to": 1
+				}
+			]
+		}
+	},
+	"fast_falling":
+	{
+		"type": "origins:modify_falling",
+		"velocity": 1,
+		"take_fall_damage": true,
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "apocalypse:myconoids/chorus_smash_resource",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"glow":
+	{
+		"type": "origins:self_glow",
+		"use_teams": false,
+		"red": 0.54,
+		"green": 0.41,
+		"blue": 0.54,
+		"entity_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:origin",
+					"origin": "apocalypse:myconoid_chorus",
+					"layer": "origins:origin"
+				}
+			]
+		},
+		"hidden": true
+	},
+	"hidden": true
+}

@@ -1,0 +1,21 @@
+{
+	"powers": [
+		"apocalypse:myconoids/spore_callback",
+		"apocalypse:myconoids/spore_passives",
+		"apocalypse:myconoids/spore_secondaries",
+		"apocalypse:myconoids/resource_temperature",
+		"apocalypse:myconoids/spore_cold",
+		"apocalypse:myconoids/spore_heat",
+		"apocalypse:myconoids/turf_penalty"
+	],
+	"icon": {
+		"item": "minecraft:amethyst_shard",
+		"tag": "{CustomModelData:19}"
+	},
+	"unchoosable": false,
+	"order": 10,
+	"impact": 3,
+	"name": "Myconoid Spore",
+	"description": "You are a tiny spore, a remnant of what once was that came before you came to be. Small and insignificant, you won't last long. You must find a suitable environment to grow, evolve and thrive."
+}
+//Umena says hi

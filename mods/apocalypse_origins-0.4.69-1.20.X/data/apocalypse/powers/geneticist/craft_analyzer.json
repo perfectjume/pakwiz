@@ -1,0 +1,57 @@
+{
+	"type": "origins:recipe",
+	"recipe": {
+		"type": "minecraft:crafting_shaped",
+		"id": "apocalypse_origins:analyzer",
+		"pattern": [
+			"^^^",
+			"^#^",
+			"-^^"
+		],
+		"key": {
+			"#": {
+				"item": "minecraft:glass_pane"
+			},
+			"^": {
+				"item": "minecraft:iron_nugget"
+			},
+			"-": {
+				"item": "minecraft:iron_ingot"
+			}
+		},
+		"result": {
+			"item": "apocalypse_origins:analyzer"
+		}
+	},
+	"name": "Labware: Analyzers",
+	"description": "You know how to create genome analyzers with glass panes, iron nuggets and iron ingots.\n \n- Upon use, they inform you of any [Gene] and [Side Effect] within you. Striking other players or mobs reveals any [Gene] and [Side Effect] they are under.",
+	"badges": [
+		{	
+			"type": "origins:crafting_recipe",
+			"sprite": "apocalypse_origins:textures/item/analyzer.png",
+			"recipe": {
+				"type": "minecraft:crafting_shaped",
+				"id": "apocalypse_origins:analyzer",
+				"pattern": [
+					"^^^",
+					"^#^",
+					"-^^"
+				],
+				"key": {
+					"#": {
+						"item": "minecraft:glass_pane"
+					},
+					"^": {
+						"item": "minecraft:iron_nugget"
+					},
+					"-": {
+						"item": "minecraft:iron_ingot"
+					}
+				},
+				"result": {
+					"item": "apocalypse_origins:analyzer"
+				}
+			}
+		}
+	]
+}

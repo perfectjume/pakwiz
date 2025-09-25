@@ -1,0 +1,13 @@
+name = "Damage Numbers"
+filename = "damagenumbers-1.4.0-fabric.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "fe499dc5d175e2a86ac0e81725c6fbb651d4f482"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 5475416
+project-id = 1022853

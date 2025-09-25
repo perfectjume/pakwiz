@@ -1,0 +1,1100 @@
+{
+	"type": "origins:multiple",
+	"ligma_y": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hud_render":{
+			"should_render": false
+		}
+	},
+	"buffering":{
+		"type": "origins:action_over_time",
+		"interval": 1,
+		"entity_action":{
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:resource",
+								"comparison": "!=",
+								"resource": "apocalypse:hidden_bufferwarpx",
+								"compare_to": 0
+							},
+							"action":{
+								"type": "origins:if_else_list",
+								"actions": [
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": ">=",
+											"resource": "apocalypse:hidden_bufferwarpx",
+											"compare_to": 20
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "resource change @s apocalypse:hidden_bufferwarpx -20"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_warpx 20"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_revwarpx -20"
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "<=",
+											"resource": "apocalypse:hidden_bufferwarpx",
+											"compare_to": -20
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "resource change @s apocalypse:hidden_bufferwarpx 20"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_warpx -20"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_revwarpx 20"
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": ">=",
+											"resource": "apocalypse:hidden_bufferwarpx",
+											"compare_to": 10
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "resource change @s apocalypse:hidden_bufferwarpx -10"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_warpx 10"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_revwarpx -10"
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "<=",
+											"resource": "apocalypse:hidden_bufferwarpx",
+											"compare_to": -10
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "resource change @s apocalypse:hidden_bufferwarpx 10"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_warpx -10"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_revwarpx 10"
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": ">=",
+											"resource": "apocalypse:hidden_bufferwarpx",
+											"compare_to": 5
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "resource change @s apocalypse:hidden_bufferwarpx -5"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_warpx 5"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_revwarpx -5"
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "<=",
+											"resource": "apocalypse:hidden_bufferwarpx",
+											"compare_to": -5
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "resource change @s apocalypse:hidden_bufferwarpx 5"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_warpx -5"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_revwarpx 5"
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": ">=",
+											"resource": "apocalypse:hidden_bufferwarpx",
+											"compare_to": 2
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "resource change @s apocalypse:hidden_bufferwarpx -2"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_warpx 2"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_revwarpx -2"
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "<=",
+											"resource": "apocalypse:hidden_bufferwarpx",
+											"compare_to": -2
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "resource change @s apocalypse:hidden_bufferwarpx 2"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_warpx -2"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_revwarpx 2"
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": ">=",
+											"resource": "apocalypse:hidden_bufferwarpx",
+											"compare_to": 1
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "resource change @s apocalypse:hidden_bufferwarpx -1"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_warpx 1"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_revwarpx -1"
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "<=",
+											"resource": "apocalypse:hidden_bufferwarpx",
+											"compare_to": -1
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "resource change @s apocalypse:hidden_bufferwarpx 1"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_warpx -1"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_revwarpx 1"
+												}
+											]
+										}
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:resource",
+								"comparison": "!=",
+								"resource": "apocalypse:hidden_bufferwarpz",
+								"compare_to": 0
+							},
+							"action":{
+								"type": "origins:if_else_list",
+								"actions": [
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": ">=",
+											"resource": "apocalypse:hidden_bufferwarpz",
+											"compare_to": 20
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "resource change @s apocalypse:hidden_bufferwarpz -20"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_warpz 20"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_revwarpz -20"
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "<=",
+											"resource": "apocalypse:hidden_bufferwarpz",
+											"compare_to": -20
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "resource change @s apocalypse:hidden_bufferwarpz 20"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_warpz -20"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_revwarpz 20"
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": ">=",
+											"resource": "apocalypse:hidden_bufferwarpz",
+											"compare_to": 10
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "resource change @s apocalypse:hidden_bufferwarpz -10"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_warpz 10"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_revwarpz -10"
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "<=",
+											"resource": "apocalypse:hidden_bufferwarpz",
+											"compare_to": -10
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "resource change @s apocalypse:hidden_bufferwarpz 10"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_warpz -10"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_revwarpz 10"
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": ">=",
+											"resource": "apocalypse:hidden_bufferwarpz",
+											"compare_to": 5
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "resource change @s apocalypse:hidden_bufferwarpz -5"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_warpz 5"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_revwarpz -5"
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "<=",
+											"resource": "apocalypse:hidden_bufferwarpz",
+											"compare_to": -5
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "resource change @s apocalypse:hidden_bufferwarpz 5"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_warpz -5"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_revwarpz 5"
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": ">=",
+											"resource": "apocalypse:hidden_bufferwarpz",
+											"compare_to": 2
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "resource change @s apocalypse:hidden_bufferwarpz -2"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_warpz 2"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_revwarpz -2"
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "<=",
+											"resource": "apocalypse:hidden_bufferwarpz",
+											"compare_to": -2
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "resource change @s apocalypse:hidden_bufferwarpz 2"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_warpz -2"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_revwarpz 2"
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": ">=",
+											"resource": "apocalypse:hidden_bufferwarpz",
+											"compare_to": 1
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "resource change @s apocalypse:hidden_bufferwarpz -1"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_warpz 1"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_revwarpz -1"
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "<=",
+											"resource": "apocalypse:hidden_bufferwarpz",
+											"compare_to": -1
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "resource change @s apocalypse:hidden_bufferwarpz 1"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_warpz -1"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource change @s apocalypse:hidden_revwarpz 1"
+												}
+											]
+										}
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "apocalypse:hidden_bufferwarpy",
+								"compare_to": 0
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 0"
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:resource",
+								"comparison": "!=",
+								"resource": "apocalypse:hidden_bufferwarpy",
+								"compare_to": 0
+							},
+							"action":{
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:if_else_list",
+										"actions": [
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 32
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 32"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 31
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 31"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 30
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 30"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 29
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 29"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 28
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 28"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 27
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 27"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 26
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 26"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 25
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 25"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 24
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 24"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 23
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 23"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 22
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 22"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 21
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 21"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 20
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 20"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 19
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 19"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 18
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 18"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 17
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 17"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 16
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 16"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 15
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 15"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 14
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 14"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 13
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 13"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 12
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 12"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 11
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 11"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 10
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 10"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 9
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 9"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 8
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 8"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 7
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 7"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 6
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 6"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 5
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 5"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 4
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 4"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 3
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 3"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 2
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 2"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": 1
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy 1"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": -1
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy -1"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": -2
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy -2"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": -3
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy -3"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": -4
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy -4"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": -5
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy -5"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_bufferwarpy",
+													"compare_to": -6
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "execute as @e[distance=..2] run resource set @s apocalypse:hidden_warpy -6"
+												}
+											}
+										]
+									},
+									{
+										"type": "origins:change_resource",
+										"resource": "*:*_ligma_y",
+										"change": 1
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:resource",
+										"comparison": "==",
+										"resource": "apocalypse:hidden_bufferwarpx",
+										"compare_to": 0
+									},
+									{
+										"type": "origins:or",
+										"conditions": [
+											{
+												"type": "origins:resource",
+												"comparison": "==",
+												"resource": "*:*_ligma_y",
+												"compare_to": 1
+											},
+											{
+												"type": "origins:resource",
+												"comparison": "==",
+												"resource": "apocalypse:hidden_bufferwarpy",
+												"compare_to": 0
+											}
+										]
+									},
+									{
+										"type": "origins:resource",
+										"comparison": "==",
+										"resource": "apocalypse:hidden_bufferwarpz",
+										"compare_to": 0
+									}
+								]
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "power revoke @s apocalypse:refractor2/teleport_buffer temprefractor"
+							}
+						}
+					]
+				}
+			]
+		}
+	}
+
+}

@@ -1,0 +1,13 @@
+name = "Create Nuclear"
+filename = "createnuclear-1.3.0-fabric.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "cee9d14249f7afadc7d2b325b2a90c061356172b"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 6621107
+project-id = 989797

@@ -1,0 +1,1 @@
+execute as @e[type=item,predicate=apocalypse:mirror_predicate,distance=0.1..7] at @s run function apocalypse:reflect_item_cancel

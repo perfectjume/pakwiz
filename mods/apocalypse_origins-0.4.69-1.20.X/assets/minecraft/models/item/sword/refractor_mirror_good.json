@@ -1,0 +1,6 @@
+{
+    "parent": "item/amethyst_shard",
+    "textures": {
+        "layer0": "item/refractor_mirror"
+    }
+}

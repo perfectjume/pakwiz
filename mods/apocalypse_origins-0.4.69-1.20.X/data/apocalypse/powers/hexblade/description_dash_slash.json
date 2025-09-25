@@ -1,0 +1,5 @@
+{
+	"type": "origins:simple",
+	"name": "Dash Slash",
+	"description": "Your hatred propels you forward with murderous intent.\n \nIf you are holding your sword, press [Primary] to dash forward a short distance and briefly become invisible. A hit scored during a dash counts as a critical hit. Additionally, if you dash through enemies, they will take 4 damage (unless they are immune to magic)."
+}

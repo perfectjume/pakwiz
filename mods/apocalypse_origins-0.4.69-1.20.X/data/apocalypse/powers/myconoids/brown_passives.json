@@ -1,0 +1,139 @@
+{
+	"type": "origins:multiple",
+	"color":
+	{
+		"type": "origins:model_color",
+		"red": 0.56,
+		"green": 0.35,
+		"blue": 0.19
+	},
+	"basehealth": 
+	{
+		"type": "origins:attribute",
+		"update_health": true,
+		"modifiers": {
+			"attribute": "minecraft:generic.max_health",
+			"operation": "multiply_total",
+			"value": -0.5
+		},
+		"name": "Frail worker",
+		"description": "Your max HP is reduced by 50%."
+	},
+	"noeffects": 
+	{
+		"type": "origins:effect_immunity",
+		"effects": [
+			"minecraft:poison"
+		],
+		"hidden": true
+	},
+	"flammable":
+	{
+		"type": "origins:self_action_when_hit",
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:set_on_fire",
+					"duration": 5
+				}
+			]
+		},
+		"damage_condition": {
+			"type": "origins:fire"
+		},
+		"cooldown": 0,
+		"name": "Flammable",
+		"description": "You are flammable and fire will not be put out on its own."
+	},
+	"melee":
+	{
+		"type": "origins:modify_damage_dealt",
+		"target_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:player",
+					"inverted": true
+				},
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:player",
+					"inverted": false
+				}
+			]
+		},
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -0.3
+		},
+		"hidden": true
+	},
+	"projectile":
+	{
+		"type": "origins:modify_projectile_damage",
+		"target_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:player",
+					"inverted": true
+				},
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:player",
+					"inverted": false
+				}
+			]
+		},
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -0.3
+		},
+		"hidden": true
+	},
+	"miner":
+	{
+		"type": "origins:modify_break_speed",
+		"modifier": {
+			"operation": "multiply_base",
+			"value": 1
+		}
+	},
+	"devolve":
+	{
+		"type": "origins:prevent_death",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "power grant @s apocalypse:myconoids/shake afungus",
+					"permission_level": 4
+				},
+				{
+					"type": "origins:clear_effect"
+				},
+				{
+					"type": "origins:extinguish"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:entity.tnt.primed master @a[distance=..10] ~ ~ ~ 4 0.5",
+					"permission_level": 4
+				}
+			]
+		}
+	},
+	"status_bar":
+	{
+		"type": "origins:status_bar_texture",
+		"texture": "apocalypse:textures/gui/myconoid_brown_bars.png"
+	},
+	"hidden": true
+}

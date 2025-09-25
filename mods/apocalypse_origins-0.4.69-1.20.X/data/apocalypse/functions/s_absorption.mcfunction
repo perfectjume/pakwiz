@@ -1,0 +1,1 @@
+give @s minecraft:suspicious_stew{display:{Lore:['[{"text":"This stew is thick","italic":false}]']},Effects:[{EffectId:22b,EffectDuration:600}]} 1

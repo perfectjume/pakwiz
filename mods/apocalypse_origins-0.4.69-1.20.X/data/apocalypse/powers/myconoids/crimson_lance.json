@@ -1,0 +1,201 @@
+{
+	"type": "origins:multiple",
+	"oofouchmybones":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:entity.evoker_fangs.attack master @s ~ ~ ~ 1 1"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:block.glass.break master @s ~ ~ ~ 1 1"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "particle minecraft:block ice ~ ~1 ~ 0 0.1 0 1 3"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "particle minecraft:cloud ~ ~1 ~ 0 0.2 0 0 2"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "particle minecraft:crit ~ ~1 ~ 0 0 0 0.5 8"
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:enchantment",
+								"enchantment": "minecraft:protection",
+								"calculation": "sum",
+								"comparison": "<",
+								"compare_to": 8
+							},
+							"action": {
+								"type": "origins:damage",
+								"amount": 9,
+								"source": {
+									"name": "freeze",
+									"bypasses_armor": false,
+									"unblockable": false
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": ">=",
+										"compare_to": 8
+									},
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": "<",
+										"compare_to": 12
+									}
+								]
+							},
+							"action": {
+								"type": "origins:damage",
+								"amount": 11,
+								"source": {
+									"name": "freeze",
+									"bypasses_armor": false,
+									"unblockable": false
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": ">=",
+										"compare_to": 12
+									},
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": "<",
+										"compare_to": 16
+									}
+								]
+							},
+							"action": {
+								"type": "origins:damage",
+								"amount": 15,
+								"source": {
+									"name": "freeze",
+									"bypasses_armor": false,
+									"unblockable": false
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": ">=",
+										"compare_to": 16
+									},
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": "<",
+										"compare_to": 20
+									}
+								]
+							},
+							"action": {
+								"type": "origins:damage",
+								"amount": 20,
+								"source": {
+									"name": "freeze",
+									"bypasses_armor": true,
+									"unblockable": false
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": ">=",
+										"compare_to": 20
+									}
+								]
+							},
+							"action": {
+								"type": "origins:damage",
+								"amount": 25,
+								"source": {
+									"name": "freeze",
+									"bypasses_armor": true,
+									"unblockable": false
+								}
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 21,
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "power revoke @s apocalypse:myconoids/crimson_lance afungus"
+							}
+						]
+					}
+				}
+			]
+		}
+	},
+	"glow":
+	{
+		"type": "origins:self_glow",
+		"use_teams": false,
+		"red": 0.71,
+		"green": 0.16,
+		"blue": 0.20,
+		"entity_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:origin",
+					"origin": "apocalypse:myconoid_crimson",
+					"layer": "origins:origin"
+				}
+			]
+		},
+		"hidden": true
+	},
+	"hidden": true
+}

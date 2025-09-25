@@ -1,0 +1,3 @@
+summon item ~ ~ ~ {Glowing:1b,Item:{id:"minecraft:wooden_sword",Count:1b,tag:{display:{Name:'{"text":"Hex of the Blade","color":"dark_purple","bold":true}',Lore:['{"text":"You may use me,","color":"dark_red"}','{"text":"and only me.","color":"dark_red"}']},HideFlags:122,Enchantments:[{id:vanishing_curse,lvl:1}],Unbreakable:1b,hexbladeid:0,CustomModelData:1,CompleteGauntlet:1,Gauntlet:1}},Tags:["target"]}
+
+execute as @e[type=item,tag=target] store result entity @s Item.tag.hexbladeid double 1 run scoreboard players get @p hexbladeid

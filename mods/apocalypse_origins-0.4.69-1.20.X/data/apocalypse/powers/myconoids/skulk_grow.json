@@ -1,0 +1,92 @@
+{
+	"type": "origins:multiple",
+	"callback":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_gained": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "scale multiply pehkui:height 1.6 @s"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "scale multiply pehkui:width 4 @s"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "scale multiply pehkui:step_height 2.5 @s"
+				}
+			]
+		},
+		"entity_action_respawned": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "power revoke @s apocalypse:myconoids/skulk_grow afungus"
+				}
+			]
+		},
+		"entity_action_lost": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "scale divide pehkui:height 1.6 @s"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "scale divide pehkui:width 4 @s"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "scale divide pehkui:step_height 2.5 @s"
+				}
+			]
+		}
+	},
+	"immunities": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type":"origins:or",
+			"conditions":[
+				{
+					"type": "origins:name",
+					"name": "fall"
+				}
+			]
+		}
+	},
+	"jump":
+	{
+		"type": "origins:modify_jump",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": 0.3
+		}
+	},
+	"basespeed": 
+	{
+		"type": "origins:attribute",
+		"update_health": true,
+		"modifiers": {
+			"attribute": "minecraft:generic.movement_speed",
+			"operation": "multiply_total",
+			"value": 0.3
+		}
+	},
+	"air_fast":
+	{
+	  "type": "origins:attribute_modify_transfer",
+	  "class": "io.github.apace100.apoli.power.ModifyAirSpeedPower",
+	  "attribute": "minecraft:generic.movement_speed",
+	  "multiplier": 1
+	}
+}

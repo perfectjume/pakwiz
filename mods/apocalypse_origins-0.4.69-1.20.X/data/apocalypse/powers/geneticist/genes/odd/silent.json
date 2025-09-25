@@ -1,0 +1,7 @@
+{
+	"type": "origins:prevent_game_event",
+	"events": [
+		"minecraft:step",
+		"minecraft:hit_ground"
+	]
+}

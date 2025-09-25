@@ -1,0 +1,13 @@
+name = "Health Indicators"
+filename = "HealthIndicators-2.5.7-1.20.1.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "a04e3ac7b6c9253733cbd9852609a77b6d3ed3e3"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 5415079
+project-id = 1018014

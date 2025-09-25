@@ -1,0 +1,127 @@
+{
+	"type": "origins:multiple",
+	"durationbar": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 15,
+		"start_value": 15,
+		"hidden": true,
+		"name": "Duration",
+		"description": "How long?",
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse:textures/gui/mycosight.png",
+			"bar_index": 0,
+			"condition": {
+				"type": "origins:resource",
+				"resource": "apocalypse:myconoids/warped_echolocated_durationbar",
+				"comparison": ">",
+				"compare_to": 0
+			}
+		}
+	},
+	"amogus":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:apocalypse.ost.echolocation master @s ~ ~ ~ 1 1",
+					"permission_level": 4
+				}
+			]
+		}
+	},
+	"timer": 
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": ">",
+								"resource": "apocalypse:myconoids/warped_echolocated_durationbar",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:myconoids/warped_echolocated_durationbar",
+								"change": -1
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "apocalypse:myconoids/warped_echolocated_durationbar",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.amethyst_cluster.break master @a[distance=..5] ~ ~ ~ 10 2",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:execute_command",
+									"command": "power revoke @s apocalypse:myconoids/warped_echolocated afungus",
+									"permission_level": 4
+								}
+							}							
+						]
+					}
+				}
+			]
+		},
+		"interval": 20,
+		"hidden": true
+	},
+	"glow":
+	{
+		"type": "origins:self_glow",
+		"use_teams": false,
+		"red": 0.08,
+		"green": 0.71,
+		"blue": 0.52,
+		"entity_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:power",
+					"power": "apocalypse:myconoids/resource_temperature"
+				},
+				{
+					"type": "origins:power",
+					"power": "apocalypse:myconoids/spore_secondaries"
+				}
+			]
+		},
+		"hidden": true
+	},
+	"hidden": true
+}

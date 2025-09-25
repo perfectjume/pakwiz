@@ -1,0 +1,472 @@
+{
+	"type": "origins:multiple",
+	"durationbar": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 120,
+		"start_value": 120,
+		"hidden": true,
+		"name": "Duration",
+		"description": "How long?",
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse_origins:textures/gui/seas_bar.png",
+			"bar_index": 0,
+			"condition": {
+				"type": "origins:resource",
+				"resource": "apocalypse:hexblade/sigil_seas_status_durationbar",
+				"comparison": ">",
+				"compare_to": 0
+			}
+		}
+	},
+	"timer": 
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "apocalypse:hexblade/sigil_seas_status_durationbar",
+								"compare_to": 120
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [				
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/sigil_seas_status_durationbar",
+								"change": -1
+							},
+							{
+								"type": "origins:extinguish"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "execute at @s run particle minecraft:bubble_pop ~ ~ ~ 1 1 1 0.1 10 normal @a"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "execute at @s run particle minecraft:underwater ~ ~ ~ 10 10 10 0.1 1000 normal @s"
+							},
+							{
+								"type": "origins:gain_air",
+								"value": 20
+							},
+							{
+								"type": "origins:if_else_list",
+								"actions": [
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:submerged_in",
+													"fluid": "minecraft:water",
+													"inverted": true
+												}
+											]
+										},
+										"action": {
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "effect give @s minecraft:night_vision 20 0 true"
+												},
+												{
+												  "type": "origins:choice",
+												  "actions": [
+														{
+															"element": {
+																"type": "origins:execute_command",
+																"command": "playsound minecraft:ambient.underwater.loop master @s ~ ~ ~ 1 1"
+															},
+															"weight": 50
+														},
+														{
+															"element": {
+																"type": "origins:execute_command",
+																"command": "playsound minecraft:ambient.underwater.loop.additions master @s ~ ~ ~ 1 1"
+															},
+															"weight": 10
+														},
+														{
+															"element": {
+																"type": "origins:execute_command",
+																"command": "playsound minecraft:ambient.underwater.loop.additions.rare master @s ~ ~ ~ 1 1"
+															},
+															"weight": 5
+														},
+														{
+															"element": {
+																"type": "origins:execute_command",
+																"command": "playsound minecraft:ambient.underwater.loop.additions.ultra_rare master @s ~ ~ ~ 1 1"
+															},
+															"weight": 1
+														}
+													]
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute at @s run particle minecraft:bubble_pop ~ ~ ~ 1 1 1 0.1 10 normal @a"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute at @s run particle minecraft:underwater ~ ~ ~ 10 10 10 0.1 1000 normal @s"
+												}
+											]
+										}
+									},
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:submerged_in",
+													"fluid": "minecraft:water"
+												}
+											]
+										},
+										"action": {
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "stopsound @s * minecraft:ambient.underwater.loop"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "effect give @s minecraft:night_vision 20 0 true"
+												}
+											]
+										}
+									}
+								]
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": ">",
+								"resource": "apocalypse:hexblade/sigil_seas_status_durationbar",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "<=",
+								"resource": "apocalypse:hexblade/sigil_seas_status_durationbar",
+								"compare_to": 119
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/sigil_seas_status_durationbar",
+								"change": -1
+							},
+							{
+								"type": "origins:extinguish"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "weather clear"
+							},
+							{
+								"type": "origins:gain_air",
+								"value": 20
+							},
+							{
+								"type": "origins:if_else_list",
+								"actions": [
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:submerged_in",
+													"fluid": "minecraft:water",
+													"inverted": true
+												}
+											]
+										},
+										"action": {
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "effect give @s minecraft:night_vision 20 0 true"
+												},
+												{
+												  "type": "origins:choice",
+												  "actions": [
+														{
+															"element": {
+																"type": "origins:execute_command",
+																"command": "playsound minecraft:ambient.underwater.loop master @s ~ ~ ~ 1 1"
+															},
+															"weight": 50
+														},
+														{
+															"element": {
+																"type": "origins:execute_command",
+																"command": "playsound minecraft:ambient.underwater.loop.additions master @s ~ ~ ~ 1 1"
+															},
+															"weight": 10
+														},
+														{
+															"element": {
+																"type": "origins:execute_command",
+																"command": "playsound minecraft:ambient.underwater.loop.additions.rare master @s ~ ~ ~ 1 1"
+															},
+															"weight": 5
+														},
+														{
+															"element": {
+																"type": "origins:execute_command",
+																"command": "playsound minecraft:ambient.underwater.loop.additions.ultra_rare master @s ~ ~ ~ 1 1"
+															},
+															"weight": 1
+														}
+													]
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute at @s run particle minecraft:bubble_pop ~ ~ ~ 1 1 1 0.1 10 normal @a"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "execute at @s run particle minecraft:underwater ~ ~ ~ 10 10 10 0.1 1000 normal @s"
+												}
+											]
+										}
+									},
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:submerged_in",
+													"fluid": "minecraft:water"
+												}
+											]
+										},
+										"action": {
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "stopsound @s * minecraft:ambient.underwater.loop"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "effect give @s minecraft:night_vision 20 0 true"
+												}
+											]
+										}
+									}
+								]
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "apocalypse:hexblade/sigil_seas_status_durationbar",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.amethyst_cluster.break master @a[distance=..5] ~ ~ ~ 10 2"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "stopsound @s * minecraft:ambient.underwater.loop"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "effect clear @s minecraft:night_vision"
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:execute_command",
+									"command": "power revoke @s apocalypse:hexblade/sigil_seas_status hexblade_bars"
+								}
+							}							
+						]
+					}
+				}
+			]
+		},
+		"interval": 20,
+		"hidden": true
+	},
+	"air_is_water":
+	{
+		"type": "origins:modify_camera_submersion",
+		"from": "none",
+		"to": "water",
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:water",
+					"comparison": "<=",
+					"compare_to": 1.8,
+					"inverted": false
+				}
+			]
+		}
+	},
+	"water_is_air":
+	{
+		"type": "origins:modify_camera_submersion",
+		"from": "water",
+		"to": "none",
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:submerged_in",
+					"fluid": "minecraft:water"
+				}
+			]
+		}
+	},
+	"water_is_air_two":
+	{
+		"type": "origins:ignore_water",
+		"hidden": true,
+		"condition": {
+			"type": "origins:power",
+			"power": "apocalypse:hexblade/sigil_skies_status",
+			"inverted": true
+		}
+	},
+	"speed":
+	{
+		"type": "origins:conditioned_attribute",
+		"modifier": {
+			"attribute": "minecraft:generic.movement_speed",
+			"operation": "multiply_total",
+			"value": -0.25
+		},
+		"tick_rate": 20,
+		"condition":{
+			"type": "origins:submerged_in",
+			"fluid": "minecraft:water",
+			"inverted": true
+		}
+	},
+	"jump":
+	{
+		"type": "origins:modify_jump",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": 2
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:water",
+					"comparison": "<=",
+					"compare_to": 1.8,
+					"inverted": false
+				}
+			]
+		}
+	},
+	"immunities": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type":"origins:or",
+			"conditions":[
+				{
+					"type": "origins:name",
+					"name": "dryOut"
+				},
+				{
+					"type": "origins:name",
+					"name": "drown"
+				}
+			]
+		},
+		"hidden": true
+	},
+	"buoyancy":
+	{
+		"type": "origins:walk_on_fluid",
+		"fluid": "minecraft:water",
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:water",
+					"comparison": "<=",
+					"compare_to": 1.8,
+					"inverted": false
+				},
+				{
+					"type": "origins:sneaking",
+					"inverted": true
+				}
+			]
+		}
+	},
+	"slow_falling":
+	{
+		"type": "origins:modify_falling",
+		"velocity": 0.01,
+		"take_fall_damage": false,
+		"condition": {
+			"type": "origins:fluid_height",
+			"fluid": "minecraft:water",
+			"comparison": "<=",
+			"compare_to": 1.8,
+			"inverted": false
+		}
+	},
+	"noelytra":
+	{
+		"type": "origins:prevent_elytra_flight"
+	},
+	"hidden": true
+}

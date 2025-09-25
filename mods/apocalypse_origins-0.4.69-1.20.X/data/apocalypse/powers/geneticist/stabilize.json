@@ -1,0 +1,122 @@
+{
+	"type": "origins:multiple",
+	"callback":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:apocalypse.ost.syringe master @a[distance=..16] ~ ~ ~ 1 1"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"--->Purging Genes<---\",\"color\":\"gold\"}"
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 6,
+					"action": {
+						"type": "origins:execute_command",
+						"command": "power grant @s apocalypse:geneticist/gene_reader geneticist"
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 7,
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "power revokeall @s gene"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "power revokeall @s sideeffect"
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:geneticist/hasgenes_is_gmo",
+								"change": -3
+							},
+							{
+								"type": "origins:if_else_list",
+								"actions": [
+									{
+										"condition": {
+											"type": "origins:sneaking"
+										},
+										"action": {
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "power revokeall @s primary"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "power revokeall @s secondary"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "power revokeall @s primarys"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "power revokeall @s secondarys"
+												}
+											]
+										}
+									}
+								]
+							},
+							{
+								"type": "origins:if_else_list",
+								"actions": [
+									{
+										"condition": {
+											"type": "origins:sneaking",
+											"inverted": true
+										},
+										"action": {
+											"type": "origins:execute_command",
+											"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"...ignoring active genes, patient required to sneak...\",\"color\":\"gold\"}"
+										}
+									}
+								]
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 15,
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"--->Genome Stable<---\",\"color\":\"gold\"}"
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 20,
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "power revoke @s apocalypse:geneticist/stabilize geneticist"
+							}
+						]
+					}
+				}
+			]
+		}
+	}
+}

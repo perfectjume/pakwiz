@@ -1,0 +1,11 @@
+{
+	"replace": false,
+	"values":
+	[
+		"minecraft:soul_sand",
+		"minecraft:soul_soil",
+		"minecraft:bedrock",
+		"minecraft:barrier",
+		"minecraft:obsidian"
+	]
+}

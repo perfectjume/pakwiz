@@ -1,0 +1,48 @@
+{
+	"type": "origins:modify_damage_dealt",
+	"modifier": {
+		"operation": "addition",
+		"value": 5
+	},
+	"target_condition": {
+		"type": "origins:or",
+		"conditions": [
+			{
+				"type": "origins:entity_group",
+				"group": "aquatic"
+			},
+			{
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:entity_type",
+						"entity_type": "minecraft:player"
+					},
+					{
+						"type": "origins:or",
+						"conditions": [
+							{
+								"type": "origins:nbt",
+								"nbt": "{Tags: ['aquatic']}"
+							},
+							{
+								"type": "origins:power",
+								"power": "apocalypse:geneticist/sideeffects/aquatic/aquatic_prey"
+							},
+							{
+								"type": "origins:origin",
+								"origin": "origins:merling",
+								"layer": "origins:origin"
+							},
+							{
+								"type": "origins:origin",
+								"origin": "libra:libra_merling",
+								"layer": "origins:origin"
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+}

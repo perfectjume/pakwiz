@@ -1,0 +1,17 @@
+{
+	"type": "origins:target_action_on_hit",
+	"cooldown": 400,
+	"hud_render": {
+		"should_render": false,
+		"bar_index": 8
+	  },
+	"entity_action": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "effect give @s minecraft:poison 10 0 true"
+			}
+		]
+	}
+}

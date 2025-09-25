@@ -1,0 +1,13 @@
+name = "CorgiLib"
+filename = "Corgilib-Fabric-1.20.1-4.0.3.4.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "541dac11b5b9655eb1fe79c2b91893cdad630855"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 6616780
+project-id = 693313

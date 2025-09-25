@@ -1,0 +1,698 @@
+{
+	"type": "origins:multiple",
+	"durationbar": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 300,
+		"start_value": 300,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse:textures/gui/zzz_buff_warped_wind.png",
+			"bar_index": 0,
+			"condition": {
+				"type": "origins:resource",
+				"resource": "*:*_durationbar",
+				"comparison": ">",
+				"compare_to": 0
+			}
+		}
+	},
+	"timer": 
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": ">",
+								"resource": "*:*_durationbar",
+								"compare_to": 5
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [				
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_durationbar",
+								"change": -1
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": ">=",
+								"resource": "*:*_durationbar",
+								"compare_to": 1
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "<=",
+								"resource": "*:*_durationbar",
+								"compare_to": 5
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_durationbar",
+								"change": -1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.note_block.bit master @s ~ ~ ~ 1 1.8"
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "*:*_durationbar",
+								"comparison": "==",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.note_block.bit master @s ~ ~ ~ 1 2"
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:execute_command",
+									"command": "power revoke @s apocalypse:myconoids/spells/blessing_of_wind afungus"
+								}
+							}							
+						]
+					}
+				}
+			]
+		},
+		"interval": 20
+	},
+	"oofouchmybones":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:item.armor.equip_leather master @a ~ ~ ~ 1 1"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "particle minecraft:cloud ~ ~1 ~ 0.5 0.5 0.5 0.1 8"
+				}
+			]
+		}
+	},
+	"air_fast":
+	{
+	  "type": "origins:attribute_modify_transfer",
+	  "class": "io.github.apace100.apoli.power.ModifyAirSpeedPower",
+	  "attribute": "minecraft:generic.movement_speed",
+	  "multiplier": 1
+	},
+	"wall_resource":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 60,
+		"start_value": 60,
+		"hud_render":
+		{
+			"should_render": true,
+			"sprite_location": "apocalypse:textures/gui/zz_stamina.png",
+			"bar_index": 0,
+			"condition":
+			{
+				"type": "origins:resource",
+				"inverted": false,
+				"comparison": "!=",
+				"resource": "*:*_wall_resource",
+				"compare_to": 60
+			}
+		}
+	},
+	"antifall_resource":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 60,
+		"start_value": 60,
+		"hud_render":
+		{
+			"should_render": false,
+			"sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_02.png",
+			"bar_index": 8,
+			"condition":
+			{
+				"type": "origins:resource",
+				"inverted": false,
+				"comparison": "!=",
+				"resource": "*:*_antifall_resource",
+				"compare_to": 60
+			}
+		}
+	},
+	"wall_overtime":
+	{
+		"type": "origins:action_over_time",
+		"interval": 1,
+		"entity_action":
+		{
+			"type": "origins:and",
+			"actions":
+			[
+				{
+					"type": "origins:if_else",
+					"condition":
+					{
+						"type": "origins:and",
+						"conditions":
+						[
+							{
+								"type": "origins:on_block",
+								"inverted": true
+							},
+							{
+								"type": "origins:resource",
+								"inverted": false,
+								"comparison": "!=",
+								"resource": "*:*_wall_resource",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:on_block",
+								"inverted": true
+							},
+							{    
+								"type": "origins:fall_flying",
+								"inverted": true
+							},
+							{         
+								"type": "origins:creative_flying",
+								"inverted": true
+							},
+							{
+								"type": "origins:gamemode",
+								"gamemode": "spectator",
+								"inverted": true
+							},
+							{    
+								"type": "origins:fluid_height",
+								"fluid": "minecraft:water",
+								"comparison": "==",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:or",
+								"inverted": false,
+								"conditions": [
+									{
+										"type": "origins:block_collision",
+										"inverted": false,
+										"offset_x": 0.1,
+										"offset_z": 0.1,
+										"offset_y": 0
+									},
+									{
+										"type": "origins:block_collision",
+										"inverted": false,
+										"offset_x": -0.1,
+										"offset_z": -0.1,
+										"offset_y": 0
+									}
+								]
+							}
+						]
+					},
+					"if_action":
+					{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_wall_resource",
+								"change": -1
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_antifall_resource",
+								"change": -60
+							},
+							{
+								"type": "origins:apply_effect",
+								"effect":
+								{
+									"duration": 2,
+									"is_ambient": false,
+									"show_particles": false,
+									"show_icon": false,
+									"effect": "levitation",
+									"amplifier": -1
+								}
+							},
+							{
+								"type": "origins:add_velocity",
+								"space": "local",
+								"set": false,
+								"z": 0.05
+							},
+							{
+								"type": "origins:execute_command",
+								"permission_level": 4,
+								"command": "playsound minecraft:block.powder_snow.break player @a[distance=..32] ~ ~ ~ .2 0"
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:if_else",
+					"condition":
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:or",
+										"inverted": true,
+										"conditions": [
+											{
+												"type": "origins:block_collision",
+												"offset_x": 0.1,
+												"offset_z": 0.1,
+												"offset_y": 0
+											},
+											{
+												"type": "origins:block_collision",
+												"offset_x": -0.1,
+												"offset_z": -0.1,
+												"offset_y": 0
+											}
+										]
+									},
+									{
+										"type": "origins:on_block"
+									}
+								]
+							},
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:resource",
+										"comparison": "!=",
+										"resource": "*:*_wall_resource",
+										"compare_to": 60
+									},
+									{
+										"type": "origins:resource",
+										"comparison": "!=",
+										"resource": "*:*_antifall_resource",
+										"compare_to": 60
+									}
+								]
+							}
+						]
+					},
+					"if_action":
+					{
+						"type": "origins:and",
+						"actions":
+						[
+							{
+								"type": "origins:clear_effect",
+								"effect": "levitation"
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_wall_resource",
+								"change": 1
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_antifall_resource",
+								"change": 2
+							}
+						]
+					}
+				}
+			]
+		}
+	},
+	"slow_falling":
+	{
+		"type": "origins:modify_falling",
+		"velocity": 0.08,
+		"take_fall_damage": false,
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"inverted": false,
+					"comparison": "!=",
+					"resource": "*:*_antifall_resource",
+					"compare_to": 60
+				}
+			]
+		}
+	},
+    "walljump": {
+        "type": "origins:active_self",
+        "hud_render": {
+            "should_render": false,
+            "sprite_location": "apocalypse:textures/gui/mycomoss.png",
+            "bar_index": 4
+        },
+        "cooldown": 2,
+        "entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:in_block_anywhere",
+						"block_condition": {
+							"type": "origins:offset",
+							"condition": {
+								"type": "origins:movement_blocking"
+							},
+							"x": 1
+						}
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "particle minecraft:block sand ~ ~0 ~ 0 0.2 0 1 15",
+							  "permission_level": 4
+							},
+							{
+								"type": "origins:add_velocity",
+								"x": -0.4,
+								"space": "world",
+								"set": true
+							},
+							{
+								"type": "origins:add_velocity",
+								"y": 0.4,
+								"space": "world"
+							},
+							{
+								"type": "origins:add_velocity",
+								"z": 0.5,
+								"space": "local"
+							},
+							{
+								"type": "origins:play_sound",
+								"sound": "minecraft:item.armor.equip_leather",
+								"volume": 1,
+								"pitch": 0.9
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_antifall_resource",
+								"change": -60
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:in_block_anywhere",
+						"block_condition": {
+							"type": "origins:offset",
+							"condition": {
+								"type": "origins:movement_blocking"
+							},
+							"x": -1
+						}
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "particle minecraft:block moss_block ~ ~0 ~ 0 0.2 0 1 15",
+							  "permission_level": 4
+							},
+							{
+								"type": "origins:add_velocity",
+								"x": 0.4,
+								"space": "world",
+								"set": true
+							},
+							{
+								"type": "origins:add_velocity",
+								"y": 0.4,
+								"space": "world"
+							},
+							{
+								"type": "origins:add_velocity",
+								"z": 0.5,
+								"space": "local"
+							},
+							{
+								"type": "origins:play_sound",
+								"sound": "minecraft:item.armor.equip_leather",
+								"volume": 1,
+								"pitch": 0.9
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_antifall_resource",
+								"change": -60
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:in_block_anywhere",
+						"block_condition": {
+							"type": "origins:offset",
+							"condition": {
+								"type": "origins:movement_blocking"
+							},
+							"z": 1
+						}
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "particle minecraft:block moss_block ~ ~0 ~ 0 0.2 0 1 15",
+							  "permission_level": 4
+							},
+							{
+								"type": "origins:add_velocity",
+								"z": -0.4,
+								"space": "world",
+								"set": true
+							},
+							{
+								"type": "origins:add_velocity",
+								"y": 0.4,
+								"space": "world"
+							},
+							{
+								"type": "origins:add_velocity",
+								"z": 0.5,
+								"space": "local"
+							},
+							{
+								"type": "origins:play_sound",
+								"sound": "minecraft:item.armor.equip_leather",
+								"volume": 1,
+								"pitch": 0.9
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_antifall_resource",
+								"change": -60
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:in_block_anywhere",
+						"block_condition": {
+							"type": "origins:offset",
+							"condition": {
+								"type": "origins:movement_blocking"
+							},
+							"z": -1
+						}
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "particle minecraft:block moss_block ~ ~0 ~ 0 0.2 0 1 15",
+							  "permission_level": 4
+							},
+							{
+								"type": "origins:add_velocity",
+								"z": 0.4,
+								"space": "world",
+								"set": true
+							},
+							{
+								"type": "origins:add_velocity",
+								"y": 0.4,
+								"space": "world"
+							},
+							{
+								"type": "origins:add_velocity",
+								"z": 0.5,
+								"space": "local"
+							},
+							{
+								"type": "origins:play_sound",
+								"sound": "minecraft:item.armor.equip_leather",
+								"volume": 1,
+								"pitch": 0.9
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_antifall_resource",
+								"change": -60
+							}
+						]
+					}
+				}
+			]
+		},
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:or",
+                    "conditions": [
+                        {
+                            "type": "origins:in_block_anywhere",
+                            "block_condition": {
+                                "type": "origins:offset",
+                                "condition": {
+                                    "type": "origins:movement_blocking"
+                                },
+                                "x": 1
+                            }
+                        },
+                        {
+                            "type": "origins:in_block_anywhere",
+                            "block_condition": {
+                                "type": "origins:offset",
+                                "condition": {
+                                    "type": "origins:movement_blocking"
+                                },
+                                "x": -1
+                            }
+                        },
+                        {
+                            "type": "origins:in_block_anywhere",
+                            "block_condition": {
+                                "type": "origins:offset",
+                                "condition": {
+                                    "type": "origins:movement_blocking"
+                                },
+                                "z": 1
+                            }
+                        },
+                        {
+                            "type": "origins:in_block_anywhere",
+                            "block_condition": {
+                                "type": "origins:offset",
+                                "condition": {
+                                    "type": "origins:movement_blocking"
+                                },
+                                "z": -1
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "origins:on_block",
+                    "inverted": true
+                },
+                {    
+                    "type": "origins:fall_flying",
+                    "inverted": true
+                },
+                {         
+                    "type": "origins:creative_flying",
+                    "inverted": true
+                },
+                {
+                    "type": "origins:gamemode",
+                    "gamemode": "spectator",
+                    "inverted": true
+                },
+				{
+					"type": "origins:resource",
+					"inverted": false,
+					"comparison": "!=",
+					"resource": "*:*_wall_resource",
+					"compare_to": 0
+				}
+            ]
+        },
+        "key": {
+            "key": "key.jump",
+			"continuous": false
+        }
+    },
+	"glow":
+	{
+		"type": "origins:self_glow",
+		"use_teams": false,
+		"red": 0.16,
+		"green": 0.16,
+		"blue": 0.3,
+		"entity_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:origin",
+					"origin": "apocalypse:myconoid_wart",
+					"layer": "origins:origin"
+				}
+			]
+		},
+		"hidden": true
+	},
+	"hidden": true
+}

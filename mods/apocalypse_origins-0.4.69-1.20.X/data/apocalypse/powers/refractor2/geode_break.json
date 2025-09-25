@@ -1,0 +1,572 @@
+{
+	"type": "origins:action_on_callback",
+	"entity_action_gained":{
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "power revoke @s apocalypse:refractor2/geode_break temprefractor"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "playsound minecraft:entity.player.levelup player @a ~ ~ ~ 1 2"
+			},
+			{
+				"type": "origins:choice",
+				"actions": [
+					{
+						"element":{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @s {\"text\":\"You feel a weight has been lifted from your equipped items.\",\"color\":\"yellow\"}"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "item modify entity @s weapon.mainhand apocalypse:refresh"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "item modify entity @s weapon.offhand apocalypse:refresh"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "item modify entity @s armor.head apocalypse:refresh"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "item modify entity @s armor.chest apocalypse:refresh"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "item modify entity @s armor.legs apocalypse:refresh"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "item modify entity @s armor.feet apocalypse:refresh"
+								}
+							]
+						},
+						"weight": 2
+					},
+					{
+						"element":{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @s {\"text\":\"You feel the wisdom of the world flow into your mind.\",\"color\":\"yellow\"}"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "experience add @s 1395 points"
+								}
+							]
+						},
+						"weight": 1
+					},
+					{
+						"element":{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @s {\"text\":\"You feel the might of the mountains awaken in you.\",\"color\":\"yellow\"}"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "effect give @s minecraft:strength 480 1 true"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "effect give @s minecraft:resistance 480 1 true"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "effect give @s minecraft:speed 480 1 true"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "effect give @s minecraft:absorption 480 4 true"
+								}
+							]
+						},
+						"weight": 1
+					},
+					{
+						"element":{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @s {\"text\":\"You feel the magic of nature entering the items in your hands.\",\"color\":\"yellow\"}"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "item modify entity @s weapon.mainhand apocalypse:enchant_mainhand"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "item modify entity @s weapon.offhand apocalypse:enchant_offhand"
+								}
+							]
+						},
+						"weight": 1
+					},
+					{
+						"element":{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @s {\"text\":\"A spirit of the land appears before you.\",\"color\":\"yellow\"}"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "summon allay ^ ^1 ^1 {Tags:[\"refsummon\"],cardinal_components:{\"apoli:powers\":{Powers:[{Type:\"apocalypse:refractor2/summons/friend\",Data:1b,Sources:[\"minecraft:refractor\"]}]}}}"
+								}
+							]
+						},
+						"weight": 1
+					},
+					{
+						"element":{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @s {\"text\":\"The geode had something inside it!\",\"color\":\"yellow\"}"
+								},
+								{
+									"type": "origins:choice",
+									"actions": [
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "give @s minecraft:diamond 1"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "give @s minecraft:blaze_rod 1"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "give @s minecraft:ender_pearl 1"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "give @s minecraft:emerald 16"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "give @s minecraft:quartz 32"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "give @s minecraft:amethyst_shard 32"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "give @s minecraft:end_stone 32"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "loot spawn ~ ~ ~ loot minecraft:chests/abandoned_mineshaft"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "loot spawn ~ ~ ~ loot minecraft:chests/ancient_city"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "loot spawn ~ ~ ~ loot minecraft:chests/ancient_city_ice_box"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "loot spawn ~ ~ ~ loot minecraft:chests/buried_treasure"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "loot spawn ~ ~ ~ loot minecraft:chests/desert_pyramid"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "loot spawn ~ ~ ~ loot minecraft:chests/igloo_chest"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "loot spawn ~ ~ ~ loot minecraft:chests/jungle_temple"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "loot spawn ~ ~ ~ loot minecraft:chests/jungle_temple_dispenser"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "loot spawn ~ ~ ~ loot minecraft:chests/pillager_outpost"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "loot spawn ~ ~ ~ loot minecraft:chests/ruined_portal"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "loot spawn ~ ~ ~ loot minecraft:chests/shipwreck_map"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "loot spawn ~ ~ ~ loot minecraft:chests/shipwreck_supply"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "loot spawn ~ ~ ~ loot minecraft:chests/shipwreck_treasure"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "loot spawn ~ ~ ~ loot minecraft:chests/simple_dungeon"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "loot spawn ~ ~ ~ loot minecraft:chests/stronghold_corridor"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "loot spawn ~ ~ ~ loot minecraft:chests/stronghold_crossing"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "loot spawn ~ ~ ~ loot minecraft:chests/stronghold_library"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "loot spawn ~ ~ ~ loot minecraft:chests/underwater_ruin_big"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "loot spawn ~ ~ ~ loot minecraft:chests/underwater_ruin_small"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:execute_command",
+												"command": "loot spawn ~ ~ ~ loot minecraft:chests/woodland_mansion"
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:if_else_list",
+												"actions":[
+													{
+														"condition":{
+															"type": "origins:advancement",
+															"advancement": "minecraft:adventure/trade"
+														},
+														"action":{
+															"type": "origins:choice",
+															"actions":[
+																{
+																	"element":{
+																		"type": "origins:execute_command",
+																		"command": "loot spawn ~ ~ ~ loot minecraft:chests/village/village_armorer"
+																	},
+																	"weight": 1
+																},
+																{
+																	"element":{
+																		"type": "origins:execute_command",
+																		"command": "loot spawn ~ ~ ~ loot minecraft:chests/village/village_butcher"
+																	},
+																	"weight": 1
+																},
+																{
+																	"element":{
+																		"type": "origins:execute_command",
+																		"command": "loot spawn ~ ~ ~ loot minecraft:chests/village/village_cartographer"
+																	},
+																	"weight": 1
+																},
+																{
+																	"element":{
+																		"type": "origins:execute_command",
+																		"command": "loot spawn ~ ~ ~ loot minecraft:chests/village/village_desert_house"
+																	},
+																	"weight": 1
+																},
+																{
+																	"element":{
+																		"type": "origins:execute_command",
+																		"command": "loot spawn ~ ~ ~ loot minecraft:chests/village/village_fisher"
+																	},
+																	"weight": 1
+																},
+																{
+																	"element":{
+																		"type": "origins:execute_command",
+																		"command": "loot spawn ~ ~ ~ loot minecraft:chests/village/village_fletcher"
+																	},
+																	"weight": 1
+																},
+																{
+																	"element":{
+																		"type": "origins:execute_command",
+																		"command": "loot spawn ~ ~ ~ loot minecraft:chests/village/village_mason"
+																	},
+																	"weight": 1
+																},
+																{
+																	"element":{
+																		"type": "origins:execute_command",
+																		"command": "loot spawn ~ ~ ~ loot minecraft:chests/village/village_plains_house"
+																	},
+																	"weight": 1
+																},
+																{
+																	"element":{
+																		"type": "origins:execute_command",
+																		"command": "loot spawn ~ ~ ~ loot minecraft:chests/village/village_savanna_house"
+																	},
+																	"weight": 1
+																},
+																{
+																	"element":{
+																		"type": "origins:execute_command",
+																		"command": "loot spawn ~ ~ ~ loot minecraft:chests/village/village_shepherd"
+																	},
+																	"weight": 1
+																},
+																{
+																	"element":{
+																		"type": "origins:execute_command",
+																		"command": "loot spawn ~ ~ ~ loot minecraft:chests/village/village_snowy_house"
+																	},
+																	"weight": 1
+																},
+																{
+																	"element":{
+																		"type": "origins:execute_command",
+																		"command": "loot spawn ~ ~ ~ loot minecraft:chests/village/village_tannery"
+																	},
+																	"weight": 1
+																},
+																{
+																	"element":{
+																		"type": "origins:execute_command",
+																		"command": "loot spawn ~ ~ ~ loot minecraft:chests/village/village_temple"
+																	},
+																	"weight": 1
+																},
+																{
+																	"element":{
+																		"type": "origins:execute_command",
+																		"command": "loot spawn ~ ~ ~ loot minecraft:chests/village/village_toolsmith"
+																	},
+																	"weight": 1
+																},
+																{
+																	"element":{
+																		"type": "origins:execute_command",
+																		"command": "loot spawn ~ ~ ~ loot minecraft:chests/village/village_weaponsmith"
+																	},
+																	"weight": 1
+																}
+															]
+														}
+													},
+													{
+														"condition":{
+															"type": "origins:advancement",
+															"advancement": "minecraft:story/enter_the_nether",
+															"inverted": true
+														},
+														"action":{
+															"type": "origins:execute_command",
+															"command": "tellraw @s {\"text\":\"You were expecting loot, but it was me, nothing!\",\"color\":\"dark_red\"}"
+														}
+													}
+												]
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:if_else_list",
+												"actions":[
+													{
+														"condition":{
+															"type": "origins:advancement",
+															"advancement": "minecraft:story/enter_the_nether"
+														},
+														"action":{
+															"type": "origins:choice",
+															"actions":[
+																{
+																	"element":{
+																		"type": "origins:execute_command",
+																		"command": "loot spawn ~ ~ ~ loot minecraft:chests/bastion_bridge"
+																	},
+																	"weight": 1
+																},
+																{
+																	"element":{
+																		"type": "origins:execute_command",
+																		"command": "loot spawn ~ ~ ~ loot minecraft:chests/bastion_hoglin_stable"
+																	},
+																	"weight": 1
+																},
+																{
+																	"element":{
+																		"type": "origins:execute_command",
+																		"command": "loot spawn ~ ~ ~ loot minecraft:chests/bastion_other"
+																	},
+																	"weight": 1
+																},
+																{
+																	"element":{
+																		"type": "origins:execute_command",
+																		"command": "loot spawn ~ ~ ~ loot minecraft:chests/bastion_treasure"
+																	},
+																	"weight": 1
+																},
+																{
+																	"element":{
+																		"type": "origins:execute_command",
+																		"command": "loot spawn ~ ~ ~ loot minecraft:chests/nether_bridge"
+																	},
+																	"weight": 1
+																}
+															]
+														}
+													},
+													{
+														"condition":{
+															"type": "origins:advancement",
+															"advancement": "minecraft:story/enter_the_nether",
+															"inverted": true
+														},
+														"action":{
+															"type": "origins:execute_command",
+															"command": "tellraw @s {\"text\":\"You were expecting loot, but it was me, nothing!\",\"color\":\"dark_red\"}"
+														}
+													}
+												]
+											},
+											"weight": 1
+										},
+										{
+											"element":{
+												"type": "origins:if_else_list",
+												"actions":[
+													{
+														"condition":{
+															"type": "origins:advancement",
+															"advancement": "minecraft:story/story/enter_the_end"
+														},
+														"action":{
+															"type": "origins:execute_command",
+															"command": "loot spawn ~ ~ ~ loot minecraft:chests/end_city_treasure"
+														}
+													},
+													{
+														"condition":{
+															"type": "origins:advancement",
+															"advancement": "minecraft:story/enter_the_end",
+															"inverted": true
+														},
+														"action":{
+															"type": "origins:execute_command",
+															"command": "tellraw @s {\"text\":\"It was disappointment!\",\"color\":\"dark_red\"}"
+														}
+													}
+												]
+											},
+											"weight": 1
+										}
+									]
+								}
+							]
+						},
+						"weight": 3
+					}
+				]
+			}
+		]
+	}
+}

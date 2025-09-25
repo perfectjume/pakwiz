@@ -1,0 +1,69 @@
+{
+	"type": "origins:recipe",
+	"recipe": {
+		"type": "minecraft:crafting_shaped",
+		"id": "apocalypse_origins:stabilizer",
+		"pattern": [
+			"#_#",
+			"#o#",
+			"^-^"
+		],
+		"key": {
+			"#": {
+				"item": "minecraft:glass_pane"
+			},
+			"^": {
+				"item": "minecraft:iron_nugget"
+			},
+			"_": {
+				"item": "minecraft:stone_button"
+			},
+			"-": {
+				"item": "minecraft:iron_ingot"
+			},
+			"o": {
+				"item": "minecraft:redstone"
+			}
+		},
+		"result": {
+			"item": "apocalypse_origins:stabilizer"
+		}
+	},
+	"name": "Labware: Stabilizers",
+	"description": "You know how to create genome stabilizers with glass panes, iron nuggets, stone buttons and redstone dust.\n \n- Upon use, they clear any [Gene] and [Side Effect] within you or other players or mobs and then break.\n \nIf the patient is sneaking while this is used on them, you will be able to purge their active genes as well, otherwise it will only purge passive genes.",
+	"badges": [
+		{	
+			"type": "origins:crafting_recipe",
+			"sprite": "apocalypse_origins:textures/item/stabilizer.png",
+			"recipe": {
+				"type": "minecraft:crafting_shaped",
+				"id": "apocalypse_origins:stabilizer",
+				"pattern": [
+					"#_#",
+					"#o#",
+					"^-^"
+				],
+				"key": {
+					"#": {
+						"item": "minecraft:glass_pane"
+					},
+					"^": {
+						"item": "minecraft:iron_nugget"
+					},
+					"_": {
+						"item": "minecraft:stone_button"
+					},
+					"-": {
+						"item": "minecraft:iron_ingot"
+					},
+					"o": {
+						"item": "minecraft:redstone"
+					}
+				},
+				"result": {
+					"item": "apocalypse_origins:stabilizer"
+				}
+			}
+		}
+	]
+}

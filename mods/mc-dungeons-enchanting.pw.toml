@@ -1,0 +1,13 @@
+name = "MC Dungeons Enchanting"
+filename = "mcde-1.6.4-1.20.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "5fde1b1d726fcb15ff12317b7d72c83226a8bc67"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 5771309
+project-id = 886511

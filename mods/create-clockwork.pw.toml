@@ -1,0 +1,13 @@
+name = "Clockwork: Create x Valkyrien Skies"
+filename = "clockwork-1.20.1-0.1.16-fabric-b3b22e39fe.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "200bbd89ebe39ce14a9d498096f656ba985aa715"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 5580458
+project-id = 807792

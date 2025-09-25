@@ -1,0 +1,13 @@
+name = "[Cobblemon] BadgeBox"
+filename = "badgebox-1.1.0 (No MR slot).jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "866de68c5ef086495c230c599ebe74b449033f4c"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 5584434
+project-id = 1034908

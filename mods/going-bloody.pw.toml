@@ -1,0 +1,13 @@
+name = "going bloody"
+filename = "sanguine-0.4.0.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "ad52cd6a896c9f1f2e80dd55eb3bf28f3f80d097"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 7024164
+project-id = 1352062

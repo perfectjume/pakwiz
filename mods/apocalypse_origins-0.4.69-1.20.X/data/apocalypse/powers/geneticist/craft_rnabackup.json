@@ -1,0 +1,63 @@
+{
+	"type": "origins:recipe",
+	"recipe": {
+		"type": "minecraft:crafting_shaped",
+		"id": "apocalypse_origins:rnabackup",
+		"pattern": [
+			"#p#",
+			"p_p",
+			" ^ "
+		],
+		"key": {
+			"#": {
+				"item": "minecraft:glass_pane"
+			},
+			"^": {
+				"item": "minecraft:iron_nugget"
+			},
+			"p": {
+				"item": "minecraft:iron_ingot"
+			},
+			"_": {
+				"item": "minecraft:totem_of_undying"
+			}
+		},
+		"result": {
+			"item": "apocalypse_origins:rnabackup"
+		}
+	},
+	"name": "Labware: RNA Backup",
+	"description": "Extracting genes is an arduous task, and losing them is a hindrance to your research. You reckon you could repurpose these unscientific totems the evokers use to create a backup or sorts...\n \nUpon use, every [Gene] and [Side Effect] within a player becomes protected. The RNA Backup then breaks. A protected [Gene] or [Side Effect] won’t reset on death. Protection wears off after one respawn, as the RNA is copied into DNA and needs to be replicated again.",
+	"badges": [
+		{	
+			"type": "origins:crafting_recipe",
+			"sprite": "apocalypse_origins:textures/item/rnabackup.png",
+			"recipe": {
+				"type": "minecraft:crafting_shaped",
+				"id": "apocalypse_origins:rnabackup",
+				"pattern": [
+					"#p#",
+					"p_p",
+					" ^ "
+				],
+				"key": {
+					"#": {
+						"item": "minecraft:glass_pane"
+					},
+					"^": {
+						"item": "minecraft:iron_nugget"
+					},
+					"p": {
+						"item": "minecraft:iron_ingot"
+					},
+					"_": {
+						"item": "minecraft:totem_of_undying"
+					}
+				},
+				"result": {
+					"item": "apocalypse_origins:rnabackup"
+				}
+			}
+		}
+	]
+}

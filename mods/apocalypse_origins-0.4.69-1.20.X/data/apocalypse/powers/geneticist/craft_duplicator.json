@@ -1,0 +1,69 @@
+{
+	"type": "origins:recipe",
+	"recipe": {
+		"type": "minecraft:crafting_shaped",
+		"id": "apocalypse_origins:gene_duplicator",
+		"pattern": [
+			"b^b",
+			"d#d",
+			"---"
+		],
+		"key": {
+			"#": {
+				"item": "minecraft:brewing_stand"
+			},
+			"^": {
+				"item": "minecraft:netherite_ingot"
+			},
+			"-": {
+				"item": "minecraft:iron_block"
+			},
+			"d": {
+				"item": "minecraft:diamond_block"
+			},
+			"b": {
+				"item": "minecraft:glass_bottle"
+			}
+		},
+		"result": {
+			"item": "apocalypse_origins:gene_duplicator"
+		}
+	},
+	"name": "Labware: Duplicator",
+	"description": "You know how to create gene duplicators.\n \n- When you use this block while holding a gene in your main hand and an empty syringe in your offhand, the duplicator will fill the empty syringe with a copy of the gene you were holding.",
+	"badges": [
+		{	
+			"type": "origins:crafting_recipe",
+			"sprite": "apocalypse_origins:textures/block/gene_duplicator.png",
+			"recipe": {
+				"type": "minecraft:crafting_shaped",
+				"id": "apocalypse_origins:gene_duplicator",
+				"pattern": [
+					"b^b",
+					"d#d",
+					"---"
+				],
+				"key": {
+					"#": {
+						"item": "minecraft:brewing_stand"
+					},
+					"^": {
+						"item": "minecraft:netherite_ingot"
+					},
+					"-": {
+						"item": "minecraft:iron_block"
+					},
+					"d": {
+						"item": "minecraft:diamond_block"
+					},
+					"b": {
+						"item": "minecraft:glass_bottle"
+					}
+				},
+				"result": {
+					"item": "apocalypse_origins:gene_duplicator"
+				}
+			}
+		}
+	]
+}

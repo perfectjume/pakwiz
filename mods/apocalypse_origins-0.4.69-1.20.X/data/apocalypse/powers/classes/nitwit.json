@@ -1,0 +1,107 @@
+{
+	"type": "origins:multiple",
+	"callback":{
+		"type": "origins:action_on_callback",
+		"entity_action_chosen": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s add saaverage",
+					"permission_level": 4
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "effect give @s minecraft:instant_health 1 0 true",
+					"permission_level": 4
+				}
+			]
+		},
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s add saaverage",
+					"permission_level": 4
+				}
+			]
+		},
+		"entity_action_respawned": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s add saaverage",
+					"permission_level": 4
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "effect give @s minecraft:instant_health 1 0 true",
+					"permission_level": 4
+				}
+			]
+		},
+		"entity_action_removed": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s remove saaverage",
+					"permission_level": 4
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "effect give @s minecraft:instant_health 1 0 true",
+					"permission_level": 4
+				}
+			]
+		},
+		"execute_chosen_when_orb": true,
+		"hidden": true
+	},
+	"resistances": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -0.05,
+			"operation":"multiply_total"
+		},
+		"hidden": true
+	},
+	"melee_damage": 
+	{
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": 0.05
+		},
+		"hidden": true
+	},
+	"projectile_damage": 
+	{
+		"type": "origins:modify_projectile_damage",
+		"target_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:player",
+					"inverted": true
+				},
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:player",
+					"inverted": false
+				}
+			]
+		},
+		"modifier": {
+			"operation": "multiply_total",
+			"value": 0.05
+		},
+		"hidden": true
+	},
+	"name": "Slightly Above Average",
+	"description": "You are not like the others, and you gain the following benefits:\n \n+5% More melee and projectile damage.\n \n+5% Resistance to all damage."
+}

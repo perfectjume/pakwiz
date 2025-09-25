@@ -1,0 +1,710 @@
+{
+	"type": "origins:active_self",
+	"cooldown": 120,
+	"hud_render": {
+		"should_render":true,
+		"sprite_location":"apocalypse_origins:textures/gui/refractor.png",
+		"bar_index": 1,
+		"condition": {
+			"type": "origins:resource",
+			"comparison": "==",
+			"resource": "apocalypse:refractor2/passives_mode",
+			"compare_to": 0
+		}
+	},
+	"entity_action": 
+	{
+		"type": "origins:if_else_list",
+		"actions": [
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "apocalypse:refractor2/passives_dashing",
+							"compare_to": 0
+						},
+						{
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "apocalypse:refractor2/passives_blinked",
+							"compare_to": 0
+						},
+						{
+							"type": "origins:sneaking",
+							"inverted": true
+						}
+					]
+				},
+				"action":{
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:if_else_list",
+							"actions":[
+								{
+									"condition":{
+										"type": "origins:resource",
+										"comparison": ">=",
+										"resource": "apocalypse:refractor2/passives_mode",
+										"compare_to": 2
+									},
+									"action":{
+										"type": "origins:execute_command",
+										"command": "resource set @s apocalypse:refractor2/passives_immune 1"
+									}
+								}
+							]
+						},
+						{
+							"type": "origins:change_resource",
+							"resource": "apocalypse:refractor2/passives_bouncing",
+							"operation": "set",
+							"change": 0
+						},
+						{
+							"type": "origins:trigger_cooldown",
+							"power": "apocalypse:refractor2/passives_emerald_cooldown"
+						},
+						{
+							"type": "origins:trigger_cooldown",
+							"power": "apocalypse:refractor2/passives_diamond_cooldown"
+						},
+						{
+							"type": "origins:trigger_cooldown",
+							"power": "apocalypse:refractor2/passives_quartz_cooldown"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "playsound minecraft:block.amethyst_block.chime master @a[distance=..5] ~ ~ ~ 10 1.2"
+						},
+						{
+							"type": "origins:add_velocity",
+							"y": 0.25,
+							"z": 1.2,
+							"space": "local"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "resource set @s apocalypse:refractor2/passives_unfall 1"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "resource set @s apocalypse:refractor2/passives_bouncing2 1"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "effect give @s minecraft:invisibility 1 1 true"
+						},
+						{
+							"type": "origins:delay",
+							"ticks": 1,
+							"action":{
+								"type": "origins:execute_command",
+								"command": "resource set @s apocalypse:refractor2/passives_dashing 1"
+							}
+						},
+						{
+							"type": "origins:delay",
+							"ticks": 30,
+							"action":{
+								"type": "origins:execute_command",
+								"command": "resource set @s apocalypse:refractor2/passives_dashing 0"
+							}
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:power",
+							"power": "apocalypse:refractor2/teleport_normal",
+							"inverted": true
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "!=",
+									"resource": "apocalypse:hidden_bufferwarpx",
+									"compare_to": 0
+								},
+								{
+									"type": "origins:resource",
+									"comparison": "!=",
+									"resource": "apocalypse:hidden_bufferwarpy",
+									"compare_to": 0
+								},
+								{
+									"type": "origins:resource",
+									"comparison": "!=",
+									"resource": "apocalypse:hidden_bufferwarpz",
+									"compare_to": 0
+								}
+							]
+						},
+						{
+							"type": "origins:sneaking"
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:regulator"
+										}
+									}
+								},
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "offhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:regulator"
+										}
+									}
+								}
+							]
+						}
+					]
+				},
+				"action":{
+					"type": "origins:and",
+					"actions": [ 
+						{
+							"type": "origins:execute_command",
+							"command": "tellraw @a[distance=..2] {\"text\":\"[FTL: Warp] engaged, take damage to cancel!\",\"color\":\"dark_aqua\"}"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:refractor2/teleport_normal temprefractor"
+						},
+						{
+							"type": "origins:if_else_list",
+							"actions": [
+								{
+									"condition":{
+										"type": "origins:resource",
+										"comparison": "==",
+										"resource": "apocalypse:refractor2/passives_tpmodea",
+										"compare_to": 1
+									},
+									"action":{
+										"type": "origins:area_of_effect",
+										"radius": 2,
+										"bientity_action": {
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:target_action",
+													"action":{
+														"type": "origins:and",
+														"actions": [
+															{
+																"type": "origins:execute_command",
+																"command": "power grant @s apocalypse:hidden apocalypse"
+															},
+															{
+																"type": "origins:execute_command",
+																"command": "resource set @s apocalypse:hidden_warpx 0"
+															},
+															{
+																"type": "origins:execute_command",
+																"command": "resource set @s apocalypse:hidden_revwarpx 0"
+															},
+															{
+																"type": "origins:execute_command",
+																"command": "resource set @s apocalypse:hidden_warpy 0"
+															},
+															{
+																"type": "origins:execute_command",
+																"command": "resource set @s apocalypse:hidden_warpz 0"
+															},
+															{
+																"type": "origins:execute_command",
+																"command": "resource set @s apocalypse:hidden_revwarpz 0"
+															},
+															{
+																"type": "origins:execute_command",
+																"command": "power grant @s apocalypse:refractor2/teleport_normal temprefractor"
+															}
+														]
+													}
+												}
+											]
+										},
+										"bientity_condition":{
+											"type": "origins:both",
+											"condition":{
+												"type": "origins:living"
+											}
+										}
+									}
+								}
+							]
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:refractor2/teleport_buffer temprefractor"
+						},
+						{
+							"type": "origins:if_else_list",
+							"actions": [
+								{
+									"condition":{
+										"type": "origins:resource",
+										"comparison": "==",
+										"resource": "apocalypse:refractor2/passives_veiled",
+										"compare_to": 1
+									},
+									"action":{
+										"type": "origins:and",
+										"actions": [ 
+											{
+												"type": "origins:execute_command",
+												"command": "playsound minecraft:block.amethyst_cluster.break master @a[distance=..5] ~ ~ ~ 10 2"
+											},
+											{
+												"type": "origins:execute_command",
+												"command": "resource set @s apocalypse:refractor2/passives_veiled 0"
+											},
+											{
+												"type": "origins:execute_command",
+												"command": "effect clear @s minecraft:invisibility"
+											}, 
+											{
+												"type": "origins:execute_command",
+												"command": "particle flash"
+											},
+											{
+												"type": "origins:execute_command",
+												"command": "scale set pehkui:visibility 1 @s"
+											},
+											{
+												"type": "origins:execute_command",
+												"command": "power revoke @s origins:water_breathing"
+											},
+											{
+												"type": "origins:execute_command",
+												"command": "resource set @s apocalypse:refractor2/passives_aftermath 0"
+											},
+											{
+												"type": "origins:execute_command",
+												"command": "resource set @s apocalypse:refractor2/passives_veil_cooldown 0"
+											},
+											{
+												"type": "origins:execute_command",
+												"command": "effect clear @e[distance=..10] minecraft:invisibility"
+											}
+										]
+									}
+								}
+							]
+						},
+						{
+							"type": "origins:if_else_list",
+							"actions": [
+								{
+									"condition":{
+										"type": "origins:or",
+										"conditions":[
+											{
+												"type": "origins:and",
+												"conditions": [
+													{
+														"type": "origins:resource",
+														"comparison": ">",
+														"resource": "apocalypse:hidden_bufferwarpx",
+														"compare_to": 0
+													},
+													{
+														"type": "origins:resource",
+														"comparison": "<=",
+														"resource": "apocalypse:hidden_bufferwarpx",
+														"compare_to": 5
+													}
+												]
+											},
+											{
+												"type": "origins:and",
+												"conditions": [
+													{
+														"type": "origins:resource",
+														"comparison": "<",
+														"resource": "apocalypse:hidden_bufferwarpx",
+														"compare_to": 0
+													},
+													{
+														"type": "origins:resource",
+														"comparison": ">=",
+														"resource": "apocalypse:hidden_bufferwarpx",
+														"compare_to": -5
+													}
+												]
+											},
+											{
+												"type": "origins:resource",
+												"comparison": "!=",
+												"resource": "apocalypse:hidden_bufferwarpy",
+												"compare_to": 0
+											},
+											{
+												"type": "origins:and",
+												"conditions": [
+													{
+														"type": "origins:resource",
+														"comparison": ">",
+														"resource": "apocalypse:hidden_bufferwarpz",
+														"compare_to": 0
+													},
+													{
+														"type": "origins:resource",
+														"comparison": "<=",
+														"resource": "apocalypse:hidden_bufferwarpz",
+														"compare_to": 5
+													}
+												]
+											},
+											{
+												"type": "origins:and",
+												"conditions": [
+													{
+														"type": "origins:resource",
+														"comparison": "<",
+														"resource": "apocalypse:hidden_bufferwarpz",
+														"compare_to": 0
+													},
+													{
+														"type": "origins:resource",
+														"comparison": ">=",
+														"resource": "apocalypse:hidden_bufferwarpz",
+														"compare_to": -5
+													}
+												]
+											}
+										]
+									},
+									"action":{
+										"type": "origins:execute_command",
+										"command": "execute as @e[distance=..2] run resource set @s apocalypse:refractor2/teleport_normal_windup_teleport 6"
+									}
+								}
+							]
+						},
+						{
+							"type": "origins:if_else_list",
+							"actions": [
+								{
+									"condition":{
+										"type": "origins:or",
+										"conditions":[
+											{
+												"type": "origins:and",
+												"conditions": [
+													{
+														"type": "origins:resource",
+														"comparison": ">",
+														"resource": "apocalypse:hidden_bufferwarpx",
+														"compare_to": 5
+													},
+													{
+														"type": "origins:resource",
+														"comparison": "<=",
+														"resource": "apocalypse:hidden_bufferwarpx",
+														"compare_to": 10
+													}
+												]
+											},
+											{
+												"type": "origins:and",
+												"conditions": [
+													{
+														"type": "origins:resource",
+														"comparison": "<",
+														"resource": "apocalypse:hidden_bufferwarpx",
+														"compare_to": -5
+													},
+													{
+														"type": "origins:resource",
+														"comparison": ">=",
+														"resource": "apocalypse:hidden_bufferwarpx",
+														"compare_to": -10
+													}
+												]
+											},
+											{
+												"type": "origins:and",
+												"conditions": [
+													{
+														"type": "origins:resource",
+														"comparison": ">",
+														"resource": "apocalypse:hidden_bufferwarpz",
+														"compare_to": 5
+													},
+													{
+														"type": "origins:resource",
+														"comparison": "<=",
+														"resource": "apocalypse:hidden_bufferwarpz",
+														"compare_to": 10
+													}
+												]
+											},
+											{
+												"type": "origins:and",
+												"conditions": [
+													{
+														"type": "origins:resource",
+														"comparison": "<",
+														"resource": "apocalypse:hidden_bufferwarpz",
+														"compare_to": -5
+													},
+													{
+														"type": "origins:resource",
+														"comparison": ">=",
+														"resource": "apocalypse:hidden_bufferwarpz",
+														"compare_to": -10
+													}
+												]
+											}
+										]
+									},
+									"action":{
+										"type": "origins:execute_command",
+										"command": "execute as @e[distance=..2] run resource set @s apocalypse:refractor2/teleport_normal_windup_teleport 12"
+									}
+								}
+							]
+						},
+						{
+							"type": "origins:if_else_list",
+							"actions": [
+								{
+									"condition":{
+										"type": "origins:or",
+										"conditions":[
+											{
+												"type": "origins:and",
+												"conditions": [
+													{
+														"type": "origins:resource",
+														"comparison": ">",
+														"resource": "apocalypse:hidden_bufferwarpx",
+														"compare_to": 10
+													},
+													{
+														"type": "origins:resource",
+														"comparison": "<=",
+														"resource": "apocalypse:hidden_bufferwarpx",
+														"compare_to": 15
+													}
+												]
+											},
+											{
+												"type": "origins:and",
+												"conditions": [
+													{
+														"type": "origins:resource",
+														"comparison": "<",
+														"resource": "apocalypse:hidden_bufferwarpx",
+														"compare_to": -10
+													},
+													{
+														"type": "origins:resource",
+														"comparison": ">=",
+														"resource": "apocalypse:hidden_bufferwarpx",
+														"compare_to": -15
+													}
+												]
+											},
+											{
+												"type": "origins:and",
+												"conditions": [
+													{
+														"type": "origins:resource",
+														"comparison": ">",
+														"resource": "apocalypse:hidden_bufferwarpz",
+														"compare_to": 10
+													},
+													{
+														"type": "origins:resource",
+														"comparison": "<=",
+														"resource": "apocalypse:hidden_bufferwarpz",
+														"compare_to": 15
+													}
+												]
+											},
+											{
+												"type": "origins:and",
+												"conditions": [
+													{
+														"type": "origins:resource",
+														"comparison": "<",
+														"resource": "apocalypse:hidden_bufferwarpz",
+														"compare_to": -10
+													},
+													{
+														"type": "origins:resource",
+														"comparison": ">=",
+														"resource": "apocalypse:hidden_bufferwarpz",
+														"compare_to": -15
+													}
+												]
+											}
+										]
+									},
+									"action":{
+										"type": "origins:execute_command",
+										"command": "execute as @e[distance=..2] run resource set @s apocalypse:refractor2/teleport_normal_windup_teleport 18"
+									}
+								}
+							]
+						},
+						{
+							"type": "origins:if_else_list",
+							"actions": [
+								{
+									"condition":{
+										"type": "origins:or",
+										"conditions":[
+											{
+												"type": "origins:and",
+												"conditions": [
+													{
+														"type": "origins:resource",
+														"comparison": ">",
+														"resource": "apocalypse:hidden_bufferwarpx",
+														"compare_to": 15
+													},
+													{
+														"type": "origins:resource",
+														"comparison": "<=",
+														"resource": "apocalypse:hidden_bufferwarpx",
+														"compare_to": 20
+													}
+												]
+											},
+											{
+												"type": "origins:and",
+												"conditions": [
+													{
+														"type": "origins:resource",
+														"comparison": "<",
+														"resource": "apocalypse:hidden_bufferwarpx",
+														"compare_to": -15
+													},
+													{
+														"type": "origins:resource",
+														"comparison": ">=",
+														"resource": "apocalypse:hidden_bufferwarpx",
+														"compare_to": -20
+													}
+												]
+											},
+											{
+												"type": "origins:and",
+												"conditions": [
+													{
+														"type": "origins:resource",
+														"comparison": ">",
+														"resource": "apocalypse:hidden_bufferwarpz",
+														"compare_to": 15
+													},
+													{
+														"type": "origins:resource",
+														"comparison": "<=",
+														"resource": "apocalypse:hidden_bufferwarpz",
+														"compare_to": 20
+													}
+												]
+											},
+											{
+												"type": "origins:and",
+												"conditions": [
+													{
+														"type": "origins:resource",
+														"comparison": "<",
+														"resource": "apocalypse:hidden_bufferwarpz",
+														"compare_to": -15
+													},
+													{
+														"type": "origins:resource",
+														"comparison": ">=",
+														"resource": "apocalypse:hidden_bufferwarpz",
+														"compare_to": -20
+													}
+												]
+											}
+										]
+									},
+									"action":{
+										"type": "origins:execute_command",
+										"command": "execute as @e[distance=..2] run resource set @s apocalypse:refractor2/teleport_normal_windup_teleport 24"
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		]
+	},
+	"condition":
+	{
+		"type": "origins:and",
+		"conditions":
+		[
+			{
+				"type": "origins:fall_flying",
+				"inverted": true
+			},
+			{
+			  "type": "origins:gamemode",
+			  "inverted": true,
+			  "gamemode": "spectator"
+			}
+		]
+	},
+	"badges": [
+		{
+			"type": "origins:keybind",
+			"sprite": "origins:textures/gui/badge/active.png",
+			"text": "Trigger with %s!"
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/star.png",
+			"text": "§e§l[FTL: Blink]§r§f does different things depending on the gem you are! §bDiamond§f costs more §5[Trapped§r §5Light]§r but will heal you and make you invincible, while §aEmerald§f is shorter, but costs less §5[Trapped§r §5Light]§r and can be used continuously while you still have trapped light. §7Quartz§f does not make you invisible, but it does make you take less damage and is faster."
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/info.png",
+			"text": "For §e§l[FTL: Warp]§r, your X and Z bars indicate how far you will teleport on the X and Z axis, in increments of 100 blocks, centered on your current coordinates. Leaving the bar on its default position (the big notch's longest bit is visible) will cause you to not teleport on the X or Z axis. The Y axis bar indicates the Y coordinate of the world you will end up in regardless of your current Y coordinates, in increments of 10."
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/info.png",
+			"text": "§4Be careful when using §e§l[FTL: Warp]§r§c! You may end up teleporting outside of the world border or into a pitfall and die there! Always scout ahead before teleporting!"
+		}
+	],
+	"name": "FTL",
+	"description": "§e§l[FTL: Dash]§r\n- Dash forward for a short distance and briefly become invisible.\n \n§e§l[FTL: Blink]§r\n- After using §e[FTL:§r §eDash]§r, press primary again while mid-air to expend some §5[Trapped§r §5Light]§r and teleport forward a short distance.\n \n§e§l[FTL: Warp]§r\n- Sneak while holding a Photonic Regulator to teleport according to your Photonic Coordinator settings, up to 2000 blocks in any direction.",
+	"key": {
+		"key":"key.origins.primary_active",
+		"continuous": false
+	}
+}

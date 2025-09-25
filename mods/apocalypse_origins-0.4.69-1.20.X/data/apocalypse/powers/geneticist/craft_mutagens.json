@@ -1,0 +1,69 @@
+{
+	"type": "origins:recipe",
+	"recipe": {
+		"type": "minecraft:crafting_shaped",
+		"id": "apocalypse_origins:mutagens",
+		"pattern": [
+			"#_#",
+			"#o#",
+			"^g^"
+		],
+		"key": {
+			"#": {
+				"item": "minecraft:glass_pane"
+			},
+			"^": {
+				"item": "minecraft:gold_nugget"
+			},
+			"_": {
+				"item": "minecraft:stone_button"
+			},
+			"g": {
+				"item": "minecraft:gold_ingot"
+			},
+			"o": {
+				"item": "minecraft:lapis_lazuli"
+			}
+		},
+		"result": {
+			"item": "apocalypse_origins:mutagens"
+		}
+	},
+	"name": "Labware: Mutagens",
+	"description": "You know how to create mutagens which exploit the unpredictable and unscientific properties of Lapis Lazuli.\n \nWhen used on someone other than yourself: Trigger [Injection Cooldown]. You can not inject that creature for 30 seconds.\n \n- When used on some mob types, you can change them into a variant version of themselves.\n \n- Upon use on a player, it rerolls every active [Side Effect] within the recipient and then breaks. If the player is a geneticist who is not under the effects of [Antimutagens], their [Innate Genes] will also be rerolled. If a player does not have any active [Side Effects], they will receive two random active [Side Effects]. If the recipient is sneaking, you will instead delete a single random [Side Effect] or generic [Gene]. There's a chance this secondary property will fail!",
+	"badges": [
+		{	
+			"type": "origins:crafting_recipe",
+			"sprite": "apocalypse_origins:textures/item/mutagens.png",
+			"recipe": {
+				"type": "minecraft:crafting_shaped",
+				"id": "apocalypse_origins:mutagens",
+				"pattern": [
+					"#_#",
+					"#o#",
+					"^g^"
+				],
+				"key": {
+					"#": {
+						"item": "minecraft:glass_pane"
+					},
+					"^": {
+						"item": "minecraft:gold_nugget"
+					},
+					"_": {
+						"item": "minecraft:stone_button"
+					},
+					"g": {
+						"item": "minecraft:gold_ingot"
+					},
+					"o": {
+						"item": "minecraft:lapis_lazuli"
+					}
+				},
+				"result": {
+					"item": "apocalypse_origins:mutagens"
+				}
+			}
+		}
+	]
+}

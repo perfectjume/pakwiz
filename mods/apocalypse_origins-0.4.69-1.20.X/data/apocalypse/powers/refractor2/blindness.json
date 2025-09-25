@@ -1,0 +1,148 @@
+{
+	"type": "origins:multiple",
+	"extrablind":
+	{
+		"type": "origins:overlay",
+		"texture": "apocalypse_origins:textures/gui/trueblindness.png",
+		"strength": 1.0,
+		"red": 1.0,
+		"green": 1.0,
+		"blue": 1.0,
+		"draw_mode": "texture",
+		"draw_phase": "below_hud",
+		"hide_with_hud": false,
+		"visible_in_third_person": true
+	},
+	"hahanowurblind": 
+	{
+		"type": "origins:prevent_entity_render",
+		"condition": {
+			"type": "origins:resource",
+			"resource": "*:*_blindbar",
+			"comparison": ">",
+			"compare_to": 0
+		}
+	},
+	"blindvision": 
+	{
+		"type": "origins:shader",
+		"shader": "minecraft:shaders/post/sobel.json"
+	},
+	"blindbar": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 5,
+		"start_value": 5,
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse_origins:textures/gui/blindness_bar.png",
+			"bar_index": 0,
+			"condition": {
+				"type": "origins:resource",
+				"resource": "*:*_blindbar",
+				"comparison": ">",
+				"compare_to": 0
+			}
+		},
+		"min_action":{
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "effect clear @s minecraft:blindness"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "power revoke @s apocalypse:refractor2/blindness refractor"
+				}							
+			]
+		}
+	},
+	"timer": 
+	{
+		"type": "origins:action_over_time",
+		"interval": 20,
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition":{
+						"type": "origins:resource",
+						"comparison": ">",
+						"resource": "*:*_blindbar",
+						"compare_to": 0
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_blindbar",
+								"change": -1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.beacon.ambient master @s ~ ~ ~ 0.1 1.5"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.amethyst_block.chime master @s ~ ~ ~ 0.2 1.5"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "effect give @s minecraft:blindness 3 0 true"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "execute at @s run particle entity_effect ~ ~1 ~ 0 1 0 0 3 normal @a[tag=refractor]"
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_blindbar",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "effect clear @s minecraft:blindness"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "power revoke @s apocalypse:refractor2/blindness refractor"
+							}							
+						]
+					}
+				}
+			]
+		}
+	},
+	"melee":
+	{
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -0.25
+		}
+	},
+	"projectile":
+	{
+		"type": "origins:modify_projectile_damage",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -1
+		}
+	}
+}

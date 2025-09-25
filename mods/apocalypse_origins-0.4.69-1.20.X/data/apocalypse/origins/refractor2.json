@@ -1,0 +1,19 @@
+{
+	"powers": [
+		"apocalypse:refractor2/passives",
+		"apocalypse:refractor2/primary",
+		"apocalypse:refractor2/secondary",
+		"apocalypse:refractor2/craft_regulator",
+		"apocalypse:refractor2/craft_coord_blocks",
+		"apocalypse:refractor2/craft_world_blocks"
+	],
+	"icon": {
+		"item": "apocalypse_origins:mirror"
+	},
+	"unchoosable": false,
+	"order": 10,
+	"impact": 3,
+	"name": "Refractor",
+	"description": "This origin is in open beta (and fully functional). Drop by on the Discord if you have suggestions or ideas, or to report any bugs!\n \nA being of crystals and gems, blessed and protected by nature itself, the Refractor is capable of transforming its own mass into photons in order to conceal itself and to travel as fast as light itself."
+}
+//Umena says hi

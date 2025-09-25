@@ -1,0 +1,78 @@
+{
+	"type": "origins:active_self",
+	"hud_render": {
+		"should_render": true,
+		"sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_03.png",
+		"bar_index": 13
+	},
+	"cooldown": 300,
+	"entity_action": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "playsound minecraft:entity.warden.agitated master @a ~ ~ ~ 1 1"
+			},
+			{
+				"type": "origins:delay",
+				"ticks": 30,
+				"action":{
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:execute_command",
+							"command": "particle minecraft:sonic_boom ~ ~-0.25 ~ -5 0 5 0 30"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "playsound minecraft:entity.warden.sonic_boom master @a ~ ~ ~ 1 1"
+						},
+						{
+							"type": "origins:area_of_effect",
+							"radius": 10,
+							"bientity_action": {
+								"type": "origins:target_action",
+								"action": {
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "particle minecraft:sonic_boom ~ ~1 ~ 0 0 0 0 1"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "power grant @s apocalypse:geneticist/genes/active/warden_roar_status geneticist"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "effect give @s minecraft:darkness 4 0 true"
+										}
+									]
+								}
+							},
+							"bientity_condition":
+							{
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:can_see"
+									},
+									{
+										"type": "origins:target_condition",
+										"condition": {
+											"type": "origins:living"
+										}
+									}
+								]
+							}
+						}
+					]
+				}
+			}
+		]
+	},
+	"key": {
+		"key": "key.origins.primary_active",
+		"continuous": false
+	}
+}

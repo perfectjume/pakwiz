@@ -1,0 +1,213 @@
+{
+	"type": "origins:multiple",
+	"durationbar": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 15,
+		"start_value": 15,
+		"hidden": true,
+		"name": "Duration",
+		"description": "How long?",
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse_origins:textures/gui/skies_bar.png",
+			"bar_index": 0,
+			"condition": {
+				"type": "origins:resource",
+				"resource": "apocalypse:hexblade/sigil_skies_status_durationbar",
+				"comparison": ">",
+				"compare_to": 0
+			}
+		}
+	},
+	"timer": 
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "apocalypse:hexblade/sigil_skies_status_durationbar",
+								"compare_to": 15
+							},
+							{
+								"type": "origins:swimming"
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:item.elytra.flying master @a[distance=..10] ~ ~ ~ 1 1.5",
+								"permission_level": 4
+							},					
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/sigil_skies_status_durationbar",
+								"change": -1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "execute at @s run particle entity_effect ~ ~1 ~ 0 1 0 0 3 normal @a[tag=hexblade]",
+								"permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "effect give @s minecraft:slow_falling 2 0 true",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": ">",
+								"resource": "apocalypse:hexblade/sigil_skies_status_durationbar",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "<=",
+								"resource": "apocalypse:hexblade/sigil_skies_status_durationbar",
+								"compare_to": 14
+							},
+							{
+								"type": "origins:swimming"
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/sigil_skies_status_durationbar",
+								"change": -1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:ambient.soul_sand_valley.additions master @a[distance=..10] ~ ~ ~ 1 2",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "execute at @s run particle entity_effect ~ ~1 ~ 0 1 0 0 3 normal @a[tag=hexblade]",
+								"permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "effect give @s minecraft:slow_falling 2 0 true",
+							  "permission_level": 4
+							},
+							{
+								"type": "origins:chance",
+								"action": {
+									"type": "origins:execute_command",
+									"command": "playsound minecraft:item.elytra.flying master @a[distance=..10] ~ ~ ~ 1 1.5",
+									"permission_level": 4
+								},
+								"chance": 0.25
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "apocalypse:hexblade/sigil_skies_status_durationbar",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:swimming"
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.amethyst_cluster.break master @a[distance=..5] ~ ~ ~ 10 2",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "stopsound @s master minecraft:item.elytra.flying",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:execute_command",
+									"command": "power revoke @s apocalypse:hexblade/sigil_skies_status hexblade_bars",
+									"permission_level": 4
+								}
+							}							
+						]
+					}
+				}
+			]
+		},
+		"interval": 20,
+		"hidden": true
+	},
+	"fly":
+	{
+		"type": "origins:swimming",
+		"condition": {
+			"type":"origins:or",
+			"conditions":[
+				{
+					"type": "origins:on_block",
+					"inverted": true
+				},
+				{
+					"type": "origins:power",
+					"power": "apocalypse:hexblade/sigil_seas_status"
+				}
+			]
+		}
+	},
+	"speed_fly":
+	{
+		"type": "origins:modify_swim_speed",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": 3
+		}
+	},
+	"body_is_air":
+	{
+		"type": "origins:invisibility",
+		"render_armor": false,
+		"condition": {
+			"type": "origins:swimming"
+		}
+	},
+	"fast_air":
+	{
+	  "type": "origins:attribute_modify_transfer",
+	  "class": "io.github.apace100.apoli.power.ModifyAirSpeedPower",
+	  "attribute": "minecraft:generic.movement_speed",
+	  "multiplier": 1
+	},
+	"hidden": true
+}

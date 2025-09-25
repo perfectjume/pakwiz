@@ -1,0 +1,21 @@
+{
+	"powers": [
+		"apocalypse:myconoids/wart_callback",
+		"apocalypse:myconoids/wart_passives",
+		"apocalypse:myconoids/wart_primary",
+		"apocalypse:myconoids/wart_secondary",
+		"apocalypse:myconoids/cold_weakness",
+		"apocalypse:myconoids/resource_temperature",
+		"apocalypse:myconoids/turf_penalty",
+		"apocalypse:myconoids/universal_toggle"
+	],
+	"icon": {
+		"item": "minecraft:nether_wart"
+	},
+	"unchoosable": true,
+	"order": 10,
+	"impact": 3,
+	"name": "Wart Myconoid",
+	"description": "Myconoid colonies have dipped their stems into the arcane before, and none are wiser in the intricacies of magic than the Wart Myconoid. With an affinity for magic, these innate spellcasters call forth powerful, unpredictable magic using their spores."
+}
+//Umena says hi

@@ -1,0 +1,402 @@
+{
+	"type": "origins:action_on_callback",
+	"entity_action_chosen": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "amoeba_origin:manifest"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @p {\"text\":\"How did you expect this would end?\",\"color\":\"red\"}"
+								},
+								{
+									"type": "origins:delay",
+									"ticks": 20,
+									"action":{
+										"type": "origins:and",
+										"actions": [
+											{
+												"type": "origins:execute_command",
+												"command": "tellraw @p {\"text\":\"Enjoy your stay!\",\"color\":\"yellow\"}"
+											},
+											{
+												"type": "origins:execute_command",
+												"command": "power remove @s amoeba_origin:manifest"
+											},
+											{
+												"type": "origins:execute_command",
+												"command": "power remove @s amoeba_origin:gluttony"
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s add hexblade"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "effect give @s minecraft:instant_health 1 0 true"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "function apocalypse:init"
+			},
+			{
+				"type": "origins:delay",
+				"ticks": 1,
+				"action":{
+					"type": "origins:execute_command",
+					"command": "function apocalypse:loop"
+				}
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power grant @s apocalypse:hexblade/hexblade_resource_souls hexblade_bars"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power grant @s apocalypse:hexblade/hexblade_resource_storage hexblade_bars"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power grant @s apocalypse:hexblade/hexblade_resource_waypoint hexblade_bars"
+			},
+			{
+				"type": "origins:delay",
+				"ticks": 2,
+				"action":{
+					"type": "origins:execute_command",
+					"command": "function apocalypse:hexblade_give"
+				}
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "resource set @s apocalypse:hexblade/hexblade_primary_critdash 0"
+			}
+		]
+	},
+	"entity_action_added": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "amoeba_origin:manifest"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @p {\"text\":\"Oh, really? You want to copy us? Go ahead.\",\"color\":\"red\"}"
+								},
+								{
+									"type": "origins:delay",
+									"ticks": 20,
+									"action":{
+										"type": "origins:and",
+										"actions": [
+											{
+												"type": "origins:execute_command",
+												"command": "tellraw @p {\"text\":\"Congratulations: Your soul is now trapped in a wooden sword!\",\"color\":\"yellow\"}"
+											},
+											{
+												"type": "origins:execute_command",
+												"command": "power remove @s amoeba_origin:manifest"
+											},
+											{
+												"type": "origins:execute_command",
+												"command": "power remove @s amoeba_origin:gluttony"
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s add hexblade"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "effect give @s minecraft:instant_health 1 0 true"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "function apocalypse:init"
+			},
+			{
+				"type": "origins:delay",
+				"ticks": 1,
+				"action":{
+					"type": "origins:execute_command",
+					"command": "function apocalypse:loop"
+				}
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power grant @s apocalypse:hexblade/hexblade_resource_souls hexblade_bars"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power grant @s apocalypse:hexblade/hexblade_resource_storage hexblade_bars"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power grant @s apocalypse:hexblade/hexblade_resource_waypoint hexblade_bars"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "resource set @s apocalypse:hexblade/hexblade_primary_b_critdash 0"
+			}
+		]
+	},
+    "entity_action_respawned":{
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "amoeba_origin:manifest"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @p {\"text\":\"Oh, really? You want to copy us? Go ahead.\",\"color\":\"red\"}"
+								},
+								{
+									"type": "origins:delay",
+									"ticks": 20,
+									"action":{
+										"type": "origins:and",
+										"actions": [
+											{
+												"type": "origins:execute_command",
+												"command": "tellraw @p {\"text\":\"Congratulations: Your soul is now trapped in a wooden sword!\",\"color\":\"yellow\"}"
+											},
+											{
+												"type": "origins:execute_command",
+												"command": "power remove @s amoeba_origin:manifest"
+											},
+											{
+												"type": "origins:execute_command",
+												"command": "power remove @s amoeba_origin:gluttony"
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"resource": "apocalypse:hexblade/hexblade_resource_storage",
+									"comparison": "<=",
+									"compare_to": 40
+								},
+								{
+									"type": "origins:resource",
+									"resource": "apocalypse:hexblade/hexblade_resource_storage",
+									"comparison": ">",
+									"compare_to": 0
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @p {\"text\":\"Your altar is now empty!\",\"color\":\"red\"}"
+								}
+							]
+						}
+					},
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"resource": "apocalypse:hexblade/hexblade_resource_storage",
+									"comparison": ">",
+									"compare_to": 40
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @p {\"text\":\"You lost 40 souls from your altar for dying!\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:command",
+									"command": "gamerule keepInventory",
+									"comparison": "==",
+									"compare_to": 1
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "clear @s minecraft:wooden_sword"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @p {\"text\":\"Imagine playing with keepInventory on.\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s add hexblade"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "effect give @s minecraft:instant_health 1 0 true"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "function apocalypse:init"
+			},
+			{
+				"type": "origins:delay",
+				"ticks": 1,
+				"action":{
+					"type": "origins:execute_command",
+					"command": "function apocalypse:loop"
+				}
+			},
+			{
+				"type": "origins:delay",
+				"ticks": 2,
+				"action":{
+					"type": "origins:execute_command",
+					"command": "function apocalypse:hexblade_give"
+				}
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "resource set @s apocalypse:hexblade/hexblade_primary_b_critdash 0"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "kill @e[tag=hexhunt]"
+			},
+			{
+				"type": "origins:change_resource",
+				"resource": "apocalypse:hexblade/hexblade_resource_storage",
+				"change": -40
+			}
+		]
+	},
+	"entity_action_removed": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s remove hexblade"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "function apocalypse:init"
+			},
+			{
+				"type": "origins:delay",
+				"ticks": 1,
+				"action":{
+					"type": "origins:execute_command",
+					"command": "function apocalypse:loop"
+				}
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "resource set @s apocalypse:hexblade/hexblade_primary_b_critdash 0"
+			}
+		]
+	},
+	"execute_chosen_when_orb": true,
+	"hidden": true
+}

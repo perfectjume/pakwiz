@@ -1,0 +1,5 @@
+{
+	"type": "origins:simple",
+	"name": "The Hex Hunt",
+	"description": "When you kill a creature, there is a 1/100 chance a hunter will spawn to hunt you down.\n \nHunters level up as you grow in power and are formidable opponents.\n \nA hunter will give up on its chase after a minute."
+}

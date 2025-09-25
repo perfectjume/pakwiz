@@ -1,0 +1,15 @@
+{
+	"powers": [
+		"apocalypse:classes/nitwit"
+	],
+	"icon": {
+		"item": "minecraft:white_wool",
+		"tag": "{CustomModelData:1}"
+	},
+	"unchoosable": false,
+	"order": 10,
+	"impact": 1,
+	"name": "Mediocrity Master",
+	"description": "You sure are better than a Nitwit, aren't you?"
+}
+//Umena says hi

@@ -1,0 +1,98 @@
+{
+	"type": "origins:multiple",
+	"sizechange":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_gained": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "scale multiply pehkui:height 1.3 @s"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "scale multiply pehkui:width 1.3 @s"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "scale multiply pehkui:reach 1.3 @s"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "scale multiply pehkui:step_height 2 @s"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "scale persist set true @s"
+				}
+			]
+		},
+		"entity_action_lost":{
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "scale divide pehkui:height 1.3 @s"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "scale divide pehkui:width 1.3 @s"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "scale divide pehkui:reach 1.3 @s"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "scale divide pehkui:step_height 2 @s"
+				}
+			]
+		}
+	},
+	"antivoid": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -0.99,
+			"operation":"multiply_total"
+		},
+		"damage_condition": {
+			"type": "origins:name",
+			"name": "outOfWorld"
+		}
+	},
+	"avoid_void":
+	{
+		"type": "origins:self_action_when_hit",
+		"cooldown": 1,
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "effect give @s minecraft:slow_falling 1 0 true"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "tp @s"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "spreadplayers ~ ~ 1 150 false @s"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:entity.guardian.death master @a ~ ~ ~ 2 0.5"
+				}
+			]
+		},
+		"damage_condition": {
+			"type": "origins:name",
+			"name": "outOfWorld"
+		}
+	}
+}

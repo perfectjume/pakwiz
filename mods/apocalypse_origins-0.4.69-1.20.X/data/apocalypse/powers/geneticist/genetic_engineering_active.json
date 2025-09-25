@@ -1,0 +1,2550 @@
+{
+	"type": "origins:active_self",
+	"cooldown": 5,
+	"hud_render": {
+		"should_render":false,
+		"bar_index": 0
+	},
+	"entity_action":{
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_living"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 1
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/generic/bulky gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/generic_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_living"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 2
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/generic/resilient gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/generic_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_living"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 3
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/generic/healthy gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/generic_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_living"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 4
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/generic/quick gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/generic_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_living"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 5
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/generic/energetic gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/generic_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_living"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 6
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/generic/strong gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/generic_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_living"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 7
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/generic/accurate gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/generic_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_living"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 8
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/generic/metabolic gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/generic_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_living"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 9
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/generic/frugal gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/generic_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_living"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 10
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/generic/lightweight gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/generic_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_living"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 11
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/generic/swimmer gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/generic_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_living"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 12
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/generic/clever gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/generic_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_living"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 13
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/generic/armored gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/generic_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_living"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 14
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/living/milker gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/living_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_living"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 15
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/living/wooly gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/living_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_living"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 16
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/living/afterlife_research gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/living_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_living"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 17
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/living/lightfall gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/living_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_living"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 18
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/living/battle_trance gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/living_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_living"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 19
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/living/frostproof gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/living_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_living"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 20
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/generic/quickstrikes gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/generic_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_living"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 21
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s origins:scare_creepers gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/living_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_aquatic"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 1
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/aquatic/aquatic_predator gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/aquatic_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_aquatic"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 2
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/aquatic/liquid_vision gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/aquatic_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_aquatic"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 3
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/aquatic/quilled gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/aquatic_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_aquatic"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 4
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/aquatic/waterproof gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/aquatic_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_aquatic"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 5
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/aquatic/fatiguer gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/aquatic_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_aquatic"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 6
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/aquatic/regenerator gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/aquatic_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_arthropod"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 1
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/arthropod/climber gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/arthropod_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_arthropod"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 2
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/arthropod/venomous gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/arthropod_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_arthropod"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 3
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/arthropod/tiny gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/arthropod_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_arthropod"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 4
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/arthropod/burrower gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/arthropod_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_arthropod"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 5
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/arthropod/webslinger gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/arthropod_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_arthropod"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 6
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s origins:master_of_webs_no_slowdown gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s origins:master_of_webs_punch_through gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/arthropod_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_arthropod"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 7
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s origins:master_of_webs_webbing gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/arthropod_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_end"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 1
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/end/dodger gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/end_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_end"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 2
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/end/levitator gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/end_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_end"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 3
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/end/juggernaut gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/end_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_end"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 4
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/end/ancient_behemoth gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/end_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_creeper"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 1
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/odd/camouflage gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/odd_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_creeper"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 2
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/odd/silent gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/odd_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_creeper"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 3
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/odd/swallow gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/odd_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_creeper"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 4
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/odd/blastproof gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/odd_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_nether"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 1
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/nether/fireproof gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/nether_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_nether"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 2
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/nether/poisonproof gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/nether_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_nether"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 3
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/nether/witherproof gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/nether_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_nether"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 4
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/nether/flamestrike gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/nether_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_nether"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 5
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/nether/witherstrike gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/nether_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_nether"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 6
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/nether/striding gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/nether_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_undead"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 1
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/undead/drowner gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/undead_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_undead"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 2
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/undead/waster gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/undead_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_undead"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 3
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/undead/gliding gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/undead_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_undead"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 4
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/undead/rigor_mortis gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/undead_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_undead"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 5
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/undead/arrow_toss gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/undead_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_undead"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 6
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/undead/soporiferous gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/undead_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_active"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 1
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/flak_skull_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_active"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 2
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/end_monolith_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_active"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 3
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/guardian_beam_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_active"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 4
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/warden_roar_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_active"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 5
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/ravaging_charge_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_active"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 6
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/ink_spray_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_active"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 7
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/glow_ink_spray_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_active"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 8
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/ender_pearl_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_active"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 9
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/airdraft_granter geneticist"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:syringe_active"
+										}
+									}
+								},
+								{
+									"type": "origins:command",
+									"command": "data get entity @s SelectedItem.tag.CustomModelData",
+									"comparison": "==",
+									"compare_to": 10
+								}
+							]
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/suitcase_granter geneticist"
+								}
+							]
+						}
+					}
+				]
+			},
+{
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:execute_command",
+							"command": "playsound minecraft:apocalypse.ost.syringe master @a[distance=..16] ~ ~ ~ 1 1"
+						},
+						{
+							"type": "origins:equipped_item_action",
+							"equipment_slot": "mainhand",
+							"action":
+							{
+								"type": "origins:consume",
+								"amount": 1
+							}
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "tellraw @s {\"text\":\"--->Gene Injected<---\",\"color\":\"gold\"}"
+						}
+					]
+				}
+		]
+	},
+	"condition":{
+		"type": "origins:and",
+		"conditions": [
+			{
+				"type": "origins:sneaking"
+			},
+			{
+				"type": "origins:or",
+				"conditions": [
+					{
+						"type": "origins:equipped_item",
+						"equipment_slot": "mainhand",
+						"item_condition":
+						{
+							"type": "origins:ingredient",
+							"ingredient":
+							{
+								"item": "apocalypse_origins:syringe_living"
+							}
+						}
+					},
+					{
+						"type": "origins:equipped_item",
+						"equipment_slot": "mainhand",
+						"item_condition":
+						{
+							"type": "origins:ingredient",
+							"ingredient":
+							{
+								"item": "apocalypse_origins:syringe_aquatic"
+							}
+						}
+					},
+					{
+						"type": "origins:equipped_item",
+						"equipment_slot": "mainhand",
+						"item_condition":
+						{
+							"type": "origins:ingredient",
+							"ingredient":
+							{
+								"item": "apocalypse_origins:syringe_arthropod"
+							}
+						}
+					},
+					{
+						"type": "origins:equipped_item",
+						"equipment_slot": "mainhand",
+						"item_condition":
+						{
+							"type": "origins:ingredient",
+							"ingredient":
+							{
+								"item": "apocalypse_origins:syringe_creeper"
+							}
+						}
+					},
+					{
+						"type": "origins:equipped_item",
+						"equipment_slot": "mainhand",
+						"item_condition":
+						{
+							"type": "origins:ingredient",
+							"ingredient":
+							{
+								"item": "apocalypse_origins:syringe_end"
+							}
+						}
+					},
+					{
+						"type": "origins:equipped_item",
+						"equipment_slot": "mainhand",
+						"item_condition":
+						{
+							"type": "origins:ingredient",
+							"ingredient":
+							{
+								"item": "apocalypse_origins:syringe_nether"
+							}
+						}
+					},
+					{
+						"type": "origins:equipped_item",
+						"equipment_slot": "mainhand",
+						"item_condition":
+						{
+							"type": "origins:ingredient",
+							"ingredient":
+							{
+								"item": "apocalypse_origins:syringe_undead"
+							}
+						}
+					},
+					{
+						"type": "origins:equipped_item",
+						"equipment_slot": "mainhand",
+						"item_condition":
+						{
+							"type": "origins:ingredient",
+							"ingredient":
+							{
+								"item": "apocalypse_origins:syringe_active"
+							}
+						}
+					}
+				]
+			}
+		]
+	},
+	"hidden": true,
+	"key": {
+		"key":"key.use",
+		"continuous": false
+	}
+}

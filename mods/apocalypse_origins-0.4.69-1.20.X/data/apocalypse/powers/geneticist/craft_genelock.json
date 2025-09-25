@@ -1,0 +1,69 @@
+{
+	"type": "origins:recipe",
+	"recipe": {
+		"type": "minecraft:crafting_shaped",
+		"id": "apocalypse_origins:genelock",
+		"pattern": [
+			"#_#",
+			"#o#",
+			"^-^"
+		],
+		"key": {
+			"#": {
+				"item": "minecraft:glass_pane"
+			},
+			"^": {
+				"item": "minecraft:iron_nugget"
+			},
+			"_": {
+				"item": "minecraft:stone_button"
+			},
+			"-": {
+				"item": "minecraft:iron_ingot"
+			},
+			"o": {
+				"item": "minecraft:nether_star"
+			}
+		},
+		"result": {
+			"item": "apocalypse_origins:genelock"
+		}
+	},
+	"name": "Labware: Genetic Lock",
+	"description": "You know how to create genetic locks, which can draw out the genetic potential in creatures through the use of a nether star.\n \nThis item is reusable and, while it is active, the drop chance of Generic and Special genes becomes 100%.\n \nThe effects of the genetic lock can be turned on and off and they are lost on death.",
+	"badges": [
+		{	
+			"type": "origins:crafting_recipe",
+			"sprite": "apocalypse_origins:textures/item/genelock.png",
+			"recipe": {
+				"type": "minecraft:crafting_shaped",
+				"id": "apocalypse_origins:genelock",
+				"pattern": [
+					"#_#",
+					"#o#",
+					"^-^"
+				],
+				"key": {
+					"#": {
+						"item": "minecraft:glass_pane"
+					},
+					"^": {
+						"item": "minecraft:iron_nugget"
+					},
+					"_": {
+						"item": "minecraft:stone_button"
+					},
+					"-": {
+						"item": "minecraft:iron_ingot"
+					},
+					"o": {
+						"item": "minecraft:nether_star"
+					}
+				},
+				"result": {
+					"item": "apocalypse_origins:genelock"
+				}
+			}
+		}
+	]
+}

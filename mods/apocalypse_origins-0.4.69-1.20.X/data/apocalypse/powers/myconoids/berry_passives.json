@@ -1,0 +1,632 @@
+{
+	"type": "origins:multiple",
+	"color":
+	{
+		"type": "origins:model_color",
+		"red": 0.15,
+		"green": 0.38,
+		"blue": 0.25
+	},
+	"basehealth": 
+	{
+		"type": "origins:attribute",
+		"update_health": true,
+		"modifiers": {
+			"attribute": "minecraft:generic.max_health",
+			"operation": "multiply_total",
+			"value": 1
+		},
+		"name": "Bulkiest defender",
+		"description": "Your max HP is increased by 100%."
+	},
+	"immunities": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type":"origins:or",
+			"conditions":[
+				{
+					"type": "origins:name",
+					"name": "sweetBerryBush"
+				},
+				{
+					"type": "origins:name",
+					"name": "inWall"
+				},
+				{
+					"type": "origins:name",
+					"name": "freeze"
+				}
+			]
+		},
+		"hidden": true
+	},
+	"fall_resistance": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type": "origins:name",
+			"name": "fall"
+		},
+		"condition":{
+			"type": "origins:fall_distance",
+			"comparison": "<=",
+			"compare_to": 6
+		}
+	},
+	"mortal": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": 1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type":"origins:or",
+			"conditions":[
+				{
+					"type": "origins:name",
+					"name": "onFire"
+				},
+				{
+					"type": "origins:name",
+					"name": "inFire"
+				},
+				{
+					"type": "origins:name",
+					"name": "lava"
+				},
+				{
+					"type": "origins:name",
+					"name": "fireball"
+				},
+				{
+					"type": "origins:name",
+					"name": "hotFloor"
+				}
+			]
+		},
+		"hidden": true
+	},
+	"flammable":
+	{
+		"type": "origins:self_action_when_hit",
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:set_on_fire",
+					"duration": 5
+				}
+			]
+		},
+		"damage_condition": {
+			"type": "origins:fire"
+		},
+		"cooldown": 0,
+		"name": "Flammable",
+		"description": "You are flammable and fire will not be put out on its own."
+	},
+	"basespeed": 
+	{
+		"type": "origins:attribute",
+		"update_health": true,
+		"modifiers": {
+			"attribute": "minecraft:generic.movement_speed",
+			"operation": "multiply_total",
+			"value": -0.25
+		},
+		"name": "Slow",
+		"description": "Your speed decreases by 25%."
+	},
+	"jump":
+	{
+		"type": "origins:modify_jump",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": 0.35
+		}
+	},
+	"ignoresnow":
+	{
+		"type": "origins:phasing",
+		"blacklist": false,
+		"render_type": "remove_blocks",
+		"block_condition": {
+			"type": "origins:in_tag",
+			"tag": "apocalypse:snowy_phaseable"
+		},
+		"condition": {
+			"type": "origins:resource",
+			"comparison": "==",
+			"resource": "apocalypse:myconoids/universal_toggle_binary",
+			"compare_to": 1
+		}
+	},
+	"in_snow_resource":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 2,
+		"start_value": 2,
+		"hidden": true,
+		"hud_render": {
+			"should_render": false,
+			"bar_index": 0,
+			"sprite_location": "apocalypse:textures/gui/mycocrimson.png"
+		}
+	},
+	"in_snow_dectection":
+	{
+		"type": "origins:action_over_time",
+		"interval": 20,
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:or",
+						"inverted": false,
+						"conditions": [
+							{
+								"type": "origins:on_block",
+								"block_condition": {
+									"type": "origins:in_tag",
+									"tag": "apocalypse:cold_blocks"
+								}
+							},
+							{
+								"type": "origins:in_block",
+								"block_condition": {
+									"type": "origins:in_tag",
+									"tag": "apocalypse:cold_blocks"
+								}
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/berry_passives_in_snow_resource 2",
+								"permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:or",
+						"inverted": true,
+						"conditions": [
+							{
+								"type": "origins:on_block",
+								"block_condition": {
+									"type": "origins:in_tag",
+									"tag": "apocalypse:cold_blocks"
+								}
+							},
+							{
+								"type": "origins:in_block",
+								"block_condition": {
+									"type": "origins:in_tag",
+									"tag": "apocalypse:cold_blocks"
+								}
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/berry_passives_in_snow_resource -1",
+								"permission_level": 4
+							}
+						]
+					}
+				}
+			]
+		}
+	},
+	"snowspeed":
+	{
+		"type": "origins:conditioned_attribute",
+		"modifier": {
+			"attribute": "minecraft:generic.movement_speed",
+			"operation": "multiply_total",
+			"value": 0.8
+		},
+		"tick_rate": 20,
+		"condition": {
+			"type": "origins:resource",
+			"comparison": ">",
+			"resource": "apocalypse:myconoids/berry_passives_in_snow_resource",
+			"compare_to": 0
+		}
+	},
+	"ride_dismount_self":{
+		"type": "origins:active_self",
+		"cooldown": 1,
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:sneaking"
+							},
+							{
+								"type": "origins:passenger"
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/berry_passives_mounted_resource -1"
+							},
+							{
+								"type": "origins:passenger_action",
+								"action": {
+									"type": "origins:execute_command",
+									"command": "resource change @s apocalypse:myconoids/mounting_resource -1"
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 3,
+								"action": {
+									"type": "origins:passenger_action",
+									"action": {
+										"type": "origins:dismount"
+									}
+								}
+							}
+						]
+					}
+				}
+			]
+		},
+		"key": {
+		  "key": "key.jump"
+		}
+	},
+	"pickup":
+	{
+		"type": "origins:action_on_entity_use",
+		"bientity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:invert",
+					"action": {
+						"type": "origins:mount"
+					}
+				},
+				{
+					"type": "origins:target_action",
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "power grant @s apocalypse:myconoids/mounting afungus",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:execute_command",
+									"command": "resource change @s apocalypse:myconoids/mounting_resource 1"
+								}
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:actor_action",
+					"action": 
+					{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/berry_passives_mounted_resource 1"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/berry_passives_mounting_cooldown_resource 3"
+							}
+						]
+					}
+				}
+			]
+		},
+		"bientity_condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:target_condition",
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:living"
+							},
+							{
+								"type": "origins:in_tag",
+								"tag": "apocalypse:pickup_blacklist",
+								"inverted": true
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:distance",
+					"comparison": "<=",
+					"compare_to": 4
+				}
+			]
+		},
+		"item_condition": {
+			"type": "origins:empty"
+		},
+		"hands": [
+			"main_hand"
+		],
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:sneaking"
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "apocalypse:myconoids/berry_passives_mounting_cooldown_resource",
+					"compare_to": 0
+				}
+			]
+		},
+		"name": "Pick up",
+		"description": "No idea if it will work but it will be funny if it does."
+	},
+	"invis":
+	{
+		"type": "origins:prevent_entity_render",
+		"hidden": true,
+		"entity_condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:living"
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "apocalypse:myconoids/mounting_resource",
+					"compare_to": 1
+				}
+			]
+		}
+	},
+	"mount_resistance": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":
+		{
+			"type": "origins:attacker",
+			"entity_condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:living"
+					},
+					{
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "apocalypse:myconoids/mounting_resource",
+						"compare_to": 1
+					}
+				]
+			}
+		},
+		"hidden": true,
+		"condition":
+		{
+			"type": "origins:and",
+			"conditions":
+			[
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "apocalypse:myconoids/berry_passives_mounted_resource",
+					"compare_to": 1
+				}
+			]
+		}
+	},
+	"mounting_cooldown_resource":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 3,
+		"start_value": 0,
+		"hidden": true,
+		"name": "On cooldown?",
+		"description": "If not 0, on cooldown.",
+		"hud_render": {
+			"should_render": false,
+			"sprite_location":"apocalypse:textures/gui/mycoberry.png",
+			"bar_index": 0
+		}
+	},
+	"mounted_resource":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hidden": true,
+		"name": "Mounted?",
+		"description": "Is there a rider?",
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse:textures/gui/zberry_mounted.png",
+			"bar_index": 0,
+			"condition": {
+				"type": "origins:and",
+				"conditions": [			
+					{
+						"type": "origins:resource",
+						"resource": "apocalypse:myconoids/berry_passives_mounted_resource",
+						"comparison": ">",
+						"compare_to": 0
+					}
+				]
+			}
+		}
+	},
+	"stamina_spores":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 30,
+		"start_value": 30,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 0,
+			"sprite_location": "apocalypse:textures/gui/mycoberry.png"
+		}
+	},
+	"spore_regen":
+	{
+		"type": "origins:action_over_time",
+		"interval": 100,
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:resource",
+						"comparison": ">",
+						"resource": "apocalypse:myconoids/turf_penalty_in_turf_resource",
+						"compare_to": 0
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/berry_passives_stamina_spores 5",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/berry_passives_mounting_cooldown_resource -1",
+								"permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "apocalypse:myconoids/turf_penalty_in_turf_resource",
+						"compare_to": 0
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/berry_passives_stamina_spores 1",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/berry_passives_mounting_cooldown_resource -1",
+								"permission_level": 4
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"comparison": "<",
+					"resource": "apocalypse:myconoids/berry_passives_stamina_spores",
+					"compare_to": 30
+				},
+				{
+					"type": "origins:resource",
+					"comparison": ">",
+					"resource": "apocalypse:myconoids/berry_passives_mounting_cooldown_resource",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"devolve":
+	{
+		"type": "origins:prevent_death",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "power grant @s apocalypse:myconoids/shake afungus",
+					"permission_level": 4
+				},
+				{
+					"type": "origins:clear_effect"
+				},
+				{
+					"type": "origins:extinguish"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:entity.tnt.primed master @a[distance=..10] ~ ~ ~ 4 0.5",
+					"permission_level": 4
+				}
+			]
+		}
+	},
+	"status_bar":
+	{
+		"type": "origins:status_bar_texture",
+		"texture": "apocalypse:textures/gui/myconoid_snow_bars.png"
+	},
+	"hidden": true
+}

@@ -1,0 +1,22 @@
+{
+	"powers": [
+		"apocalypse:myconoids/chorus_callback",
+		"apocalypse:myconoids/chorus_passives",
+		"apocalypse:myconoids/chorus_primary",
+		"apocalypse:myconoids/chorus_secondary",
+		"apocalypse:myconoids/heat_weakness",
+		"apocalypse:myconoids/resource_temperature",
+		"apocalypse:myconoids/turf_penalty",
+		"apocalypse:myconoids/chorus_void_bounce",
+		"apocalypse:myconoids/universal_toggle"
+	],
+	"icon": {
+		"item": "minecraft:chorus_fruit"
+	},
+	"unchoosable": true,
+	"order": 10,
+	"impact": 3,
+	"name": "Chorus Myconoid",
+	"description": "You have adapted to the unforgiving cold of the void and have manifested the ability to harness its mysterious power over gravity, the same power that keeps the end islands floating. This adaptation, however, has rendered you unable to spread your spores and create fertile soil."
+}
+//Umena says hi

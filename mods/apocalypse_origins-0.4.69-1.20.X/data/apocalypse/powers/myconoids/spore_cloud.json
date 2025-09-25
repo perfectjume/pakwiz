@@ -1,0 +1,132 @@
+{
+	"type": "origins:multiple",
+	"extrablind":
+	{
+		"type": "origins:overlay",
+		"texture": "apocalypse:textures/gui/trueblindness.png",
+		"strength": 1.0,
+		"red": 1.0,
+		"green": 1.0,
+		"blue": 1.0,
+		"draw_mode": "texture",
+		"draw_phase": "below_hud",
+		"hide_with_hud": false,
+		"visible_in_third_person": true
+	},
+	"hahanowurblind": 
+	{
+		"type": "origins:prevent_entity_render",
+		"hidden": true,
+		"condition": {
+			"type": "origins:resource",
+			"resource": "apocalypse:myconoids/spore_cloud_blindbar",
+			"comparison": ">",
+			"compare_to": 0
+		}
+	},
+	"blindvision": 
+	{
+		"type": "origins:shader",
+		"shader": "minecraft:shaders/post/sobel.json",
+		"toggleable": false,
+		"hidden": true
+	},
+	"blindbar": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 2,
+		"start_value": 2,
+		"hidden": true,
+		"name": "Blinded",
+		"description": "Are you blinded?",
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse:textures/gui/blindness_bar.png",
+			"bar_index": 0,
+			"condition": {
+				"type": "origins:resource",
+				"resource": "apocalypse:myconoids/spore_cloud_blindbar",
+				"comparison": ">",
+				"compare_to": 0
+			}
+		}
+	},
+	"timer": 
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": ">",
+								"resource": "apocalypse:myconoids/spore_cloud_blindbar",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:myconoids/spore_cloud_blindbar",
+								"change": -1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.beacon.ambient master @s ~ ~ ~ 0.1 1.5",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "effect give @s minecraft:blindness 3 0 true",
+								"permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "apocalypse:myconoids/spore_cloud_blindbar",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "effect clear @s minecraft:blindness",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:execute_command",
+									"command": "power revoke @s apocalypse:myconoids/spore_cloud afungus",
+									"permission_level": 4
+								}
+							}							
+						]
+					}
+				}
+			]
+		},
+		"interval": 10,
+		"hidden": true
+	},
+	"hidden": true
+}

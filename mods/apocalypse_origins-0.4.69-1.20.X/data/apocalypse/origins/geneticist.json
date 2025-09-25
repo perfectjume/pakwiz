@@ -1,0 +1,30 @@
+{
+	"powers": [
+		"apocalypse:geneticist/geneticist_callback",
+		"apocalypse:geneticist/geneticist_passives",
+		"apocalypse:geneticist/gene_harvest",
+		"apocalypse:geneticist/gene_harvest_locked",
+		"apocalypse:geneticist/craft_syringe",
+		"apocalypse:geneticist/craft_syringe_reinforced",
+		"apocalypse:geneticist/craft_stabilizer",
+		"apocalypse:geneticist/craft_antimutagens",
+		"apocalypse:geneticist/craft_rnabackup",
+		"apocalypse:geneticist/craft_mutagens",
+		"apocalypse:geneticist/craft_genelock",
+		"apocalypse:geneticist/stabilize_active",
+		"apocalypse:geneticist/craft_analyzer",
+		"apocalypse:geneticist/craft_duplicator",
+		"apocalypse:geneticist/duplicator_use",
+		"apocalypse:geneticist/genetic_engineering",
+		"apocalypse:geneticist/genetic_engineering_active"
+	],
+	"icon": {
+		"item": "apocalypse_origins:syringe"
+	},
+	"unchoosable": false,
+	"order": 10,
+	"impact": 3,
+  "name": "Geneticist",
+  "description": "You suddenly find yourself alone in a world full of unknown creatures, yet you do not let this scare you. Propelled by your natural curiosity and encyclopedic knowledge in genetics, and armed with your syringe and your stabilizer, you set out to not only survive, but unravel the biology of every living creature and shape this world and its denizens to your will. You will be, in time, the origin of origins."
+}
+//Umena says hi

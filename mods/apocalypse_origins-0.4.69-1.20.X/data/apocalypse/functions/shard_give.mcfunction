@@ -1,0 +1,3 @@
+summon item ~ ~ ~ {Glowing:1b,Item:{id:"minecraft:emerald",Count:1b,tag:{Enchantments:[{id:vanishing_curse,lvl:1}],display:{Name:'{"text":"Attunement Shard","color":"yellow","bold":false}',Lore:['{"text":"It is all connected","color":"white"}','{"text":"you will see.","color":"white"}']},HideFlags:122,Unbreakable:1b,CustomModelData:1,hexbladeid:0}},Tags:["target"]}
+
+execute as @e[type=item,tag=target] store result entity @s Item.tag.hexbladeid double 1 run scoreboard players get @p hexbladeid

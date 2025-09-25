@@ -1,0 +1,9 @@
+{
+	"type": "origins:attribute",
+	"update_health": true,
+	"modifiers": {
+		"attribute": "minecraft:generic.max_health",
+		"operation": "multiply_total",
+		"value": -0.5
+	}
+}

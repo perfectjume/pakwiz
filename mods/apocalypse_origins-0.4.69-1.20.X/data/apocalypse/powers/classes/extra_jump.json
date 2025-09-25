@@ -1,0 +1,62 @@
+{
+	"type": "origins:active_self",
+	"entity_action": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "playsound minecraft:entity.player.attack.sweep master @s ~ ~ ~ 1 1"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "particle minecraft:sweep_attack ~1.5 ~1 ~"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "particle minecraft:sweep_attack ~ ~1 ~1.5"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "particle minecraft:sweep_attack ~-1.5 ~1 ~"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "particle minecraft:sweep_attack ~ ~1 ~-1.5"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power grant @a[distance=..3] apocalypse:classes/stomp_or_not smallbane"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power grant @e[type=#apocalypse:small,distance=..3] apocalypse:classes/stomped_mob smallbane"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power grant @e[type=!minecraft:villager,distance=0.2..3] apocalypse:classes/aoe_damage smallbane"
+			}
+		]
+	},
+	"condition":
+	{
+		"type": "origins:equipped_item",
+		"equipment_slot": "mainhand",
+		"item_condition":
+		{
+			"type": "origins:ingredient",
+			"ingredient": {
+				"tag": "apocalypse:swords"
+			}
+		}
+	},
+	"cooldown": 20,
+	"hud_render": {
+		"should_render": false
+	},
+	"key": {
+		"key": "key.attack",
+		"continuous": false
+	},
+	"name": "Spinning Bonk Attack",
+	"description": "Your attacks with vanilla swords inflict AOE damage (1 heart in a 2.5 blocks radius, 1 second cooldown) and can apply the stomped status effect on small origins and mobs."
+}

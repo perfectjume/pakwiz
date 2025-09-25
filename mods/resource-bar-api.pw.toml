@@ -1,0 +1,13 @@
+name = "Resource Bar API"
+filename = "resource-bar-api-1.6.2.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "15c35ab96b70ecd554ca4658c95c1a1809929414"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 5974761
+project-id = 1144943

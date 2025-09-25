@@ -1,0 +1,28 @@
+{
+    "type": "origins:resource",
+    "min": 0,
+    "max": 40,
+    "start_value": 10,
+	"hidden": true,
+    "hud_render": {
+        "should_render": true,
+        "bar_index": 0,
+        "sprite_location": "apocalypse_origins:textures/gui/a_hexblade_storage.png",
+        "condition": {
+            "type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"resource": "apocalypse:hexblade/hexblade_resource_souls",
+					"comparison": ">",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:origin",
+					"origin": "apocalypse:hexblade",
+					"layer": "origins:origin"
+				}
+			]
+		}
+    }
+}

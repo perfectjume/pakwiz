@@ -1,0 +1,1 @@
+give @s minecraft:suspicious_stew{display:{Lore:['[{"text":"Creamy as a cloud","italic":false}]']},Effects:[{EffectId:25b,EffectDuration:600}]} 1

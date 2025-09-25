@@ -1,0 +1,1270 @@
+{
+	"type": "origins:active_self",
+	"cooldown": 5,
+	"hud_render": {
+	  "should_render":false,
+	  "sprite_location":"apocalypse:textures/gui/refractor.png",
+	  "bar_index": 1
+	},
+	"entity_action": 
+	{
+		"type": "origins:if_else_list",
+		"actions": [
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "<",
+									"resource": "apocalypse:myconoids/resource_evolve_brown",
+									"compare_to": 30
+								}
+							]
+						},
+						{
+							"type": "origins:in_block",
+							"block_condition": {
+								"type": "origins:block",
+								"block": "minecraft:farmland"
+							}
+						},
+						{
+							"type": "origins:biome",
+							"condition": {
+								"type": "origins:temperature",
+								"comparison": ">",
+								"compare_to": 0.2
+							}
+						},
+						{
+							"type": "origins:dimension",
+							"inverted": true,
+							"dimension": "minecraft:the_end"
+						},
+						{
+							"type": "origins:biome",
+							"condition": {
+								"type": "origins:temperature",
+								"inverted": false,
+								"comparison": "<",
+								"compare_to": 0.95
+							}
+						},
+						{
+							"type": "origins:dimension",
+							"inverted": true,
+							"dimension": "minecraft:the_nether"
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:change_resource",
+							"resource": "apocalypse:myconoids/resource_evolve_brown",
+							"change": 1
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "==",
+									"resource": "apocalypse:myconoids/resource_evolve_brown",
+									"compare_to": 30
+								}
+							]
+						},
+						{
+							"type": "origins:in_block",
+							"block_condition": {
+								"type": "origins:block",
+								"block": "minecraft:farmland"
+							}
+						},
+						{
+							"type": "origins:biome",
+							"condition": {
+								"type": "origins:temperature",
+								"comparison": ">",
+								"compare_to": 0.2
+							}
+						},
+						{
+							"type": "origins:dimension",
+							"inverted": true,
+							"dimension": "minecraft:the_end"
+						},
+						{
+							"type": "origins:biome",
+							"condition": {
+								"type": "origins:temperature",
+								"inverted": false,
+								"comparison": "<",
+								"compare_to": 0.95
+							}
+						},
+						{
+							"type": "origins:dimension",
+							"inverted": true,
+							"dimension": "minecraft:the_nether"
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:execute_command",
+							"command": "resource set @s apocalypse:myconoids/resource_evolve_brown 0"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "origin set @s origins:origin apocalypse:myconoid_brown"
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "<",
+									"resource": "apocalypse:myconoids/resource_evolve_cactus",
+									"compare_to": 30
+								}
+							]
+						},
+						{
+							"type": "origins:on_block",
+							"block_condition": {
+								"type": "origins:block",
+								"block": "minecraft:sand"
+							}
+						},
+						{
+							"type": "origins:dimension",
+							"inverted": true,
+							"dimension": "minecraft:the_end"
+						},
+						{
+							"type": "origins:biome",
+							"condition": {
+								"type": "origins:temperature",
+								"comparison": ">=",
+								"compare_to": 0.95
+							}
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:change_resource",
+							"resource": "apocalypse:myconoids/resource_evolve_cactus",
+							"change": 1
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "==",
+									"resource": "apocalypse:myconoids/resource_evolve_cactus",
+									"compare_to": 30
+								}
+							]
+						},
+						{
+							"type": "origins:on_block",
+							"block_condition": {
+								"type": "origins:block",
+								"block": "minecraft:sand"
+							}
+						},
+						{
+							"type": "origins:biome",
+							"condition": {
+								"type": "origins:temperature",
+								"comparison": ">=",
+								"compare_to": 0.95
+							}
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:execute_command",
+							"command": "resource set @s apocalypse:myconoids/resource_evolve_cactus 0"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "origin set @s origins:origin apocalypse:myconoid_desert"
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "<",
+									"resource": "apocalypse:myconoids/resource_evolve_red",
+									"compare_to": 30
+								}
+							]
+						},
+						{
+							"type": "origins:on_block",
+							"block_condition": {
+								"type": "origins:block",
+								"block": "minecraft:mushroom_stem"
+							}
+						},
+						{
+							"type": "origins:dimension",
+							"inverted": true,
+							"dimension": "minecraft:the_end"
+						},
+						{
+							"type": "origins:dimension",
+							"inverted": true,
+							"dimension": "minecraft:the_nether"
+						},
+						{
+							"type": "origins:biome",
+							"condition": {
+								"type": "origins:temperature",
+								"comparison": ">",
+								"compare_to": 0.2
+							}
+						},
+						{
+							"type": "origins:biome",
+							"condition": {
+								"type": "origins:temperature",
+								"inverted": false,
+								"comparison": "<",
+								"compare_to": 0.95
+							}
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:change_resource",
+							"resource": "apocalypse:myconoids/resource_evolve_red",
+							"change": 1
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "==",
+									"resource": "apocalypse:myconoids/resource_evolve_red",
+									"compare_to": 30
+								}
+							]
+						},
+						{
+							"type": "origins:on_block",
+							"block_condition": {
+								"type": "origins:block",
+								"block": "minecraft:mushroom_stem"
+							}
+						},
+						{
+							"type": "origins:dimension",
+							"inverted": true,
+							"dimension": "minecraft:the_end"
+						},
+						{
+							"type": "origins:dimension",
+							"inverted": true,
+							"dimension": "minecraft:the_nether"
+						},
+						{
+							"type": "origins:biome",
+							"condition": {
+								"type": "origins:temperature",
+								"comparison": ">",
+								"compare_to": 0.2
+							}
+						},
+						{
+							"type": "origins:biome",
+							"condition": {
+								"type": "origins:temperature",
+								"inverted": false,
+								"comparison": "<",
+								"compare_to": 0.95
+							}
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:execute_command",
+							"command": "resource set @s apocalypse:myconoids/resource_evolve_red 0"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "origin set @s origins:origin apocalypse:myconoid_red"
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "<",
+									"resource": "apocalypse:myconoids/resource_evolve_moss",
+									"compare_to": 30
+								}
+							]
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:on_block",
+									"block_condition": {
+										"type": "origins:block",
+										"block": "minecraft:moss_block"
+									}
+								},
+								{
+									"type": "origins:in_block",
+									"block_condition": {
+										"type": "origins:block",
+										"block": "minecraft:moss_carpet"
+									}
+								}
+							]
+						},
+						{
+							"type": "origins:dimension",
+							"inverted": true,
+							"dimension": "minecraft:the_nether"
+						},
+						{
+						  "type": "origins:or",
+						  "conditions": [
+								{
+									"type": "origins:biome",
+									"condition": {
+										"type": "origins:temperature",
+										"comparison": "<=",
+										"compare_to": 0.2
+									}
+								},
+								{
+									"type": "origins:dimension",
+									"dimension": "minecraft:the_end"
+								}
+							]
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:change_resource",
+							"resource": "apocalypse:myconoids/resource_evolve_moss",
+							"change": 1
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "==",
+									"resource": "apocalypse:myconoids/resource_evolve_moss",
+									"compare_to": 30
+								}
+							]
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:on_block",
+									"block_condition": {
+										"type": "origins:block",
+										"block": "minecraft:moss_block"
+									}
+								},
+								{
+									"type": "origins:in_block",
+									"block_condition": {
+										"type": "origins:block",
+										"block": "minecraft:moss_carpet"
+									}
+								}
+							]
+						},
+						{
+							"type": "origins:dimension",
+							"inverted": true,
+							"dimension": "minecraft:the_nether"
+						},
+						{
+						  "type": "origins:or",
+						  "conditions": [
+								{
+									"type": "origins:biome",
+									"condition": {
+										"type": "origins:temperature",
+										"comparison": "<=",
+										"compare_to": 0.2
+									}
+								},
+								{
+									"type": "origins:dimension",
+									"dimension": "minecraft:the_end"
+								}
+							]
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:execute_command",
+							"command": "resource set @s apocalypse:myconoids/resource_evolve_moss 0"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "origin set @s origins:origin apocalypse:myconoid_moss"
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "<",
+									"resource": "apocalypse:myconoids/resource_evolve_berry",
+									"compare_to": 30
+								}
+							]
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:on_block",
+									"block_condition": {
+										"type": "origins:block",
+										"block": "minecraft:podzol"
+									}
+								},
+								{
+									"type": "origins:in_block",
+									"block_condition": {
+										"type": "origins:block",
+										"block": "minecraft:sweet_berry_bush"
+									}
+								}
+							]
+						},
+						{
+							"type": "origins:dimension",
+							"inverted": true,
+							"dimension": "minecraft:the_nether"
+						},
+						{
+						  "type": "origins:or",
+						  "conditions": [
+								{
+									"type": "origins:biome",
+									"condition": {
+										"type": "origins:temperature",
+										"comparison": "<=",
+										"compare_to": 0.2
+									}
+								},
+								{
+									"type": "origins:dimension",
+									"dimension": "minecraft:the_end"
+								}
+							]
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:change_resource",
+							"resource": "apocalypse:myconoids/resource_evolve_berry",
+							"change": 1
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "==",
+									"resource": "apocalypse:myconoids/resource_evolve_berry",
+									"compare_to": 30
+								}
+							]
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:on_block",
+									"block_condition": {
+										"type": "origins:block",
+										"block": "minecraft:podzol"
+									}
+								},
+								{
+									"type": "origins:in_block",
+									"block_condition": {
+										"type": "origins:block",
+										"block": "minecraft:sweet_berry_bush"
+									}
+								}
+							]
+						},
+						{
+							"type": "origins:dimension",
+							"inverted": true,
+							"dimension": "minecraft:the_nether"
+						},
+						{
+						  "type": "origins:or",
+						  "conditions": [
+								{
+									"type": "origins:biome",
+									"condition": {
+										"type": "origins:temperature",
+										"comparison": "<=",
+										"compare_to": 0.2
+									}
+								},
+								{
+									"type": "origins:dimension",
+									"dimension": "minecraft:the_end"
+								}
+							]
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:execute_command",
+							"command": "resource set @s apocalypse:myconoids/resource_evolve_berry 0"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "origin set @s origins:origin apocalypse:myconoid_berry"
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "<",
+									"resource": "apocalypse:myconoids/resource_evolve_warped",
+									"compare_to": 30
+								}
+							]
+						},
+						{
+							"type": "origins:on_block",
+							"block_condition": {
+								"type": "origins:block",
+								"block": "minecraft:warped_nylium"
+							}
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:dimension",
+									"dimension": "minecraft:the_nether"
+								},
+								{
+									"type": "origins:biome",
+									"condition": {
+										"type": "origins:temperature",
+										"comparison": ">=",
+										"compare_to": 0.95
+									}
+								}
+							]
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:change_resource",
+							"resource": "apocalypse:myconoids/resource_evolve_warped",
+							"change": 1
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "==",
+									"resource": "apocalypse:myconoids/resource_evolve_warped",
+									"compare_to": 30
+								}
+							]
+						},
+						{
+							"type": "origins:on_block",
+							"block_condition": {
+								"type": "origins:block",
+								"block": "minecraft:warped_nylium"
+							}
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:dimension",
+									"dimension": "minecraft:the_nether"
+								},
+								{
+									"type": "origins:biome",
+									"condition": {
+										"type": "origins:temperature",
+										"comparison": ">=",
+										"compare_to": 0.95
+									}
+								}
+							]
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:execute_command",
+							"command": "resource set @s apocalypse:myconoids/resource_evolve_warped 0"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "origin set @s origins:origin apocalypse:myconoid_warped"
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "<",
+									"resource": "apocalypse:myconoids/resource_evolve_crimson",
+									"compare_to": 30
+								}
+							]
+						},
+						{
+							"type": "origins:on_block",
+							"block_condition": {
+								"type": "origins:block",
+								"block": "minecraft:crimson_nylium"
+							}
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:dimension",
+									"dimension": "minecraft:the_nether"
+								},
+								{
+									"type": "origins:biome",
+									"condition": {
+										"type": "origins:temperature",
+										"comparison": ">=",
+										"compare_to": 0.95
+									}
+								}
+							]
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:change_resource",
+							"resource": "apocalypse:myconoids/resource_evolve_crimson",
+							"change": 1
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "==",
+									"resource": "apocalypse:myconoids/resource_evolve_crimson",
+									"compare_to": 30
+								}
+							]
+						},
+						{
+							"type": "origins:on_block",
+							"block_condition": {
+								"type": "origins:block",
+								"block": "minecraft:crimson_nylium"
+							}
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:dimension",
+									"dimension": "minecraft:the_nether"
+								},
+								{
+									"type": "origins:biome",
+									"condition": {
+										"type": "origins:temperature",
+										"comparison": ">=",
+										"compare_to": 0.95
+									}
+								}
+							]
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:execute_command",
+							"command": "resource set @s apocalypse:myconoids/resource_evolve_crimson 0"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "origin set @s origins:origin apocalypse:myconoid_crimson"
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "<",
+									"resource": "apocalypse:myconoids/resource_evolve_wart",
+									"compare_to": 30
+								}
+							]
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:on_block",
+									"block_condition": {
+										"type": "origins:block",
+										"block": "minecraft:soul_soil"
+									}
+								},
+								{
+									"type": "origins:in_block",
+									"block_condition": {
+										"type": "origins:block",
+										"block": "minecraft:soul_sand"
+									}
+								}
+							]
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:dimension",
+									"dimension": "minecraft:the_nether"
+								},
+								{
+									"type": "origins:biome",
+									"condition": {
+										"type": "origins:temperature",
+										"comparison": ">=",
+										"compare_to": 0.95
+									}
+								}
+							]
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:change_resource",
+							"resource": "apocalypse:myconoids/resource_evolve_wart",
+							"change": 1
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "==",
+									"resource": "apocalypse:myconoids/resource_evolve_wart",
+									"compare_to": 30
+								}
+							]
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:on_block",
+									"block_condition": {
+										"type": "origins:block",
+										"block": "minecraft:soul_soil"
+									}
+								},
+								{
+									"type": "origins:in_block",
+									"block_condition": {
+										"type": "origins:block",
+										"block": "minecraft:soul_sand"
+									}
+								}
+							]
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:dimension",
+									"dimension": "minecraft:the_nether"
+								},
+								{
+									"type": "origins:biome",
+									"condition": {
+										"type": "origins:temperature",
+										"comparison": ">=",
+										"compare_to": 0.95
+									}
+								}
+							]
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:execute_command",
+							"command": "resource set @s apocalypse:myconoids/resource_evolve_wart 0"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "origin set @s origins:origin apocalypse:myconoid_wart"
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "<",
+									"resource": "apocalypse:myconoids/resource_evolve_chorus",
+									"compare_to": 30
+								}
+							]
+						},
+						{
+							"type": "origins:on_block",
+							"block_condition": {
+								"type": "origins:block",
+								"block": "minecraft:end_stone"
+							}
+						},
+						{
+						  "type": "origins:or",
+						  "conditions": [
+								{
+									"type": "origins:biome",
+									"condition": {
+										"type": "origins:temperature",
+										"comparison": "<=",
+										"compare_to": 0.2
+									}
+								},
+								{
+									"type": "origins:dimension",
+									"dimension": "minecraft:the_end"
+								}
+							]
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:change_resource",
+							"resource": "apocalypse:myconoids/resource_evolve_chorus",
+							"change": 1
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "==",
+									"resource": "apocalypse:myconoids/resource_evolve_chorus",
+									"compare_to": 30
+								}
+							]
+						},
+						{
+							"type": "origins:on_block",
+							"block_condition": {
+								"type": "origins:block",
+								"block": "minecraft:end_stone"
+							}
+						},
+						{
+						  "type": "origins:or",
+						  "conditions": [
+								{
+									"type": "origins:biome",
+									"condition": {
+										"type": "origins:temperature",
+										"comparison": "<=",
+										"compare_to": 0.2
+									}
+								},
+								{
+									"type": "origins:dimension",
+									"dimension": "minecraft:the_end"
+								}
+							]
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:execute_command",
+							"command": "resource set @s apocalypse:myconoids/resource_evolve_chorus 0"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "origin set @s origins:origin apocalypse:myconoid_chorus"
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "<",
+									"resource": "apocalypse:myconoids/resource_evolve_skulk",
+									"compare_to": 30
+								}
+							]
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:on_block",
+									"block_condition": {
+										"type": "origins:block",
+										"block": "minecraft:sculk"
+									}
+								},
+								{
+									"type": "origins:in_block",
+									"block_condition": {
+										"type": "origins:block",
+										"block": "minecraft:sculk_vein"
+									}
+								}
+							]
+						},
+						{
+							"type": "origins:biome",
+							"condition": {
+								"type": "origins:temperature",
+								"comparison": ">",
+								"compare_to": 0.2
+							}
+						},
+						{
+							"type": "origins:dimension",
+							"inverted": true,
+							"dimension": "minecraft:the_end"
+						},
+						{
+							"type": "origins:biome",
+							"condition": {
+								"type": "origins:temperature",
+								"comparison": "<",
+								"compare_to": 0.95
+							}
+						},
+						{
+							"type": "origins:dimension",
+							"inverted": true,
+							"dimension": "minecraft:the_nether"
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:change_resource",
+							"resource": "apocalypse:myconoids/resource_evolve_skulk",
+							"change": 1
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "==",
+									"resource": "apocalypse:myconoids/resource_evolve_skulk",
+									"compare_to": 30
+								}
+							]
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:on_block",
+									"block_condition": {
+										"type": "origins:block",
+										"block": "minecraft:sculk"
+									}
+								},
+								{
+									"type": "origins:in_block",
+									"block_condition": {
+										"type": "origins:block",
+										"block": "minecraft:sculk_vein"
+									}
+								}
+							]
+						},
+						{
+							"type": "origins:biome",
+							"condition": {
+								"type": "origins:temperature",
+								"comparison": ">",
+								"compare_to": 0.2
+							}
+						},
+						{
+							"type": "origins:dimension",
+							"inverted": true,
+							"dimension": "minecraft:the_end"
+						},
+						{
+							"type": "origins:biome",
+							"condition": {
+								"type": "origins:temperature",
+								"comparison": "<",
+								"compare_to": 0.95
+							}
+						},
+						{
+							"type": "origins:dimension",
+							"inverted": true,
+							"dimension": "minecraft:the_nether"
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:execute_command",
+							"command": "resource set @s apocalypse:myconoids/resource_evolve_skulk 0"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "origin set @s origins:origin apocalypse:myconoid_skulk"
+						}
+					]
+				}
+			}
+		]
+	},
+	"condition":
+	{
+		"type": "origins:and",
+		"conditions":
+		[
+			{
+				"type": "origins:power",
+				"power": "apocalypse:myconoids/shake",
+				"inverted": true
+			},
+			{
+			  "type": "origins:gamemode",
+			  "inverted": true,
+			  "gamemode": "spectator"
+			}
+		]
+	},
+	"hidden": false,
+	"name": "Evolution",
+	"description": "[Secondary] Evolve to adapt to the environment you are currently in.\n \nBrown: Overworld temperate biome, on farmland.\n \nRed: Overworld temperate biome, on a mushroom stem.\n \nDesert: Any hot biome, on sand.\n \nMoss: Overworld cold biome on moss.\n \nSnowberry: Overworld cold biome on podzol or in a berry bush.\n \nWarped: Hot biome or the Nether on warped nylium.\n \nCrimson: Hot biome or the Nether on crimson nylium.\n \nWart: Hot biome or the Nether on soul sand or soul soul.\n \nChorus: Cold biome or the End on end stone.",
+	"key": {
+		"key":"key.origins.secondary_active",
+		"continuous": true
+	}
+}

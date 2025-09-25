@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "apocalypse_origins",
+	"version": "0.4.69-1.20.X",
+	"name": "Apocalypse Origins",
+	"description": "Adds Jasel Umena's Apocalypse origins. Requires Origins for Minecraft 1.20 or higher to work.",
+	"authors": [
+		"Jasel Umena"
+	],
+	"contact": {
+		"homepage": "https://legacy.curseforge.com/minecraft/mc-mods/apocalypse-origins",
+		"sources": "https://github.com/Jasel-Umena/Apocalypse-Origins"
+	},
+	"license": "Custom License",
+	"icon": "assets/apocalypse_origins/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.apocalypse.origins.Apocalypse_Origins"
+		],
+		"client": [
+			"net.apocalypse.origins.Apocalypse_Origins_Client"
+		],
+		"fabric-datagen": [
+			"net.apocalypse.origins.Apocalypse_OriginsDataGenerator"
+		]
+	},
+	"mixins": [
+		"apocalypse_origins.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.0",
+		"minecraft": ">=1.20",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

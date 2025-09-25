@@ -1,0 +1,21 @@
+{
+	"powers": [
+		"apocalypse:myconoids/moss_callback",
+		"apocalypse:myconoids/moss_passives",
+		"apocalypse:myconoids/moss_primary",
+		"apocalypse:myconoids/overworld_secondaries",
+		"apocalypse:myconoids/heat_weakness",
+		"apocalypse:myconoids/resource_temperature",
+		"apocalypse:myconoids/turf_penalty",
+		"apocalypse:myconoids/universal_toggle"
+	],
+	"icon": {
+		"item": "minecraft:azalea"
+	},
+	"unchoosable": true,
+	"order": 10,
+	"impact": 3,
+	"name": "Moss Myconoid",
+	"description": "You are an expert explorer, adapted to the cold of caves and snow, and your mobility is nearly unparallelled."
+}
+//Umena says hi

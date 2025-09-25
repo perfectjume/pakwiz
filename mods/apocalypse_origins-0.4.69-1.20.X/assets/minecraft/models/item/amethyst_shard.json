@@ -1,0 +1,146 @@
+{
+    "parent": "minecraft:item/generated",
+    "textures": {
+        "layer0": "minecraft:item/amethyst_shard"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "custom_model_data": 1
+            },
+            "model": "item/sword/refractor_mirror"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 2
+            },
+            "model": "item/sword/refractor_mirror_broken"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 3
+            },
+            "model": "item/sword/refractor_mirror_blessed"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 4
+            },
+            "model": "item/sword/sigil_scrying"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 5
+            },
+            "model": "item/sword/sigil_sands"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 6
+            },
+            "model": "item/sword/sigil_sight"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 7
+            },
+            "model": "item/sword/sigil_seething"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 8
+            },
+            "model": "item/sword/sigil_seas"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 9
+            },
+            "model": "item/sword/sigil_skies"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 10
+            },
+            "model": "item/sword/sigil_sagacity"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 11
+            },
+            "model": "item/sword/sigil_doltish_inactive"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 12
+            },
+            "model": "item/sword/sigil_doltish_active"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 13
+            },
+            "model": "item/sword/sigil_sss_inactive"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 14
+            },
+            "model": "item/sword/sigil_sss_active"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 15
+            },
+            "model": "item/sword/sigil_fff_inactive"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 16
+            },
+            "model": "item/sword/sigil_fff_active"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 17
+            },
+            "model": "item/sword/sigil_sagacity_active"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 18
+            },
+            "model": "item/sword/sigil_unnamed"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 19
+            },
+            "model": "item/sword/spore"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 20
+            },
+            "model": "item/sword/hexhunter"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 21
+            },
+            "model": "item/sword/fungalhealer"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 22
+            },
+            "model": "item/sword/sigil_sundering"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 23
+            },
+            "model": "item/sword/sigil_smiting"
+        }
+    ]
+}

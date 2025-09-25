@@ -1,0 +1,261 @@
+{
+	"type": "origins:multiple",
+	"durationbar": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 60,
+		"start_value": 60,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse:textures/gui/zzz_buff_warped_bad_hex.png",
+			"bar_index": 0,
+			"condition": {
+				"type": "origins:resource",
+				"resource": "*:*_durationbar",
+				"comparison": ">",
+				"compare_to": 0
+			}
+		}
+	},
+	"timer": 
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": ">",
+								"resource": "*:*_durationbar",
+								"compare_to": 2
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [				
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_durationbar",
+								"change": -1
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": ">=",
+								"resource": "*:*_durationbar",
+								"compare_to": 1
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "<=",
+								"resource": "*:*_durationbar",
+								"compare_to": 2
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_durationbar",
+								"change": -1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.note_block.iron_xylophone master @s ~ ~ ~ 1 1.8"
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "*:*_durationbar",
+								"comparison": "==",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.note_block.iron_xylophone master @s ~ ~ ~ 1 2"
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:execute_command",
+									"command": "power revoke @s apocalypse:myconoids/spells/hex afungus",
+									"permission_level": 4
+								}
+							}							
+						]
+					}
+				}
+			]
+		},
+		"interval": 20
+	},
+	"oofouchmybones":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:entity.player.breath master @a ~ ~ ~ 1 0.5"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "particle minecraft:crit ~ ~1 ~ 0.5 0.5 0.5 0.1 8"
+				}
+			]
+		}
+	},
+	"vulnerability": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"operation": "addition",
+			"value": 4
+		},
+		"damage_condition":{
+			"type":"origins:or",
+			"conditions":[
+				{
+					"type": "origins:name",
+					"name": "magic"
+				},
+				{
+					"type": "origins:name",
+					"name": "inFire"
+				},
+				{
+					"type": "origins:name",
+					"name": "freeze"
+				},
+				{
+					"type": "origins:name",
+					"name": "fire"
+				},
+				{
+					"type": "origins:name",
+					"name": "onFire"
+				},
+				{
+					"type": "origins:name",
+					"name": "lava"
+				},
+				{
+					"type": "origins:name",
+					"name": "hotFloor"
+				},
+				{
+					"type": "origins:name",
+					"name": "indirectMagic"
+				},
+				{
+					"type": "origins:name",
+					"name": "fallingBlock"
+				},
+				{
+					"type": "origins:name",
+					"name": "dragonBreath"
+				},
+				{
+					"type": "origins:name",
+					"name": "outOfWorld"
+				},
+				{
+					"type": "origins:name",
+					"name": "cramming"
+				},
+				{
+					"type": "origins:name",
+					"name": "inWall"
+				},
+				{
+					"type": "origins:name",
+					"name": "lightningBolt"
+				},
+				{
+					"type": "origins:name",
+					"name": "magic"
+				},
+				{
+					"type": "origins:name",
+					"name": "wither"
+				},
+				{
+					"type": "origins:name",
+					"name": "indirectMagic"
+				},
+				{
+					"type": "origins:name",
+					"name": "dragonBreath"
+				},
+				{
+					"type": "origins:name",
+					"name": "witherSkull"
+				},
+				{
+					"type": "origins:name",
+					"name": "badRespawnPoint"
+				},
+				{
+					"type": "origins:name",
+					"name": "explosion"
+				},
+				{
+					"type": "origins:name",
+					"name": "explosion.player"
+				},
+				{
+					"type": "origins:name",
+					"name": "fireworks"
+				}
+			]
+		}
+	},
+	"glow":
+	{
+		"type": "origins:self_glow",
+		"use_teams": false,
+		"red": 0,
+		"green": 0.16,
+		"blue": 0.16,
+		"entity_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:origin",
+					"origin": "apocalypse:myconoid_wart",
+					"layer": "origins:origin"
+				}
+			]
+		},
+		"hidden": true
+	},
+	"hidden": true
+}

@@ -1,0 +1,365 @@
+{
+	"type": "origins:multiple",
+	"durationbar": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 60,
+		"start_value": 60,
+		"hidden": true,
+		"name": "Duration",
+		"description": "How long?",
+		"hud_render": {
+			"should_render": false,
+			"sprite_location":"apocalypse_origins:textures/gui/seas_bar.png",
+			"bar_index": 0,
+			"condition": {
+				"type": "origins:resource",
+				"resource": "apocalypse:hexblade/hexblade_hunter_abilities_durationbar",
+				"comparison": ">",
+				"compare_to": 0
+			}
+		}
+	},
+	"timer": 
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": ">",
+								"resource": "apocalypse:hexblade/hexblade_hunter_abilities_durationbar",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_hunter_abilities_durationbar",
+								"change": -1
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "apocalypse:hexblade/hexblade_hunter_abilities_durationbar",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:execute_command",
+									"command": "power revoke @s apocalypse:hexblade/hexblade_hunter_abilities",
+									"permission_level": 4
+								}
+							}							
+						]
+					}
+				}
+			]
+		},
+		"interval": 20,
+		"hidden": true
+	},
+	"speedy":
+	{
+		"type": "origins:attribute",
+		"modifier": {
+			"name": "Max health increase",
+			"attribute": "minecraft:generic.movement_speed",
+			"value": 0.1,
+			"operation": "addition"
+		}
+	},
+	"immunities": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type":"origins:or",
+			"conditions":[
+				{
+					"type": "origins:name",
+					"name": "dryOut"
+				},
+				{
+					"type": "origins:name",
+					"name": "drown"
+				},
+				{
+					"type": "origins:name",
+					"name": "cramming"
+				},
+				{
+					"type": "origins:name",
+					"name": "inWall"
+				},
+				{
+					"type": "origins:name",
+					"name": "fallingBlock"
+				},
+				{
+					"type": "origins:name",
+					"name": "freeze"
+				},
+				{
+					"type": "origins:name",
+					"name": "fall"
+				}
+			]
+		},
+		"hidden": true
+	},
+	"teleport":
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:choice",
+					"actions": [
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "execute at @e[tag=hexblade,sort=nearest,limit=1] run tp @s ^ ^ ^-2 facing entity @e[tag=hexblade,sort=nearest,limit=1]",
+								"permission_level": 4
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "execute at @e[tag=hexblade,sort=nearest,limit=1] run tp @s ^ ^ ^2 facing entity @e[tag=hexblade,sort=nearest,limit=1]",
+								"permission_level": 4
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "execute at @e[tag=hexblade,sort=nearest,limit=1] run tp @s ^2 ^ ^ facing entity @e[tag=hexblade,sort=nearest,limit=1]",
+								"permission_level": 4
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "execute at @e[tag=hexblade,sort=nearest,limit=1] run tp @s ^-2 ^ ^ facing entity @e[tag=hexblade,sort=nearest,limit=1]",
+								"permission_level": 4
+							},
+							"weight": 1
+						}
+					]
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 5,
+					"action": {
+						"type": "origins:execute_command",
+						"command": "playsound minecraft:entity.enderman.teleport master @p[distance=..15] ~ ~ ~ 1 1.2",
+						"permission_level": 4
+					}
+				},
+				{
+					"type": "origins:choice",
+					"actions": [
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tellraw @p {\"text\":\"Hunter: You can run, but you can not hide!\",\"color\":\"dark_aqua\"}",
+								"permission_level": 4
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tellraw @p {\"text\":\"Hunter: Here is Johnny!\",\"color\":\"dark_aqua\"}",
+								"permission_level": 4
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tellraw @p {\"text\":\"Hunter: Stop right there, criminal scum!\",\"color\":\"dark_aqua\"}",
+								"permission_level": 4
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tellraw @p {\"text\":\"Hunter: You can not run away from debt!\",\"color\":\"dark_aqua\"}",
+								"permission_level": 4
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tellraw @p {\"text\":\"Hunter: Die, monster! You do not belong in this world!\",\"color\":\"dark_aqua\"}",
+								"permission_level": 4
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tellraw @p {\"text\":\"Hunter: Oh Dreeeam!\",\"color\":\"dark_aqua\"}",
+								"permission_level": 4
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tellraw @p {\"text\":\"Hunter: Get over here!\",\"color\":\"dark_aqua\"}",
+								"permission_level": 4
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tellraw @p {\"text\":\"Hunter: How dare thee steal me cookies!\",\"color\":\"dark_aqua\"}",
+								"permission_level": 4
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tellraw @p {\"text\":\"Hunter: I found the impostor!\",\"color\":\"dark_aqua\"}",
+								"permission_level": 4
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tellraw @p {\"text\":\"Hunter: You are a threat to this world!\",\"color\":\"dark_aqua\"}",
+								"permission_level": 4
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tellraw @p {\"text\":\"Hunter: I vanquish the darkness!\",\"color\":\"dark_aqua\"}",
+								"permission_level": 4
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tellraw @p {\"text\":\"Hunter: The souls of others are not your to toy with!\",\"color\":\"dark_aqua\"}",
+								"permission_level": 4
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tellraw @p {\"text\":\"Hunter: There is no escape!\",\"color\":\"dark_aqua\"}",
+								"permission_level": 4
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tellraw @p {\"text\":\"Hunter: You have committed crimes against this world and their people. What say you in your defense?\",\"color\":\"dark_aqua\"}",
+								"permission_level": 4
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tellraw @p {\"text\":\"Hunter: Tax evasion? Evade this!\",\"color\":\"dark_aqua\"}",
+								"permission_level": 4
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tellraw @p {\"text\":\"Hunter: I will end you!\",\"color\":\"dark_aqua\"}",
+								"permission_level": 4
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tellraw @p {\"text\":\"Hunter: Take this!\",\"color\":\"dark_aqua\"}",
+								"permission_level": 4
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tellraw @p {\"text\":\"Hunter: How about a little more?!\",\"color\":\"dark_aqua\"}",
+								"permission_level": 4
+							},
+							"weight": 1
+						}
+					]
+				}
+			]
+		},
+		"interval": 200,
+		"hidden": true
+	},
+	"effects":
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "effect give @s minecraft:slow_falling 10 0 true",
+					"permission_level": 4
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "effect give @s minecraft:water_breathing 10 0 true",
+					"permission_level": 4
+				}
+			]
+		},
+		"interval": 190,
+		"hidden": true
+	},
+	"hidden": true
+}

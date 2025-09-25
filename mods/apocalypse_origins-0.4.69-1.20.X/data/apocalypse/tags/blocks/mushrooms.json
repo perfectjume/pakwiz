@@ -1,0 +1,42 @@
+{
+	"replace": false,
+	"values":
+	[
+		"minecraft:mycelium",
+		"minecraft:podzol",
+		"minecraft:crimson_nylium",
+		"minecraft:warped_nylium",
+		"minecraft:brown_mushroom_block",
+		"minecraft:red_mushroom_block",
+		"minecraft:mushroom_stem",
+
+		"minecraft:nether_wart_block",
+		"minecraft:crimson_stem",
+		"minecraft:crimson_hyphae",
+		"minecraft:warped_wart_block",
+		"minecraft:warped_stem",
+		"minecraft:warped_hyphae",
+		"minecraft:shroomlight",
+
+		"minecraft:moss_block",
+		"minecraft:mossy_cobblestone",
+		"minecraft:mossy_cobblestone_stairs",
+		"minecraft:mossy_cobblestone_slab",
+		"minecraft:mossy_stone_bricks",
+		"minecraft:mossy_stone_brick_stairs",
+		"minecraft:mossy_stone_brick_slab",
+
+		"minecraft:crimson_planks",
+		"minecraft:crimson_stairs",
+		"minecraft:crimson_slab",
+		"minecraft:crimson_trapdoor",
+		"minecraft:crimson_fence_gate",
+		"minecraft:crimson_fence",
+		"minecraft:warped_planks",
+		"minecraft:warped_stairs",
+		"minecraft:warped_slab",
+		"minecraft:warped_trapdoor",
+		"minecraft:warped_fence_gate",
+		"minecraft:warped_fence"
+	]
+}

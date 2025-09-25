@@ -1,0 +1,1497 @@
+{
+	"type": "origins:multiple",
+	"color":
+	{
+		"type": "origins:model_color",
+		"red": 0.74,
+		"green": 0.24,
+		"blue": 0.29
+	},
+	"noeffects": 
+	{
+		"type": "origins:effect_immunity",
+		"effects": [
+			"minecraft:wither"
+		]
+	},
+	"immunities": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type":"origins:or",
+			"conditions":[
+				{
+					"type": "origins:name",
+					"name": "onFire"
+				},
+				{
+					"type": "origins:name",
+					"name": "inFire"
+				}
+			]
+		}
+	},
+	"resistances": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -0.5,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:name",
+					"name": "lava"
+				}
+			]
+		}
+	},
+	"mortal": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": 1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type":"origins:or",
+			"conditions":[
+				{
+					"type": "origins:name",
+					"name": "freeze"
+				}
+			]
+		}
+	},
+	"unarmored":
+	{
+		"type": "origins:attribute",
+		"modifier": {
+			"attribute": "minecraft:generic.armor",
+			"operation": "multiply_total",
+			"value": -0.75
+		}
+	},
+	"melee":
+	{
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -0.5
+		}
+	},
+	"projectile":
+	{
+		"type": "origins:modify_projectile_damage",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -0.9
+		}
+	},
+	"spells":
+	{
+		"type": "origins:action_on_hit",
+		"cooldown": 40,
+		"bientity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:actor_condition",
+								"condition": {
+									"type": "origins:resource",
+									"comparison": "==",
+									"resource": "*:*_effect_type",
+									"compare_to": 0
+								}
+							},
+							"action": {
+								"type": "origins:target_action",
+								"action": {
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "particle minecraft:angry_villager ~ ~2 ~",
+											"permission_level": 4
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:and",
+														"actions": [
+															{
+															  "type": "origins:execute_command",
+															  "command": "power grant @s apocalypse:myconoids/spells/burning afungus"
+															}
+														]
+													},
+													"weight": 2
+												},
+												{
+													"element": {
+														"type": "origins:and",
+														"actions": [
+															{
+															  "type": "origins:execute_command",
+															  "command": "power grant @s apocalypse:myconoids/spells/freezing afungus"
+															}
+														]
+													},
+													"weight": 2
+												},
+												{
+													"element": {
+														"type": "origins:and",
+														"actions": [
+															{
+															  "type": "origins:execute_command",
+															  "command": "power grant @s apocalypse:myconoids/spells/magic_strike afungus"
+															}
+														]
+													},
+													"weight": 3
+												},
+												{
+													"element": {
+														"type": "origins:and",
+														"actions": [
+															{
+															  "type": "origins:execute_command",
+															  "command": "power grant @s apocalypse:myconoids/spells/sundering afungus"
+															}
+														]
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:and",
+														"actions": [
+															{
+															  "type": "origins:execute_command",
+															  "command": "power grant @s apocalypse:myconoids/spells/hex afungus"
+															}
+														]
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:and",
+														"actions": [
+															{
+															  "type": "origins:execute_command",
+															  "command": "power grant @s apocalypse:myconoids/spells/magnify_gravity afungus"
+															}
+														]
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:actor_condition",
+								"condition": {
+									"type": "origins:resource",
+									"comparison": "==",
+									"resource": "*:*_effect_type",
+									"compare_to": 1
+								}
+							},
+							"action": {
+								"type": "origins:target_action",
+								"action": {
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "particle minecraft:happy_villager ~ ~4 ~",
+											"permission_level": 4
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:and",
+														"actions": [
+															{
+															  "type": "origins:execute_command",
+															  "command": "power grant @s apocalypse:myconoids/spells/heal afungus"
+															}
+														]
+													},
+													"weight": 3
+												},
+												{
+													"element": {
+														"type": "origins:and",
+														"actions": [
+															{
+															  "type": "origins:execute_command",
+															  "command": "power grant @s apocalypse:myconoids/spells/purge_good afungus"
+															}
+														]
+													},
+													"weight": 2
+												},
+												{
+													"element": {
+														"type": "origins:and",
+														"actions": [
+															{
+															  "type": "origins:execute_command",
+															  "command": "power grant @s apocalypse:myconoids/spells/mage_armor afungus"
+															}
+														]
+													},
+													"weight": 2
+												},
+												{
+													"element": {
+														"type": "origins:and",
+														"actions": [
+															{
+															  "type": "origins:execute_command",
+															  "command": "power grant @s apocalypse:myconoids/spells/gaseous_form afungus"
+															}
+														]
+													},
+													"weight": 2
+												},
+												{
+													"element": {
+														"type": "origins:and",
+														"actions": [
+															{
+															  "type": "origins:execute_command",
+															  "command": "power grant @s apocalypse:myconoids/spells/wings afungus"
+															}
+														]
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:and",
+														"actions": [
+															{
+															  "type": "origins:execute_command",
+															  "command": "power grant @s apocalypse:myconoids/spells/blessing_of_wind afungus"
+															}
+														]
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:and",
+														"actions": [
+															{
+															  "type": "origins:execute_command",
+															  "command": "power grant @s apocalypse:myconoids/spells/fire_shield afungus"
+															}
+														]
+													},
+													"weight": 2
+												}
+											]
+										}
+									]
+								}
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:target_action",
+					"action": {
+						"type": "origins:choice",
+						"actions": [
+							{
+								"element": {
+									"type": "origins:and",
+									"actions": [
+										{
+										  "type": "origins:execute_command",
+										  "command": "playsound minecraft:block.note_block.chime master @a ~ ~ ~ 2 0.793701"
+										}
+									]
+								},
+								"weight": 1
+							},
+							{
+								"element": {
+									"type": "origins:and",
+									"actions": [
+										{
+										  "type": "origins:execute_command",
+										  "command": "playsound minecraft:block.note_block.chime master @a ~ ~ ~ 2 1.587401"
+										}
+									]
+								},
+								"weight": 1
+							},
+							{
+								"element": {
+									"type": "origins:and",
+									"actions": [
+										{
+										  "type": "origins:execute_command",
+										  "command": "playsound minecraft:block.note_block.chime master @a ~ ~ ~ 2 0.594604"
+										}
+									]
+								},
+								"weight": 1
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:distance",
+								"comparison": "<=",
+								"compare_to": 4
+							},
+							"action": {
+								"type": "origins:actor_action",
+								"action": {
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:change_resource",
+											"resource": "*:*_stamina_spores",
+											"change": -4
+										}
+									]
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:distance",
+								"comparison": ">",
+								"compare_to": 4
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:actor_action",
+										"action": {
+											"type": "origins:change_resource",
+											"resource": "*:*_stamina_spores",
+											"change": -14
+										}
+									},
+									{
+										"type": "origins:if_else_list",
+										"actions": [
+											{
+												"condition": {
+													"type": "origins:actor_condition",
+													"condition": {
+														"type": "origins:resource",
+														"comparison": "==",
+														"resource": "*:*_effect_type",
+														"compare_to": 1
+													}
+												},
+												"action": {
+													"type": "origins:target_action",
+													"action": {
+														"type": "origins:and",
+														"actions": [
+															{
+																"type": "origins:heal",
+																"amount": 2
+															},
+															{
+																"type": "origins:choice",
+																"actions": [
+																	{
+																		"element": {
+																			"type": "origins:and",
+																			"actions": [
+																				{
+																				  "type": "origins:execute_command",
+																				  "command": "effect give @s minecraft:speed 10 1 true"
+																				}
+																			]
+																		},
+																		"weight": 1
+																	},
+																	{
+																		"element": {
+																			"type": "origins:and",
+																			"actions": [
+																				{
+																				  "type": "origins:execute_command",
+																				  "command": "effect give @s minecraft:haste 10 1 true"
+																				}
+																			]
+																		},
+																		"weight": 1
+																	},
+																	{
+																		"element": {
+																			"type": "origins:and",
+																			"actions": [
+																				{
+																				  "type": "origins:execute_command",
+																				  "command": "effect give @s minecraft:strength 10 1 true"
+																				}
+																			]
+																		},
+																		"weight": 1
+																	},
+																	{
+																		"element": {
+																			"type": "origins:and",
+																			"actions": [
+																				{
+																				  "type": "origins:execute_command",
+																				  "command": "effect give @s minecraft:regeneration 10 1 true"
+																				}
+																			]
+																		},
+																		"weight": 2
+																	},
+																	{
+																		"element": {
+																			"type": "origins:and",
+																			"actions": [
+																				{
+																				  "type": "origins:execute_command",
+																				  "command": "effect give @s minecraft:resistance 10 1 true"
+																				}
+																			]
+																		},
+																		"weight": 1
+																	},
+																	{
+																		"element": {
+																			"type": "origins:and",
+																			"actions": [
+																				{
+																				  "type": "origins:execute_command",
+																				  "command": "effect give @s minecraft:health_boost 60 1 true"
+																				}
+																			]
+																		},
+																		"weight": 1
+																	},
+																	{
+																		"element": {
+																			"type": "origins:and",
+																			"actions": [
+																				{
+																				  "type": "origins:execute_command",
+																				  "command": "effect give @s minecraft:absorption 10 1 true"
+																				}
+																			]
+																		},
+																		"weight": 1
+																	},
+																	{
+																		"element": {
+																			"type": "origins:and",
+																			"actions": [
+																				{
+																				  "type": "origins:execute_command",
+																				  "command": "effect give @s minecraft:saturation 10 1 true"
+																				}
+																			]
+																		},
+																		"weight": 1
+																	},
+																	{
+																		"element": {
+																			"type": "origins:and",
+																			"actions": [
+																				{
+																				  "type": "origins:execute_command",
+																				  "command": "effect give @s minecraft:jump_boost 10 1 true"
+																				}
+																			]
+																		},
+																		"weight": 1
+																	},
+																	{
+																		"element": {
+																			"type": "origins:and",
+																			"actions": [
+																				{
+																				  "type": "origins:execute_command",
+																				  "command": "effect give @s minecraft:fire_resistance 60 1 true"
+																				}
+																			]
+																		},
+																		"weight": 1
+																	},
+																	{
+																		"element": {
+																			"type": "origins:and",
+																			"actions": [
+																				{
+																				  "type": "origins:execute_command",
+																				  "command": "effect give @s minecraft:water_breathing 60 1 true"
+																				}
+																			]
+																		},
+																		"weight": 1
+																	},
+																	{
+																		"element": {
+																			"type": "origins:and",
+																			"actions": [
+																				{
+																				  "type": "origins:execute_command",
+																				  "command": "effect give @s minecraft:invisibility 10 1 true"
+																				}
+																			]
+																		},
+																		"weight": 1
+																	},
+																	{
+																		"element": {
+																			"type": "origins:and",
+																			"actions": [
+																				{
+																				  "type": "origins:execute_command",
+																				  "command": "effect give @s minecraft:night_vision 60 1 true"
+																				}
+																			]
+																		},
+																		"weight": 1
+																	},
+																	{
+																		"element": {
+																			"type": "origins:and",
+																			"actions": [
+																				{
+																				  "type": "origins:execute_command",
+																				  "command": "effect give @s minecraft:luck 480 1 true"
+																				}
+																			]
+																		},
+																		"weight": 1
+																	},
+																	{
+																		"element": {
+																			"type": "origins:and",
+																			"actions": [
+																				{
+																				  "type": "origins:execute_command",
+																				  "command": "effect give @s minecraft:slow_falling 60 1 true"
+																				}
+																			]
+																		},
+																		"weight": 1
+																	},
+																	{
+																		"element": {
+																			"type": "origins:and",
+																			"actions": [
+																				{
+																				  "type": "origins:execute_command",
+																				  "command": "effect give @s minecraft:conduit_power 60 1 true"
+																				}
+																			]
+																		},
+																		"weight": 1
+																	},
+																	{
+																		"element": {
+																			"type": "origins:and",
+																			"actions": [
+																				{
+																				  "type": "origins:execute_command",
+																				  "command": "effect give @s minecraft:dolphins_grace 60 1 true"
+																				}
+																			]
+																		},
+																		"weight": 1
+																	},
+																	{
+																		"element": {
+																			"type": "origins:and",
+																			"actions": [
+																				{
+																				  "type": "origins:execute_command",
+																				  "command": "effect give @s minecraft:hero_of_the_village 480 1 true"
+																				}
+																			]
+																		},
+																		"weight": 1
+																	}
+																]
+															}
+														]
+													}
+												}
+											},
+											{
+												"condition": {
+													"type": "origins:actor_condition",
+													"condition": {
+														"type": "origins:resource",
+														"comparison": "==",
+														"resource": "*:*_effect_type",
+														"compare_to": 0
+													}
+												},
+												"action": {
+													"type": "origins:target_action",
+													"action": {
+														"type": "origins:choice",
+														"actions": [
+															{
+																"element": {
+																	"type": "origins:and",
+																	"actions": [
+																		{
+																		  "type": "origins:execute_command",
+																		  "command": "effect give @s minecraft:slowness 10 1 true"
+																		}
+																	]
+																},
+																"weight": 1
+															},
+															{
+																"element": {
+																	"type": "origins:and",
+																	"actions": [
+																		{
+																		  "type": "origins:execute_command",
+																		  "command": "effect give @s minecraft:mining_fatigue 10 1 true"
+																		}
+																	]
+																},
+																"weight": 1
+															},
+															{
+																"element": {
+																	"type": "origins:and",
+																	"actions": [
+																		{
+																		  "type": "origins:execute_command",
+																		  "command": "effect give @s minecraft:blindness 10 1 true"
+																		}
+																	]
+																},
+																"weight": 1
+															},
+															{
+																"element": {
+																	"type": "origins:and",
+																	"actions": [
+																		{
+																		  "type": "origins:execute_command",
+																		  "command": "effect give @s minecraft:hunger 10 1 true"
+																		}
+																	]
+																},
+																"weight": 1
+															},
+															{
+																"element": {
+																	"type": "origins:and",
+																	"actions": [
+																		{
+																		  "type": "origins:execute_command",
+																		  "command": "effect give @s minecraft:weakness 10 1 true"
+																		}
+																	]
+																},
+																"weight": 1
+															},
+															{
+																"element": {
+																	"type": "origins:and",
+																	"actions": [
+																		{
+																		  "type": "origins:execute_command",
+																		  "command": "effect give @s minecraft:poison 10 1 true"
+																		}
+																	]
+																},
+																"weight": 1
+															},
+															{
+																"element": {
+																	"type": "origins:and",
+																	"actions": [
+																		{
+																		  "type": "origins:execute_command",
+																		  "command": "effect give @s minecraft:wither 10 1 true"
+																		}
+																	]
+																},
+																"weight": 1
+															},
+															{
+																"element": {
+																	"type": "origins:and",
+																	"actions": [
+																		{
+																		  "type": "origins:execute_command",
+																		  "command": "effect give @s minecraft:levitation 10 1 true"
+																		}
+																	]
+																},
+																"weight": 1
+															},
+															{
+																"element": {
+																	"type": "origins:and",
+																	"actions": [
+																		{
+																		  "type": "origins:execute_command",
+																		  "command": "effect give @s minecraft:glowing 10 1 true"
+																		}
+																	]
+																},
+																"weight": 1
+															},
+															{
+																"element": {
+																	"type": "origins:and",
+																	"actions": [
+																		{
+																		  "type": "origins:execute_command",
+																		  "command": "effect give @s minecraft:nausea 10 1 true"
+																		}
+																	]
+																},
+																"weight": 1
+															},
+															{
+																"element": {
+																	"type": "origins:and",
+																	"actions": [
+																		{
+																		  "type": "origins:execute_command",
+																		  "command": "effect give @s minecraft:unluck 480 1 true"
+																		}
+																	]
+																},
+																"weight": 1
+															},
+															{
+																"element": {
+																	"type": "origins:and",
+																	"actions": [
+																		{
+																		  "type": "origins:execute_command",
+																		  "command": "effect give @s minecraft:bad_omen 480 1 true"
+																		}
+																	]
+																},
+																"weight": 1
+															}
+														]
+													}
+												}
+											}
+										]
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		"bientity_condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:actor_condition",
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "apocalypse:myconoids/universal_toggle_binary",
+								"compare_to": 1
+							},
+							{
+								"type": "origins:resource",
+								"comparison": ">=",
+								"resource": "*:*_stamina_spores",
+								"compare_to": 2
+							}
+						]
+					}
+				}
+			]
+		}
+	},
+	"switch_spells": 
+	{
+		"type": "origins:active_self",
+		"cooldown": 20,
+		"hud_render": {
+			"should_render":false,
+			"bar_index": 1
+		},
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_effect_type",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:entity.guardian.death master @s ~ ~ ~ 10 1.4"
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_effect_type",
+								"operation": "set",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "title @s actionbar {\"text\":\"Switching to Positive Spells\",\"color\":\"dark_green\"}"
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_effect_type",
+								"compare_to": 1
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:entity.guardian.death master @s ~ ~ ~ 10 0.7",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_effect_type",
+								"operation": "set",
+								"change": 0
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "title @s actionbar {\"text\":\"Switching to Negative Spells\",\"color\":\"dark_red\"}",
+								"permission_level": 4
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition":
+		{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:sneaking"
+				}
+			]
+		},
+		"hidden": true,	
+		"key": {
+			"key":"key.origins.primary_active",
+			"continuous": false
+		}
+	},
+	"effect_type":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 0,
+			"sprite_location": "apocalypse:textures/gui/z_mycowart_spelltype.png"
+		}
+	},
+	"stamina_spores":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 30,
+		"start_value": 30,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 0,
+			"sprite_location": "apocalypse:textures/gui/mycowart.png"
+		}
+	},
+	"spore_regen":
+	{
+		"type": "origins:action_over_time",
+		"interval": 50,
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:resource",
+						"comparison": ">",
+						"resource": "apocalypse:myconoids/turf_penalty_in_turf_resource",
+						"compare_to": 0
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_stamina_spores",
+								"change": 5
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "apocalypse:myconoids/turf_penalty_in_turf_resource",
+						"compare_to": 0
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_stamina_spores",
+								"change": 1
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"comparison": "<",
+					"resource": "*:*_stamina_spores",
+					"compare_to": 30
+				}
+			]
+		}
+	},
+	"milk_bowl":{
+		"type": "origins:action_on_being_used",
+		"bientity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:target_action",
+							"action": {
+								"type": "origins:change_resource",
+								"resource": "*:*_stamina_spores",
+								"change": -10
+							}
+						},
+						{
+							"type": "origins:actor_action",
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+									  "type": "origins:execute_command",
+									  "command": "playsound entity.cow.milk master @a ~ ~ ~ 1 1"
+									},
+									{
+										"type": "origins:choice",
+										"actions": [
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_speed"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_slowness"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_haste"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_miningfatigue"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_strength"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_jumpboost"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_nausea"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_regeneration"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_resistance"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_fireres"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_waterbreathing"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_invisibility"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_blindness"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_nightvision"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_hunger"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_weakness"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_poison"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_wither"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_healthboost"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_absorption"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_saturation"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_glowing"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_levitation"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_luck"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_unluck"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_slowfall"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_conduitpower"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_dolphin"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_badomen"
+														}
+													]
+												}
+											},
+											{	
+												"weight": 1,
+												"element": {
+													"type": "origins:and",
+													"actions": [ 
+														{
+															"type": "origins:execute_command",
+															"command": "function apocalypse:s_herovillage"
+														}
+													]
+												}
+											}
+										]
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		"item_condition": {
+			"type": "origins:ingredient",
+			"ingredient": {
+				"item": "minecraft:bowl"
+			}
+		},
+		"hands": [
+			"main_hand"
+		],
+		"held_item_action": {
+			"type": "origins:consume"
+		},
+		"bientity_condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:target_condition",
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "apocalypse:myconoids/universal_toggle_binary",
+								"compare_to": 1
+							},
+							{
+								"type": "origins:resource",
+								"comparison": ">=",
+								"resource": "*:*_stamina_spores",
+								"compare_to": 10
+							}
+						]
+					}
+				}
+			]
+		},
+		"name": "Milkable",
+		"description": "You can be right-clicked with a wooden bowl to provide random suspicious stew at the cost of 10 spores."
+	},
+	"devolve":
+	{
+		"type": "origins:prevent_death",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "power grant @s apocalypse:myconoids/shake afungus",
+					"permission_level": 4
+				},
+				{
+					"type": "origins:clear_effect"
+				},
+				{
+					"type": "origins:extinguish"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:entity.tnt.primed master @a[distance=..10] ~ ~ ~ 4 0.5",
+					"permission_level": 4
+				}
+			]
+		}
+	},
+	"status_bar":
+	{
+		"type": "origins:status_bar_texture",
+		"texture": "apocalypse:textures/gui/myconoid_wart_bars.png"
+	},
+	"hidden": true
+}

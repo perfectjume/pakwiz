@@ -1,0 +1,217 @@
+{
+	"type": "origins:action_on_callback",
+	"entity_action_gained": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:choice",
+				"actions": [
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/exhausted mutation"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/frail mutation"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/heavy mutation"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/hungry mutation"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/inaccurate mutation"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/insatiable mutation"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/landlocked mutation"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/obtuse mutation"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/sickly mutation"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/slowstrikes mutation"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/sluggish mutation"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/sundered mutation"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/vulnerable mutation"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/weak mutation"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xexhausted mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xfrail mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xheavy mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xhungry mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xinaccurate mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xinsatiable mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xlandlocked mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xobtuse mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xsickly mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xslowstrikes mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xsluggish mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xsundered mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xvulnerable mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xweak mutation"
+						},
+						"weight": 1
+					}
+				]
+			},
+			{
+				"type": "origins:delay",
+				"ticks": 1,
+				"action": {
+					"type": "origins:execute_command",
+					"command": "power revoke @s apocalypse:geneticist/sideeffects/generic_mutation_granter mutation"
+				}
+			}
+		]
+	}
+}

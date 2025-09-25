@@ -1,0 +1,15 @@
+{
+	"type": "origins:multiple",
+	"water_vision":
+	{
+		"type": "origins:modify_camera_submersion",
+		"from": "water",
+		"to": "none"
+	},
+	"lava_vision":
+	{
+		"type": "origins:lava_vision",
+		"s": 0,
+		"v": 10
+	}
+}

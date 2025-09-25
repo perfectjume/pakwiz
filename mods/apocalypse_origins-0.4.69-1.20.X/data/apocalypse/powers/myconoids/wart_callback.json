@@ -1,0 +1,109 @@
+{
+	"type": "origins:action_on_callback",
+	"entity_action_chosen": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s add wart"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s add myconoid"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power revoke @s apocalypse:myconoids/shake afungus"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "effect give @s minecraft:instant_health 1 0 true"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "resource set @s apocalypse:myconoids/turf_penalty_in_turf_resource 0"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "scale set pehkui:height 0.6 @s"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "scale set pehkui:width 0.4 @s"
+			}
+		]
+	},
+	"entity_action_added": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s add wart"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s add myconoid"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power revoke @s apocalypse:myconoids/shake afungus"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "scale set pehkui:height 0.6 @s"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "scale set pehkui:width 0.4 @s"
+			}
+		]
+	},
+    "entity_action_respawned": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s add wart"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s add myconoid"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power revoke @s apocalypse:myconoids/shake afungus"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "effect give @s minecraft:instant_health 1 0 true"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "scale set pehkui:height 0.6 @s"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "scale set pehkui:width 0.4 @s"
+			}
+		]
+	},
+	"entity_action_removed": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s remove wart"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s remove myconoid"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "scale reset @s"
+			}
+		]
+	},
+	"execute_chosen_when_orb": true,
+	"hidden": true
+}

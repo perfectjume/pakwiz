@@ -1,0 +1,1 @@
+give @s minecraft:suspicious_stew{display:{Lore:['[{"text":"Swirly","italic":false}]']},Effects:[{EffectId:9b,EffectDuration:600}]} 1

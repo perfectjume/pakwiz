@@ -1,0 +1,49 @@
+{
+	"type": "origins:active_self",
+	"cooldown": 5,
+	"hud_render": {
+		"should_render":false,
+		"bar_index": 0
+	},
+	"entity_action": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:equipped_item_action",
+				"equipment_slot": "mainhand",
+				"action":
+				{
+					"type": "origins:consume",
+					"amount": 1
+				}
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power grant @s apocalypse:geneticist/stabilize geneticist"
+			}
+		]
+	},
+	"condition":{
+		"type": "origins:and",
+		"conditions": [
+			{
+				"type": "origins:equipped_item",
+				"equipment_slot": "mainhand",
+				"item_condition":
+				{
+					"type": "origins:ingredient",
+					"inverted": false,
+					"ingredient":
+					{
+						"item": "apocalypse_origins:stabilizer"
+					}
+				}
+			}
+		]
+	},
+	"hidden": true,
+	"key": {
+		"key":"key.use",
+		"continuous": false
+	}
+}

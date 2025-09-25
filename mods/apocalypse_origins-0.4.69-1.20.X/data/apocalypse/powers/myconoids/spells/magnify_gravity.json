@@ -1,0 +1,300 @@
+{
+	"type": "origins:multiple",
+	"durationbar": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 60,
+		"start_value": 60,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse:textures/gui/zzz_buff_warped_bad.png",
+			"bar_index": 0,
+			"condition": {
+				"type": "origins:resource",
+				"resource": "*:*_durationbar",
+				"comparison": ">",
+				"compare_to": 0
+			}
+		}
+	},
+	"timer": 
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": ">",
+								"resource": "*:*_durationbar",
+								"compare_to": 2
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [				
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_durationbar",
+								"change": -1
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": ">=",
+								"resource": "*:*_durationbar",
+								"compare_to": 1
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "<=",
+								"resource": "*:*_durationbar",
+								"compare_to": 2
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_durationbar",
+								"change": -1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.note_block.iron_xylophone master @s ~ ~ ~ 1 1.8"
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "*:*_durationbar",
+								"comparison": "==",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.note_block.iron_xylophone master @s ~ ~ ~ 1 2"
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:execute_command",
+									"command": "power revoke @s apocalypse:myconoids/spells/magnify_gravity afungus",
+									"permission_level": 4
+								}
+							}							
+						]
+					}
+				}
+			]
+		},
+		"interval": 20
+	},
+	"oofouchmybones":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:block.beacon.activate master @a ~ ~ ~ 3 0.5"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "particle minecraft:crit ~ ~1 ~ 0.5 0.5 0.5 0.1 8"
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": "<",
+										"compare_to": 8
+									}
+								]
+							},
+							"action": {
+								"type": "origins:damage",
+								"amount": 2,
+								"source": {
+									"name": "magic",
+									"bypasses_armor": true
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": ">=",
+										"compare_to": 8
+									},
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": "<",
+										"compare_to": 12
+									}
+								]
+							},
+							"action": {
+								"type": "origins:damage",
+								"amount": 3,
+								"source": {
+									"name": "magic",
+									"bypasses_armor": true
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": ">=",
+										"compare_to": 12
+									},
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": "<",
+										"compare_to": 16
+									}
+								]
+							},
+							"action": {
+								"type": "origins:damage",
+								"amount": 4,
+								"source": {
+									"name": "magic",
+									"bypasses_armor": true
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": ">=",
+										"compare_to": 16
+									}
+								]
+							},
+							"action": {
+								"type": "origins:damage",
+								"amount": 8,
+								"source": {
+									"name": "magic",
+									"bypasses_armor": true
+								}
+							}
+						}
+					]
+				}
+			]
+		}
+	},
+	"less_jump":
+	{
+		"type": "origins:modify_jump",
+		"modifier": {
+			"operation": "addition",
+			"value": -0.1
+		}
+	},
+	"fall_faster":
+	{
+		"type": "origins:modify_falling",
+		"velocity": 0.5,
+		"take_fall_damage": true
+	},
+	"fall_harder": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": 0.5,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type":"origins:or",
+			"conditions":[
+				{
+					"type": "origins:name",
+					"name": "fall"
+				}
+			]
+		}
+	},
+	"elytra_disable":
+	{
+		"type": "origins:prevent_elytra_flight",
+		"entity_action": {
+			"type": "origins:execute_command",
+			"command": "tellraw @s {\"text\": \"Gravity overpowers your wings!\", \"color\": \"red\"}"
+		}
+	},
+	"glow":
+	{
+		"type": "origins:self_glow",
+		"use_teams": false,
+		"red": 0.16,
+		"green": 0.16,
+		"blue": 0,
+		"entity_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:origin",
+					"origin": "apocalypse:myconoid_wart",
+					"layer": "origins:origin"
+				}
+			]
+		}
+	}
+}

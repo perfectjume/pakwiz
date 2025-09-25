@@ -1,0 +1,5 @@
+{
+	"type": "origins:simple",
+	"name": "Secondary key",
+	"description": "Your [Secondary] key is context-sensitive, and it has a variety of functions:\n \n- [Sneak + Secondary] key while holding an item that can be repaired that is not a wooden sword will repair the item if there are enough souls in the storage.\n \n- [Secondary] while holding a wooden sword that is not a hexblade will make a basic copy of your sword. (This copy does not include enchantments beyond curse of vanishing).\n \n- [Secondary] while holding a sigil focus in your main or offhand and your sword in your main or off hand will activate said sigil.\n \n- [Secondary] while holding the materials needed to craft a sigil focus next to a smithing table will craft the corresponding sigil focus. Some sigils can also be refueled by holding a certain material in your offhand and the empty sigil in your main hand by the smithing table. Check the CurseForge page for a list of sigils you can craft.\n \n- [Secondary] while on a hexblade altar will store souls and materials. You can check how to make a hexblade altar at the CurseForge page for this mod."
+}

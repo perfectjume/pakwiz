@@ -1,0 +1,814 @@
+{
+	"type": "origins:multiple",
+	"color":
+	{
+		"type": "origins:model_color",
+		"red": 0.71,
+		"green": 0.16,
+		"blue": 0.20
+	},
+	"basehealth": 
+	{
+		"type": "origins:attribute",
+		"update_health": true,
+		"modifiers": {
+			"attribute": "minecraft:generic.max_health",
+			"operation": "multiply_total",
+			"value": -0.2
+		},
+		"name": "Mobile ambusher",
+		"description": "Your max HP is reduced by 20%."
+	},
+	"noeffects": 
+	{
+		"type": "origins:effect_immunity",
+		"effects": [
+			"minecraft:wither"
+		],
+		"hidden": true
+	},
+	"immunities":
+	{
+		"type": "origins:fire_immunity"
+	},
+	"mortal": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": 1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type":"origins:or",
+			"conditions":[
+				{
+					"type": "origins:name",
+					"name": "freeze"
+				}
+			]
+		},
+		"hidden": true
+	},
+	"melee":
+	{
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -0.2
+		},
+		"hidden": true
+	},
+	"right_click": 
+	{
+		"type": "origins:active_self",
+		"cooldown": 10,
+		"hud_render": {
+			"should_render":false,
+			"sprite_location":"origins:textures/gui/community/spiderkolo/resource_bar_02.png",
+			"bar_index": 1
+		},
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+					"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient": {
+										"tag": "apocalypse:axes"
+									}
+								}
+							},
+							{
+								"type": "origins:resource",
+								"comparison": ">=",
+								"resource": "apocalypse:myconoids/crimson_passives_stamina_spores",
+								"compare_to": 15
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "tag @s add sucker"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/crimson_passives_stamina_spores -15"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "power grant @e[type=!#apocalypse:non_living,tag=!sucker,distance=..5] apocalypse:myconoids/crimson_whirlwind afungus"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:flame ~ ~1 ~ 0 0 0 0.05 8"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:small_flame ~ ~1 ~ 0 0 0 0.05 8"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:flame ~ ~1 ~ 1 1 1 0.05 25"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:small_flame ~ ~1 ~ 3 1 3 0.05 50"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:smoke ~ ~1 ~ 1 1 1 0.05 25"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:item.elytra.flying master @s ~ ~ ~ 1 1"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:entity.player.attack.knockback master @s ~ ~ ~ 1 1"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "effect give @s minecraft:slow_falling 1 0 true"
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action": {
+									"type": "origins:execute_command",
+									"command": "tp @s ~ ~0.2 ~ ~30 ~",
+									"permission_level": 4
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 2,
+								"action": {
+									"type": "origins:execute_command",
+									"command": "tp @s ~ ~0.2 ~ ~30 ~",
+									"permission_level": 4
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 3,
+								"action": {
+									"type": "origins:execute_command",
+									"command": "tp @s ~ ~0.2 ~ ~30 ~",
+									"permission_level": 4
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 4,
+								"action": {
+									"type": "origins:execute_command",
+									"command": "tp @s ~ ~0.2 ~ ~30 ~",
+									"permission_level": 4
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 5,
+								"action": {
+									"type": "origins:execute_command",
+									"command": "tp @s ~ ~0.2 ~ ~30 ~",
+									"permission_level": 4
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 6,
+								"action": {
+									"type": "origins:execute_command",
+									"command": "tp @s ~ ~0.2 ~ ~30 ~",
+									"permission_level": 4
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 7,
+								"action": {
+									"type": "origins:execute_command",
+									"command": "tp @s ~ ~0.2 ~ ~30 ~",
+									"permission_level": 4
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 8,
+								"action": {
+									"type": "origins:execute_command",
+									"command": "tp @s ~ ~0.2 ~ ~30 ~",
+									"permission_level": 4
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 9,
+								"action": {
+									"type": "origins:execute_command",
+									"command": "tp @s ~ ~0.2 ~ ~30 ~",
+									"permission_level": 4
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 10,
+								"action": {
+									"type": "origins:execute_command",
+									"command": "tp @s ~ ~0.2 ~ ~30 ~",
+									"permission_level": 4
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 11,
+								"action": {
+									"type": "origins:execute_command",
+									"command": "tp @s ~ ~0.2 ~ ~30 ~",
+									"permission_level": 4
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 12,
+								"action": {
+									"type": "origins:execute_command",
+									"command": "tp @s ~ ~0.2 ~ ~30 ~",
+									"permission_level": 4
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 10,
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "particle minecraft:flame ~ ~1 ~ 0 0 0 0.05 8"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "particle minecraft:small_flame ~ ~1 ~ 0 0 0 0.05 8"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "particle minecraft:flame ~ ~1 ~ 1 1 1 0.05 25"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "particle minecraft:small_flame ~ ~1 ~ 3 1 3 0.05 50"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "particle minecraft:smoke ~ ~1 ~ 1 1 1 0.05 25"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:entity.player.attack.knockback master @s ~ ~ ~ 1 1"
+										}
+									]
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 21,
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "tag @s remove sucker"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "stopsound @s master minecraft:item.elytra.flying"
+										}
+									]
+								}
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient": {
+										"tag": "apocalypse:swords"
+									}
+								}
+							},
+							{
+								"type": "origins:resource",
+								"comparison": ">=",
+								"resource": "apocalypse:myconoids/crimson_passives_stamina_spores",
+								"compare_to": 5
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "tag @s add slasher"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/crimson_passives_stamina_spores -5"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "summon armor_stand ^3 ^0.5 ^5 {Tags:[\"lance_granter\"],Invisible:1b,Invulnerable:1b,NoAI:1,Silent:1}"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "summon armor_stand ^-3 ^0.5 ^5 {Tags:[\"lance_granter\"],Invisible:1b,Invulnerable:1b,NoAI:1,Silent:1}"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "summon armor_stand ^ ^0.5 ^5 {Tags:[\"lance_granter\"],Invisible:1b,Invulnerable:1b,NoAI:1,Silent:1}"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "summon armor_stand ^ ^0.5 ^2 {Tags:[\"lance_granter\"],Invisible:1b,Invulnerable:1b,NoAI:1,Silent:1}"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "power grant @e[tag=lance_granter,distance=..10] apocalypse:myconoids/crimson_granter_iai afungus"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:entity.player.attack.sweep master @s ~ ~ ~ 1 1"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:entity.ender_eye.death master @s ~ ~ ~ 1 1"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:sweep_attack ^ ^1 ^1"
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:add_velocity",
+											"z": -0.75,
+											"space": "local"
+										}
+									]
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 21,
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "tag @s remove slasher"
+										}
+									]
+								}
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient":
+									{
+										"item": "minecraft:trident"
+									}
+								}
+							},
+							{
+								"type": "origins:resource",
+								"comparison": ">=",
+								"resource": "apocalypse:myconoids/crimson_passives_stamina_spores",
+								"compare_to": 10
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "tag @s add piercer"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/crimson_passives_stamina_spores -10"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "summon armor_stand ^ ^0.5 ^ {Tags:[\"lance_granter\"],Invisible:1b,Invulnerable:1b,NoAI:1,Silent:1}"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "summon armor_stand ^ ^0.5 ^2 {Tags:[\"lance_granter\"],Invisible:1b,Invulnerable:1b,NoAI:1,Silent:1}"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "summon armor_stand ^ ^0.5 ^6 {Tags:[\"lance_granter\"],Invisible:1b,Invulnerable:1b,NoAI:1,Silent:1}"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "summon armor_stand ^ ^0.5 ^6 {Tags:[\"lance_granter\"],Invisible:1b,Invulnerable:1b,NoAI:1,Silent:1}"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "summon armor_stand ^ ^0.5 ^8 {Tags:[\"lance_granter\"],Invisible:1b,Invulnerable:1b,NoAI:1,Silent:1}"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "power grant @e[tag=lance_granter,distance=..10] apocalypse:myconoids/crimson_granter_lance afungus"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:entity.evoker_fangs.attack master @s ~ ~ ~ 1 1"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.glass.break master @s ~ ~ ~ 1 1"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:item.trident.riptide_1 master @a[distance=..15] ~ ~ ~ 1 1"
+							},
+							{
+								"type": "origins:add_velocity",
+								"z": 1.5,
+								"space": "local"
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 21,
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "tag @s remove piercer"
+										}
+									]
+								}
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "mainhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"ingredient":
+											{
+												"item": "minecraft:bow"
+											}
+										}
+									},
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "mainhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"ingredient":
+											{
+												"item": "minecraft:crossbow"
+											}
+										}
+									}
+								]
+							},
+							{
+								"type": "origins:resource",
+								"comparison": ">=",
+								"resource": "apocalypse:myconoids/crimson_passives_stamina_spores",
+								"compare_to": 5
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "tag @s add blaster"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/crimson_passives_stamina_spores -5"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "power grant @e[tag=!blaster,distance=..5] apocalypse:myconoids/crimson_blast afungus"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:cloud ~ ~1 ~ 0.5 0 0.5 0 6"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:explosion ~ ~1 ~ 2 0 2 0 10"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:entity.generic.explode master @s ~ ~ ~ 1 2"
+							},
+							{
+								"type": "origins:add_velocity",
+								"y": 1,
+								"space": "world"
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 21,
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "tag @s remove blaster"
+										}
+									]
+								}
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition":
+		{
+			"type": "origins:and",
+			"conditions":
+			[
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "apocalypse:myconoids/universal_toggle_binary",
+					"compare_to": 1
+				},
+				{
+					"type": "origins:or",
+					"conditions":
+					[
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient": {
+											"tag": "apocalypse:axes"
+										}
+									}
+								},
+								{
+									"type": "origins:resource",
+									"comparison": ">=",
+									"resource": "apocalypse:myconoids/crimson_passives_stamina_spores",
+									"compare_to": 15
+								}
+							]
+						},
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:or",
+									"conditions": [
+										{
+											"type": "origins:equipped_item",
+											"equipment_slot": "mainhand",
+											"item_condition":
+											{
+												"type": "origins:ingredient",
+												"ingredient":
+												{
+													"item": "minecraft:bow"
+												}
+											}
+										},
+										{
+											"type": "origins:equipped_item",
+											"equipment_slot": "mainhand",
+											"item_condition":
+											{
+												"type": "origins:ingredient",
+												"ingredient":
+												{
+													"item": "minecraft:crossbow"
+												}
+											}
+										}
+									]
+								},
+								{
+									"type": "origins:resource",
+									"comparison": ">=",
+									"resource": "apocalypse:myconoids/crimson_passives_stamina_spores",
+									"compare_to": 5
+								}
+							]
+						},
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "minecraft:trident"
+										}
+									}
+								},
+								{
+									"type": "origins:resource",
+									"comparison": ">=",
+									"resource": "apocalypse:myconoids/crimson_passives_stamina_spores",
+									"compare_to": 10
+								}
+							]
+						},
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient": {
+											"tag": "apocalypse:swords"
+										}
+									}
+								},
+								{
+									"type": "origins:resource",
+									"comparison": ">=",
+									"resource": "apocalypse:myconoids/crimson_passives_stamina_spores",
+									"compare_to": 5
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		"hidden": true,	
+		"key": {
+			"key":"key.use",
+			"continuous": false
+		}
+	},
+	"stamina_spores":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 30,
+		"start_value": 30,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 0,
+			"sprite_location": "apocalypse:textures/gui/mycocrimson.png"
+		}
+	},
+	"spore_regen":
+	{
+		"type": "origins:action_over_time",
+		"interval": 100,
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:resource",
+						"comparison": ">",
+						"resource": "apocalypse:myconoids/turf_penalty_in_turf_resource",
+						"compare_to": 0
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/crimson_passives_stamina_spores 5"
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "apocalypse:myconoids/turf_penalty_in_turf_resource",
+						"compare_to": 0
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/crimson_passives_stamina_spores 1"
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"comparison": "<",
+					"resource": "apocalypse:myconoids/crimson_passives_stamina_spores",
+					"compare_to": 30
+				}
+			]
+		}
+	},
+	"devolve":
+	{
+		"type": "origins:prevent_death",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "power grant @s apocalypse:myconoids/shake afungus",
+					"permission_level": 4
+				},
+				{
+					"type": "origins:clear_effect"
+				},
+				{
+					"type": "origins:extinguish"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:entity.tnt.primed master @a[distance=..10] ~ ~ ~ 4 0.5",
+					"permission_level": 4
+				}
+			]
+		}
+	},
+	"status_bar":
+	{
+		"type": "origins:status_bar_texture",
+		"texture": "apocalypse_origins:textures/gui/myconoid_crimson_bars.png"
+	},
+	"hidden": true
+}

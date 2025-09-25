@@ -1,0 +1,13 @@
+name = "Simple AutoPickup"
+filename = "auto-pickup-1.2.0+1.20.1.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "1918f08495e5b687caecf2cdf265563afbdff71e"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 6841623
+project-id = 1309048

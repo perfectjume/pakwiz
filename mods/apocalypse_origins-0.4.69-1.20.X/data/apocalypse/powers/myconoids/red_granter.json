@@ -1,0 +1,74 @@
+{
+	"type": "origins:multiple",
+	"callback":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+				  "type": "origins:execute_command",
+				  "command": "particle minecraft:falling_dust redstone_block ~ ~ ~ 0.2 1 0.2 0 25"
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 300,
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "kill @s"
+							}
+						]
+					}
+				}
+			]
+		}
+	},
+	"push":
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "particle minecraft:falling_dust redstone_block ~ ~ ~ 0.2 1 0.2 0 15"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "execute as @e[tag=myconoid,distance=..15] run resource change @s apocalypse:myconoids/turf_penalty_in_turf_resource 2"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "execute as @e[tag=red,distance=..15] run resource change @s apocalypse:myconoids/red_active_buff_durationbar 2"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "power grant @e[tag=red,distance=..15] apocalypse:myconoids/red_active_buff afungus"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "execute as @e[tag=myconoid,tag=!red,distance=..15] run resource change @s apocalypse:myconoids/red_buff_indicator_durationbar 2"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "power grant @e[tag=myconoid,tag=!red,distance=..15] apocalypse:myconoids/red_buff_indicator afungus"
+				}
+			]
+		},
+		"interval": 10
+	},
+	"basehealth": 
+	{
+		"type": "origins:attribute",
+		"update_health": true,
+		"modifiers": {
+			"attribute": "minecraft:generic.max_health",
+			"operation": "multiply_total",
+			"value": 0.5
+		}
+	},
+	"hidden": true
+}

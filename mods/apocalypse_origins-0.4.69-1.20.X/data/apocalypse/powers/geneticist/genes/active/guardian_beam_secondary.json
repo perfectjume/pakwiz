@@ -1,0 +1,329 @@
+{
+	"type": "origins:multiple",
+	"resource":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 10,
+		"start_value": 10,
+		"hud_render": {
+			"should_render": true,
+			"sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
+			"bar_index": 6
+		}
+	},
+	"beamstart":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false,
+			"bar_index": 4
+		}
+	},
+	"halt":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false,
+			"bar_index": 3
+		}
+	},
+	"update_resource":
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_resource",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_beamstart",
+								"compare_to": 1
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_beamstart",
+								"change": -1
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "<",
+								"resource": "*:*_resource",
+								"compare_to": 10
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_beamstart",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_resource",
+								"change": 1
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_resource",
+								"compare_to": 10
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_halt",
+								"compare_to": 1
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_halt",
+								"change": -1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:apocalypse.ost.recharged master @a ~ ~ ~ 0.3 1"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "tellraw @s {\"text\":\"Guardian Beam (Secondary) ready!\",\"color\":\"aqua\"}"
+							}
+						]
+					}
+				}
+			]
+		},
+		"interval": 10
+	},
+	"beamo":
+	{
+		"type": "origins:active_self",
+		"hud_render": {
+			"should_render": false
+		},
+		"cooldown": 11,
+		"entity_action": {
+			"type": "origins:raycast",
+			"distance": 32,
+			"block": true,
+			"entity": true,
+			"shape_type": "visual",
+			"fluid_handling": "none",
+			"bientity_action": {
+				"type": "origins:target_action",
+				"action": {
+					"type": "origins:damage",
+					"amount": 4,
+					"source": {
+						"name": "magic",
+						"bypasses_armor": true
+					}
+				}
+			},
+			"before_action": {
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": {
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "*:*_beamstart",
+							"compare_to": 0
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "playsound minecraft:apocalypse.ost.beamstart master @a ~ ~ ~ 1 1"
+								},
+								{
+									"type": "origins:change_resource",
+									"resource": "*:*_beamstart",
+									"change": 1
+								}
+							]
+						}
+					}
+				]
+			},
+			"hit_action": {
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": {
+							"type": "origins:resource",
+							"comparison": ">",
+							"resource": "*:*_resource",
+							"compare_to": 1
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "playsound minecraft:apocalypse.ost.beamo master @a ~ ~ ~ 0.2 1"
+								},
+								{
+									"type": "origins:change_resource",
+									"resource": "*:*_resource",
+									"change": -1
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "*:*_resource",
+							"compare_to": 1
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "playsound minecraft:apocalypse.ost.beamo master @a ~ ~ ~ 0.2 1"
+								},
+								{
+									"type": "origins:change_resource",
+									"resource": "*:*_resource",
+									"change": -1
+								},
+								{
+									"type": "origins:change_resource",
+									"resource": "*:*_halt",
+									"change": 1
+								}
+							]
+						}
+					}
+				]
+			},
+			"miss_action": {
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": {
+							"type": "origins:resource",
+							"comparison": ">",
+							"resource": "*:*_resource",
+							"compare_to": 1
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "playsound minecraft:apocalypse.ost.beamo master @a ~ ~ ~ 0.2 1"
+								},
+								{
+									"type": "origins:change_resource",
+									"resource": "*:*_resource",
+									"change": -1
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "*:*_resource",
+							"compare_to": 1
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "playsound minecraft:apocalypse.ost.beamo master @a ~ ~ ~ 0.2 1"
+								},
+								{
+									"type": "origins:change_resource",
+									"resource": "*:*_resource",
+									"change": -1
+								},
+								{
+									"type": "origins:change_resource",
+									"resource": "*:*_halt",
+									"change": 1
+								}
+							]
+						}
+					}
+				]
+			},
+			"command_at_hit": "playsound minecraft:apocalypse.ost.brrr master @a ~ ~ ~ 0.4 1",
+			"command_along_ray": "particle minecraft:electric_spark ~ ~ ~ -0.1 0.1 0.1 0 4",
+			"command_step": 1,
+			"command_along_ray_only_on_hit": false
+		},
+		"condition": {
+		"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"comparison": ">",
+					"resource": "*:*_resource",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "*:*_halt",
+					"compare_to": 0
+				}				
+			]
+		},
+		"key": {
+			"key": "key.origins.secondary_active",
+			"continuous": true
+		}
+	}
+}

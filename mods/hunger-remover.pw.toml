@@ -1,0 +1,13 @@
+name = "Hunger Remover"
+filename = "hunger-remover-1.0.7.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "0d71212e88f6757ca3ef32e66f1336532163cd84"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 4595890
+project-id = 478201

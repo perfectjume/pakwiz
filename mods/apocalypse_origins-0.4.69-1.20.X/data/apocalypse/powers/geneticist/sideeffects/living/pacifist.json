@@ -1,0 +1,66 @@
+{
+	"type": "origins:multiple",
+	"resource":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 3,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false,
+			"bar_index": 6
+		}
+	},
+	"damage_melee":{
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -1
+		},
+		"condition": {
+			"type": "origins:resource",
+			"comparison": "==",
+			"resource": "*:*_resource",
+			"compare_to": 0
+		}
+	},
+	"damage_ranged":{
+		"type": "origins:modify_projectile_damage",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -1
+		},
+		"condition": {
+			"type": "origins:resource",
+			"comparison": "==",
+			"resource": "*:*_resource",
+			"compare_to": 0
+		}
+	},
+	"hurt_detect":
+	{
+		"type": "origins:self_action_when_hit",
+		"cooldown": 1,
+		"entity_action": {
+			"type": "origins:change_resource",
+			"resource": "*:*_resource",
+			"change": 3
+		}
+	},
+	"hurt_reset":
+	{
+		"type": "origins:action_over_time",
+		"interval": 20,
+		"entity_action": {
+			"type": "origins:change_resource",
+			"resource": "*:*_resource",
+			"change": -1
+		},
+		"condition": {
+			"type": "origins:resource",
+			"comparison": ">",
+			"resource": "*:*_resource",
+			"compare_to": 0
+		}
+	}
+}

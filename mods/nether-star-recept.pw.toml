@@ -1,0 +1,13 @@
+name = "Nether Star Recipe"
+filename = "mysticrift_netherstar_recept-1.2.2-fabric-1.20.1.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "e23cd5f0060efad23818f374cfeed041db94560f"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 5565396
+project-id = 1071134

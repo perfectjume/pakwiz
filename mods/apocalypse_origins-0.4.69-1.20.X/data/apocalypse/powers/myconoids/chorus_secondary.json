@@ -1,0 +1,363 @@
+{
+	"type": "origins:multiple",
+	"breakself":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 10,
+		"start_value": 0,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 0,
+			"sprite_location": "apocalypse:textures/gui/mycodevolve.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "apocalypse:myconoids/chorus_secondary_breakself",
+						"comparison": ">",
+						"compare_to": 0
+					}
+				]
+			}
+		}
+	},
+	"active":
+	{
+		"type": "origins:active_self",
+		"cooldown": 20,
+		"hud_render": {
+		  "should_render":false,
+		  "sprite_location":"apocalypse:textures/gui/refractor.png",
+		  "bar_index": 1
+		},
+		"entity_action": 
+		{
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:sneaking"
+							},
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "mainhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"ingredient":
+											{
+												"item": "minecraft:netherite_hoe"
+											}
+										}
+									},
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "offhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"ingredient":
+											{
+												"item": "minecraft:netherite_hoe"
+											}
+										}
+									}
+								]
+							},
+							{
+								"type": "origins:resource",
+								"comparison": ">=",
+								"resource": "apocalypse:myconoids/chorus_passives_stamina_spores",
+								"compare_to": 5
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/chorus_passives_stamina_spores -5"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "summon armor_stand ^ ^ ^ {Tags:[\"cpusher\"],Invisible:1b,Invulnerable:1b,NoAI:1,Silent:1,NoGravity:1b}"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "power grant @e[tag=cpusher,distance=..10] apocalypse:myconoids/chorus_granter_push afungus"
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "mainhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"ingredient":
+											{
+												"item": "minecraft:netherite_hoe"
+											}
+										}
+									},
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "offhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"ingredient":
+											{
+												"item": "minecraft:netherite_hoe"
+											}
+										}
+									}
+								]
+							},
+							{
+								"type": "origins:resource",
+								"comparison": ">=",
+								"resource": "apocalypse:myconoids/chorus_passives_stamina_spores",
+								"compare_to": 10
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/chorus_passives_stamina_spores -10"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "summon villager ^ ^ ^ {Tags:[\"cpuller\"],VillagerData:{profession:nitwit,level:2,type:plains},Silent:1,NoAI:1,ActiveEffects:[{Id:14,Amplifier:0,Duration:999999,ShowParticles:0b}]}"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "power grant @e[tag=cpuller,distance=..10] apocalypse:myconoids/chorus_granter_pull afungus"
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:sneaking"
+							},
+							{
+								"type": "origins:or",
+								"inverted": true,
+								"conditions": [
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "mainhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"ingredient":
+											{
+												"item": "minecraft:netherite_hoe"
+											}
+										}
+									},
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "offhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"ingredient":
+											{
+												"item": "minecraft:netherite_hoe"
+											}
+										}
+									}
+								]
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:myconoids/chorus_secondary_breakself",
+								"comparison": ">",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "resource set @s apocalypse:myconoids/chorus_secondary_breakself 0"
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:or",
+								"inverted": true,
+								"conditions": [
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "mainhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"ingredient":
+											{
+												"item": "minecraft:netherite_hoe"
+											}
+										}
+									},
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "offhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"ingredient":
+											{
+												"item": "minecraft:netherite_hoe"
+											}
+										}
+									}
+								]
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:myconoids/chorus_secondary_breakself",
+								"comparison": "<",
+								"compare_to": 10
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/chorus_secondary_breakself 1"
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:or",
+								"inverted": true,
+								"conditions": [
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "mainhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"ingredient":
+											{
+												"item": "minecraft:netherite_hoe"
+											}
+										}
+									},
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "offhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"ingredient":
+											{
+												"item": "minecraft:netherite_hoe"
+											}
+										}
+									}
+								]
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:myconoids/chorus_secondary_breakself",
+								"comparison": "==",
+								"compare_to": 10
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "power grant @s apocalypse:myconoids/shake afungus"
+							},
+							{
+								"type": "origins:clear_effect"
+							},
+							{
+								"type": "origins:extinguish"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:entity.tnt.primed master @a[distance=..10] ~ ~ ~ 4 0.5"
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition":
+		{
+			"type": "origins:and",
+			"conditions":
+			[
+				{
+					"type": "origins:gamemode",
+					"inverted": true,
+					"gamemode": "spectator"
+				}
+			]
+		},
+		"key": {
+			"key":"key.origins.secondary_active",
+			"continuous": true
+		}
+	},
+	"name": "Manage Spores",
+	"description": "[Hold Secondary] Devolve into a spore.\n \n[Secondary + Shift] Reset your devolve progress.\n \nGravitic Flux:\n \n[Secondary]: If you are holding a netherite hoe, you deploy a gravity manipulator on your position which pulls living entities towards itself.\n \n[Secondary + Sneak]: If you are holding a netherite hoe, you deploy a gravity manipulator on your position which pushes living entities away from itself."
+}

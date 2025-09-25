@@ -1,0 +1,215 @@
+{
+	"type": "origins:multiple",
+	"resource":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 2,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false,
+			"bar_index": 7
+		}
+	},
+	"update_resource":
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": ">",
+								"resource": "*:*_resource",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_projectile",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_resource",
+								"change": -2
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.dispenser.fail master @s ~ ~ ~ 2 1"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "tellraw @s {\"text\":\"Flak Skull (Primary) ready!\",\"color\":\"dark_red\"}"
+							}
+						]
+					}
+				}
+			]
+		},
+		"interval": 10
+	},
+	"projectile":
+	{
+		"type": "origins:fire_projectile",
+		"cooldown": 200,
+		"divergence": 0,
+		"speed": 1.25,
+		"entity_type": "minecraft:snowball",
+		"tag": "{Item: {id: 'minecraft:wither_skeleton_skull', Count: 1b}}",
+		"sound": "minecraft:entity.wither.shoot",
+		"hud_render": {
+			"should_render": true,
+			"sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
+			"bar_index": 2
+		},
+        "key":
+        {
+            "key": "key.origins.primary_active",
+            "continuous": false
+        }
+	},
+	"boom":
+	{
+		"type": "origins:active_self",
+		"hud_render": {
+			"should_render": false
+		},
+		"cooldown": 1,
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:area_of_effect",
+					"radius": 32,
+					"bientity_action": {
+						"type": "origins:target_action",
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:explode",
+									"power": 3,
+									"destruction_type": "none",
+									"damage_self": false,
+									"create_fire": false
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "kill @s"
+								}
+							]
+						}
+					},
+					"bientity_condition":
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:target_condition",
+								"condition": {
+									"type": "origins:entity_type",
+									"entity_type": "minecraft:snowball"
+								}
+							},
+							{
+								"type": "origins:actor_condition",
+								"condition": {
+									"type": "origins:resource",
+									"comparison": "==",
+									"resource": "*:*_resource",
+									"compare_to": 1
+								}
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:resource",
+										"comparison": "==",
+										"resource": "*:*_resource",
+										"compare_to": 0
+									}
+								]
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:change_resource",
+										"resource": "*:*_resource",
+										"change": 1
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:resource",
+										"comparison": "==",
+										"resource": "*:*_resource",
+										"compare_to": 1
+									}
+								]
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:change_resource",
+										"resource": "*:*_resource",
+										"change": 1
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "playsound minecraft:apocalypse.ost.click master @a[distance=..32] ~ ~ ~ 2 1"
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		"condition": {
+		"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"comparison": ">=",
+					"resource": "*:*_projectile",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "<=",
+					"resource": "*:*_resource",
+					"compare_to": 1
+				}				
+			]
+		},
+		"key": {
+			"key": "key.origins.primary_active",
+			"continuous": false
+		}
+	}
+}

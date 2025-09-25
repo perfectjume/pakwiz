@@ -1,0 +1,22 @@
+{
+	"powers": [
+		"apocalypse:myconoids/skulk_callback",
+		"apocalypse:myconoids/skulk_passives",
+		"apocalypse:myconoids/skulk_primary",
+		"apocalypse:myconoids/overworld_secondaries",
+		"apocalypse:myconoids/cold_weakness",
+		"apocalypse:myconoids/heat_weakness",
+		"apocalypse:myconoids/resource_temperature",
+		"apocalypse:myconoids/turf_penalty",
+		"apocalypse:myconoids/universal_toggle"
+	],
+	"icon": {
+		"item": "minecraft:sculk_catalyst"
+	},
+	"unchoosable": true,
+	"order": 10,
+	"impact": 3,
+	"name": "Sculk Myconoid",
+	"description": "You have adapted to the dark depths of the Deep Dark, deprived of light and safety, you have honed your ability to detect and escape danger, as well as fortifying your position and calling for help when required."
+}
+//Umena says hi

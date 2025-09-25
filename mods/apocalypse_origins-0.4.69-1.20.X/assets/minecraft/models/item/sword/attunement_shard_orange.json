@@ -1,0 +1,6 @@
+{
+    "parent": "item/emerald",
+    "textures": {
+        "layer0": "item/attunement_shard_orange"
+    }
+}

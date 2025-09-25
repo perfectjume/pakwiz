@@ -1,0 +1,20 @@
+{
+    "item.apocalypse.syringe": "Syringe",
+    "item.apocalypse.syringe_aquatic": "Syringe (Aquatic Mob Gene)",
+    "item.apocalypse.syringe_arthropod": "Syringe (Arthropod Mob Gene)",
+    "item.apocalypse.syringe_creeper": "Syringe (Odd Mob Gene)",
+    "item.apocalypse.syringe_end": "Syringe (End Mob Gene)",
+    "item.apocalypse.syringe_living": "Syringe (Living Mob Gene)",
+    "item.apocalypse.syringe_nether": "Syringe (Nether Mob Gene)",
+    "item.apocalypse.syringe_undead": "Syringe (Undead Mob Gene)",
+    "item.apocalypse.syringe_active": "Syringe (Active Gene)",
+    "item.apocalypse.stabilizer": "Genome Stabilizer",
+    "item.apocalypse.analyzer": "Genome Analyzer",
+    "item.apocalypse.mutagens": "Mutagens",
+    "item.apocalypse.rnabackup": "RNA Backup",
+    "item.apocalypse.genelock": "Genetic Lock",
+    "item.apocalypse.syringe_reinforced": "Reinforced Syringe",
+    "item.apocalypse.antimutagens": "Antimutagens",
+    "item.apocalypse.mirrorblade": "Mirror Blade",
+    "item.apocalypse.rmirror": "Refractor Mirror"
+}

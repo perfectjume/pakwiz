@@ -1,0 +1,220 @@
+{
+	"type": "origins:multiple",
+	"binary":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 1,
+		"hidden": true,
+		"hud_render": {
+			"should_render": false,
+			"bar_index": 0,
+			"sprite_location": "apocalypse:textures/gui/temperature_hot.png"
+		}
+	},
+	"right_click": 
+	{
+		"type": "origins:active_self",
+		"cooldown": 20,
+		"hud_render": {
+			"should_render":false,
+			"bar_index": 1
+		},
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_binary",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.dispenser.fail master @a[distance=..5] ~ ~ ~ 10 1.4"
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_binary",
+								"operation": "set",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "title @s actionbar {\"text\":\"Toggle: ON\",\"color\":\"dark_green\"}"
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_binary",
+								"compare_to": 1
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.dispenser.fail master @a[distance=..5] ~ ~ ~ 10 1.4",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_binary",
+								"operation": "set",
+								"change": 0
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "title @s actionbar {\"text\":\"Toggle: OFF\",\"color\":\"dark_red\"}",
+								"permission_level": 4
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition":
+		{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:sneaking"
+				},
+				{
+					"type": "origins:or",
+					"conditions": [
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "mainhand",
+							"item_condition":
+							{
+								"type": "origins:ingredient",
+								"inverted": false,
+								"ingredient":
+								{
+									"item": "minecraft:warped_fungus"
+								}
+							}
+						},
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "offhand",
+							"item_condition":
+							{
+								"type": "origins:ingredient",
+								"inverted": false,
+								"ingredient":
+								{
+									"item": "minecraft:warped_fungus"
+								}
+							}
+						},
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "mainhand",
+							"item_condition":
+							{
+								"type": "origins:ingredient",
+								"inverted": false,
+								"ingredient":
+								{
+									"item": "minecraft:crimson_fungus"
+								}
+							}
+						},
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "offhand",
+							"item_condition":
+							{
+								"type": "origins:ingredient",
+								"inverted": false,
+								"ingredient":
+								{
+									"item": "minecraft:crimson_fungus"
+								}
+							}
+						},
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "mainhand",
+							"item_condition":
+							{
+								"type": "origins:ingredient",
+								"inverted": false,
+								"ingredient":
+								{
+									"item": "minecraft:brown_mushroom"
+								}
+							}
+						},
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "offhand",
+							"item_condition":
+							{
+								"type": "origins:ingredient",
+								"inverted": false,
+								"ingredient":
+								{
+									"item": "minecraft:brown_mushroom"
+								}
+							}
+						},
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "mainhand",
+							"item_condition":
+							{
+								"type": "origins:ingredient",
+								"inverted": false,
+								"ingredient":
+								{
+									"item": "minecraft:red_mushroom"
+								}
+							}
+						},
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "offhand",
+							"item_condition":
+							{
+								"type": "origins:ingredient",
+								"inverted": false,
+								"ingredient":
+								{
+									"item": "minecraft:red_mushroom"
+								}
+							}
+						}
+					]
+				}
+			]
+		},
+		"hidden": true,	
+		"key": {
+			"key":"key.use",
+			"continuous": false
+		}
+	},
+	"hidden": true
+}

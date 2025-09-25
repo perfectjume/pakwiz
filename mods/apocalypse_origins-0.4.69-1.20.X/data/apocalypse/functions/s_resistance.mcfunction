@@ -1,0 +1,1 @@
+give @s minecraft:suspicious_stew{display:{Lore:['[{"text":"It is hard to chew","italic":false}]']},Effects:[{EffectId:11b,EffectDuration:600}]} 1

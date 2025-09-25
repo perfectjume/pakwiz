@@ -1,0 +1,83 @@
+{
+	"type": "origins:multiple",
+	"durationbar": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 3,
+		"start_value": 3,
+		"hidden": true,
+		"name": "Duration",
+		"description": "How long?",
+		"hud_render": {
+			"should_render": false,
+			"sprite_location":"apocalypse_origins:textures/gui/seething_bar.png",
+			"bar_index": 0,
+			"condition": {
+				"type": "origins:resource",
+				"resource": "apocalypse:hexblade/sigil_seething_status_mob_durationbar",
+				"comparison": ">",
+				"compare_to": 0
+			}
+		}
+	},
+	"timer": 
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": ">",
+								"resource": "apocalypse:hexblade/sigil_seething_status_mob_durationbar",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [				
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/sigil_seething_status_mob_durationbar",
+								"change": -1
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "apocalypse:hexblade/sigil_seething_status_mob_durationbar",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:execute_command",
+									"command": "power revoke @s apocalypse:hexblade/sigil_seething_status_mob hexblade_bars"
+								}
+							}							
+						]
+					}
+				}
+			]
+		},
+		"interval": 20
+	}
+}

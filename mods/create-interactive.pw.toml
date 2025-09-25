@@ -1,0 +1,13 @@
+name = "Create: Interactive"
+filename = "create_interactive-1.1.1-beta.4_1.20.1-fabric.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "028166cf63500b8a0971ba30ced387db3149ff88"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 6821975
+project-id = 925913

@@ -1,0 +1,332 @@
+{
+	"type": "origins:active_self",
+	"cooldown": 10,
+	"hud_render": {
+	  "should_render":false
+	},
+	"entity_action": 
+	{
+		"type": "origins:if_else_list",
+		"actions": [
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "apocalypse:refractor2/passives_veiled",
+							"compare_to": 0
+						},
+						{
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "apocalypse:refractor2/passives_veil_cooldown",
+							"compare_to": 6
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:refractor2/teleport_normal",
+									"inverted": true
+								},
+								{
+									"type": "origins:resource",
+									"comparison": "==",
+									"resource": "apocalypse:refractor2/teleport_normal_windup_teleport",
+									"compare_to": 0
+								}
+							]
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:refractor2/teleport_reverse",
+									"inverted": true
+								},
+								{
+									"type": "origins:resource",
+									"comparison": "==",
+									"resource": "apocalypse:refractor2/teleport_reverse_windup_teleport",
+									"compare_to": 0
+								}
+							]
+						},
+						{
+							"type": "origins:sneaking",
+							"inverted": true
+						},
+						{
+							"type": "origins:resource",
+							"comparison": ">=",
+							"resource": "apocalypse:refractor2/passives_trapped_light",
+							"compare_to": 2
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition": {
+										"type": "origins:or",
+										"conditions":[
+											{
+												"type": "origins:ingredient",
+												"ingredient": {
+													"item": "apocalypse_origins:mirror"
+												}
+											},
+											{
+												"type": "origins:ingredient",
+												"ingredient": {
+													"item": "apocalypse_origins:mirror_nether"
+												}
+											}
+										]
+									}
+								},
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "offhand",
+									"item_condition": {
+										"type": "origins:or",
+										"conditions":[
+											{
+												"type": "origins:ingredient",
+												"ingredient": {
+													"item": "apocalypse_origins:mirror"
+												}
+											},
+											{
+												"type": "origins:ingredient",
+												"ingredient": {
+													"item": "apocalypse_origins:mirror_nether"
+												}
+											}
+										]
+									}
+								}
+							]
+						}
+					]
+				},
+				"action": 	{
+					"type": "origins:and",
+					"actions": [ 
+						{
+							"type": "origins:execute_command",
+							"command": "playsound minecraft:block.enchantment_table.use master @a[distance=..10] ~ ~ ~ 1 1.5"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "resource set @s apocalypse:refractor2/passives_veiled 1"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "resource change @s apocalypse:refractor2/passives_trapped_light -2"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "scale set pehkui:visibility 0 @s"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "particle flash"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "effect give @s minecraft:invisibility 2 0 true"
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "apocalypse:refractor2/passives_veiled",
+							"compare_to": 0
+						},
+						{
+							"type": "origins:resource",
+							"comparison": "<",
+							"resource": "apocalypse:refractor2/passives_veil_cooldown",
+							"compare_to": 6
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:refractor2/teleport_normal",
+									"inverted": true
+								},
+								{
+									"type": "origins:resource",
+									"comparison": "==",
+									"resource": "apocalypse:refractor2/teleport_normal_windup_teleport",
+									"compare_to": 0
+								}
+							]
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:refractor2/teleport_reverse",
+									"inverted": true
+								},
+								{
+									"type": "origins:resource",
+									"comparison": "==",
+									"resource": "apocalypse:refractor2/teleport_reverse_windup_teleport",
+									"compare_to": 0
+								}
+							]
+						},
+						{
+							"type": "origins:sneaking",
+							"inverted": true
+						},
+						{
+							"type": "origins:resource",
+							"comparison": ">=",
+							"resource": "apocalypse:refractor2/passives_trapped_light",
+							"compare_to": 2
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:mirror"
+										}
+									}
+								},
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "offhand",
+									"item_condition":
+									{
+										"type": "origins:ingredient",
+										"ingredient":
+										{
+											"item": "apocalypse_origins:mirror"
+										}
+									}
+								}
+							]
+						}
+					]
+				},
+				"action":{
+					"type": "origins:execute_command",
+					"command": "tellraw @s {\"text\":\"Veil of Illusions is on cooldown!\",\"color\":\"dark_red\"}"
+				}
+			},
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "apocalypse:refractor2/passives_veiled",
+							"compare_to": 1
+						},
+						{
+							"type": "origins:sneaking",
+							"inverted": true
+						}
+					]
+				},
+				"action":{
+					"type": "origins:and",
+					"actions": [ 
+						{
+							"type": "origins:execute_command",
+							"command": "playsound minecraft:block.amethyst_cluster.break master @a[distance=..5] ~ ~ ~ 10 2"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "resource set @s apocalypse:refractor2/passives_veiled 0"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "effect clear @s minecraft:invisibility"
+						}, 
+						{
+							"type": "origins:execute_command",
+							"command": "particle flash"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "scale set pehkui:visibility 1 @s"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "power revoke @s origins:water_breathing"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "resource set @s apocalypse:refractor2/passives_aftermath 0"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "resource set @s apocalypse:refractor2/passives_veil_cooldown 0"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "effect clear @e[distance=..10] minecraft:invisibility"
+						}
+					]
+				}
+			}
+		]
+	},
+	"condition":
+	{
+		"type": "origins:and",
+		"conditions":
+		[
+			{
+			  "type": "origins:gamemode",
+			  "inverted": true,
+			  "gamemode": "spectator"
+			}
+		]
+	},
+	"badges": [
+		{
+			"type": "origins:keybind",
+			"sprite": "origins:textures/gui/badge/active.png",
+			"text": "Trigger with %s!"
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/info.png",
+			"text": "§e§l[Veil of Illusions]§r§f will stop your ability to breathe while it is in use, and will prevent you from gaining the water breathing potion effect upon canceling the illusion. A respiration helmet, a potion of water breathing or a turtle shell may be helpful!"
+		}
+	],
+	"name": "Veil of Illusions",
+	"description": "§e§l[Veil of Illusions]§r:\nWhile holding your mirror, bend light around yourself in order to fully conceal your presence. Exiting this ability will also purge the invisibility potion effect from nearby entities. While this ability is active, you can not regain §5[Trapped§r §5Light]§r and you also gain §5[Truesight]§r.\n \n§5§l[Truesight]§r:\nYou and other refractors see white particles emitted by living entities and rainbow particles emitted by players, revealing their location, even if they are invisible or in a different plane.",
+	"key": {
+		"key":"key.origins.secondary_active",
+		"continuous": false
+	}
+}

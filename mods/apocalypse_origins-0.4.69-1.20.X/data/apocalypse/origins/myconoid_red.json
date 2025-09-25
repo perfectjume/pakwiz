@@ -1,0 +1,22 @@
+{
+	"powers": [
+		"apocalypse:myconoids/red_callback",
+		"apocalypse:myconoids/red_passives",
+		"apocalypse:myconoids/red_primary",
+		"apocalypse:myconoids/overworld_secondaries",
+		"apocalypse:myconoids/cold_weakness",
+		"apocalypse:myconoids/heat_weakness",
+		"apocalypse:myconoids/resource_temperature",
+		"apocalypse:myconoids/turf_penalty",
+		"apocalypse:myconoids/universal_toggle"
+	],
+	"icon": {
+		"item": "minecraft:red_mushroom"
+	},
+	"unchoosable": true,
+	"order": 10,
+	"impact": 3,
+	"name": "Red Myconoid",
+	"description": "You are an expert defender and boast increased melee combat prowess."
+}
+//Umena says hi

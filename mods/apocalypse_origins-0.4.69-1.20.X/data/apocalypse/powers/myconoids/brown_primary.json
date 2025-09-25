@@ -1,0 +1,314 @@
+{
+	"type": "origins:active_self",
+	"cooldown": 20,
+	"hud_render": {
+	  "should_render":false,
+	  "sprite_location":"origins:textures/gui/community/spiderkolo/resource_bar_02.png",
+	  "bar_index": 7
+	},
+	"entity_action": {
+		"type": "origins:and",
+        "actions": [
+            {
+                "type": "origins:if_else",			
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:block_in_radius",
+							"block_condition": {
+								"type": "origins:in_tag",
+								"tag": "apocalypse:valuores"
+							},
+							"radius": 2
+						}
+					]
+				},
+                "if_action": {
+					"type": "origins:and",
+					"actions": [ 
+						{
+						  "type": "origins:execute_command",
+						  "command": "playsound block.note_block.bit master @s ~ ~ ~ 10 2 1",
+						  "permission_level": 4
+						},
+						{
+						  "type": "origins:execute_command",
+						  "command": "playsound minecraft:block.conduit.attack.target master @a[distance=..5] ~ ~ ~ 2 1 1",
+						  "permission_level": 4
+						},
+						{
+						  "type": "origins:execute_command",
+						  "command": "particle minecraft:explosion",
+						  "permission_level": 4
+						}
+					]
+				},
+                "else_action": 
+				{
+					"type": "origins:if_else",
+					
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:block_in_radius",
+								"block_condition": {
+									"type": "origins:in_tag",
+									"tag": "apocalypse:valuores"
+								},
+								"radius": 3
+							}
+						]
+					},								
+					"if_action": {
+						"type": "origins:and",
+						"actions": [ 
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound block.note_block.bit master @s ~ ~ ~ 10 1.6 1",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.conduit.attack.target master @a[distance=..5] ~ ~ ~ 2 1 1",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "particle minecraft:explosion",
+							  "permission_level": 4
+							}
+						]
+					},						
+					"else_action": 
+					{
+						"type": "origins:if_else",							
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:block_in_radius",
+									"block_condition": {
+										"type": "origins:in_tag",
+										"tag": "apocalypse:valuores"
+									},
+									"radius": 4
+								}
+							]
+						},										
+						"if_action": {
+							"type": "origins:and",
+							"actions": [ 
+								{
+								  "type": "origins:execute_command",
+								  "command": "playsound block.note_block.bit master @s ~ ~ ~ 10 1.2 1",
+								  "permission_level": 4
+								},
+								{
+								  "type": "origins:execute_command",
+								  "command": "playsound minecraft:block.conduit.attack.target master @a[distance=..5] ~ ~ ~ 2 1 1",
+								  "permission_level": 4
+								},
+								{
+								  "type": "origins:execute_command",
+								  "command": "particle minecraft:explosion",
+								  "permission_level": 4
+								}
+							]
+						},							
+						"else_action": {
+							"type": "origins:if_else",
+							
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:block_in_radius",
+										"block_condition": {
+											"type": "origins:in_tag",
+											"tag": "apocalypse:valuores"
+										},
+										"radius": 5
+									}
+								]
+							},											
+							"if_action": {
+								"type": "origins:and",
+								"actions": [ 
+									{
+									  "type": "origins:execute_command",
+									  "command": "playsound block.note_block.bit master @s ~ ~ ~ 10 1 1",
+									  "permission_level": 4
+									},
+									{
+									  "type": "origins:execute_command",
+									  "command": "playsound minecraft:block.conduit.attack.target master @a[distance=..5] ~ ~ ~ 2 1 1",
+									  "permission_level": 4
+									},			
+									{
+									  "type": "origins:execute_command",
+									  "command": "particle minecraft:explosion",
+									  "permission_level": 4
+									}
+								]
+							},								
+							"else_action": {
+								"type": "origins:if_else",						
+								"condition": {
+									"type": "origins:and",
+									"conditions": [
+										{
+											"type": "origins:block_in_radius",
+											"block_condition": {
+												"type": "origins:in_tag",
+												"tag": "apocalypse:metalores"
+											},
+											"radius": 2
+										}
+									]
+								},												
+								"if_action": {
+									"type": "origins:and",
+									"actions": [ 
+										{
+										  "type": "origins:execute_command",
+										  "command": "playsound block.note_block.xylophone master @s ~ ~ ~ 10 2 1",
+										  "permission_level": 4
+										},
+										{
+										  "type": "origins:execute_command",
+										  "command": "playsound minecraft:block.conduit.attack.target master @a[distance=..5] ~ ~ ~ 2 1 1",
+										  "permission_level": 4
+										},			
+										{
+										  "type": "origins:execute_command",
+										  "command": "particle minecraft:explosion",
+										  "permission_level": 4
+										}
+									]
+								},									
+								"else_action": {
+									"type": "origins:if_else",		
+									"condition": {
+										"type": "origins:and",
+										"conditions": [
+											{
+												"type": "origins:block_in_radius",
+												"block_condition": {
+													"type": "origins:in_tag",
+													"tag": "apocalypse:metalores"
+												},
+												"radius": 3
+											}
+										]
+									},													
+									"if_action": {
+										"type": "origins:and",
+										"actions": [ 
+											{
+											  "type": "origins:execute_command",
+											  "command": "playsound block.note_block.xylophone master @s ~ ~ ~ 10 1.6 1",
+											  "permission_level": 4
+											},
+											{
+											  "type": "origins:execute_command",
+											  "command": "playsound minecraft:block.conduit.attack.target master @a[distance=..5] ~ ~ ~ 2 1 1",
+											  "permission_level": 4
+											},			
+											{
+											  "type": "origins:execute_command",
+											  "command": "particle minecraft:explosion",
+											  "permission_level": 4
+											}
+										]
+									},										
+									"else_action": {
+										"type": "origins:if_else",
+										
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:block_in_radius",
+													"block_condition": {
+														"type": "origins:in_tag",
+														"tag": "apocalypse:metalores"
+													},
+													"radius": 4
+												}
+											]
+										},														
+										"if_action": {
+											"type": "origins:and",
+											"actions": [ 
+												{
+												  "type": "origins:execute_command",
+												  "command": "playsound block.note_block.xylophone master @s ~ ~ ~ 10 1.3 1",
+												  "permission_level": 4
+												},
+												{
+												  "type": "origins:execute_command",
+												  "command": "playsound minecraft:block.conduit.attack.target master @a[distance=..5] ~ ~ ~ 2 1 1",
+												  "permission_level": 4
+												},
+												{
+												  "type": "origins:execute_command",
+												  "command": "particle minecraft:explosion",
+												  "permission_level": 4
+												}
+											]
+										},											
+										"else_action": {
+											"type": "origins:if_else",
+											"condition": {
+												"type": "origins:and",
+												"conditions": [
+													{
+														"type": "origins:block_in_radius",
+														"block_condition": {
+															"type": "origins:in_tag",
+															"tag": "apocalypse:metalores"
+														},
+														"radius": 5
+													}
+												]
+											},								
+											"if_action": {
+												"type": "origins:and",
+												"actions": [ 
+													{
+													  "type": "origins:execute_command",
+													  "command": "playsound block.note_block.xylophone master @s ~ ~ ~ 10 1 1",
+													  "permission_level": 4
+													},
+													{
+													  "type": "origins:execute_command",
+													  "command": "playsound minecraft:block.conduit.attack.target master @a[distance=..5] ~ ~ ~ 2 1 1",
+													  "permission_level": 4
+													},
+													{
+													  "type": "origins:execute_command",
+													  "command": "particle minecraft:explosion",
+													  "permission_level": 4
+													}
+												]
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+            
+        ]  
+    },
+	"name": "Ore Sense",
+	"description": "[Primary] While you are closer than 5 blocks to valuable ores, you will hear a sound.\n \nThe pitch changes depending on how far from the ore you are.",
+	"key": {
+		"key":"key.origins.primary_active",
+		"continuous": true
+	}
+}

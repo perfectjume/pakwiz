@@ -1,0 +1,20 @@
+{
+	"type": "origins:multiple",
+	"model":
+	{
+		"type": "origins:model_color",
+		"red": 0.69,
+		"green": 0.55,
+		"blue": 0.94
+	},
+	"basehealth": 
+	{
+		"type": "origins:attribute",
+		"update_health": true,
+		"modifiers": {
+			"attribute": "minecraft:generic.max_health",
+			"operation": "multiply_total",
+			"value": 4
+		}
+	}
+}

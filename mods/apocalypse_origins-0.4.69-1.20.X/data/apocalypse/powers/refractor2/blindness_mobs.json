@@ -1,0 +1,87 @@
+{
+	"type": "origins:multiple",
+	"removal": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 2,
+		"start_value": 2,
+		"hud_render": {
+			"should_render": false
+		},
+		"min_action":{
+			"type": "origins:execute_command",
+			"command": "power revoke @s apocalypse:refractor2/blindness_mobs refractor"
+		}
+	},
+	"timer": 
+	{
+		"type": "origins:action_over_time",
+		"interval": 20,
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": ">",
+								"resource": "*:*_removal",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_removal",
+								"change": -1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "execute at @s run particle entity_effect ~ ~1 ~ 0 1 0 0 3 normal @a[tag=refractor]"
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_removal",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:execute_command",
+						"command": "power revoke @s apocalypse:refractor2/blindness_mobs refractor"
+					}
+				}
+			]
+		}
+	},
+	"melee":
+	{
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -0.25
+		}
+	},
+	"projectile":
+	{
+		"type": "origins:modify_projectile_damage",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -1
+		}
+	}
+}

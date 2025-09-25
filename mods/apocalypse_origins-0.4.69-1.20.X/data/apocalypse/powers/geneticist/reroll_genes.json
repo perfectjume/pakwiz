@@ -1,0 +1,776 @@
+{
+	"type": "origins:multiple",
+	"callback":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:choice",
+					"actions": [
+						{
+							"element": {
+								"type": "origins:choice",
+								"actions": [
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/generic/bulky gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/generic/resilient gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/generic/healthy gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/generic/quick gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/generic/energetic gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/generic/strong gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/generic/accurate gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/generic/metabolic gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/generic/frugal gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/generic/lightweight gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/generic/swimmer gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/generic/clever gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/generic/armored gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/generic/quickstrikes gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/aquatic/aquatic_predator gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/aquatic/fatiguer gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/aquatic/liquid_vision gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/aquatic/quilled gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/aquatic/regenerator gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/aquatic/waterproof gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/arthropod/burrower gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/arthropod/climber gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/arthropod/tiny gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/arthropod/venomous gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/arthropod/webslinger gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/end/ancient_behemoth gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/end/dodger gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/end/juggernaut gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/end/levitator gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/living/afterlife_research gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/living/battle_trance gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/living/frostproof gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/living/lightfall gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/living/milker gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/living/wooly gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/nether/fireproof gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/nether/flamestrike gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/nether/poisonproof gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/nether/striding gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/nether/witherproof gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/nether/witherstrike gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/odd/blastproof gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/odd/camouflage gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/odd/silent gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/odd/swallow gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/undead/arrow_toss gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/undead/drowner gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/undead/gliding gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/undead/rigor_mortis gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/undead/soporiferous gene"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/genes/undead/waster gene"
+										},
+										"weight": 1
+									}
+								]
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:choice",
+								"actions": [
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/exhausted sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/frail sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/heavy sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/hungry sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/inaccurate sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/insatiable sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/landlocked sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/obtuse sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/sickly sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/slowstrikes sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/sluggish sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/sundered sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/vulnerable sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/weak sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/xexhausted sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/xfrail sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/xheavy sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/xhungry sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/xinaccurate sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/xinsatiable sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/xlandlocked sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/xobtuse sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/xsickly sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/xslowstrikes sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/xsluggish sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/xsundered sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/xvulnerable sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/generic/xweak sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/aquatic/aquatic_prey sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/aquatic/floppy sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/aquatic/gills sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/aquatic/xerosis sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/arthropod/hemolymph sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/arthropod/photosensitivity sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s origins:carnivore sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/end/hydrophobia sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/end/panicked_teleportation sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s origins:no_shield sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s origins:pumpkin_hate sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/living/defeatist sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/living/corruptible sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/living/filter sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/living/pacifist sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s origins:weak_arms sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s origins:claustrophobia sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s origins:more_kinetic_damage sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s origins:vegetarian sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/nether/heart_of_fire sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/nether/hellbound sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/odd/blind sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/odd/volatile sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/undead/heliophobia sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/undead/unholy sideeffect"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "power revoke @s apocalypse:geneticist/sideeffects/undead/waterlogged sideeffect"
+										},
+										"weight": 1
+									}
+								]
+							},
+							"weight": 1.15
+						}
+					]
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 6,
+					"action": {
+						"type": "origins:execute_command",
+						"command": "power revoke @s apocalypse:geneticist/reroll_genes geneticist"
+					}
+				}
+			]
+		}
+	}
+}

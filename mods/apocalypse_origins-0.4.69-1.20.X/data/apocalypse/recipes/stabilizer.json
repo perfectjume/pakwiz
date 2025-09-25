@@ -1,0 +1,30 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"id": "apocalypse_origins:stabilizer",
+	"pattern": [
+		"#_#",
+		"#o#",
+		"^-^"
+	],
+	"key": {
+		"#": {
+			"item": "minecraft:glass_pane"
+		},
+		"^": {
+			"item": "minecraft:iron_nugget"
+		},
+		"_": {
+			"item": "minecraft:stone_button"
+		},
+		"-": {
+			"item": "minecraft:iron_ingot"
+		},
+		"o": {
+			"item": "minecraft:redstone"
+		}
+	},
+	"result": {
+		"item": "apocalypse_origins:stabilizer",
+        "count": 1
+	}
+}

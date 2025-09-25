@@ -1,0 +1,48 @@
+{
+	"name":"Class",
+	"replace": false,
+	"order": 10,
+	"enabled": true,
+	"origins": [
+		{
+			"condition": {
+				"type": "origins:origin",
+				"origin": "apocalypse:hexblade",
+				"layer": "origins:origin",
+				"inverted": true
+			},
+			"origins": [
+				"apocalypse:hex_warrior"
+			]
+		},
+		{
+			"condition": {
+				"type": "origins:origin",
+				"origin": "apocalypse:hexblade",
+				"layer": "origins:origin",
+				"inverted": true
+			},
+			"origins": [
+				"apocalypse:hex_hunter"
+			]
+		},
+		"apocalypse:nitwit",
+		"apocalypse:fungal_healer",
+		{
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:origin",
+						"origin": "apocalypse:myconoid_spore",
+						"layer": "origins:origin",
+						"inverted": true
+					}
+				]
+			},
+			"origins": [
+				"apocalypse:smallbane"
+			]
+		}
+	]
+}

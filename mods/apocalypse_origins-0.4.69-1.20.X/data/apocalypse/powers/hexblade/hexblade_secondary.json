@@ -1,0 +1,3862 @@
+{
+	"type": "origins:multiple",
+	"interact": 
+	{
+		"type": "origins:active_self",
+		"cooldown": 0,
+		"hud_render": {
+			"should_render": false,
+			"bar_index": 1,
+			"sprite_location": "apocalypse_origins:textures/gui/hexblade_parry.png"
+		},
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<",
+								"compare_to": 999
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:netherite_ingot"
+									}
+								}
+							},
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition":{
+									"type": "origins:or",
+									"conditions": [
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar"
+										},
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar2"
+										},
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar3"
+										}
+									]
+								},
+								"radius": 3,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"change": 12
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "clear @s minecraft:netherite_ingot 1",
+								"permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<",
+								"compare_to": 1999
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:netherite_ingot"
+									}
+								}
+							},
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition":{
+									"type": "origins:or",
+									"conditions": [
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar2"
+										},
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar3"
+										}
+									]
+								},
+								"radius": 3,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"change": 12
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "clear @s minecraft:netherite_ingot 1",
+								"permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 1999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<",
+								"compare_to": 4000
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:netherite_ingot"
+									}
+								}
+							},
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition": {
+									"type": "origins:block",
+									"block": "apocalypse_origins:hexaltar3"
+								},
+								"radius": 3,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"change": 12
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "clear @s minecraft:netherite_ingot 1",
+								"permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<",
+								"compare_to": 999
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:diamond"
+									}
+								}
+							},
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition":{
+									"type": "origins:or",
+									"conditions": [
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar"
+										},
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar2"
+										},
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar3"
+										}
+									]
+								},
+								"radius": 3,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"change": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "clear @s minecraft:diamond 1",
+								"permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<",
+								"compare_to": 1999
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:diamond"
+									}
+								}
+							},
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition":{
+									"type": "origins:or",
+									"conditions": [
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar2"
+										},
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar3"
+										}
+									]
+								},
+								"radius": 3,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"change": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "clear @s minecraft:diamond 1",
+								"permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 1999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<",
+								"compare_to": 4000
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:diamond"
+									}
+								}
+							},
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition": {
+									"type": "origins:block",
+									"block": "apocalypse_origins:hexaltar3"
+								},
+								"radius": 3,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"change": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "clear @s minecraft:diamond 1",
+								"permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<",
+								"compare_to": 999
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:iron_ingot"
+									}
+								}
+							},
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition":{
+									"type": "origins:or",
+									"conditions": [
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar"
+										},
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar2"
+										},
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar3"
+										}
+									]
+								},
+								"radius": 3,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "clear @s minecraft:iron_ingot 1",
+								"permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<",
+								"compare_to": 1999
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:iron_ingot"
+									}
+								}
+							},
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition":{
+									"type": "origins:or",
+									"conditions": [
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar2"
+										},
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar3"
+										}
+									]
+								},
+								"radius": 3,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "clear @s minecraft:iron_ingot 1",
+								"permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 1999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<",
+								"compare_to": 4000
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:iron_ingot"
+									}
+								}
+							},
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition": {
+									"type": "origins:block",
+									"block": "apocalypse_origins:hexaltar3"
+								},
+								"radius": 3,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "clear @s minecraft:iron_ingot 1",
+								"permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<",
+								"compare_to": 999
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:gold_ingot"
+									}
+								}
+							},
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition":{
+									"type": "origins:or",
+									"conditions": [
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar"
+										},
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar2"
+										},
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar3"
+										}
+									]
+								},
+								"radius": 3,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "clear @s minecraft:gold_ingot 1",
+								"permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<",
+								"compare_to": 1999
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:gold_ingot"
+									}
+								}
+							},
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition":{
+									"type": "origins:or",
+									"conditions": [
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar2"
+										},
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar3"
+										}
+									]
+								},
+								"radius": 3,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "clear @s minecraft:gold_ingot 1",
+								"permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 1999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<",
+								"compare_to": 4000
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:gold_ingot"
+									}
+								}
+							},
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition": {
+									"type": "origins:block",
+									"block": "apocalypse_origins:hexaltar3"
+								},
+								"radius": 3,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "clear @s minecraft:gold_ingot 1",
+								"permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<",
+								"compare_to": 999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"comparison": ">",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition":{
+									"type": "origins:or",
+									"conditions": [
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar"
+										},
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar2"
+										},
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar3"
+										}
+									]
+								},
+								"radius": 3,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"change": 1
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"change": -1
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<",
+								"compare_to": 1999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"comparison": ">",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition":{
+									"type": "origins:or",
+									"conditions": [
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar2"
+										},
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar3"
+										}
+									]
+								},
+								"radius": 3,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"change": 1
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"change": -1
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 1999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<",
+								"compare_to": 4000
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"comparison": ">",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition": {
+									"type": "origins:block",
+									"block": "apocalypse_origins:hexaltar3"
+								},
+								"radius": 3,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"change": 1
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"change": -1
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<",
+								"compare_to": 999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"comparison": "==",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:xp_points",
+								"comparison": ">=",
+								"compare_to": 50
+							},
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition":{
+									"type": "origins:or",
+									"conditions": [
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar"
+										},
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar2"
+										},
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar3"
+										}
+									]
+								},
+								"radius": 3,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "experience add @s -50",
+								"permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<",
+								"compare_to": 1999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"comparison": "==",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:xp_points",
+								"comparison": ">=",
+								"compare_to": 50
+							},
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition":{
+									"type": "origins:or",
+									"conditions": [
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar2"
+										},
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar3"
+										}
+									]
+								},
+								"radius": 3,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "experience add @s -50",
+								"permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 1999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<",
+								"compare_to": 4000
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"comparison": "==",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:xp_points",
+								"comparison": ">=",
+								"compare_to": 50
+							},
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition":{
+									"type": "origins:block",
+									"block": "apocalypse_origins:hexaltar3"
+								},
+								"radius": 3,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "experience add @s -50",
+								"permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"comparison": "<",
+								"compare_to": 40
+							},
+							{
+								"type": "origins:sneaking"
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_passives_combat_antiheal",
+								"comparison": "==",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition":{
+									"type": "origins:or",
+									"conditions": [
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar"
+										},
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar2"
+										},
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:hexaltar3"
+										}
+									]
+								},
+								"radius": 3,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"change": -1
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"change": 1
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition":
+		{
+			"type": "origins:or",
+			"conditions":
+			[
+				{
+				  "type": "origins:gamemode",
+				  "inverted": true,
+				  "gamemode": "spectator"
+				}
+			]
+		},
+		"hidden": true,	
+		"key": {
+			"key":"key.origins.secondary_active",
+			"continuous": true
+		}
+	},
+	"interact_tap": 
+	{
+		"type": "origins:active_self",
+		"cooldown": 0,
+		"hud_render": {
+			"should_render": false,
+			"bar_index": 1,
+			"sprite_location": "apocalypse_origins:textures/gui/hexblade_parry.png"
+		},
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 50
+							},								
+							{
+								"type": "origins:command",
+								"command": "execute if data entity @s SelectedItem.tag.Damage",
+								"comparison": ">=",
+								"compare_to": 1
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": true,
+									"ingredient":
+									{
+										"item": "minecraft:wooden_sword"
+									}
+								}
+							},
+							{
+								"type": "origins:sneaking"
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"change": -50
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "item modify entity @s weapon.mainhand apocalypse:repair",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.smithing_table.use master @a[distance=..10] ~ ~ ~ 2 0.5",
+								"permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [	
+							{
+								"type": "origins:command",
+								"command": "data get entity @s SelectedItem.tag.CustomModelData",
+								"comparison": "==",
+								"compare_to": 1,
+								"inverted": true
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:wooden_sword"
+									}
+								}
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "item replace entity @s weapon.mainhand with minecraft:air",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "function apocalypse:hexblade_give",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [	
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:diamond_block"
+									}
+								}
+							},
+							{
+								"type": "origins:dimension",
+								"dimension": "minecraft:overworld",
+								"inverted": false
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition": {
+									"type": "origins:block",
+									"block": "minecraft:smithing_table"
+								},
+								"radius": 1,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "clear @s minecraft:diamond_block 1",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.smithing_table.use master @a[distance=..10] ~ ~ ~ 2 0.5",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "function apocalypse:sigil_scrying_give",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:or",
+								"conditions": [	
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "mainhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"inverted": false,
+											"ingredient":
+											{
+												"item": "minecraft:sand"
+											}
+										}
+									},
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "mainhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"inverted": false,
+											"ingredient":
+											{
+												"item": "minecraft:red_sand"
+											}
+										}
+									}
+								]
+							},
+							{
+								"type": "origins:dimension",
+								"dimension": "minecraft:overworld",
+								"inverted": false
+							},
+							{
+								"type": "origins:biome",
+								"condition": {
+									"type": "origins:temperature",
+									"comparison": ">=",
+									"compare_to": 2
+								}
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition": {
+									"type": "origins:block",
+									"block": "minecraft:smithing_table"
+								},
+								"radius": 1,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "clear @s minecraft:sand 1",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.smithing_table.use master @a[distance=..10] ~ ~ ~ 2 0.5",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "function apocalypse:sigil_sands_give",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:glowstone_dust"
+									}
+								}
+							},
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+									  "type": "origins:or",
+									  "conditions": [
+											{
+												"type": "origins:biome",
+												"condition": {
+													"type": "origins:temperature",
+													"comparison": "<=",
+													"compare_to": 0.2
+												}
+											},
+											{
+												"type": "origins:dimension",
+												"dimension": "minecraft:the_end"
+											}
+										]
+									},
+									{
+										"type": "origins:biome",
+										"condition": {
+											"type": "origins:category",
+											"category": "jungle"
+										}
+									}
+								]
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition": {
+									"type": "origins:block",
+									"block": "minecraft:smithing_table"
+								},
+								"radius": 1,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "clear @s minecraft:glowstone_dust 1",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.smithing_table.use master @a[distance=..10] ~ ~ ~ 2 0.5",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "function apocalypse:sigil_sight_give",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:crimson_fungus"
+									}
+								}
+							},
+							{
+								"type": "origins:dimension",
+								"dimension": "minecraft:the_nether",
+								"inverted": false
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition": {
+									"type": "origins:block",
+									"block": "minecraft:smithing_table"
+								},
+								"radius": 1,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "clear @s minecraft:crimson_fungus 1",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.smithing_table.use master @a[distance=..10] ~ ~ ~ 2 0.5",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "function apocalypse:sigil_seething_give",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:oxidized_copper"
+									}
+								}
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition": {
+									"type": "origins:block",
+									"block": "minecraft:smithing_table"
+								},
+								"radius": 1,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "clear @s minecraft:oxidized_copper 1",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.smithing_table.use master @a[distance=..10] ~ ~ ~ 2 0.5",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "function apocalypse:sigil_sundering_give",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:nautilus_shell"
+									}
+								}
+							},
+							{
+								"type": "origins:dimension",
+								"dimension": "minecraft:overworld",
+								"inverted": false
+							},
+							{
+								"type": "origins:in_rain"
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition": {
+									"type": "origins:block",
+									"block": "minecraft:smithing_table"
+								},
+								"radius": 1,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "clear @s minecraft:nautilus_shell 1",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.smithing_table.use master @a[distance=..10] ~ ~ ~ 2 0.5",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "function apocalypse:sigil_seas_give",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:feather"
+									}
+								}
+							},
+							{
+								"type": "origins:advancement",
+								"advancement": "minecraft:end/elytra"
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition": {
+									"type": "origins:block",
+									"block": "minecraft:smithing_table"
+								},
+								"radius": 1,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "clear @s minecraft:feather 1",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.smithing_table.use master @a[distance=..10] ~ ~ ~ 2 0.5",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "function apocalypse:sigil_skies_give",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:totem_of_undying"
+									}
+								}
+							},
+							{
+								"type": "origins:advancement",
+								"advancement": "minecraft:adventure/totem_of_undying"
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition": {
+									"type": "origins:block",
+									"block": "minecraft:smithing_table"
+								},
+								"radius": 1,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "clear @s minecraft:totem_of_undying 1",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.smithing_table.use master @a[distance=..10] ~ ~ ~ 2 0.5",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "function apocalypse:sigil_smiting_give",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:copper_block"
+									}
+								}
+							},
+							{
+								"type": "origins:advancement",
+								"advancement": "minecraft:nether/summon_wither"
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition": {
+									"type": "origins:block",
+									"block": "minecraft:smithing_table"
+								},
+								"radius": 1,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "clear @s minecraft:copper_block 1",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.smithing_table.use master @a[distance=..10] ~ ~ ~ 2 0.5",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "function apocalypse:sigil_sagacity_give",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:command",
+								"command": "data get entity @s SelectedItem.tag.CustomModelData",
+								"comparison": "==",
+								"compare_to": 18
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:nether_star"
+									}
+								}
+							},
+							{
+								"type": "origins:advancement",
+								"advancement": "minecraft:end/kill_dragon"
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition": {
+									"type": "origins:block",
+									"block": "minecraft:smithing_table"
+								},
+								"radius": 1,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:equipped_item_action",
+								"equipment_slot": "mainhand",
+								"action":
+								{
+									"type": "origins:consume",
+									"amount": 1
+								}
+							},
+							{
+								"type": "origins:equipped_item_action",
+								"equipment_slot": "offhand",
+								"action":
+								{
+									"type": "origins:consume",
+									"amount": 1
+								}
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.smithing_table.use master @a[distance=..10] ~ ~ ~ 2 0.5",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "function apocalypse:sigil_sss_give",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:command",
+								"command": "data get entity @s SelectedItem.tag.CustomModelData",
+								"comparison": "==",
+								"compare_to": 18
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:tnt"
+									}
+								}
+							},
+							{
+								"type": "origins:advancement",
+								"advancement": "minecraft:end/kill_dragon"
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition": {
+									"type": "origins:block",
+									"block": "minecraft:smithing_table"
+								},
+								"radius": 1,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:equipped_item_action",
+								"equipment_slot": "mainhand",
+								"action":
+								{
+									"type": "origins:consume",
+									"amount": 1
+								}
+							},
+							{
+								"type": "origins:equipped_item_action",
+								"equipment_slot": "offhand",
+								"action":
+								{
+									"type": "origins:consume",
+									"amount": 1
+								}
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.smithing_table.use master @a[distance=..10] ~ ~ ~ 2 0.5",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "function apocalypse:sigil_fff_give",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:command",
+								"command": "data get entity @s SelectedItem.tag.CustomModelData",
+								"comparison": "==",
+								"compare_to": 18
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:wither_rose"
+									}
+								}
+							},
+							{
+								"type": "origins:advancement",
+								"advancement": "minecraft:end/kill_dragon"
+							},
+							{
+								"type": "origins:block_in_radius",
+								"block_condition": {
+									"type": "origins:block",
+									"block": "minecraft:smithing_table"
+								},
+								"radius": 1,
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:equipped_item_action",
+								"equipment_slot": "mainhand",
+								"action":
+								{
+									"type": "origins:consume",
+									"amount": 1
+								}
+							},
+							{
+								"type": "origins:equipped_item_action",
+								"equipment_slot": "offhand",
+								"action":
+								{
+									"type": "origins:consume",
+									"amount": 1
+								}
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.smithing_table.use master @a[distance=..10] ~ ~ ~ 2 0.5",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "function apocalypse:sigil_ddd_give",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:command",
+								"command": "data get entity @s SelectedItem.tag.CustomModelData",
+								"comparison": "==",
+								"compare_to": 13
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:ghast_tear"
+									}
+								}
+							},
+							{
+								"type": "origins:advancement",
+								"advancement": "minecraft:end/kill_dragon"
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:equipped_item_action",
+								"equipment_slot": "offhand",
+								"action":
+								{
+									"type": "origins:consume",
+									"amount": 1
+								}
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "item modify entity @s weapon.mainhand apocalypse:sss_activate",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.smithing_table.use master @a[distance=..10] ~ ~ ~ 2 0.5",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:command",
+								"command": "data get entity @s SelectedItem.tag.CustomModelData",
+								"comparison": "==",
+								"compare_to": 15
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:tnt"
+									}
+								}
+							},
+							{
+								"type": "origins:advancement",
+								"advancement": "minecraft:end/kill_dragon"
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:equipped_item_action",
+								"equipment_slot": "offhand",
+								"action":
+								{
+									"type": "origins:consume",
+									"amount": 1
+								}
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "item modify entity @s weapon.mainhand apocalypse:fff_activate",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.smithing_table.use master @a[distance=..10] ~ ~ ~ 2 0.5",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:command",
+								"command": "data get entity @s SelectedItem.tag.CustomModelData",
+								"comparison": "==",
+								"compare_to": 16
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 1999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<=",
+								"compare_to": 4000
+							},
+							{
+								"type": "origins:resource",
+								"comparison": ">=",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"compare_to": 35
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "item modify entity @s weapon.mainhand apocalypse:fff_deactivate",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "resource change @s apocalypse:hexblade/hexblade_resource_souls -35",
+							  "permission_level": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:entity.wither.spawn master @a[distance=..5] ~ ~ ~ 2 0.5",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:entity.wither.spawn master @a[distance=..5] ~ ~ ~ 2 1.5",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "execute at @s at @e[type=player,distance=..15] run particle flash",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 40,
+								"action": {
+									"type": "origins:and",
+									"actions": [ 
+										{
+										  "type": "origins:execute_command",
+										  "command": "playsound minecraft:block.bell.resonate master @a[distance=..5] ~ ~ ~ 2 0.75"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "effect give @e[distance=..5] minecraft:nausea 5 10 true",
+											"permission_level": 4
+										}
+									]
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 80,
+								"action": {
+									"type": "origins:and",
+									"actions": [ 
+										{
+										  "type": "origins:execute_command",
+										  "command": "playsound minecraft:block.bell.resonate master @a[distance=..5] ~ ~ ~ 2 1"
+										}
+									]
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 120,
+								"action": {
+									"type": "origins:and",
+									"actions": [ 
+										{
+										  "type": "origins:execute_command",
+										  "command": "playsound minecraft:block.bell.resonate master @a[distance=..5] ~ ~ ~ 2 1.5"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "effect give @e[distance=..5] minecraft:nausea 5 10 true",
+											"permission_level": 4
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "execute at @s at @e[type=player,distance=..15] run particle flash",
+											"permission_level": 4
+										}
+									]
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 160,
+								"action": {
+									"type": "origins:and",
+									"actions": [ 
+										{
+										  "type": "origins:execute_command",
+										  "command": "playsound minecraft:block.bell.use master @a[distance=..5] ~ ~ ~ 2 0.5"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "execute at @s at @e[type=player,distance=..15] run particle flash",
+											"permission_level": 4
+										}
+									]
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 180,
+								"action": {
+									"type": "origins:and",
+									"actions": [ 
+										{
+										  "type": "origins:execute_command",
+										  "command": "playsound minecraft:block.bell.use master @a[distance=..5] ~ ~ ~ 2 0.75"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "execute at @s at @e[type=player,distance=..15] run particle flash",
+											"permission_level": 4
+										}
+									]
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 190,
+								"action": {
+									"type": "origins:and",
+									"actions": [ 
+										{
+										  "type": "origins:execute_command",
+										  "command": "playsound minecraft:block.bell.resonate master @a[distance=..5] ~ ~ ~ 2 1.75"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "execute at @s at @e[type=player,distance=..15] run particle flash",
+											"permission_level": 4
+										}
+									]
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 195,
+								"action": {
+									"type": "origins:and",
+									"actions": [ 
+										{
+										  "type": "origins:execute_command",
+										  "command": "playsound minecraft:block.bell.use master @a[distance=..5] ~ ~ ~ 2 1.25"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "execute at @s at @e[type=player,distance=..15] run particle flash",
+											"permission_level": 4
+										}
+									]
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 200,
+								"action": 
+								{
+									"type": "origins:if_else_list",
+									"actions": [
+										{
+											"condition": 
+											{
+												"type": "origins:and",
+												"conditions": [
+													{
+														"type": "origins:command",
+														"command": "gamerule mobGriefing",
+														"comparison": "==",
+														"compare_to": 1
+													}
+												]
+											},
+											"action":
+											{
+												"type": "origins:and",
+												"actions": [
+													{
+													  "type": "origins:execute_command",
+													  "command": "gamerule mobGriefing false",
+													  "permission_level": 4
+													},
+													{
+													  "type": "origins:execute_command",
+													  "command": "summon minecraft:creeper ~ ~ ~ {Fuse:0,powered:1,ActiveEffects:[{Id:14,Amplifier:0,Duration:40},{Id:20,Amplifier:0,Duration:600}]}",
+													  "permission_level": 4
+													},
+													{
+													  "type": "origins:execute_command",
+													  "command": "playsound minecraft:entity.wither.spawn master @a[distance=..5] ~ ~ ~ 2 0.5",
+													  "permission_level": 4
+													},
+													{
+													  "type": "origins:execute_command",
+													  "command": "playsound minecraft:entity.lightning_bolt.thunder master @a[distance=..5] ~ ~ ~ 2 0.5",
+													  "permission_level": 4
+													},
+													{
+													  "type": "origins:execute_command",
+													  "command": "playsound minecraft:entity.lightning_bolt.impact master @a[distance=..5] ~ ~ ~ 2 0.5",
+													  "permission_level": 4
+													},
+													{
+														"type": "origins:execute_command",
+														"command": "effect give @e[distance=..5] minecraft:nausea 10 10 true",
+														"permission_level": 4
+													},
+													{
+														"type": "origins:execute_command",
+														"command": "execute at @s at @e[type=player,distance=..15] run particle flash",
+														"permission_level": 4
+													},
+													{
+														"type": "origins:delay",
+														"ticks": 21,
+														"action":{
+														  "type": "origins:execute_command",
+														  "command": "gamerule mobGriefing true",
+														  "permission_level": 4
+														}
+													}
+												]
+											}
+										},
+										{
+											"condition": 
+											{
+												"type": "origins:and",
+												"conditions": [
+													{
+														"type": "origins:command",
+														"command": "gamerule mobGriefing",
+														"comparison": "==",
+														"compare_to": 0
+													}
+												]
+											},
+											"action":
+											{
+												"type": "origins:and",
+												"actions": [
+													{
+													  "type": "origins:execute_command",
+													  "command": "summon minecraft:creeper ~ ~ ~ {Fuse:0,powered:1,ActiveEffects:[{Id:14,Amplifier:0,Duration:40},{Id:20,Amplifier:0,Duration:600}]}",
+													  "permission_level": 4
+													},
+													{
+													  "type": "origins:execute_command",
+													  "command": "playsound minecraft:entity.wither.spawn master @a[distance=..5] ~ ~ ~ 2 0.5",
+													  "permission_level": 4
+													},
+													{
+													  "type": "origins:execute_command",
+													  "command": "playsound minecraft:entity.lightning_bolt.thunder master @a[distance=..5] ~ ~ ~ 2 0.5",
+													  "permission_level": 4
+													},
+													{
+													  "type": "origins:execute_command",
+													  "command": "playsound minecraft:entity.lightning_bolt.impact master @a[distance=..5] ~ ~ ~ 2 0.5",
+													  "permission_level": 4
+													},
+													{
+														"type": "origins:execute_command",
+														"command": "effect give @e[distance=..5] minecraft:nausea 10 10 true",
+														"permission_level": 4
+													},
+													{
+														"type": "origins:execute_command",
+														"command": "execute at @s at @e[type=player,distance=..15] run particle flash",
+														"permission_level": 4
+													}
+												]
+											}
+										}
+									]
+								}
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:command",
+								"command": "data get entity @s Inventory[{Slot: -106b}].tag.CustomModelData",
+								"comparison": "==",
+								"compare_to": 16
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 1999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<=",
+								"compare_to": 4000
+							},
+							{
+								"type": "origins:resource",
+								"comparison": ">=",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"compare_to": 35
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "item modify entity @s weapon.offhand apocalypse:fff_deactivate",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "resource change @s apocalypse:hexblade/hexblade_resource_souls -35",
+							  "permission_level": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:entity.wither.spawn master @a[distance=..15] ~ ~ ~ 2 0.5",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:entity.wither.spawn master @a[distance=..15] ~ ~ ~ 2 1.5",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "execute at @s at @e[type=player,distance=..15] run particle flash",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 40,
+								"action": {
+									"type": "origins:and",
+									"actions": [ 
+										{
+										  "type": "origins:execute_command",
+										  "command": "playsound minecraft:block.bell.resonate master @a[distance=..5] ~ ~ ~ 2 0.75"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "effect give @e[distance=..5] minecraft:nausea 5 10 true",
+											"permission_level": 4
+										}
+									]
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 80,
+								"action": {
+									"type": "origins:and",
+									"actions": [ 
+										{
+										  "type": "origins:execute_command",
+										  "command": "playsound minecraft:block.bell.resonate master @a[distance=..5] ~ ~ ~ 2 1"
+										}
+									]
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 120,
+								"action": {
+									"type": "origins:and",
+									"actions": [ 
+										{
+										  "type": "origins:execute_command",
+										  "command": "playsound minecraft:block.bell.resonate master @a[distance=..5] ~ ~ ~ 2 1.5"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "effect give @e[distance=..5] minecraft:nausea 5 10 true",
+											"permission_level": 4
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "execute at @s at @e[type=player,distance=..15] run particle flash",
+											"permission_level": 4
+										}
+									]
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 160,
+								"action": {
+									"type": "origins:and",
+									"actions": [ 
+										{
+										  "type": "origins:execute_command",
+										  "command": "playsound minecraft:block.bell.use master @a[distance=..5] ~ ~ ~ 2 0.5"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "execute at @s at @e[type=player,distance=..15] run particle flash",
+											"permission_level": 4
+										}
+									]
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 180,
+								"action": {
+									"type": "origins:and",
+									"actions": [ 
+										{
+										  "type": "origins:execute_command",
+										  "command": "playsound minecraft:block.bell.use master @a[distance=..5] ~ ~ ~ 2 0.75"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "execute at @s at @e[type=player,distance=..15] run particle flash",
+											"permission_level": 4
+										}
+									]
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 190,
+								"action": {
+									"type": "origins:and",
+									"actions": [ 
+										{
+										  "type": "origins:execute_command",
+										  "command": "playsound minecraft:block.bell.resonate master @a[distance=..5] ~ ~ ~ 2 1.75"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "execute at @s at @e[type=player,distance=..15] run particle flash",
+											"permission_level": 4
+										}
+									]
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 195,
+								"action": {
+									"type": "origins:and",
+									"actions": [ 
+										{
+										  "type": "origins:execute_command",
+										  "command": "playsound minecraft:block.bell.use master @a[distance=..5] ~ ~ ~ 2 1.25"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "execute at @s at @e[type=player,distance=..15] run particle flash",
+											"permission_level": 4
+										}
+									]
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 200,
+								"action": {
+									"type": "origins:and",
+									"actions": [ 
+										{
+										  "type": "origins:execute_command",
+										  "command": "summon minecraft:creeper ~ ~ ~ {Fuse:0,powered:1,ActiveEffects:[{Id:14,Amplifier:0,Duration:40},{Id:20,Amplifier:0,Duration:600}]}"
+										},
+										{
+										  "type": "origins:execute_command",
+										  "command": "playsound minecraft:entity.wither.spawn master @a[distance=..5] ~ ~ ~ 2 0.5"
+										},
+										{
+										  "type": "origins:execute_command",
+										  "command": "playsound minecraft:entity.lightning_bolt.thunder master @a[distance=..5] ~ ~ ~ 2 0.5"
+										},
+										{
+										  "type": "origins:execute_command",
+										  "command": "playsound minecraft:entity.lightning_bolt.impact master @a[distance=..5] ~ ~ ~ 2 0.5"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "effect give @e[distance=..5] minecraft:nausea 10 10 true",
+											"permission_level": 4
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "execute at @s at @e[type=player,distance=..15] run particle flash",
+											"permission_level": 4
+										}
+									]
+								}
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:command",
+								"command": "data get entity @s SelectedItem.tag.CustomModelData",
+								"comparison": "==",
+								"compare_to": 11
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 1999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<=",
+								"compare_to": 4000
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "item modify entity @s weapon.mainhand apocalypse:ddd_activate",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:entity.ravager.celebrate master @a[distance=..10] ~ ~ ~ 2 1",
+							  "permission_level": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:entity.wither.ambient master @a[distance=..10] ~ ~ ~ 1 0.5",
+								"permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "power grant @s apocalypse:hexblade/hexblade_ddd hexblade_bars",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "resource set @s apocalypse:hexblade/hexblade_resource_ultimates_ddd 1",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:command",
+								"command": "data get entity @s Inventory[{Slot: -106b}].tag.CustomModelData",
+								"comparison": "==",
+								"compare_to": 11
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 1999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<=",
+								"compare_to": 4000
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "item modify entity @s weapon.offhand apocalypse:ddd_activate",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:entity.ravager.celebrate master @a[distance=..10] ~ ~ ~ 2 1",
+							  "permission_level": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:entity.wither.ambient master @a[distance=..10] ~ ~ ~ 1 0.5",
+								"permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "power grant @s apocalypse:hexblade/hexblade_ddd hexblade_bars",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "resource set @s apocalypse:hexblade/hexblade_resource_ultimates_ddd 1",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:command",
+								"command": "data get entity @s SelectedItem.tag.CustomModelData",
+								"comparison": "==",
+								"compare_to": 12
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 1999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<=",
+								"compare_to": 4000
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "item modify entity @s weapon.mainhand apocalypse:ddd_deactivate",
+							  "permission_level": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:entity.wither.ambient master @a[distance=..10] ~ ~ ~ 0.5 1.3",
+								"permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "power revoke @s apocalypse:hexblade/hexblade_ddd hexblade_bars",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "resource set @s apocalypse:hexblade/hexblade_resource_ultimates_ddd 0",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:command",
+								"command": "data get entity @s Inventory[{Slot: -106b}].tag.CustomModelData",
+								"comparison": "==",
+								"compare_to": 12
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 1999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<=",
+								"compare_to": 4000
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "item modify entity @s weapon.offhand apocalypse:ddd_deactivate",
+							  "permission_level": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:entity.wither.ambient master @a[distance=..10] ~ ~ ~ 0.5 1.3",
+								"permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "power revoke @s apocalypse:hexblade/hexblade_ddd hexblade_bars",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "resource set @s apocalypse:hexblade/hexblade_resource_ultimates_ddd 0",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:command",
+								"command": "data get entity @s SelectedItem.tag.CustomModelData",
+								"comparison": "==",
+								"compare_to": 14
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 1999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<=",
+								"compare_to": 4000
+							},
+							{
+								"type": "origins:resource",
+								"comparison": ">=",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"compare_to": 10
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "item modify entity @s weapon.mainhand apocalypse:sss_deactivate",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:apocalypse.ost.sss master @a[distance=..10] ~ ~ ~ 1 1",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "power grant @e[type=player,tag=!hexblade,distance=0.5..10] apocalypse:hexblade/sigil_sss_status_player hexblade_bars",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "power grant @e[type=!player,tag=!hexblade,distance=0.5..10] apocalypse:hexblade/sigil_sss_status_mob hexblade_bars",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "power grant @s apocalypse:hexblade/sigil_sss_status_self hexblade_bars",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "resource change @s apocalypse:hexblade/hexblade_resource_souls -10",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "effect give @s minecraft:nausea 5 10 true",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:command",
+								"command": "data get entity @s Inventory[{Slot: -106b}].tag.CustomModelData",
+								"comparison": "==",
+								"compare_to": 14
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 1999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<=",
+								"compare_to": 4000
+							},
+							{
+								"type": "origins:resource",
+								"comparison": ">=",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"compare_to": 10
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "item modify entity @s weapon.offhand apocalypse:sss_deactivate",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:apocalypse.ost.sss master @a[distance=..10] ~ ~ ~ 1 1",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "power grant @e[type=player,tag=!hexblade,distance=0.5..10] apocalypse:hexblade/sigil_sss_status_player hexblade_bars",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "power grant @e[type=!player,tag=!hexblade,distance=0.5..10] apocalypse:hexblade/sigil_sss_status_mob hexblade_bars",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "power grant @s apocalypse:hexblade/sigil_sss_status_self hexblade_bars",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "resource change @s apocalypse:hexblade/hexblade_resource_souls -10",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "effect give @s minecraft:nausea 5 10 true",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:command",
+										"command": "data get entity @s SelectedItem.tag.CustomModelData",
+										"comparison": "==",
+										"compare_to": 5
+									},
+									{
+										"type": "origins:command",
+										"command": "data get entity @s Inventory[{Slot: -106b}].tag.CustomModelData",
+										"comparison": "==",
+										"compare_to": 5
+									}
+								]
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"comparison": ">=",
+								"compare_to": 5
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:entity.firework_rocket.twinkle_far master @a[distance=..5] ~ ~ ~ 1 0.4",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.soul_sand.break master @a[distance=..5] ~ ~ ~ 1 0.4",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "power grant @e[type=!item,distance=0.1..5] apocalypse:hexblade/sigil_sand_status hexblade_bars",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "resource change @s apocalypse:hexblade/hexblade_resource_souls -5",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:command",
+										"command": "data get entity @s SelectedItem.tag.CustomModelData",
+										"comparison": "==",
+										"compare_to": 6
+									},
+									{
+										"type": "origins:command",
+										"command": "data get entity @s Inventory[{Slot: -106b}].tag.CustomModelData",
+										"comparison": "==",
+										"compare_to": 6
+									}
+								]
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"comparison": ">=",
+								"compare_to": 5
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.enchantment_table.use master @a[distance=..5] ~ ~ ~ 1 0.4",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.soul_sand.break master @a[distance=..5] ~ ~ ~ 1 0.4",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "power grant @e[type=!item,distance=2..30] apocalypse:hexblade/sigil_sight_status hexblade_bars",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "resource change @s apocalypse:hexblade/hexblade_resource_souls -5",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:command",
+										"command": "data get entity @s SelectedItem.tag.CustomModelData",
+										"comparison": "==",
+										"compare_to": 7
+									},
+									{
+										"type": "origins:command",
+										"command": "data get entity @s Inventory[{Slot: -106b}].tag.CustomModelData",
+										"comparison": "==",
+										"compare_to": 7
+									}
+								]
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"comparison": ">=",
+								"compare_to": 5
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.enchantment_table.use master @a[distance=..5] ~ ~ ~ 1 0.4",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.soul_sand.break master @a[distance=..5] ~ ~ ~ 1 0.4",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "power grant @s apocalypse:hexblade/sigil_seething_status hexblade_bars",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "resource change @s apocalypse:hexblade/hexblade_resource_souls -5",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:command",
+										"command": "data get entity @s SelectedItem.tag.CustomModelData",
+										"comparison": "==",
+										"compare_to": 22
+									},
+									{
+										"type": "origins:command",
+										"command": "data get entity @s Inventory[{Slot: -106b}].tag.CustomModelData",
+										"comparison": "==",
+										"compare_to": 22
+									}
+								]
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"comparison": ">=",
+								"compare_to": 5
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:item.shield.break master @a[distance=..5] ~ ~ ~ 1 0.4",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.soul_sand.break master @a[distance=..5] ~ ~ ~ 1 0.4",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "power grant @e[type=!item,distance=0.1..5] apocalypse:hexblade/sigil_sundering_status hexblade_bars",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "resource change @s apocalypse:hexblade/hexblade_resource_souls -5",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:command",
+										"command": "data get entity @s SelectedItem.tag.CustomModelData",
+										"comparison": "==",
+										"compare_to": 8
+									},
+									{
+										"type": "origins:command",
+										"command": "data get entity @s Inventory[{Slot: -106b}].tag.CustomModelData",
+										"comparison": "==",
+										"compare_to": 8
+									}
+								]
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"comparison": ">=",
+								"compare_to": 10
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 1000
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.enchantment_table.use master @a[distance=..10] ~ ~ ~ 1 0.4",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "power grant @a[distance=..10] apocalypse:hexblade/sigil_seas_status hexblade_bars",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "resource change @s apocalypse:hexblade/hexblade_resource_souls -10",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:command",
+										"command": "data get entity @s SelectedItem.tag.CustomModelData",
+										"comparison": "==",
+										"compare_to": 23
+									},
+									{
+										"type": "origins:command",
+										"command": "data get entity @s Inventory[{Slot: -106b}].tag.CustomModelData",
+										"comparison": "==",
+										"compare_to": 23
+									}
+								]
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"comparison": ">=",
+								"compare_to": 10
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 1000
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.enchantment_table.use master @a[distance=..10] ~ ~ ~ 1 0.4",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "power grant @e[type=!item,distance=0.1..5] apocalypse:hexblade/sigil_smiting_status hexblade_bars",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "resource change @s apocalypse:hexblade/hexblade_resource_souls -10",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:command",
+										"command": "data get entity @s SelectedItem.tag.CustomModelData",
+										"comparison": "==",
+										"compare_to": 17
+									},
+									{
+										"type": "origins:command",
+										"command": "data get entity @s Inventory[{Slot: -106b}].tag.CustomModelData",
+										"comparison": "==",
+										"compare_to": 17
+									}
+								]
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"comparison": ">=",
+								"compare_to": 10
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 1000
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_waypoint",
+								"comparison": "==",
+								"compare_to": 0
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.enchantment_table.use master @a[distance=..10] ~ ~ ~ 1 0.4",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "function apocalypse:hexblade_waypoint",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "resource change @s apocalypse:hexblade/hexblade_resource_souls -10",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "resource change @s apocalypse:hexblade/hexblade_resource_waypoint 1",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:command",
+										"command": "data get entity @s SelectedItem.tag.CustomModelData",
+										"comparison": "==",
+										"compare_to": 17
+									},
+									{
+										"type": "origins:command",
+										"command": "data get entity @s Inventory[{Slot: -106b}].tag.CustomModelData",
+										"comparison": "==",
+										"compare_to": 17
+									}
+								]
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"comparison": ">=",
+								"compare_to": 10
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 1000
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_waypoint",
+								"comparison": "==",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.enchantment_table.use master @a[distance=..10] ~ ~ ~ 1 0.4",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:apocalypse.ost.sagacity master @a[distance=..10] ~ ~ ~ 0.2 1",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "function apocalypse:hexblade_waypoint_tp",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "resource change @s apocalypse:hexblade/hexblade_resource_souls -10",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "resource change @s apocalypse:hexblade/hexblade_resource_waypoint -1",
+							  "permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:command",
+										"command": "data get entity @s SelectedItem.tag.CustomModelData",
+										"comparison": "==",
+										"compare_to": 9
+									},
+									{
+										"type": "origins:command",
+										"command": "data get entity @s Inventory[{Slot: -106b}].tag.CustomModelData",
+										"comparison": "==",
+										"compare_to": 9
+									}
+								]
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"comparison": ">=",
+								"compare_to": 10
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 1000
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:block.enchantment_table.use master @a[distance=..2] ~ ~ ~ 1 0.4",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "power grant @a[distance=..2] apocalypse:hexblade/sigil_skies_status hexblade_bars",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "resource change @s apocalypse:hexblade/hexblade_resource_souls -10",
+							  "permission_level": 4
+							},
+							{
+								"type": "origins:and",
+								"actions": [ 
+									{
+									  "type": "origins:execute_command",
+									  "command": "playsound minecraft:item.elytra.flying master @a[distance=5..10] ~ ~ ~ 2 0.7",
+									  "permission_level": 4
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "execute as @s at @s run effect give @e[distance=3..10] minecraft:levitation 6 10 true",
+										"permission_level": 4
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "execute as @s at @s run effect give @e[distance=3..10] minecraft:slow_falling 15 0 true",
+										"permission_level": 4
+									},
+									{
+										"type": "origins:delay",
+										"ticks": 120,
+										"action": {
+											"type": "origins:and",
+											"actions": [ 
+												{
+													"type": "origins:execute_command",
+													"command": "stopsound @a[distance=..100] master minecraft:item.elytra.flying",
+													"permission_level": 4
+												}
+											]
+										}
+									}
+								]
+							}
+						]
+					}
+				},
+				{
+					"condition": 
+					{
+						"type": "origins:and",
+						"conditions": [	
+							{
+								"type": "origins:command",
+								"command": "data get entity @s SelectedItem.tag.CustomModelData",
+								"comparison": "==",
+								"compare_to": 1
+							},
+							{
+								"type": "origins:command",
+								"command": "data get entity @s Inventory[{Slot: -106b}].tag.CustomModelData",
+								"comparison": "==",
+								"compare_to": 4
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"comparison": ">=",
+								"compare_to": 10
+							},		
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:wooden_sword"
+									}
+								}
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:amethyst_shard"
+									}
+								}
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "function apocalypse:loop",
+							  "permission_level": 4
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+										  "type": "origins:execute_command",
+										  "command": "function apocalypse:hexblade_spectatetrigger"
+										}
+									]
+								}
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition":
+		{
+			"type": "origins:and",
+			"conditions":
+			[
+				{
+				  "type": "origins:gamemode",
+				  "inverted": true,
+				  "gamemode": "spectator"
+				},
+				{
+					"type": "origins:block_in_radius",
+					"block_condition":{
+						"type": "origins:and",
+						"inverted": true,
+						"conditions": [
+							{
+								"type": "origins:block",
+								"block": "apocalypse_origins:hexaltar"
+							},
+							{
+								"type": "origins:block",
+								"block": "apocalypse_origins:hexaltar2"
+							},
+							{
+								"type": "origins:block",
+								"block": "apocalypse_origins:hexaltar3"
+							}
+						]
+					},
+					"radius": 3,
+					"comparison": ">=",
+					"compare_to": 1
+				}
+			]
+		},
+		"hidden": true,	
+		"key": {
+			"key":"key.origins.secondary_active",
+			"continuous": false
+		}
+	},
+	"hidden": true
+}

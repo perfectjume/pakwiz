@@ -1,0 +1,37 @@
+{
+	"type": "origins:multiple",
+	"callback":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_gained": {
+			"type": "origins:execute_command",
+			"command": "tag @s add undead"
+		},
+		"entity_action_lost":{
+			"type": "origins:execute_command",
+			"command": "tag @s remove undead"
+		},
+		"execute_chosen_when_orb": true
+	},
+	"enchantment_damage":
+	{
+		"type": "origins:modify_damage_taken",
+		"damage_condition": {
+			"type": "origins:attacker",
+			"entity_condition": {
+				"type": "origins:equipped_item",
+				"equipment_slot": "mainhand",
+				"item_condition": {
+					"type": "origins:enchantment",
+					"enchantment": "minecraft:smite",
+					"comparison": ">=",
+					"compare_to": 1
+				}
+			}
+		},
+		"modifier": {
+			"operation": "multiply_base_additive",
+			"value": 1
+		}
+	}
+}

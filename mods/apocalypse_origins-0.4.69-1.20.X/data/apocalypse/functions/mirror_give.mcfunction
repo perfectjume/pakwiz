@@ -1,0 +1,3 @@
+summon item ~ ~ ~ {Glowing:1b,Item:{id:"minecraft:amethyst_shard",Count:1b,tag:{Enchantments:[{id:vanishing_curse,lvl:1}],display:{Name:'{"text":"Refractor Mirror","color":"yellow","bold":false}',Lore:['{"text":"It reflects everything,","color":"white"}','{"text":"but not you.","color":"white"}']},HideFlags:122,Unbreakable:1b,CustomModelData:1,hexbladeid:0}},Tags:["target"]}
+
+execute as @e[type=item,tag=target] store result entity @s Item.tag.hexbladeid double 1 run scoreboard players get @p hexbladeid

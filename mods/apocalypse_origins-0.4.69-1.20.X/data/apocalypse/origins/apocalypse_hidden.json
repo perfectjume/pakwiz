@@ -1,0 +1,10 @@
+{
+	"powers": [
+		"apocalypse:hidden"
+	],
+	"icon": "minecraft:dragon_head",
+	"order": 1,
+	"impact": 3,
+	"name": "Apocalypse Hidden",
+	"description": "Accessory origin to the Apocalypse Origins. Do not touch unless you know what you are doing."
+}

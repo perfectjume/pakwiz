@@ -1,0 +1,81 @@
+{
+	"type": "origins:self_action_when_hit",
+	"cooldown": 1,
+	"hud_render": {
+		"should_render": false
+	},
+	"entity_action": {
+		"type": "origins:chance",
+		"action": 	{
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:choice",
+					"actions": [
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tp @s ^ ^0.5 ^-5"
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tp @s ^ ^0.5 ^5"
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tp @s ^5 ^0.5 ^"
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tp @s ^-5 ^0.5 ^"
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tp @s ^-5 ^0.5 ^5"
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tp @s ^-5 ^0.5 ^-5"
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tp @s ^5 ^0.5 ^5"
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:execute_command",
+								"command": "tp @s ^5 ^0.5 ^-5"
+							},
+							"weight": 1
+						}
+					]
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:entity.enderman.teleport master @a ~ ~ ~ 2"
+				}
+			]
+		},
+		"chance": 0.1
+	}
+}

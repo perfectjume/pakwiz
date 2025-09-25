@@ -1,0 +1,771 @@
+{
+	"type": "origins:multiple",
+	"color":
+	{
+		"type": "origins:model_color",
+		"red": 0.44,
+		"green": 0.56,
+		"blue": 0.17
+	},
+	"basehealth": 
+	{
+		"type": "origins:attribute",
+		"update_health": true,
+		"modifiers": {
+			"attribute": "minecraft:generic.max_health",
+			"operation": "multiply_total",
+			"value": -0.6
+		},
+		"name": "Frail and airborne",
+		"description": "Your max HP is reduced by 60%."
+	},
+	"mortal": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": 1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type":"origins:or",
+			"conditions":[
+				{
+					"type": "origins:name",
+					"name": "onFire"
+				},
+				{
+					"type": "origins:name",
+					"name": "inFire"
+				},
+				{
+					"type": "origins:name",
+					"name": "lava"
+				},
+				{
+					"type": "origins:name",
+					"name": "fireball"
+				},
+				{
+					"type": "origins:name",
+					"name": "hotFloor"
+				}
+			]
+		},
+		"hidden": true
+	},
+	"flammable":
+	{
+		"type": "origins:self_action_when_hit",
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:set_on_fire",
+					"duration": 5
+				}
+			]
+		},
+		"damage_condition": {
+			"type": "origins:fire"
+		},
+		"cooldown": 0,
+		"name": "Flammable",
+		"description": "You are flammable and fire will not be put out on its own."
+	},
+	"immunities": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type":"origins:or",
+			"conditions":[
+				{
+					"type": "origins:name",
+					"name": "drown"
+				},
+				{
+					"type": "origins:name",
+					"name": "fall"
+				},
+				{
+					"type": "origins:name",
+					"name": "freeze"
+				}
+			]
+		},
+		"hidden": true
+	},
+	"no_step":
+	{
+	  "type": "origins:prevent_game_event",
+	  "event": "minecraft:step"
+	},
+	"slow_falling":
+	{
+		"type": "origins:modify_falling",
+		"velocity": 0.01,
+		"take_fall_damage": false,
+		"condition": {
+			"type": "origins:sneaking",
+			"inverted": true
+		}
+	},
+	"jump":
+	{
+		"type": "origins:modify_jump",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": 1
+		}
+	},
+	"basespeed": 
+	{
+		"type": "origins:attribute",
+		"update_health": true,
+		"modifiers": {
+			"attribute": "minecraft:generic.movement_speed",
+			"operation": "multiply_total",
+			"value": 0.3
+		},
+		"name": "Speedy",
+		"description": "Your speed increases by 30%."
+	},
+	"air_fast":
+	{
+	  "type": "origins:attribute_modify_transfer",
+	  "class": "io.github.apace100.apoli.power.ModifyAirSpeedPower",
+	  "attribute": "minecraft:generic.movement_speed",
+	  "multiplier": 1
+	},
+	"melee":
+	{
+		"type": "origins:modify_damage_dealt",
+		"target_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:player",
+					"inverted": true
+				},
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:player",
+					"inverted": false
+				}
+			]
+		},
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -0.7
+		},
+		"hidden": true
+	},
+	"projectile":
+	{
+		"type": "origins:modify_projectile_damage",
+		"target_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:player",
+					"inverted": true
+				},
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:player",
+					"inverted": false
+				}
+			]
+		},
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -0.7
+		},
+		"hidden": true
+	},
+	"rider":
+	{
+		"type": "origins:action_on_entity_use",
+		"bientity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:mount"
+				},
+				{
+					"type": "origins:target_action",
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "power grant @s apocalypse:myconoids/mounted afungus",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:execute_command",
+									"command": "resource change @s apocalypse:myconoids/mounted_resource 1"
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:execute_command",
+									"command": "tellraw @s {\"text\":\"\",\"color\":\"green\",\"extra\":[{\"selector\":\"@a[tag=moss,sort=nearest,limit=1]\"},{\"text\":\" is riding you! [Sneak+Jump] to kick them off!\"}]}"
+								}
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:actor_action",
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/moss_passives_hide_to_mount_resource 1"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/moss_passives_mounting_cooldown_resource 3"
+							}
+						]
+					}
+				}
+			]
+		},
+		"bientity_condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:distance",
+					"comparison": "<=",
+					"compare_to": 3
+				}
+			]
+		},
+		"item_condition": {
+			"type": "origins:empty"
+		},
+		"hands": [
+			"main_hand"
+		],
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:on_block",
+					"inverted": true
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "apocalypse:myconoids/moss_passives_mounting_cooldown_resource",
+					"compare_to": 0
+				}
+			]
+		},
+		"name": "Riding",
+		"description": "Took originally took this one from the power library channel, made by Zorra#3630 before I made it almost unrecognizeable through editing. Yes, even I use that channel, you should too."
+	},
+	"mounting_cooldown_resource":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 3,
+		"start_value": 0,
+		"hidden": true,
+		"name": "On cooldown?",
+		"description": "If not 0, on cooldown.",
+		"hud_render": {
+			"should_render": false,
+			"sprite_location":"apocalypse:textures/gui/mycomoss.png",
+			"bar_index": 0
+		}
+	},
+	"mounting_cooldown_charge":
+	{
+		"type": "origins:action_over_time",
+		"interval": 100,
+		"entity_action": {
+			"type": "origins:execute_command",
+			"command": "resource change @s apocalypse:myconoids/moss_passives_mounting_cooldown_resource -1",
+			"permission_level": 4
+		},
+		"condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"comparison": ">",
+					"resource": "apocalypse:myconoids/moss_passives_mounting_cooldown_resource",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"dismounting":{
+		"type": "origins:active_self",
+		"cooldown": 1,
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:dismount"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "resource change @s apocalypse:myconoids/moss_passives_hide_to_mount_resource -1"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "execute as @e[type=!#apocalypse:non_living,sort=nearest,distance=..7] run resource change @s apocalypse:myconoids/mounted_resource -1"
+				}
+			]
+		},
+		"key": {
+		  "key": "key.sneak"
+		}
+	},
+	"right_click": 
+	{
+		"type": "origins:active_self",
+		"cooldown": 20,
+		"hud_render": {
+			"should_render":false,
+			"sprite_location":"origins:textures/gui/community/spiderkolo/resource_bar_02.png",
+			"bar_index": 1
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:dismount"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "resource change @s apocalypse:myconoids/moss_passives_hide_to_mount_resource -1"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "execute as @e[type=!#apocalypse:non_living,sort=nearest,distance=..7] run resource change @s apocalypse:myconoids/mounted_resource -1"
+				}
+			]
+		},
+		"condition":
+		{
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "offhand",
+					"item_condition":
+					{
+						"type": "origins:ingredient",
+						"ingredient":
+						{
+							"item": "minecraft:chorus_fruit"
+						}
+					}
+				},
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "mainhand",
+					"item_condition":
+					{
+						"type": "origins:ingredient",
+						"ingredient":
+						{
+							"item": "minecraft:chorus_fruit"
+						}
+					}
+				}
+			]
+		},
+		"hidden": true,	
+		"key": {
+			"key":"key.use",
+			"continuous": false
+		}
+	},
+	"rider_resistance": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":
+		{
+			"type": "origins:attacker",
+			"entity_condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:living"
+					},
+					{
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "apocalypse:myconoids/mounted_resource",
+						"compare_to": 1
+					}
+				]
+			}
+		},
+		"hidden": true,
+		"condition":{
+			"type": "origins:resource",
+			"comparison": "==",
+			"resource": "apocalypse:myconoids/moss_passives_hide_to_mount_resource",
+			"compare_to": 1
+		}
+	},
+	"hide_to_mount_resource":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"name": "Mounting?",
+		"description": "Is there a mount?",
+		"hud_render": {
+			"should_render": false,
+			"sprite_location":"apocalypse:textures/gui/mycomoss.png",
+			"bar_index": 0
+		}
+	},
+	"hide_on_mount":
+	{
+		"type": "origins:invisibility",
+		"render_armor": false,
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "apocalypse:myconoids/moss_passives_hide_to_mount_resource",
+					"compare_to": 1
+				},
+				{
+					"type": "origins:riding"
+				}
+			]
+		}
+	},
+    "walljump": {
+        "type": "origins:active_self",
+        "hud_render": {
+            "should_render": false,
+            "sprite_location": "apocalypse:textures/gui/mycomoss.png",
+            "bar_index": 4
+        },
+        "cooldown": 2,
+        "entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:in_block_anywhere",
+						"block_condition": {
+							"type": "origins:offset",
+							"condition": {
+								"type": "origins:movement_blocking"
+							},
+							"x": 1
+						}
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "particle minecraft:block moss_block ~ ~0 ~ 0 0.2 0 1 15",
+							  "permission_level": 4
+							},
+							{
+								"type": "origins:add_velocity",
+								"x": -0.6,
+								"space": "world",
+								"set": true
+							},
+							{
+								"type": "origins:add_velocity",
+								"y": 0.6,
+								"space": "world"
+							},
+							{
+								"type": "origins:add_velocity",
+								"z": 0.5,
+								"space": "local"
+							},
+							{
+								"type": "origins:play_sound",
+								"sound": "minecraft:item.armor.equip_leather",
+								"volume": 1,
+								"pitch": 0.9
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:in_block_anywhere",
+						"block_condition": {
+							"type": "origins:offset",
+							"condition": {
+								"type": "origins:movement_blocking"
+							},
+							"x": -1
+						}
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "particle minecraft:block moss_block ~ ~0 ~ 0 0.2 0 1 15",
+							  "permission_level": 4
+							},
+							{
+								"type": "origins:add_velocity",
+								"x": 0.6,
+								"space": "world",
+								"set": true
+							},
+							{
+								"type": "origins:add_velocity",
+								"y": 0.6,
+								"space": "world"
+							},
+							{
+								"type": "origins:add_velocity",
+								"z": 0.5,
+								"space": "local"
+							},
+							{
+								"type": "origins:play_sound",
+								"sound": "minecraft:item.armor.equip_leather",
+								"volume": 1,
+								"pitch": 0.9
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:in_block_anywhere",
+						"block_condition": {
+							"type": "origins:offset",
+							"condition": {
+								"type": "origins:movement_blocking"
+							},
+							"z": 1
+						}
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "particle minecraft:block moss_block ~ ~0 ~ 0 0.2 0 1 15",
+							  "permission_level": 4
+							},
+							{
+								"type": "origins:add_velocity",
+								"z": -0.6,
+								"space": "world",
+								"set": true
+							},
+							{
+								"type": "origins:add_velocity",
+								"y": 0.6,
+								"space": "world"
+							},
+							{
+								"type": "origins:add_velocity",
+								"z": 0.5,
+								"space": "local"
+							},
+							{
+								"type": "origins:play_sound",
+								"sound": "minecraft:item.armor.equip_leather",
+								"volume": 1,
+								"pitch": 0.9
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:in_block_anywhere",
+						"block_condition": {
+							"type": "origins:offset",
+							"condition": {
+								"type": "origins:movement_blocking"
+							},
+							"z": -1
+						}
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "particle minecraft:block moss_block ~ ~0 ~ 0 0.2 0 1 15",
+							  "permission_level": 4
+							},
+							{
+								"type": "origins:add_velocity",
+								"z": 0.6,
+								"space": "world",
+								"set": true
+							},
+							{
+								"type": "origins:add_velocity",
+								"y": 0.6,
+								"space": "world"
+							},
+							{
+								"type": "origins:add_velocity",
+								"z": 0.5,
+								"space": "local"
+							},
+							{
+								"type": "origins:play_sound",
+								"sound": "minecraft:item.armor.equip_leather",
+								"volume": 1,
+								"pitch": 0.9
+							}
+						]
+					}
+				}
+			]
+		},
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:or",
+                    "conditions": [
+                        {
+                            "type": "origins:in_block_anywhere",
+                            "block_condition": {
+                                "type": "origins:offset",
+                                "condition": {
+                                    "type": "origins:movement_blocking"
+                                },
+                                "x": 1
+                            }
+                        },
+                        {
+                            "type": "origins:in_block_anywhere",
+                            "block_condition": {
+                                "type": "origins:offset",
+                                "condition": {
+                                    "type": "origins:movement_blocking"
+                                },
+                                "x": -1
+                            }
+                        },
+                        {
+                            "type": "origins:in_block_anywhere",
+                            "block_condition": {
+                                "type": "origins:offset",
+                                "condition": {
+                                    "type": "origins:movement_blocking"
+                                },
+                                "z": 1
+                            }
+                        },
+                        {
+                            "type": "origins:in_block_anywhere",
+                            "block_condition": {
+                                "type": "origins:offset",
+                                "condition": {
+                                    "type": "origins:movement_blocking"
+                                },
+                                "z": -1
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "origins:on_block",
+                    "inverted": true
+                },
+                {    
+                    "type": "origins:fall_flying",
+                    "inverted": true
+                },
+                {         
+                    "type": "origins:creative_flying",
+                    "inverted": true
+                },
+                {
+                    "type": "origins:gamemode",
+                    "gamemode": "spectator",
+                    "inverted": true
+                },
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "apocalypse:myconoids/universal_toggle_binary",
+					"compare_to": 1
+				}
+            ]
+        },
+        "key": {
+            "key": "key.jump",
+			"continuous": false
+        }
+    },
+	"devolve":
+	{
+		"type": "origins:prevent_death",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "power grant @s apocalypse:myconoids/shake afungus",
+					"permission_level": 4
+				},
+				{
+					"type": "origins:clear_effect"
+				},
+				{
+					"type": "origins:extinguish"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:entity.tnt.primed master @a[distance=..10] ~ ~ ~ 4 0.5",
+					"permission_level": 4
+				}
+			]
+		}
+	},
+	"status_bar":
+	{
+		"type": "origins:status_bar_texture",
+		"texture": "apocalypse_origins:textures/gui/myconoid_moss_bars.png"
+	},
+	"hidden": true
+}

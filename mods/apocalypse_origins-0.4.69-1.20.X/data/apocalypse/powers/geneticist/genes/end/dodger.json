@@ -1,0 +1,106 @@
+{
+	"type": "origins:multiple",
+	"resource": {
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 20,
+			"sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+			"condition": {
+				"type": "origins:resource",
+				"comparison": "==",
+				"resource": "*:*_resource",
+				"compare_to": 1
+			}
+		}
+	},
+	"resistances": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -0.9999,
+			"operation":"multiply_total"
+		},
+		"condition":
+		{
+			"type": "origins:resource",
+			"comparison": "==",
+			"resource": "*:*_resource",
+			"compare_to": 1
+		}
+	},
+	"dodging":
+	{
+		"type": "origins:self_action_when_hit",
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_resource",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:chance",
+						"action": {
+							"type": "origins:change_resource",
+							"resource": "*:*_resource",
+							"change": 1
+						},
+						"chance": 0.1
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_resource",
+								"compare_to": 1
+							}
+						]
+					},
+					"action": 
+					{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:entity.enderman.teleport master @a ~ ~ ~ 1 1"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:portal ~ ~ ~ -0.25 0.25 0.25 0.2 20"
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action": {
+									"type": "origins:change_resource",
+									"resource": "*:*_resource",
+									"change": -1
+								}
+							}
+						]
+					}
+				}
+			]
+		},
+		"cooldown": 0,
+		"hud_render": {
+			"should_render": false
+		}
+	}
+}

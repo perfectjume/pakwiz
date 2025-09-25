@@ -1,0 +1,112 @@
+{
+	"type": "origins:multiple",
+	"callback":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:block.conduit.ambient master @a ~ ~ ~ 2 1"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "particle minecraft:portal ~ ~1 ~ 0 0 0 1 50"
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 200,
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "kill @s"
+							}
+						]
+					}
+				}
+			]
+		}
+	},
+	"push":
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:block.conduit.ambient master @a ~ ~ ~ 2 1"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "particle minecraft:portal ~ ~1 ~ 0 0 0 1 25"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "tp @e[type=minecraft:item,sort=furthest,distance=..15,limit=5] @s"
+				},
+				{
+					"type": "origins:area_of_effect",
+					"radius": 10,
+					"bientity_action": {
+						"type": "origins:target_action",
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tp @s ^ ^ ^ facing entity @e[tag=cpuller,limit=1,distance=..10]"
+								},
+								{
+									"type": "origins:delay",
+									"ticks": 1,
+									"action":{
+										"type": "origins:and",
+										"actions": [
+											{
+												"type": "origins:execute_command",
+												"command": "power grant @s[type=!minecraft:armor_stand] apocalypse:myconoids/chorus_pulled afungus"
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					"bientity_condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:target_condition",
+								"condition": {
+									"type": "origins:and",
+									"conditions": [
+										{
+										   "type": "origins:living"
+										},
+										{
+											"type": "origins:power",
+											"power": "apocalypse:myconoids/chorus_smash",
+											"inverted": true
+										},
+										{
+											"type": "origins:origin",
+											"origin": "apocalypse:myconoid_chorus",
+											"layer": "origins:origin",
+											"inverted": true
+										}
+									]
+								}
+							}
+						]
+					}
+				}
+			]
+		},
+		"interval": 10
+	},
+	"hidden": true
+}

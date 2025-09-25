@@ -1,0 +1,38 @@
+{
+	"powers": [
+		"apocalypse:hexblade/craft_altars",
+		"apocalypse:hexblade/hexblade_callback",
+		"apocalypse:hexblade/hexblade_passives",
+		"apocalypse:hexblade/hexblade_resource_risk",
+		"apocalypse:hexblade/hexblade_resource_nostalgia",
+		"apocalypse:hexblade/hexblade_primary",
+		"apocalypse:hexblade/hexblade_primary_b",
+		"apocalypse:hexblade/hexblade_secondary",
+		"apocalypse:hexblade/hexblade_right_click",
+		"apocalypse:hexblade/hexblade_resource_ultimates",
+		"apocalypse:hexblade/description_soul_barrier",
+		"apocalypse:hexblade/description_risk",
+		"apocalypse:hexblade/description_nostalgia",
+		"apocalypse:hexblade/description_buoyancy",
+		"apocalypse:hexblade/description_one_soul",
+		"apocalypse:hexblade/description_item_curse",
+		"apocalypse:hexblade/description_smite_of_radiance",
+		"apocalypse:hexblade/description_hunters",
+		"apocalypse:hexblade/description_inanimate",
+		"apocalypse:hexblade/description_intangible",
+		"apocalypse:hexblade/description_timeless",
+		"apocalypse:hexblade/description_dash_slash",
+		"apocalypse:hexblade/description_parry",
+		"apocalypse:hexblade/description_secondary"
+	],
+	"icon": {
+		"item": "minecraft:wooden_sword",
+		"tag": "{CustomModelData:1}"
+	},
+	"unchoosable": false,
+	"order": 10,
+	"impact": 3,
+  "name": "Hexblade",
+  "description": "You wake up in a hole near spawn. By your side, there's a wooden axe and a wooden pickaxe that are missing a bit of durability. You do not know what or who you are, but the feelings of loneliness and hatred well inside you together with the blurry... memory? of a player walking away from you holding shiny stone tools.."
+}
+//Umena says hi

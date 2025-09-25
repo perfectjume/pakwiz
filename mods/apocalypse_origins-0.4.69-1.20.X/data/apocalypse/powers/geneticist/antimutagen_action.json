@@ -1,0 +1,88 @@
+{
+	"type": "origins:multiple",
+	"callback":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:apocalypse.ost.syringe master @a[distance=..16] ~ ~ ~ 1 1"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "tellraw @s {\"text\":\"--->Activating Antimutagens<---\",\"color\":\"aqua\"}"
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 7,
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:if_else_list",
+								"actions": [
+									{
+										"condition": {
+											"type": "origins:sneaking",
+											"inverted": true
+										},
+										"action": {
+											"type": "origins:execute_command",
+											"command": "power revokeall @s mutation"
+										}
+									},
+									{
+										"condition": {
+											"type": "origins:sneaking"
+										},
+										"action": {
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "tellraw @s {\"text\":\"...not purging, preventing mutations for 10 minutes...\",\"color\":\"aqua\"}"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "power grant @s apocalypse:geneticist/antimutagens_buff geneticist"
+												}
+											]
+										}
+									}
+								]
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 15,
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "tellraw @s {\"text\":\"--->Antimutagens Administered<---\",\"color\":\"aqua\"}"
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 20,
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "power revoke @s apocalypse:geneticist/antimutagen_action geneticist"
+							}
+						]
+					}
+				}
+			]
+		}
+	}
+}

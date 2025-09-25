@@ -1,0 +1,3496 @@
+{
+	"type": "origins:action_on_callback",
+	"entity_action_added": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/exhausted"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Exhausted\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/xexhausted"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Exhausted +\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/frail"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Frail\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/xfrail"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Frail +\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/heavy"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Heavy\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/xheavy"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Heavy +\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/hungry"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Hungry\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/xhungry"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Hungry +\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/inaccurate"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Inaccurate\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/xinaccurate"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Inaccurate +\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/insatiable"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Insatiable\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/xinsatiable"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Insatiable +\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/landlocked"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Landlocked\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/xlandlocked"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Landlocked +\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/obtuse"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Obtuse\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/xobtuse"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Obtuse +\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/sickly"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Sickly\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/xsickly"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Sickly +\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/slowstrikes"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Slowstrikes\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/xslowstrikes"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Slowstrikes +\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/sluggish"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Sluggish\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/xsluggish"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Sluggish +\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/sundered"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Sundered\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/xsundered"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Sundered +\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/vulnerable"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Vulnerable\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/xvulnerable"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Vulnerable +\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/weak"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Weak\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/generic/xweak"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Side-effect: Weak +\",\"color\":\"red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/generic/accurate"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Gene: Accurate\",\"color\":\"green\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/generic/armored"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Gene: Armored\",\"color\":\"green\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/generic/bulky"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Gene: Bulky\",\"color\":\"green\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/generic/clever"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Gene: Clever\",\"color\":\"green\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/generic/energetic"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Gene: Energetic\",\"color\":\"green\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/generic/frugal"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Gene: Frugal\",\"color\":\"green\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/generic/healthy"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Gene: Healthy\",\"color\":\"green\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/generic/lightweight"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Gene: Lightweight\",\"color\":\"green\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/generic/metabolic"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Gene: Metabolic\",\"color\":\"green\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/generic/quick"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Gene: Quick\",\"color\":\"green\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/generic/quickstrikes"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Gene: Quickstrikes\",\"color\":\"green\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/generic/resilient"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Gene: Resilient\",\"color\":\"green\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/generic/strong"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Gene: Strong\",\"color\":\"green\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/generic/swimmer"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Generic Gene: Swimmer\",\"color\":\"green\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/aquatic/aquatic_prey"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Aquatic Side-effect: Aquatic Prey\",\"color\":\"aqua\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/aquatic/floppy"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Aquatic Side-effect: Floppy\",\"color\":\"aqua\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/aquatic/gills"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Aquatic Side-effect: Gills\",\"color\":\"aqua\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/aquatic/xerosis"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Aquatic Side-effect: Xerosis\",\"color\":\"aqua\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/aquatic/aquatic_predator"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Aquatic Gene: Aquatic Predator\",\"color\":\"aqua\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/aquatic/fatiguer"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Aquatic Gene: Fatiguer\",\"color\":\"aqua\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/aquatic/liquid_vision"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Aquatic Gene: Liquid Vision\",\"color\":\"aqua\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/aquatic/quilled"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Aquatic Gene: Quilled\",\"color\":\"aqua\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/aquatic/regenerator"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Aquatic Gene: Regenerator\",\"color\":\"aqua\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/aquatic/waterproof"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Aquatic Gene: Waterproof\",\"color\":\"aqua\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "origins:carnivore"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Arthropod Side-effect: Carnivore\",\"color\":\"light_purple\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/arthropod/hemolymph"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Arthropod Side-effect: Hemolymph\",\"color\":\"light_purple\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/arthropod/photosensitivity"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Arthropod Side-effect: Photosensitivity\",\"color\":\"light_purple\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/arthropod/burrower"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Arthropod Gene: Burrower\",\"color\":\"light_purple\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/arthropod/climber"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Arthropod Gene: Climber\",\"color\":\"light_purple\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/arthropod/tiny"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Arthropod Gene: Tiny\",\"color\":\"light_purple\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/arthropod/venomous"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Arthropod Gene: Venomous\",\"color\":\"light_purple\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "origins:master_of_webs_webbing"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Arthropod Gene: Webbing\",\"color\":\"light_purple\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/arthropod/webslinger"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Arthropod Gene: Webslinger\",\"color\":\"light_purple\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "origins:master_of_webs_no_slowdown"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Arthropod Gene: Webwalker\",\"color\":\"light_purple\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/end/hydrophobia"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"End Side-effect: Hydrophobia\",\"color\":\"dark_purple\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/end/panicked_teleportation"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"End Side-effect: Panicked Teleportation\",\"color\":\"dark_purple\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "origins:pumpkin_hate"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"End Side-effect: Samhainophobia\",\"color\":\"dark_purple\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "origins:unwieldy"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"End Side-effect: Unwieldy\",\"color\":\"dark_purple\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/end/ancient_behemoth"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"End Gene: Ancient Behemoth\",\"color\":\"dark_purple\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/end/dodger"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"End Gene: Dodger\",\"color\":\"dark_purple\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/end/juggernaut"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"End Gene: Juggernaut\",\"color\":\"dark_purple\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/end/levitator"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"End Gene: Levitator\",\"color\":\"dark_purple\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "origins:claustrophobia"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Living Side-effect: Claustrophobia\",\"color\":\"blue\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/living/corruptible"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Living Side-effect: Corruptible\",\"color\":\"blue\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/living/defeatist"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Living Side-effect: Defeatist\",\"color\":\"blue\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/living/filter"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Living Side-effect: Filter\",\"color\":\"blue\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "origins:more_kinetic_damage"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Living Side-effect: Frail Bones\",\"color\":\"blue\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/living/pacifist"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Living Side-effect: Pacifist\",\"color\":\"blue\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "origins:vegetarian"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Living Side-effect: Vegetarian\",\"color\":\"blue\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "origins:weak_arms"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Living Side-effect: Weak Arms\",\"color\":\"blue\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/living/afterlife_research"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Living Gene: Afterlife Research\",\"color\":\"blue\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/living/battle_trance"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Living Gene: Battle Trance\",\"color\":\"blue\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/living/frostproof"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Living Gene: Frostproof\",\"color\":\"blue\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/living/lightfall"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Living Gene: Lightfall\",\"color\":\"blue\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/living/milker"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Living Gene: Milker\",\"color\":\"blue\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "origins:scare_creepers"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Living Gene: Scarecreep\",\"color\":\"blue\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/living/wooly"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Living Gene: Wooly\",\"color\":\"blue\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/nether/heart_of_fire"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Nether Side-effect: Heart of Fire\",\"color\":\"dark_red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/nether/hellbound"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Nether Side-effect: Hellbound\",\"color\":\"dark_red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/nether/fireproof"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Nether Gene: Fireproof\",\"color\":\"dark_red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/nether/flamestrike"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Nether Gene: Flamestrike\",\"color\":\"dark_red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/nether/poisonproof"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Nether Gene: Poisonproof\",\"color\":\"dark_red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/nether/striding"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Nether Gene: Striding\",\"color\":\"dark_red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/nether/witherproof"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Nether Gene: Witherproof\",\"color\":\"dark_red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/nether/witherstrike"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Nether Gene: Witherstrike\",\"color\":\"dark_red\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/odd/blind"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Odd Side-effect: Blind\",\"color\":\"dark_green\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/odd/volatile"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Odd Side-effect: Volatile\",\"color\":\"dark_green\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/odd/blastproof"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Odd Gene: Blastproof\",\"color\":\"dark_green\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/odd/camouflage"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Odd Gene: Camouflage\",\"color\":\"dark_green\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/odd/silent"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Odd Gene: Silent\",\"color\":\"dark_green\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/odd/swallow"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Odd Gene: Swallow\",\"color\":\"dark_green\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/undead/heliophobia"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Undead Side-effect: Heliophobia\",\"color\":\"dark_gray\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/undead/unholy"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Undead Side-effect: Unholy\",\"color\":\"dark_gray\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/undead/waterlogged"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Undead Side-effect: Waterlogged\",\"color\":\"dark_gray\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/undead/arrow_toss"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Undead Gene: Arrow Toss\",\"color\":\"dark_gray\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/undead/drowner"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Undead Gene: Drowner\",\"color\":\"dark_gray\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/undead/gliding"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Undead Gene: Gliding\",\"color\":\"dark_gray\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/undead/rigor_mortis"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Undead Gene: Rigor Mortis\",\"color\":\"dark_gray\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/undead/soporiferous"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Undead Gene: Soporiferous\",\"color\":\"dark_gray\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/undead/waster"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Undead Gene: Waster\",\"color\":\"dark_gray\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/undead/gliding"
+								},
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/living/lightfall"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Synergy: Airborne\",\"color\":\"green\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/active/calm_after_the_storm_primary"
+								},
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/active/calm_after_the_storm_secondary"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Active Side-effect: Calm after the Storm\",\"color\":\"white\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/active/corrosion_primary"
+								},
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/active/corrosion_secondary"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Active Side-effect: Corrosion\",\"color\":\"white\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/active/high_caliber_primary"
+								},
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/active/high_caliber_secondary"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Active Side-effect: High Caliber\",\"color\":\"white\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/active/noguard_primary"
+								},
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/active/noguard_secondary"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Active Side-effect: No Guard\",\"color\":\"white\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/active/painful_remorse_primary"
+								},
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/active/painful_remorse_secondary"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Active Side-effect: Painful Remorse\",\"color\":\"white\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/active/regret_primary"
+								},
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/active/regret_secondary"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Active Side-effect: Regret\",\"color\":\"white\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/active/trauma_primary"
+								},
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/sideeffects/active/trauma_secondary"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Active Side-effect: Trauma\",\"color\":\"white\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/active/end_monolith_primary"
+								},
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/active/end_monolith_secondary"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Active Gene: End Monolith\",\"color\":\"white\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/active/flak_skull_primary"
+								},
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/active/flak_skull_secondary"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Active Gene: Flak Skull\",\"color\":\"white\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/active/glow_ink_spray_primary"
+								},
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/active/glow_ink_spray_secondary"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Active Gene: Glow Ink Spray\",\"color\":\"white\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/active/ink_spray_primary"
+								},
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/active/ink_spray_secondary"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Active Gene: Ink Spray\",\"color\":\"white\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/active/guardian_beam_primary"
+								},
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/active/guardian_beam_secondary"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Active Gene: Guardian Beam\",\"color\":\"white\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/active/ravaging_charge_primary"
+								},
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/active/ravaging_charge_secondary"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Active Gene: Ravaging Charge\",\"color\":\"white\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/active/warden_roar_primary"
+								},
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/active/warden_roar_secondary"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Active Gene: Warden Roar\",\"color\":\"white\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/active/ender_pearl_primary"
+								},
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/active/ender_pearl_secondary"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Active Gene: Pearl Toss\",\"color\":\"white\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/active/airdraft_primary"
+								},
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/active/airdraft_secondary"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Active Gene: Airdraft\",\"color\":\"white\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": 
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/active/suitcase_primary"
+								},
+								{
+									"type": "origins:power",
+									"power": "apocalypse:geneticist/genes/active/suitcase_secondary"
+								}
+							]
+						},
+						"action":
+						{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"Active Gene: Suitcase\",\"color\":\"white\"}"
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:delay",
+				"ticks": 5,
+				"action":{
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:execute_command",
+							"command": "power revoke @s apocalypse:geneticist/gene_reader geneticist"
+						}
+					]
+				}
+			}
+		]
+	}
+}
+//Umena says hi

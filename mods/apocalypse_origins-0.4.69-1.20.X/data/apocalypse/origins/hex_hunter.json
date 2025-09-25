@@ -1,0 +1,15 @@
+{
+	"powers": [
+		"apocalypse:classes/hex_hunter"
+	],
+	"icon": {
+		"item": "minecraft:amethyst_shard",
+		"tag": "{CustomModelData:20}"
+	},
+	"unchoosable": false,
+	"order": 10,
+	"impact": 3,
+  "name": "Hex Hunter",
+  "description": "As the hex of the blade grows stronger, new and stronger allies need to step up to stop its destruction of life and souls. The Hex Hunters are an order of rangers that specializes in defeating the feared hexblades once and for all."
+}
+//Umena says hi

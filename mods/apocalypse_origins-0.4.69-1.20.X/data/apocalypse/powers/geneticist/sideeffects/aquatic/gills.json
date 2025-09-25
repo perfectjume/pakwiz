@@ -1,0 +1,30 @@
+{
+	"type": "origins:action_on_callback",
+	"entity_action_gained": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "power grant @s origins:water_breathing sideeffect"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power grant @s apocalypse:geneticist/genes/aquatic/waterproof sideeffect"
+			}
+		]
+	},
+	"entity_action_lost":{
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "power revoke @s origins:water_breathing sideeffect"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power grant @s apocalypse:geneticist/genes/aquatic/waterproof sideeffect"
+			}
+		]
+	},
+	"execute_chosen_when_orb": true
+}

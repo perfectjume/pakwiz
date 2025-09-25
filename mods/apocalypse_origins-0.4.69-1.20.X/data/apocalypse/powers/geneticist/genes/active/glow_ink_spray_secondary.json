@@ -1,0 +1,115 @@
+{
+	"type": "origins:active_self",
+	"cooldown": 260,
+	"hud_render": {
+		"should_render": true,
+		"sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
+		"bar_index": 20
+	},
+	"entity_action":{
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s add ginker"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "summon armor_stand ^3 ^0.5 ^5 {Tags:[\"gink_granter\"],Invisible:1b,Invulnerable:1b,NoAI:1,Silent:1}"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "summon armor_stand ^-3 ^0.5 ^5 {Tags:[\"gink_granter\"],Invisible:1b,Invulnerable:1b,NoAI:1,Silent:1}"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "summon armor_stand ^ ^0.5 ^6 {Tags:[\"gink_granter\"],Invisible:1b,Invulnerable:1b,NoAI:1,Silent:1}"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "summon armor_stand ^1 ^0.5 ^3 {Tags:[\"gink_granter\"],Invisible:1b,Invulnerable:1b,NoAI:1,Silent:1}"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "summon armor_stand ^ ^0.5 ^2 {Tags:[\"gink_granter\"],Invisible:1b,Invulnerable:1b,NoAI:1,Silent:1}"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "summon armor_stand ^-1 ^0.5 ^3 {Tags:[\"gink_granter\"],Invisible:1b,Invulnerable:1b,NoAI:1,Silent:1}"
+			},
+			{
+				"type": "origins:area_of_effect",
+				"radius": 10,
+				"bientity_action": {
+					"type": "origins:target_action",
+					"action": {
+						"type": "origins:execute_command",
+						"command": "power grant @s[tag=gink_granter] apocalypse:geneticist/genes/active/gink_granter geneticist"
+					}
+				},
+				"bientity_condition":
+				{
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:can_see"
+						},
+						{
+							"type": "origins:target_condition",
+							"condition": 
+							{
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:living"
+									}
+								]
+							}
+						}
+					]
+				}
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power grant @e[tag=gink_granter,distance=..10] apocalypse:geneticist/genes/active/fail_granter geneticist"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "playsound minecraft:entity.glow_squid.squirt master @s ~ ~ ~ 1 1"
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": {
+							"type": "origins:sneaking",
+							"inverted": true
+						},
+						"action": {
+							"type": "origins:add_velocity",
+							"z": -1,
+							"space": "local"
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:delay",
+				"ticks": 2,
+				"action":{
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:execute_command",
+							"command": "tag @s remove ginker"
+						}
+					]
+				}
+			}
+		]
+	},
+	"key": {
+		"key": "key.origins.secondary_active",
+		"continuous": true
+	}
+}

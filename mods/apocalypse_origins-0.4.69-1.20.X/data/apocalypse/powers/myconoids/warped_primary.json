@@ -1,0 +1,174 @@
+{
+	"type": "origins:active_self",
+	"cooldown": 120,
+	"hud_render": {
+		"should_render": true,
+		"sprite_location":"apocalypse:textures/gui/mycosight.png",
+		"bar_index": 0
+	},
+	"entity_action": {
+		"type": "origins:if_else_list",
+		"actions": [
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:sneaking",
+							"inverted": false
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [ 
+						{
+							"type": "origins:execute_command",
+							"command": "playsound minecraft:apocalypse.ost.echolocation master @s ~ ~ ~ 1 1",
+							"permission_level": 4
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "playsound minecraft:apocalypse.ost.echolocation master @a[distance=..15] ~ ~ ~ 1 1",
+							"permission_level": 4
+						},
+						{
+						  "type": "origins:execute_command",
+						  "command": "power grant @e[type=!item,type=!armor_stand,distance=1..30] apocalypse:myconoids/warped_echolocated afungus",
+						  "permission_level": 4
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:submerged_in",
+									"fluid": "minecraft:water"
+								},
+								{
+									"type": "origins:submerged_in",
+									"fluid": "minecraft:lava"
+								},
+								{    
+								  "type": "origins:in_rain"
+								},
+								{    
+								  "type": "origins:fluid_height",
+								  "fluid": "minecraft:water",
+								  "comparison": ">",
+								  "compare_to": 0
+								},
+								{    
+								  "type": "origins:fluid_height",
+								  "fluid": "minecraft:lava",
+								  "comparison": ">",
+								  "compare_to": 0
+								}
+							]
+						},
+						{
+							"type": "origins:sneaking",
+							"inverted": true
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [ 
+						{
+							"type": "origins:execute_command",
+							"command": "playsound minecraft:block.bubble_column.upwards_inside master @a[distance=..15] ~ ~ ~ 2 1",
+							"permission_level": 4
+						},
+						{
+						  "type": "origins:execute_command",
+						  "command": "particle minecraft:bubble_pop ~ ~0 ~ 0 0.2 0 1 15",
+						  "permission_level": 4
+						},
+						{
+							"type": "origins:add_velocity",
+							"z": 2,
+							"space": "local"
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:submerged_in",
+									"fluid": "minecraft:water",
+									"inverted": true
+								},
+								{
+									"type": "origins:submerged_in",
+									"fluid": "minecraft:lava",
+									"inverted": true
+								},
+								{    
+									"type": "origins:in_rain",
+									"inverted": true
+								},
+								{    
+									"type": "origins:fluid_height",
+									"fluid": "minecraft:water",
+									"comparison": ">",
+									"compare_to": 0,
+									"inverted": true
+								},
+								{    
+									"type": "origins:fluid_height",
+									"fluid": "minecraft:lava",
+									"comparison": ">",
+									"compare_to": 0,
+									"inverted": true
+								}
+							]
+						},
+						{
+							"type": "origins:sneaking",
+							"inverted": true
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [ 
+						{
+							"type": "origins:execute_command",
+							"command": "playsound minecraft:apocalypse.ost.echolocation master @s ~ ~ ~ 1 1",
+							"permission_level": 4
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "playsound minecraft:apocalypse.ost.echolocation master @a[distance=..15] ~ ~ ~ 1 1",
+							"permission_level": 4
+						},
+						{
+						  "type": "origins:execute_command",
+						  "command": "power grant @e[type=!item,type=!armor_stand,distance=1..30] apocalypse:myconoids/warped_echolocated afungus",
+						  "permission_level": 4
+						}
+					]
+				}
+			}
+		]
+	},
+	"name": "Feel the Currents",
+	"description": "[Primary] You can propel yourself forward while in water, rain or lava. You can hold [Primary] to do it automatically.\n \n[Primary+Sneak] You can echolocate and mark nearby entities for you and other myconoids to see. [Primary] defaults to echolocating when you are unable to perform the dash.",
+	"key": {
+		"key":"key.origins.primary_active",
+		"continuous": true
+	}
+}

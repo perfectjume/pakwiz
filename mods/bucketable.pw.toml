@@ -1,0 +1,13 @@
+name = "Bucketable"
+filename = "bucketable-3.2.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "100f94949e60d0e8b244155cf5020e8c6c6b664b"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 6439958
+project-id = 1246711

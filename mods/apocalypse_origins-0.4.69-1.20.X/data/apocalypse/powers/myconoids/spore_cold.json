@@ -1,0 +1,109 @@
+{
+	"type": "origins:action_over_time",
+	"interval": 40,
+	"entity_action": {
+		"type": "origins:if_else_list",
+		"actions": [
+			{
+				"condition": {
+				  "type": "origins:and",
+				  "conditions": [
+						{
+							"type": "origins:resource",
+							"comparison": ">",
+							"resource": "apocalypse:myconoids/resource_temperature_coolness",
+							"compare_to": 0
+						},
+						{
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "apocalypse:myconoids/resource_temperature_hotness",
+							"compare_to": 0
+						},
+						{
+						  "type": "origins:or",
+						  "conditions": [
+								{
+									"type": "origins:biome",
+									"condition": {
+										"type": "origins:temperature",
+										"comparison": "<=",
+										"compare_to": 0.2
+									}
+								},
+								{
+									"type": "origins:dimension",
+									"dimension": "minecraft:the_end"
+								}
+							]
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [ 
+						{	
+							"type": "origins:execute_command",
+							"command": "resource change @s apocalypse:myconoids/resource_temperature_coolness -1"
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+				  "type": "origins:and",
+				  "conditions": [
+						{
+							"type": "origins:resource",
+							"comparison": "<",
+							"resource": "apocalypse:myconoids/resource_temperature_coolness",
+							"compare_to": 7
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:biome",
+									"condition": {
+										"type": "origins:temperature",
+										"comparison": ">",
+										"compare_to": 0.2
+									}
+								},
+								{
+								  "type": "origins:and",
+								  "conditions": [
+										{
+											"type": "origins:biome",
+											"condition": {
+												"type": "origins:temperature",
+												"comparison": ">",
+												"compare_to": 0.2
+											}
+										},
+										{
+											"type": "origins:dimension",
+											"inverted": true,
+											"dimension": "minecraft:the_end"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [ 
+						{	
+							"type": "origins:execute_command",
+							"command": "resource change @s apocalypse:myconoids/resource_temperature_coolness 1"
+						}
+					]
+				}
+			}
+		]
+	},
+	"name": "Cold Biomes",
+	"description": "Being in a cold biome such a tundra or the end dimension allows you to evolve into your Snowberry, Moss and Chorus forms. You will know a biome is cold if you see a blue thermometer indicator showing up on the bottom right of your screen."
+}

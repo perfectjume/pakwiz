@@ -1,0 +1,474 @@
+{
+	"type": "origins:multiple",
+	"oofouchmybones":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:item.elytra.flying master @s ~ ~ ~ 1 1"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:entity.player.attack.knockback master @s ~ ~ ~ 1 1"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "particle minecraft:flame ~ ~1 ~ 0 0 0 0.05 8"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "particle minecraft:crit ~ ~1 ~ 0 0 0 0.5 8"
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:enchantment",
+								"enchantment": "minecraft:protection",
+								"calculation": "sum",
+								"comparison": "<",
+								"compare_to": 8
+							},
+							"action": {
+								"type": "origins:damage",
+								"amount": 5,
+								"source": {
+									"name": "onFire",
+									"bypasses_armor": false,
+									"unblockable": false
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": ">=",
+										"compare_to": 8
+									},
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": "<",
+										"compare_to": 12
+									}
+								]
+							},
+							"action": {
+								"type": "origins:damage",
+								"amount": 7,
+								"source": {
+									"name": "onFire",
+									"bypasses_armor": false,
+									"unblockable": false
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": ">=",
+										"compare_to": 12
+									},
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": "<",
+										"compare_to": 16
+									}
+								]
+							},
+							"action": {
+								"type": "origins:damage",
+								"amount": 9,
+								"source": {
+									"name": "onFire",
+									"bypasses_armor": false,
+									"unblockable": false
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": ">=",
+										"compare_to": 16
+									},
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": "<",
+										"compare_to": 20
+									}
+								]
+							},
+							"action": {
+								"type": "origins:damage",
+								"amount": 11,
+								"source": {
+									"name": "onFire",
+									"bypasses_armor": true,
+									"unblockable": false
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": ">=",
+										"compare_to": 20
+									}
+								]
+							},
+							"action": {
+								"type": "origins:damage",
+								"amount": 16,
+								"source": {
+									"name": "onFire",
+									"bypasses_armor": true,
+									"unblockable": false
+								}
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "tp @s @p[tag=sucker]"
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 1,
+					"action": {
+						"type": "origins:execute_command",
+						"command": "tp @s ~ ~0.2 ~ ~30 ~",
+						"permission_level": 4
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 2,
+					"action": {
+						"type": "origins:execute_command",
+						"command": "tp @s ~ ~0.2 ~ ~30 ~",
+						"permission_level": 4
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 3,
+					"action": {
+						"type": "origins:execute_command",
+						"command": "tp @s ~ ~0.2 ~ ~30 ~",
+						"permission_level": 4
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 4,
+					"action": {
+						"type": "origins:execute_command",
+						"command": "tp @s ~ ~0.2 ~ ~30 ~",
+						"permission_level": 4
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 5,
+					"action": {
+						"type": "origins:execute_command",
+						"command": "tp @s ~ ~0.2 ~ ~30 ~",
+						"permission_level": 4
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 6,
+					"action": {
+						"type": "origins:execute_command",
+						"command": "tp @s ~ ~0.2 ~ ~30 ~",
+						"permission_level": 4
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 7,
+					"action": {
+						"type": "origins:execute_command",
+						"command": "tp @s ~ ~0.2 ~ ~30 ~",
+						"permission_level": 4
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 8,
+					"action": {
+						"type": "origins:execute_command",
+						"command": "tp @s ~ ~0.2 ~ ~30 ~",
+						"permission_level": 4
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 9,
+					"action": {
+						"type": "origins:execute_command",
+						"command": "tp @s ~ ~0.2 ~ ~30 ~",
+						"permission_level": 4
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 10,
+					"action": {
+						"type": "origins:execute_command",
+						"command": "tp @s ~ ~0.2 ~ ~30 ~",
+						"permission_level": 4
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 11,
+					"action": {
+						"type": "origins:execute_command",
+						"command": "tp @s ~ ~0.2 ~ ~30 ~",
+						"permission_level": 4
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 12,
+					"action": {
+						"type": "origins:execute_command",
+						"command": "tp @s ~ ~0.2 ~ ~30 ~",
+						"permission_level": 4
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 10,
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:entity.player.attack.knockback master @s ~ ~ ~ 1 1"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:crit ~ ~1 ~ 0 0 0 0.5 8"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:flame ~ ~1 ~ 0 0 0 0.05 8"
+							},
+							{
+								"type": "origins:if_else_list",
+								"actions": [
+									{
+										"condition": {
+											"type": "origins:enchantment",
+											"enchantment": "minecraft:protection",
+											"calculation": "sum",
+											"comparison": "<",
+											"compare_to": 8
+										},
+										"action": {
+											"type": "origins:damage",
+											"amount": 5,
+											"source": {
+												"name": "onFire",
+												"bypasses_armor": false,
+												"unblockable": false
+											}
+										}
+									},
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:enchantment",
+													"enchantment": "minecraft:protection",
+													"calculation": "sum",
+													"comparison": ">=",
+													"compare_to": 8
+												},
+												{
+													"type": "origins:enchantment",
+													"enchantment": "minecraft:protection",
+													"calculation": "sum",
+													"comparison": "<",
+													"compare_to": 12
+												}
+											]
+										},
+										"action": {
+											"type": "origins:damage",
+											"amount": 7,
+											"source": {
+												"name": "onFire",
+												"bypasses_armor": false,
+												"unblockable": false
+											}
+										}
+									},
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:enchantment",
+													"enchantment": "minecraft:protection",
+													"calculation": "sum",
+													"comparison": ">=",
+													"compare_to": 12
+												},
+												{
+													"type": "origins:enchantment",
+													"enchantment": "minecraft:protection",
+													"calculation": "sum",
+													"comparison": "<",
+													"compare_to": 16
+												}
+											]
+										},
+										"action": {
+											"type": "origins:damage",
+											"amount": 9,
+											"source": {
+												"name": "onFire",
+												"bypasses_armor": false,
+												"unblockable": false
+											}
+										}
+									},
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:enchantment",
+													"enchantment": "minecraft:protection",
+													"calculation": "sum",
+													"comparison": ">=",
+													"compare_to": 16
+												},
+												{
+													"type": "origins:enchantment",
+													"enchantment": "minecraft:protection",
+													"calculation": "sum",
+													"comparison": "<",
+													"compare_to": 20
+												}
+											]
+										},
+										"action": {
+											"type": "origins:damage",
+											"amount": 11,
+											"source": {
+												"name": "onFire",
+												"bypasses_armor": true,
+												"unblockable": false
+											}
+										}
+									},
+									{
+										"condition": {
+											"type": "origins:or",
+											"conditions": [
+												{
+													"type": "origins:enchantment",
+													"enchantment": "minecraft:protection",
+													"calculation": "sum",
+													"comparison": ">=",
+													"compare_to": 20
+												}
+											]
+										},
+										"action": {
+											"type": "origins:damage",
+											"amount": 16,
+											"source": {
+												"name": "onFire",
+												"bypasses_armor": true,
+												"unblockable": false
+											}
+										}
+									}
+								]
+							},
+							{
+								"type": "origins:set_on_fire",
+								"duration": 3
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 21,
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "power revoke @s apocalypse:myconoids/crimson_whirlwind afungus"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "stopsound @s master minecraft:item.elytra.flying"
+							}
+						]
+					}
+				}
+			]
+		}
+	},
+	"glow":
+	{
+		"type": "origins:self_glow",
+		"use_teams": false,
+		"red": 0.71,
+		"green": 0.16,
+		"blue": 0.20,
+		"entity_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:origin",
+					"origin": "apocalypse:myconoid_crimson",
+					"layer": "origins:origin"
+				}
+			]
+		},
+		"hidden": true
+	},
+	"hidden": true
+}

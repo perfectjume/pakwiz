@@ -1,0 +1,11 @@
+{
+	"replace": true,
+	"values": [
+		"minecraft:tropical_fish",
+		"minecraft:pufferfish",
+		"minecraft:cooked_cod",
+		"minecraft:cooked_salmon",
+		"minecraft:cod",
+		"minecraft:salmon"
+	]
+}

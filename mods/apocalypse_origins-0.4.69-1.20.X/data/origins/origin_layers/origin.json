@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "origins": [
+	"apocalypse:refractor2",
+	"apocalypse:hexblade",
+	"apocalypse:myconoid_spore",
+	"apocalypse:myconoid_brown",
+	"apocalypse:myconoid_red",
+	"apocalypse:myconoid_desert",
+	"apocalypse:myconoid_moss",
+	"apocalypse:myconoid_berry",
+	"apocalypse:myconoid_warped",
+	"apocalypse:myconoid_crimson",
+	"apocalypse:myconoid_wart",
+	"apocalypse:myconoid_chorus",
+	"apocalypse:geneticist"
+  ]
+}

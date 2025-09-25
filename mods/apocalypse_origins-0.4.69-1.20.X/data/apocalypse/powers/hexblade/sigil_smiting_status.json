@@ -1,0 +1,279 @@
+{
+	"type": "origins:multiple",
+	"durationbar": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 60,
+		"start_value": 60,
+		"hidden": true,
+		"name": "Duration",
+		"description": "How long?",
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse_origins:textures/gui/smiting_bar.png",
+			"bar_index": 0,
+			"condition": {
+				"type": "origins:resource",
+				"resource": "apocalypse:hexblade/sigil_smiting_status_durationbar",
+				"comparison": ">",
+				"compare_to": 0
+			}
+		}
+	},
+	"timer": 
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "apocalypse:hexblade/sigil_smiting_status_durationbar",
+								"compare_to": 60
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.soul_sand.break master @a[distance=..10] ~ ~ ~ 1 1.5",
+								"permission_level": 4
+							},						
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/sigil_smiting_status_durationbar",
+								"change": -1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "execute at @s run particle entity_effect ~ ~1 ~ 0 1 0 0 3 normal @a[tag=hexblade]",
+								"permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": ">",
+								"resource": "apocalypse:hexblade/sigil_smiting_status_durationbar",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "<=",
+								"resource": "apocalypse:hexblade/sigil_smiting_status_durationbar",
+								"compare_to": 59
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/sigil_smiting_status_durationbar",
+								"change": -1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:ambient.soul_sand_valley.additions master @a[distance=..10] ~ ~ ~ 1 2",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "execute at @s run particle entity_effect ~ ~1 ~ 0 1 0 0 3 normal @a[tag=hexblade]",
+								"permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "apocalypse:hexblade/sigil_smiting_status_durationbar",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.amethyst_cluster.break master @a[distance=..5] ~ ~ ~ 10 2",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:execute_command",
+									"command": "power revoke @s apocalypse:hexblade/sigil_smiting_status hexblade_bars",
+									"permission_level": 4
+								}
+							}							
+						]
+					}
+				}
+			]
+		},
+		"interval": 20,
+		"hidden": true
+	},
+	"sigil_trigger": 
+	{
+		"type": "origins:self_action_when_hit",
+		"entity_action":{
+			"type": "origins:chance",
+			"action": {
+				"type": "origins:choice",
+				"actions": [
+					{
+						"element": {	
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:hexblade/sigil_sundering_status hexblade_bars",
+							"permission_level": 4	
+						},
+						"weight": 1
+					},
+					{
+						"element": {	
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:hexblade/sigil_sand_status hexblade_bars",
+							"permission_level": 4	
+						},
+						"weight": 1
+					},
+					{
+						"element": {	
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:hexblade/sigil_sight_status hexblade_bars",
+							"permission_level": 4	
+						},
+						"weight": 1
+					},
+					{
+						"element":{
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"permission_level": 4,
+									"command": "tag @s add seether"
+								},
+								{
+									"type": "origins:execute_command",
+									"permission_level": 4,
+									"command": "power grant @e[type=!area_effect_cloud,type=!item,distance=..40] apocalypse:hexblade/sigil_seething_status_mob hexblade_bars"
+								},
+								{
+									"type": "origins:execute_command",
+									"permission_level": 4,
+									"command": "resource change @e[type=!area_effect_cloud,type=!item,distance=..40] apocalypse:hexblade/sigil_seething_status_mob_durationbar 2"
+								},
+								{
+									"type": "origins:execute_command",
+									"permission_level": 4,
+									"command": "execute at @e[type=!player,type=!area_effect_cloud,type=!item,distance=0.5..40] run summon area_effect_cloud ~ ~0.5 ~ {Tags:[\"seething\"],Particle:\"minecraft:ash\",Radius:0.3f,Duration:20,Effects:[{Id:6,Amplifier:30,Duration:1,ShowParticles:0b},{Id:7,Amplifier:30,Duration:20,ShowParticles:0b}]}"
+								},
+								{
+									"type": "origins:execute_command",
+									"permission_level": 4,
+									"command": "execute as @e[tag=seething] run data modify entity @s Owner set from entity @e[tag=seether,limit=1] UUID"
+								},
+								{
+									"type": "origins:execute_command",
+									"permission_level": 4,
+									"command": "tag @s remove seether"
+								},
+								{
+									"type": "origins:execute_command",
+									"permission_level": 4,
+									"command": "tag @e remove seething"
+								}
+							]
+						},
+						"weight": 1
+					}
+				]
+			},
+			"chance": 0.15
+		},
+		"damage_condition":{
+			"type":"origins:or",
+			"inverted": true,
+			"conditions":[
+				{
+					"type": "origins:name",
+					"name": "wither"
+				},
+				{
+					"type": "origins:name",
+					"name": "inFire"
+				},
+				{
+					"type": "origins:name",
+					"name": "onFire"
+				},
+				{
+					"type": "origins:name",
+					"name": "lava"
+				},
+				{
+					"type": "origins:name",
+					"name": "outOfWorld"
+				},
+				{
+					"type": "origins:name",
+					"name": "hotFloor"
+				},
+				{
+					"type": "origins:name",
+					"name": "dragonBreath"
+				},
+				{
+					"type": "origins:name",
+					"name": "drown"
+				},
+				{
+					"type": "origins:name",
+					"name": "inWall"
+				},
+				{
+					"type": "origins:name",
+					"name": "freeze"
+				},
+				{
+					"type": "origins:name",
+					"name": "magic"
+				},
+				{
+					"type": "origins:name",
+					"name": "indirectMagic"
+				}
+			]
+		},
+		"cooldown": 0,
+		"hud_render": {
+			"should_render": false
+		},
+		"hidden": true
+	},
+	"hidden": true
+}

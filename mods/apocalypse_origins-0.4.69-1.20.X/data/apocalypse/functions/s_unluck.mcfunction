@@ -1,0 +1,1 @@
+give @s minecraft:suspicious_stew{display:{Lore:['[{"text":"Golden and squishy","italic":false}]']},Effects:[{EffectId:27b,EffectDuration:600}]} 1

@@ -1,0 +1,428 @@
+{
+	"type": "origins:multiple",
+	"color":
+	{
+		"type": "origins:model_color",
+		"red": 0.54,
+		"green": 0.41,
+		"blue": 0.54
+	},
+	"noeffects": 
+	{
+		"type": "origins:effect_immunity",
+		"effects": [
+			"minecraft:levitation"
+		],
+		"hidden": true
+	},
+	"mortal": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": 1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type":"origins:or",
+			"conditions":[
+				{
+					"type": "origins:name",
+					"name": "onFire"
+				},
+				{
+					"type": "origins:name",
+					"name": "inFire"
+				},
+				{
+					"type": "origins:name",
+					"name": "lava"
+				},
+				{
+					"type": "origins:name",
+					"name": "fireball"
+				},
+				{
+					"type": "origins:name",
+					"name": "hotFloor"
+				}
+			]
+		},
+		"hidden": true
+	},
+	"flammable":
+	{
+		"type": "origins:self_action_when_hit",
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:set_on_fire",
+					"duration": 5
+				}
+			]
+		},
+		"damage_condition": {
+			"type": "origins:fire"
+		},
+		"cooldown": 0,
+		"name": "Flammable",
+		"description": "You are flammable and fire will not be put out on its own."
+	},
+	"resistances": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -0.9,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:name",
+					"name": "outOfWorld"
+				}
+			]
+		},
+		"hidden": true
+	},
+	"immunities": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type":"origins:or",
+			"conditions":[
+				{
+					"type": "origins:name",
+					"name": "freeze"
+				},
+				{
+					"type": "origins:name",
+					"name": "magic"
+				},
+				{
+					"type": "origins:name",
+					"name": "lightningBolt"
+				}
+			]
+		},
+		"hidden": true
+	},
+	"antivoid": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:name",
+					"name": "outOfWorld"
+				}
+			]
+		},
+		"condition":
+		{
+			"type": "origins:resource",
+			"comparison": "==",
+			"resource": "*:*_hurt_resource",
+			"compare_to": 1
+		}
+	},
+	"slow_falling":
+	{
+		"type": "origins:modify_falling",
+		"velocity": 0,
+		"take_fall_damage": false,
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:sneaking",
+					"inverted": true
+				},
+				{
+					"type": "origins:on_block",
+					"inverted": true
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "apocalypse:myconoids/chorus_passives_hurt_resource",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "apocalypse:myconoids/universal_toggle_binary",
+					"compare_to": 1
+				}
+			]
+		}
+	},
+	"air_fast":
+	{
+	  "type": "origins:attribute_modify_transfer",
+	  "class": "io.github.apace100.apoli.power.ModifyAirSpeedPower",
+	  "attribute": "minecraft:generic.movement_speed",
+	  "multiplier": 1
+	},
+	"airbreak":
+	{
+		"type": "origins:modify_break_speed",
+		"modifier": {
+			"operation": "multiply_base",
+			"value": 2.5
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:on_block",
+					"inverted": true
+				}
+			]
+		}
+	},
+	"air_jump":
+	{
+		"type": "origins:active_self",
+		"cooldown": 10,
+		"hud_render": {
+		  "should_render":false,
+		  "sprite_location":"origins:textures/gui/community/spiderkolo/resource_bar_02.png",
+		  "bar_index": 7
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [ 
+				{
+				  "type": "origins:execute_command",
+				  "command": "particle minecraft:dripping_obsidian_tear ~ ~0 ~ 0.3 0 0.3 0.1 10",
+				  "permission_level": 4
+				},
+				{
+					"type": "origins:add_velocity",
+					"y": 0.5,
+					"space": "world"
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:sneaking",
+					"inverted": true
+				},
+				{
+					"type": "origins:on_block",
+					"inverted": true
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "apocalypse:myconoids/chorus_passives_hurt_resource",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "apocalypse:myconoids/universal_toggle_binary",
+					"compare_to": 1
+				}
+			]
+		},
+		"name": "Move up",
+		"description": "[Jump mid-air] You can propel yourself upwards if you are in the air.",
+		"key": {
+			"key":"key.jump",
+			"continuous": true
+		}
+	},
+	"projectile":
+	{
+		"type": "origins:modify_projectile_damage",
+		"target_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:player",
+					"inverted": true
+				},
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:player",
+					"inverted": false
+				}
+			]
+		},
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -0.5
+		},
+		"hidden": true
+	},
+	"hurt_resource":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 2,
+		"start_value": 2,
+		"hidden": true,
+		"hud_render": {
+			"should_render": false,
+			"bar_index": 0,
+			"sprite_location": "apocalypse:textures/gui/mycocrimson.png"
+		}
+	},
+	"hurt_detect":
+	{
+		"type": "origins:self_action_when_hit",
+		"cooldown": 1,
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "resource change @s apocalypse:myconoids/chorus_passives_hurt_resource 2",
+					"permission_level": 4
+				}
+			]
+		},
+		"hidden": true
+	},
+	"hurt_reset":
+	{
+		"type": "origins:action_over_time",
+		"interval": 20,
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "resource change @s apocalypse:myconoids/chorus_passives_hurt_resource -1",
+					"permission_level": 4
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:resource",
+			"comparison": ">",
+			"resource": "apocalypse:myconoids/chorus_passives_hurt_resource",
+			"compare_to": 0
+		}
+	},
+	"stamina_spores":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 30,
+		"start_value": 30,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 0,
+			"sprite_location": "apocalypse:textures/gui/mycochorus.png"
+		}
+	},
+	"spore_regen":
+	{
+		"type": "origins:action_over_time",
+		"interval": 100,
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:resource",
+						"comparison": ">",
+						"resource": "apocalypse:myconoids/turf_penalty_in_turf_resource",
+						"compare_to": 0
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/chorus_passives_stamina_spores 5",
+								"permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "apocalypse:myconoids/turf_penalty_in_turf_resource",
+						"compare_to": 0
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/chorus_passives_stamina_spores 1",
+								"permission_level": 4
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"comparison": "<",
+					"resource": "apocalypse:myconoids/chorus_passives_stamina_spores",
+					"compare_to": 30
+				}
+			]
+		}
+	},
+	"devolve":
+	{
+		"type": "origins:prevent_death",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "power grant @s apocalypse:myconoids/shake afungus",
+					"permission_level": 4
+				},
+				{
+					"type": "origins:clear_effect"
+				},
+				{
+					"type": "origins:extinguish"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:entity.tnt.primed master @a[distance=..10] ~ ~ ~ 4 0.5",
+					"permission_level": 4
+				}
+			]
+		}
+	},
+	"status_bar":
+	{
+		"type": "origins:status_bar_texture",
+		"texture": "apocalypse:textures/gui/myconoid_chorus_bars.png"
+	},
+	"hidden": true
+}

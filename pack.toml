@@ -7,6 +7,7 @@ pack-format = "packwiz:1.1.0"
 file = "index.toml"
 hash-format = "sha256"
 hash = "f4e97494bcd8105cb19545ab8f3419a39ed0305d09894bad7819208c6cc60a77"
+url = "https://perfectjume.github.io/pakwiz/index.toml"
 
 [versions]
 fabric = "0.17.2"

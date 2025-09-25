@@ -1,0 +1,376 @@
+{
+	"type": "origins:action_over_time",
+	"interval": 20,
+	"entity_action": {
+		"type": "origins:if_else_list",
+		"actions": [
+			{
+				"condition": {
+				  "type": "origins:and",
+				  "conditions": [
+						{
+							"type": "origins:resource",
+							"comparison": ">",
+							"resource": "apocalypse:myconoids/resource_temperature_hotness",
+							"compare_to": 6
+						},
+						{
+							"type": "origins:power",
+							"power": "apocalypse:geneticist/genes/nether/fireproof",
+							"inverted": true
+						},
+						{    
+						  "type": "origins:fluid_height",
+						  "fluid": "minecraft:water",
+						  "comparison": ">",
+						  "compare_to": 0,
+						  "inverted": true
+						},
+						{
+							"type": "origins:block_in_radius",	
+							"radius": 2,
+							"inverted": true,
+								"block_condition": {
+									"type": "origins:in_tag",
+									"tag": "apocalypse:cold_blocks"
+							}
+						},
+						{
+							"type": "origins:dimension",
+							"inverted": true,
+							"dimension": "minecraft:the_end"
+						},
+						{
+							"type": "origins:in_block",
+							"inverted": true,
+							"block_condition": {
+								"type": "origins:block",
+								"block": "minecraft:cactus"
+							}
+						},
+						{
+							"type": "origins:status_effect",
+							"effect": "minecraft:fire_resistance",
+							"inverted": true
+						},
+						{
+						  "type": "origins:or",
+						  "conditions": [
+								{
+									"type": "origins:biome",
+									"condition": {
+										"type": "origins:temperature",
+										"comparison": ">=",
+										"compare_to": 0.95
+									}
+								},
+								{
+									"type": "origins:on_fire"
+								},
+								{
+									"type": "origins:dimension",
+									"dimension": "minecraft:the_nether"
+								}
+							]
+						},
+						{
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "apocalypse:myconoids/turf_penalty_in_turf_resource",
+							"compare_to": 0
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [
+						{	
+							"type": "origins:execute_command",
+							"command": "playsound minecraft:block.fire.extinguish master @s ~ ~ ~ 1 2 1"
+						},
+						{
+							"type": "origins:damage",
+							"amount": 2,
+							"source": {
+								"name": "onFire",
+								"bypasses_armor": true
+							}
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+				  "type": "origins:and",
+				  "conditions": [
+						{
+							"type": "origins:gamemode",
+							"gamemode": "survival"
+						},
+						{
+							"type": "origins:resource",
+							"comparison": "<",
+							"resource": "apocalypse:myconoids/resource_temperature_hotness",
+							"compare_to": 7
+						},
+						{
+							"type": "origins:power",
+							"power": "apocalypse:geneticist/genes/nether/fireproof",
+							"inverted": true
+						},
+						{
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "apocalypse:myconoids/resource_temperature_coolness",
+							"compare_to": 7
+						},
+						{
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "apocalypse:myconoids/resource_temperature_wetness",
+							"compare_to": 0
+						},
+						{    
+						  "type": "origins:fluid_height",
+						  "fluid": "minecraft:water",
+						  "comparison": ">",
+						  "compare_to": 0,
+						  "inverted": true
+						},
+						{
+							"type": "origins:block_in_radius",	
+							"radius": 2,
+							"inverted": true,
+								"block_condition": {
+									"type": "origins:in_tag",
+									"tag": "apocalypse:cold_blocks"
+							}
+						},
+						{
+							"type": "origins:dimension",
+							"inverted": true,
+							"dimension": "minecraft:the_end"
+						},
+						{
+							"type": "origins:in_block",
+							"inverted": true,
+							"block_condition": {
+								"type": "origins:block",
+								"block": "minecraft:cactus"
+							}
+						},
+						{
+							"type": "origins:status_effect",
+							"effect": "minecraft:fire_resistance",
+							"inverted": true
+						},
+						{
+						  "type": "origins:or",
+						  "conditions": [
+								{
+									"type": "origins:biome",
+									"condition": {
+										"type": "origins:temperature",
+										"comparison": ">=",
+										"compare_to": 0.95
+									}
+								},
+								{
+									"type": "origins:on_fire"
+								},
+								{
+									"type": "origins:dimension",
+									"dimension": "minecraft:the_nether"
+								}
+							]
+						},
+						{
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "apocalypse:myconoids/turf_penalty_in_turf_resource",
+							"compare_to": 0
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [ 
+						{	
+							"type": "origins:execute_command",
+							"command": "resource change @s apocalypse:myconoids/resource_temperature_hotness 1",
+							"permission_level": 4	
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+				  "type": "origins:and",
+				  "conditions": [
+						{
+							"type": "origins:resource",
+							"comparison": ">",
+							"resource": "apocalypse:myconoids/resource_temperature_hotness",
+							"compare_to": 0
+						},
+						{
+							"type": "origins:on_fire",
+							"inverted": true
+						},
+						{
+						  "type": "origins:or",
+						  "conditions": [
+								{
+								  "type": "origins:and",
+								  "conditions": [
+										{
+											"type": "origins:biome",
+											"condition": {
+												"type": "origins:temperature",
+												"inverted": false,
+												"comparison": "<",
+												"compare_to": 0.95
+											}
+										},
+										{
+											"type": "origins:dimension",
+											"dimension": "minecraft:the_nether",
+											"inverted": true
+										}
+									]
+								},
+								{
+									"type": "origins:block_in_radius",	
+									"radius": 2,
+									"inverted": false,
+									"block_condition": {
+										"type": "origins:in_tag",
+										"tag": "apocalypse:cold_blocks"
+									}
+								},
+								{    
+								  "type": "origins:fluid_height",
+								  "fluid": "minecraft:water",
+								  "comparison": ">",
+								  "compare_to": 0
+								},
+								{
+									"type": "origins:in_block",
+									"block_condition": {
+										"type": "origins:block",
+										"block": "minecraft:water_cauldron"
+									}
+								},
+								{
+									"type": "origins:resource",
+									"comparison": ">",
+									"resource": "apocalypse:myconoids/turf_penalty_in_turf_resource",
+									"compare_to": 0
+								}
+							]
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [ 
+						{	
+							"type": "origins:execute_command",
+							"command": "resource change @s apocalypse:myconoids/resource_temperature_hotness -1"
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+				  "type": "origins:and",
+				  "conditions": [
+						{
+							"type": "origins:resource",
+							"comparison": "<",
+							"resource": "apocalypse:myconoids/resource_temperature_hotness",
+							"compare_to": 7
+						},
+						{
+							"type": "origins:resource",
+							"comparison": ">",
+							"resource": "apocalypse:myconoids/resource_temperature_wetness",
+							"compare_to": 0
+						},
+						{    
+						  "type": "origins:fluid_height",
+						  "fluid": "minecraft:water",
+						  "comparison": ">",
+						  "compare_to": 0,
+						  "inverted": true
+						},
+						{
+							"type": "origins:block_in_radius",	
+							"radius": 2,
+							"inverted": true,
+								"block_condition": {
+									"type": "origins:in_tag",
+									"tag": "apocalypse:cold_blocks"
+							}
+						},
+						{
+							"type": "origins:dimension",
+							"inverted": true,
+							"dimension": "minecraft:the_end"
+						},
+						{
+							"type": "origins:in_block",
+							"inverted": true,
+							"block_condition": {
+								"type": "origins:block",
+								"block": "minecraft:cactus"
+							}
+						},
+						{
+							"type": "origins:status_effect",
+							"effect": "minecraft:fire_resistance",
+							"inverted": true
+						},
+						{
+						  "type": "origins:or",
+						  "conditions": [
+								{
+									"type": "origins:biome",
+									"condition": {
+										"type": "origins:temperature",
+										"comparison": ">=",
+										"compare_to": 0.95
+									}
+								},
+								{
+									"type": "origins:on_fire"
+								},
+								{
+									"type": "origins:dimension",
+									"dimension": "minecraft:the_nether"
+								}
+							]
+						},
+						{
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "apocalypse:myconoids/turf_penalty_in_turf_resource",
+							"compare_to": 0
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [ 
+						{	
+							"type": "origins:execute_command",
+							"command": "resource change @s apocalypse:myconoids/resource_temperature_wetness -1"
+						}
+					]
+				}
+			}
+		]
+	},
+	"name": "Heat Aversion",
+	"description": "Being in a hot biome such a desert or the nether dimension hurts you, unless you are in water or other sources of cold."
+}

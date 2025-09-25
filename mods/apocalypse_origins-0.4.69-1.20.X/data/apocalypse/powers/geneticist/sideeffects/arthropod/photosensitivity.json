@@ -1,0 +1,161 @@
+{
+	"type": "origins:multiple",
+	"resource":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 7,
+			"sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_02.png"
+		}
+	},
+	"update_resource":
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:in_block",
+								"block_condition": {
+									"type": "origins:light_level",
+									"comparison": "<=",
+									"compare_to": 11
+								}
+							},
+							{
+								"type": "origins:on_block",
+								"block_condition": {
+									"type": "origins:light_level",
+									"comparison": "<=",
+									"compare_to": 11
+								}
+							},
+							{
+								"type": "origins:exposed_to_sun",
+								"inverted": true
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_resource",
+								"compare_to": 1
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_resource",
+								"change": -1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "power revoke @s apocalypse:geneticist/sideeffects/arthropod/photosensitivity_blindness sideeffect"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "power revoke @s apocalypse:geneticist/sideeffects/arthropod/photosensitivity_extrablind sideeffect"
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:in_block",
+										"block_condition": {
+											"type": "origins:light_level",
+											"comparison": ">",
+											"compare_to": 11
+										}
+									},
+									{
+										"type": "origins:on_block",
+										"block_condition": {
+											"type": "origins:light_level",
+											"comparison": ">",
+											"compare_to": 11
+										}
+									},
+									{
+										"type": "origins:exposed_to_sun"
+									}
+								]
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_resource",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_resource",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "power grant @s apocalypse:geneticist/sideeffects/arthropod/photosensitivity_blindness sideeffect"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "power grant @s apocalypse:geneticist/sideeffects/arthropod/photosensitivity_extrablind sideeffect"
+							}
+						]
+					}
+				}
+			]
+		},
+		"interval": 10
+	},
+	"nightvision":
+	{
+		"type": "origins:night_vision",
+		"strength": 0.5,
+		"condition": {
+			"type": "origins:resource",
+			"comparison": "==",
+			"resource": "*:*_resource",
+			"compare_to": 0
+		}
+	},
+	"extrablind":
+	{
+		"type": "origins:overlay",
+		"texture": "apocalypse:textures/gui/trueblindness.png",
+		"strength": 1.0,
+		"red": 1.0,
+		"green": 1.0,
+		"blue": 1.0,
+		"draw_mode": "texture",
+		"draw_phase": "below_hud",
+		"hide_with_hud": false,
+		"visible_in_third_person": true
+	},
+	"blindness":
+	{
+		"type": "origins:shader",
+		"shader": "minecraft:shaders/post/sobel.json",
+		"toggleable": false
+	}
+}

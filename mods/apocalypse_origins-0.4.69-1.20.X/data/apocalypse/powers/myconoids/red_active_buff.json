@@ -1,0 +1,131 @@
+{
+	"type": "origins:multiple",
+	"icon": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 1,
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse:textures/gui/zred_buff.png",
+			"bar_index": 0
+		}
+	},
+	"durationbar": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 2,
+		"start_value": 2,
+		"hidden": true,
+		"name": "Duration",
+		"description": "How long?",
+		"hud_render": {
+			"should_render": false,
+			"sprite_location":"apocalypse:textures/gui/zred_buff.png",
+			"bar_index": 0,
+			"condition": {
+				"type": "origins:resource",
+				"resource": "apocalypse:myconoids/red_active_buff_durationbar",
+				"comparison": ">",
+				"compare_to": 0
+			}
+		}
+	},
+	"timer": 
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": ">",
+								"resource": "apocalypse:myconoids/red_active_buff_durationbar",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "particle minecraft:block red_mushroom_block ~ ~0 ~ 0 0 0 1 15"
+							},
+							{
+								"type": "origins:heal",
+								"amount": 1
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:myconoids/red_active_buff_durationbar",
+								"change": -1
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "apocalypse:myconoids/red_active_buff_durationbar",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "particle minecraft:block red_mushroom_block ~ ~0 ~ 0 0 0 1 15"
+							},
+							{
+								"type": "origins:heal",
+								"amount": 1
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:execute_command",
+									"command": "power revoke @s apocalypse:myconoids/red_active_buff afungus"
+								}
+							}							
+						]
+					}
+				}
+			]
+		},
+		"interval": 20,
+		"hidden": true
+	},
+	"speed":
+	{
+		"type": "origins:attribute",
+		"modifier": {
+			"attribute": "minecraft:generic.movement_speed",
+			"operation": "multiply_total",
+			"value": 0.5
+		}
+	},
+	"resistances": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -0.25,
+			"operation":"multiply_total"
+		},
+		"hidden": true
+	},
+	"hidden": true
+}

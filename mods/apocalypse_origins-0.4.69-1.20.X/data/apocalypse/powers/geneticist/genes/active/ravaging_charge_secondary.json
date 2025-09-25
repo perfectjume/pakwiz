@@ -1,0 +1,166 @@
+{
+	"type": "origins:multiple",
+	"antiexploit":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:change_resource",
+			"resource": "*:*_critdash",
+			"change": -1
+		}
+	},
+	"critdash":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hidden": true,
+		"hud_render": {
+			"should_render": false,
+			"bar_index": 1
+		}
+	},
+	"crit_damage": 
+	{
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "multiply_base_additive",
+			"value": 0.5
+		},
+		"condition": {
+			"type": "origins:resource",
+			"resource": "*:*_critdash",
+			"comparison": "==",
+			"compare_to": 1
+		}
+	},
+	"iframes":
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -1,
+			"operation":"multiply_total"
+		},
+		"condition": {
+			"type": "origins:resource",
+			"resource": "*:*_critdash",
+			"comparison": "==",
+			"compare_to": 1
+		}
+	},
+	"dash": 
+	{
+		"type": "origins:active_self",
+		"cooldown": 200,
+		"hud_render": {
+			"should_render": true,
+			"sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_02.png",
+			"bar_index": 4
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [ 
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:entity.ravager.attack master @a ~ ~ ~ 1 1"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:item.trident.throw master @a[distance=..10] ~ ~ ~ 4 1.2"
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_critdash",
+					"change": 1
+				},
+				{
+					"type": "origins:add_velocity",
+					"z": 1,
+					"space": "local"
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 8,
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:if_else_list",
+								"actions": [
+									{
+										"condition": {
+											"type": "origins:sneaking",
+											"inverted": true
+										},
+										"action": {
+											"type": "origins:explode",
+											"power": 2,
+											"destruction_type": "none",
+											"damage_self": false,
+											"create_fire": false
+										}
+									}
+								]
+							},
+							{
+								"type": "origins:area_of_effect",
+								"radius": 4,
+								"bientity_action": {
+									"type": "origins:target_action",
+									"action": {
+										"type": "origins:and",
+										"actions": [
+											{
+												"type": "origins:add_velocity",
+												"y": 0.7,
+												"space": "world"
+											},
+											{
+												"type": "origins:add_velocity",
+												"z": -1,
+												"space": "local"
+											}
+										]
+									}
+								},
+								"bientity_condition":
+								{
+									"type": "origins:and",
+									"conditions": [
+										{
+											"type": "origins:can_see"
+										},
+										{
+											"type": "origins:target_condition",
+											"condition": {
+												"type": "origins:living"
+											}
+										}
+									]
+								}
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 10,
+					"action": {
+						"type": "origins:change_resource",
+						"resource": "*:*_critdash",
+						"change": -1
+					}
+				}
+			]
+		},
+		"condition":{
+			"type": "origins:sneaking",
+			"inverted": true
+		},	
+		"key": {
+			"key":"key.origins.secondary_active",
+			"continuous": false
+		}
+	}
+}

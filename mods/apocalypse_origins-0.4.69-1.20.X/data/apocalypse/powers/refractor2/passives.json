@@ -1,0 +1,6653 @@
+{
+	"type": "origins:multiple",
+	"mode": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 3,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false
+		}
+	},
+	"overheat": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 20,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false
+		},
+		"max_action":{
+			"type": "origins:trigger_cooldown",
+			"power": "*:*_heatunheal"
+		},
+		"min_action":{
+			"type": "origins:execute_command",
+			"command": "playsound minecraft:block.fire.extinguish master @a ~ ~ ~ 0.75 0.3"
+		}
+	},
+	"heatunheal": 
+	{
+		"type": "origins:cooldown",
+		"cooldown": 200,
+		"hud_render":{
+			"should_render":false
+		}
+	},
+	"heatcooldown": 
+	{
+		"type": "origins:cooldown",
+		"cooldown": 40,
+		"hud_render":{
+			"should_render":false
+		}
+	},
+	"overlay_overheat":
+	{
+		"type": "origins:overlay",
+		"texture": "minecraft:textures/block/frosted_ice_0.png",
+		"strength": 0.5,
+		"red": 1,
+		"green": 0.4,
+		"blue": 0,
+		"draw_mode": "texture",
+		"draw_phase": "below_hud",
+		"hide_with_hud": false,
+		"visible_in_third_person": false,
+		"condition":{
+			"type": "origins:resource",
+			"resource": "*:*_heatunheal",
+			"comparison": ">",
+			"compare_to": 0
+		}
+	},
+	"tpmodea": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false
+		}
+	},
+	"unfall": 
+	{
+		"type": "origins:cooldown",
+		"cooldown": 21,
+		"hud_render":{
+			"should_render":false
+		}
+	},
+	"fun_movement": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 2,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false
+		}
+	},
+	"group_tp": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false
+		}
+	},
+	"warp_cooldown": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 30,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse_origins:textures/gui/refractor_mirrors.png",
+			"bar_index": 1,
+			"condition":{
+				"type": "origins:resource",
+				"resource": "*:*_bufferwarp_cooldown",
+				"comparison": ">",
+				"compare_to": 0
+			}
+		}
+	},
+	"blockusing": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false
+		},
+		"max_action":{
+			"type": "origins:delay",
+			"ticks": 1,
+			"action":{
+				"type": "origins:change_resource",
+				"resource": "*:*_blockusing",
+				"operation": "set",
+				"change": 0
+			}
+		}
+	},
+	"dashing": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false
+		}
+	},
+	"bouncing": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false
+		}
+	},
+	"bouncing2":
+	{
+		"type": "origins:cooldown",
+		"cooldown": 31,
+		"hud_render":{
+			"should_render":false
+		}
+	},
+	"blinked": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false
+		}
+	},
+	"airjumped": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 2,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false
+		}
+	},
+	"clinging": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false
+		}
+	},
+	"trapped_light":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 25,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse_origins:textures/gui/refractor_trapped_light.png",
+			"bar_index": 0
+		}
+	},
+	"reinforced": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 1,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 0,
+			"sprite_location": "apocalypse_origins:textures/gui/zamethyst_reinforced.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "*:*_reinforced",
+						"comparison": "==",
+						"compare_to": 1
+					},
+					{
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "*:*_mode",
+						"compare_to": 0
+					}
+				]
+			}
+		}
+	},
+	"reinforced_emerald": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 1,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 1,
+			"sprite_location": "apocalypse_origins:textures/gui/zamethyst_reinforced.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "*:*_reinforced",
+						"comparison": "==",
+						"compare_to": 1
+					},
+					{
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "*:*_mode",
+						"compare_to": 1
+					}
+				]
+			}
+		}
+	},
+	"reinforced_diamond": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 1,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 2,
+			"sprite_location": "apocalypse_origins:textures/gui/zamethyst_reinforced.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "*:*_reinforced",
+						"comparison": "==",
+						"compare_to": 1
+					},
+					{
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "*:*_mode",
+						"compare_to": 2
+					}
+				]
+			}
+		}
+	},
+	"reinforced_quartz": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 1,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 3,
+			"sprite_location": "apocalypse_origins:textures/gui/zamethyst_reinforced.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "*:*_reinforced",
+						"comparison": "==",
+						"compare_to": 1
+					},
+					{
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "*:*_mode",
+						"compare_to": 3
+					}
+				]
+			}
+		}
+	},
+	"immune":
+	{
+		"type": "origins:cooldown",
+		"cooldown": 21,
+		"hud_render":{
+			"should_render":false
+		}
+	},
+	"immune_visual": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 0,
+			"sprite_location": "apocalypse_origins:textures/gui/z_parry_cooldown.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "*:*_immune",
+						"comparison": "!=",
+						"compare_to": 0
+					},
+					{
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "*:*_mode",
+						"compare_to": 0
+					}
+				]
+			}
+		}
+	},
+	"immune_emerald": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 1,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 1,
+			"sprite_location": "apocalypse_origins:textures/gui/z_parry_cooldown.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "*:*_immune",
+						"comparison": "!=",
+						"compare_to": 0
+					},
+					{
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "*:*_mode",
+						"compare_to": 1
+					}
+				]
+			}
+		}
+	},
+	"immune_diamond": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 1,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 2,
+			"sprite_location": "apocalypse_origins:textures/gui/z_parry_cooldown.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "*:*_immune",
+						"comparison": "!=",
+						"compare_to": 0
+					},
+					{
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "*:*_mode",
+						"compare_to": 2
+					}
+				]
+			}
+		}
+	},
+	"immune_quartz": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 1,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 3,
+			"sprite_location": "apocalypse_origins:textures/gui/z_parry_cooldown.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "*:*_immune",
+						"comparison": "!=",
+						"compare_to": 0
+					},
+					{
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "*:*_mode",
+						"compare_to": 3
+					}
+				]
+			}
+		}
+	},
+	"aftermath":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 20,
+		"start_value": 20,
+		"hud_render": {
+			"should_render": false
+		}
+	},
+	"veil_cooldown":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 6,
+		"start_value": 6,
+		"hud_render": {
+			"should_render": false
+		}
+	},
+	"veiled":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse_origins:textures/gui/refractor_mirrors.png",
+			"bar_index": 2,
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "*:*_veiled",
+						"comparison": ">",
+						"compare_to": 0
+					},
+					{
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "*:*_mode",
+						"compare_to": 0
+					}
+				]
+			}
+		}
+	},
+	"veiled_emerald":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 1,
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse_origins:textures/gui/refractor_mirrors.png",
+			"bar_index": 3,
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "*:*_veiled",
+						"comparison": ">",
+						"compare_to": 0
+					},
+					{
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "*:*_mode",
+						"compare_to": 1
+					}
+				]
+			}
+		}
+	},
+	"veiled_diamond":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 1,
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse_origins:textures/gui/refractor_mirrors.png",
+			"bar_index": 4,
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "*:*_veiled",
+						"comparison": ">",
+						"compare_to": 0
+					},
+					{
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "*:*_mode",
+						"compare_to": 2
+					}
+				]
+			}
+		}
+	},
+	"veiled_quartz":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 1,
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse_origins:textures/gui/refractor_mirrors.png",
+			"bar_index": 5,
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "*:*_veiled",
+						"comparison": ">",
+						"compare_to": 0
+					},
+					{
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "*:*_mode",
+						"compare_to": 3
+					}
+				]
+			}
+		}
+	},
+	"callback":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_chosen": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s add refractor"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s add construct"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "give @s apocalypse_origins:mirror"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "power grant @s apocalypse:refractor2/no_armor refractor"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "scale delay set 0 @s"
+				}
+			]
+		},
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s add refractor"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s add construct"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "scale delay set 0 @s"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "resource set @s apocalypse:refractor2/passives_blockusing 0"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "resource set @s apocalypse:refractor2/passives_dashing 0"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "resource set @s apocalypse:refractor2/passives_unfall 0"
+				}
+			]
+		},
+		"entity_action_respawned": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s add refractor"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s add construct"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "scale delay set 0 @s"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "resource set @s apocalypse:refractor2/passives_blockusing 0"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "resource set @s apocalypse:refractor2/passives_dashing 0"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "resource set @s apocalypse:refractor2/passives_unfall 0"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "resource set @s apocalypse:refractor2/passives_clinging 0"
+				}
+			]
+		},
+		"entity_action_lost": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s remove refractor"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s remove construct"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "power revoke @s apocalypse:refractor2/emerald_passives refractor"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "power revoke @s apocalypse:refractor2/diamond_passives refractor"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "power revoke @s apocalypse:refractor2/quartz_passives refractor"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "power revoke @s apocalypse:refractor2/no_armor refractor"
+				}
+			]
+		},
+		"execute_chosen_when_orb": true
+	},
+	"modelcolor": 
+	{
+		"type": "origins:model_color",
+		"alpha": 0.85
+	},
+	"modelcolor_amethyst": 
+	{
+		"type": "origins:model_color",
+		"red": 0.69,
+		"green": 0.55,
+		"blue": 0.94,
+		"condition": {
+			"type": "origins:resource",
+			"comparison": "==",
+			"resource": "*:*_mode",
+			"compare_to": 0
+		}
+	},
+	"modelcolor_emerald": 
+	{
+		"type": "origins:model_color",
+		"red": 0.25,
+		"green": 0.94,
+		"blue": 0.51,
+		"condition": {
+			"type": "origins:resource",
+			"comparison": "==",
+			"resource": "*:*_mode",
+			"compare_to": 1
+		}
+	},
+	"modelcolor_diamond": 
+	{
+		"type": "origins:model_color",
+		"red": 0.29,
+		"green": 0.92,
+		"blue": 0.84,
+		"condition": {
+			"type": "origins:resource",
+			"comparison": "==",
+			"resource": "*:*_mode",
+			"compare_to": 2
+		}
+	},
+	"modelcolor_quartz": 
+	{
+		"type": "origins:model_color",
+		"red": 0.39,
+		"green": 0.16,
+		"blue": 0.16,
+		"condition": {
+			"type": "origins:resource",
+			"comparison": "==",
+			"resource": "*:*_mode",
+			"compare_to": 3
+		}
+	},
+	"basehealth": 
+	{
+		"type": "origins:attribute",
+		"modifiers": {
+			"attribute": "minecraft:generic.max_health",
+			"operation": "addition",
+			"value": 20
+		}
+	},
+	"noshields": 
+	{
+		"type": "origins:prevent_item_use",
+		"item_condition": {
+			"type": "origins:ingredient",
+			"ingredient": {
+			"tag": "origins:shields"
+			}
+		},
+		"condition": {
+			"type": "origins:resource",
+			"comparison": "!=",
+			"resource": "*:*_mode",
+			"compare_to": 2
+		}
+	},
+	"nopotions": 
+	{
+		"type": "origins:prevent_item_use",
+		"item_condition": {
+			"type": "origins:ingredient",
+			"ingredient": {
+				"tag": "apocalypse:potions"
+			}
+		}
+	},
+	"noregen": 
+	{
+		"type": "origins:disable_regen"
+	},
+	"nohunger": 
+	{
+		"type": "origins:modify_exhaustion",
+		"modifier": {
+			"operation": "multiply_base",
+			"value": -1
+		}
+	},
+	"noeffects": 
+	{
+		"type": "origins:effect_immunity",
+		"effects": [
+			"minecraft:hunger",
+			"minecraft:regeneration",
+			"minecraft:instant_health",
+			"minecraft:poison"
+		]
+	},
+	"on_fire":
+	{
+		"type": "origins:self_action_when_hit",
+		"cooldown": 0,
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action":{
+			"type": "origins:and",
+			"actions":[
+				{
+					"type": "origins:heal",
+					"amount": 2
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions":[
+						{
+							"condition":{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_mode",
+								"compare_to": 2
+							},
+							"action":{
+								"type": "origins:and",
+								"actions":[
+									{
+										"type": "origins:change_resource",
+										"resource": "*:*_overheat",
+										"change": 2
+									},
+									{
+										"type": "origins:trigger_cooldown",
+										"power": "*:*_heatcooldown"
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		"damage_condition": {
+			"type": "origins:fire"
+		},
+		"condition":{
+			"type": "origins:and",
+			"conditions":[
+				{
+					"type": "origins:status_effect",
+					"effect": "minecraft:fire_resistance",
+					"min_amplifier": 0,
+					"inverted": true
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "*:*_heatunheal",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"resistances": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -0.5,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type":"origins:or",
+			"conditions":[
+				{
+					"type": "origins:name",
+					"name": "magic"
+				},
+				{
+					"type": "origins:name",
+					"name": "inFire"
+				},
+				{
+					"type": "origins:name",
+					"name": "freeze"
+				},
+				{
+					"type": "origins:name",
+					"name": "fire"
+				},
+				{
+					"type": "origins:name",
+					"name": "onFire"
+				},
+				{
+					"type": "origins:name",
+					"name": "lava"
+				},
+				{
+					"type": "origins:name",
+					"name": "hotFloor"
+				},
+				{
+					"type": "origins:name",
+					"name": "indirectMagic"
+				},
+				{
+					"type": "origins:name",
+					"name": "fallingBlock"
+				},
+				{
+					"type": "origins:name",
+					"name": "dragonBreath"
+				},
+				{
+					"type": "origins:name",
+					"name": "outOfWorld"
+				},
+				{
+					"type": "origins:name",
+					"name": "cramming"
+				},
+				{
+					"type": "origins:name",
+					"name": "inWall"
+				},
+				{
+					"type": "origins:name",
+					"name": "sonic_boom"
+				},
+				{
+					"type": "origins:name",
+					"name": "genericDamageOverTime"
+				},
+				{
+					"type": "origins:name",
+					"name": "hurt_by_water"
+				}
+			]
+		}
+	},
+	"immunities": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type":"origins:or",
+			"conditions":[
+				{
+					"type": "origins:name",
+					"name": "lightningBolt"
+				}
+			]
+		}
+	},
+	"immunity_bouncing": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type": "origins:name",
+			"name": "fall"
+		},
+		"condition":{
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "*:*_bouncing",
+					"compare_to": 1
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "!=",
+					"resource": "*:*_bouncing2",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"immunity_parry": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -0.99,
+			"operation":"multiply_total"
+		},
+		"condition":{
+			"type": "origins:resource",
+			"comparison": "!=",
+			"resource": "*:*_immune",
+			"compare_to": 0
+		}
+	},
+	"true_immunity":
+	{
+		"type": "origins:invulnerability",
+		"damage_condition": {
+			"type": "origins:fire",
+			"inverted": true
+		},
+		"condition":{
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:resource",
+							"comparison": "!=",
+							"resource": "*:*_immune",
+							"compare_to": 0
+						},
+						{
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "*:*_mode",
+							"compare_to": 2
+						}
+					]
+				}
+			]
+		}
+	},
+	"weaknesses": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": 0.5,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type":"origins:or",
+			"conditions":[
+				{
+					"type": "origins:name",
+					"name": "witherSkull"
+				},
+				{
+					"type": "origins:name",
+					"name": "anvil"
+				},
+				{
+					"type": "origins:name",
+					"name": "badRespawnPoint"
+				},
+				{
+					"type": "origins:name",
+					"name": "flyIntoWall"
+				},
+				{
+					"type": "origins:name",
+					"name": "fall"
+				},
+				{
+					"type": "origins:name",
+					"name": "explosion"
+				},
+				{
+					"type": "origins:name",
+					"name": "explosion.player"
+				},
+				{
+					"type": "origins:name",
+					"name": "fireworks"
+				},
+				{
+					"type": "origins:name",
+					"name": "fallingStalactite"
+				}
+			]
+		}
+	},
+	"weakness_pickaxe": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": 2,
+			"operation":"multiply_total"
+		},
+		"damage_condition":
+		{
+			"type": "origins:attacker",
+			"entity_condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:entity_type",
+						"entity_type": "minecraft:player"
+					},
+					{
+						"type": "origins:equipped_item",
+						"equipment_slot": "mainhand",
+						"item_condition":
+						{
+							"type": "origins:ingredient",
+							"ingredient": {
+								"tag": "apocalypse:picks"
+							}
+						}
+					}
+				]
+			}
+		}
+	},
+	"fullinvis": 
+	{
+		"type": "origins:invisibility",
+		"render_armor": false,
+		"condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "*:*_veiled",
+					"compare_to": 1
+				},
+				{
+					"type": "origins:status_effect",
+					"effect": "minecraft:invisibility",
+					"min_amplifier": 0
+				}
+			]
+		}
+	},
+	"flash_of_light": 
+	{
+		"type": "origins:attacker_action_when_hit",
+		"cooldown": 0,
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [ 
+				{
+					"type": "origins:execute_command",
+					"command": "particle minecraft:flash"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "effect give @s minecraft:blindness 2 0 true"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "power grant @s[type=player,tag=!refractor] apocalypse:refractor2/blindness_short refractor"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "power grant @s[type=!player,tag=!refractor] apocalypse:refractor2/blindness_mobs refractor"
+				}
+			]
+		},
+		"damage_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:projectile",
+					"projectile": "minecraft:arrow"
+				},
+				{
+					"type": "origins:name",
+					"name": "witherSkull"
+				},
+				{
+					"type": "origins:name",
+					"name": "fireworks"
+				},
+				{
+					"type": "origins:name",
+					"name": "trident"
+				},
+				{
+					"type": "origins:name",
+					"name": "trident"
+				},
+				{
+					"type": "origins:name",
+					"name": "thrown"
+				}
+			]
+		}
+	},
+	"hurt_sound":
+	{
+		"type": "origins:self_action_when_hit",
+		"cooldown": 0,
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:feed",
+					"food": 2,
+					"saturation": 0
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:block.glass.break master @a ~ ~ ~ 0.5 1.3"
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_mode",
+								"compare_to": 0
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:block amethyst_block ~ ~1 ~ .1 .1 .1 1 5 normal"
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_mode",
+								"compare_to": 1
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:block emerald_block ~ ~1 ~ .1 .1 .1 1 5 normal"
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_mode",
+								"compare_to": 2
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:block diamond_block ~ ~1 ~ .1 .1 .1 1 5 normal"
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_mode",
+								"compare_to": 3
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:block nether_quartz_ore ~ ~1 ~ .1 .1 .1 1 5 normal"
+							}
+						}
+					]
+				}
+			]
+		}
+	},
+	"step_refractor":
+	{
+		"type": "origins:prevent_game_event",
+		"events": [
+			"minecraft:step"
+		],
+		"entity_action":{
+			"type": "origins:execute_command",
+			"command": "playsound minecraft:block.amethyst_block.hit master @a ~ ~ ~ 0.05 1.3"
+		}
+	},
+	"no_hit_floor_refractor":
+	{
+		"type": "origins:prevent_game_event",
+		"events": [
+			"minecraft:hit_ground"
+		]
+	},
+	"landing_sound_short":
+	{
+		"type": "origins:action_on_land",
+		"entity_action":{
+			"type": "origins:execute_command",
+			"command": "playsound minecraft:block.amethyst_block.hit master @a ~ ~ ~ 0.05 1.3"
+		},
+		"condition":
+		{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:water",
+					"comparison": "==",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:lava",
+					"comparison": "==",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:fall_distance",
+					"comparison": "<",
+					"compare_to": 4
+				}
+			]
+		}
+	},
+	"landing_sound":
+	{
+		"type": "origins:action_on_land",
+		"entity_action": {
+			"type": "origins:execute_command",
+			"command": "playsound minecraft:block.amethyst_block.resonate master @a ~ ~ ~ 1 1"
+		},
+		"condition":
+		{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:water",
+					"comparison": "==",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:lava",
+					"comparison": "==",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:fall_distance",
+					"comparison": ">=",
+					"compare_to": 4
+				}
+			]
+		}
+	},
+	"great_integrity":
+	{
+		"type": "origins:prevent_death",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:clear_effect"
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_reinforced",
+					"operation": "set",
+					"change": 0
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:resource",
+								"comparison": "!=",
+								"resource": "*:*_mode",
+								"compare_to": 2
+							},
+							"action":{
+								"type": "origins:heal",
+								"amount": 19
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_mode",
+								"compare_to": 2
+							},
+							"action":{
+								"type": "origins:heal",
+								"amount": 9
+							}
+						}
+					]
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:resource",
+			"resource": "*:*_reinforced",
+			"comparison": "==",
+			"compare_to": 1
+		}
+	},
+	"over_time_stuff":
+	{
+		"type": "origins:action_over_time",
+		"interval": 10,
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions":[
+									{
+										"type": "origins:on_fire"
+									},
+									{
+										"type": "origins:status_effect",
+										"effect": "minecraft:fire_resistance",
+										"min_amplifier": 0,
+										"inverted": true
+									},
+									{
+										"type": "origins:resource",
+										"resource": "*:*_heatunheal",
+										"comparison": "==",
+										"compare_to": 0
+									}
+								]
+							},
+							"action":{
+								"type": "origins:and",
+								"actions":[
+									{
+										"type": "origins:heal",
+										"amount": 0.5
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions":[
+									{
+										"type": "origins:resource",
+										"resource": "*:*_heatcooldown",
+										"comparison": "==",
+										"compare_to": 0
+									},
+									{
+										"type": "origins:resource",
+										"resource": "*:*_overheat",
+										"comparison": ">",
+										"compare_to": 0
+									}
+								]
+							},
+							"action":{
+								"type": "origins:if_else_list",
+								"actions":[
+									{
+										"condition":{
+											"type": "origins:fluid_height",
+											"fluid": "minecraft:water",
+											"comparison": "==",
+											"compare_to": 0
+										},
+										"action":{
+											"type": "origins:change_resource",
+											"resource": "*:*_overheat",
+											"change": -1
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:fluid_height",
+											"fluid": "minecraft:water",
+											"comparison": ">",
+											"compare_to": 0
+										},
+										"action":{
+											"type": "origins:change_resource",
+											"resource": "*:*_overheat",
+											"change": -2
+										}
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:on_block",
+								"block_condition":{
+									"type": "origins:or",
+									"conditions": [
+										{
+											"type": "origins:block",
+											"block": "minecraft:budding_amethyst"
+										},
+										{
+											"type": "origins:block",
+											"block": "apocalypse_origins:gob_complainer"
+										}
+									]
+								}
+							},
+							"action":{
+								"type": "origins:heal",
+								"amount": 4
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:and",
+								"conditions":
+								[
+									{
+										"type": "origins:resource",
+										"resource": "*:*_trapped_light",
+										"comparison": "<",
+										"compare_to": 25
+									},
+									{
+										"type": "origins:resource",
+										"comparison": "==",
+										"resource": "*:*_veiled",
+										"compare_to": 0
+									},
+									{
+										"type": "origins:or",
+										"conditions":[
+											{
+												"type": "origins:equipped_item",
+												"equipment_slot": "mainhand",
+												"item_condition": {
+													"type": "origins:ingredient",
+													"ingredient": {
+														"item": "apocalypse_origins:mirror_nether"
+													}
+												}
+											},
+											{
+												"type": "origins:equipped_item",
+												"equipment_slot": "offhand",
+												"item_condition": {
+													"type": "origins:ingredient",
+													"ingredient": {
+														"item": "apocalypse_origins:mirror_nether"
+													}
+												}
+											}
+										]
+									}
+								]
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:change_resource",
+									"resource": "*:*_trapped_light",
+									"change": 1
+								},
+								"chance": 0.25
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:and",
+								"conditions":
+								[
+									{
+										"type": "origins:resource",
+										"resource": "*:*_trapped_light",
+										"comparison": "<",
+										"compare_to": 25
+									},
+									{
+										"type": "origins:resource",
+										"comparison": "!=",
+										"resource": "*:*_mode",
+										"compare_to": 1
+									},
+									{
+										"type": "origins:resource",
+										"comparison": "==",
+										"resource": "*:*_veiled",
+										"compare_to": 0
+									}
+								]
+							},
+							"action":{
+								"type": "origins:if_else_list",
+								"actions":[
+									{
+										"condition":{
+											"type": "origins:exposed_to_sun"
+										},
+										"action":{
+											"type": "origins:change_resource",
+											"resource": "*:*_trapped_light",
+											"change": 1
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:and",
+											"conditions":[
+												{
+													"type": "origins:exposed_to_sun",
+													"inverted": true
+												},
+												{
+													"type": "origins:in_rain",
+													"inverted": true
+												},
+												{
+													"type": "origins:exposed_to_sky"
+												}
+											]
+										},
+										"action":{
+											"type": "origins:chance",
+											"action":{
+												"type": "origins:change_resource",
+												"resource": "*:*_trapped_light",
+												"change": 1
+											},
+											"chance": 0.05
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:or",
+											"inverted": true,
+											"conditions":[
+												{
+													"type": "origins:exposed_to_sun"
+												},
+												{
+													"type": "origins:in_rain"
+												},
+												{
+													"type": "origins:exposed_to_sky"
+												}
+											]
+										},
+										"action":{
+											"type": "origins:chance",
+											"action":{
+												"type": "origins:change_resource",
+												"resource": "*:*_trapped_light",
+												"change": 1
+											},
+											"chance": 0.01
+										}
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:and",
+								"conditions":
+								[
+									{
+										"type": "origins:resource",
+										"resource": "*:*_trapped_light",
+										"comparison": "<",
+										"compare_to": 25
+									},
+									{
+										"type": "origins:resource",
+										"comparison": "==",
+										"resource": "*:*_mode",
+										"compare_to": 1
+									},
+									{
+										"type": "origins:resource",
+										"comparison": "==",
+										"resource": "*:*_veiled",
+										"compare_to": 0
+									}
+								]
+							},
+							"action":{
+								"type": "origins:if_else_list",
+								"actions":[
+									{
+										"condition":{
+											"type": "origins:exposed_to_sun"
+										},
+										"action":{
+											"type": "origins:change_resource",
+											"resource": "*:*_trapped_light",
+											"change": 2
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:and",
+											"conditions":[
+												{
+													"type": "origins:exposed_to_sun",
+													"inverted": true
+												},
+												{
+													"type": "origins:in_rain",
+													"inverted": true
+												},
+												{
+													"type": "origins:exposed_to_sky"
+												}
+											]
+										},
+										"action":{
+											"type": "origins:chance",
+											"action":{
+												"type": "origins:change_resource",
+												"resource": "*:*_trapped_light",
+												"change": 2
+											},
+											"chance": 0.2
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:or",
+											"inverted": true,
+											"conditions":[
+												{
+													"type": "origins:exposed_to_sun"
+												},
+												{
+													"type": "origins:in_rain"
+												},
+												{
+													"type": "origins:exposed_to_sky"
+												}
+											]
+										},
+										"action":{
+											"type": "origins:chance",
+											"action":{
+												"type": "origins:change_resource",
+												"resource": "*:*_trapped_light",
+												"change": 2
+											},
+											"chance": 0.02
+										}
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:and",
+								"conditions":
+								[
+									{
+										"type": "origins:or",
+										"conditions": [
+											{
+												"type": "origins:on_block"
+											},
+											{
+												"type": "origins:fluid_height",
+												"fluid": "minecraft:water",
+												"comparison": ">",
+												"compare_to": 0
+											},
+											{
+												"type": "origins:fluid_height",
+												"fluid": "minecraft:lava",
+												"comparison": ">",
+												"compare_to": 0
+											}
+										]
+									},
+									{
+										"type": "origins:or",
+										"conditions":
+										[
+											{
+												"type": "origins:resource",
+												"resource": "*:*_dashing",
+												"comparison": ">",
+												"compare_to": 0
+											},
+											{
+												"type": "origins:resource",
+												"comparison": ">",
+												"resource": "*:*_blinked",
+												"compare_to": 0
+											},
+											{
+												"type": "origins:resource",
+												"comparison": ">",
+												"resource": "*:*_airjumped",
+												"compare_to": 0
+											},
+											{
+												"type": "origins:resource",
+												"comparison": "!=",
+												"resource": "*:*_wall_resource",
+												"compare_to": 20
+											},
+											{
+												"type": "origins:resource",
+												"comparison": "!=",
+												"resource": "*:*_antifall_resource",
+												"compare_to": 120
+											}
+										]
+									}
+								]
+							},
+							"action":{
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:change_resource",
+										"resource": "*:*_dashing",
+										"operation": "set",
+										"change": 0
+									},
+									{
+										"type": "origins:change_resource",
+										"resource": "*:*_blinked",
+										"operation": "set",
+										"change": 0
+									},
+									{
+										"type": "origins:change_resource",
+										"resource": "*:*_airjumped",
+										"operation": "set",
+										"change": 0
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "stopsound @s master minecraft:item.elytra.flying"
+									},
+									{
+										"type": "origins:change_resource",
+										"resource": "*:*_wall_resource",
+										"change": 20
+									},
+									{
+										"type": "origins:change_resource",
+										"resource": "*:*_antifall_resource",
+										"change": 120
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions":
+								[
+									{
+										"type": "origins:resource",
+										"resource": "*:*_reinforced",
+										"comparison": "==",
+										"compare_to": 0
+									},
+									{
+										"type": "origins:health",
+										"comparison": ">=",
+										"compare_to": 35
+									},
+									{
+										"type": "origins:resource",
+										"comparison": "!=",
+										"resource": "*:*_mode",
+										"compare_to": 2
+									}
+								]
+							},
+							"action": {
+								"type": "origins:change_resource",
+								"resource": "*:*_reinforced",
+								"operation": "set",
+								"change": 1
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions":
+								[
+									{
+										"type": "origins:resource",
+										"resource": "*:*_reinforced",
+										"comparison": "==",
+										"compare_to": 1
+									},
+									{
+										"type": "origins:health",
+										"comparison": "<",
+										"compare_to": 35
+									},
+									{
+										"type": "origins:resource",
+										"comparison": "!=",
+										"resource": "*:*_mode",
+										"compare_to": 2
+									}
+								]
+							},
+							"action": {
+								"type": "origins:change_resource",
+								"resource": "*:*_reinforced",
+								"operation": "set",
+								"change": 0
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions":
+								[
+									{
+										"type": "origins:resource",
+										"resource": "*:*_reinforced",
+										"comparison": "==",
+										"compare_to": 0
+									},
+									{
+										"type": "origins:health",
+										"comparison": ">=",
+										"compare_to": 15
+									},
+									{
+										"type": "origins:resource",
+										"comparison": "==",
+										"resource": "*:*_mode",
+										"compare_to": 2
+									}
+								]
+							},
+							"action": {
+								"type": "origins:change_resource",
+								"resource": "*:*_reinforced",
+								"operation": "set",
+								"change": 1
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions":
+								[
+									{
+										"type": "origins:resource",
+										"resource": "*:*_reinforced",
+										"comparison": "==",
+										"compare_to": 1
+									},
+									{
+										"type": "origins:health",
+										"comparison": "<",
+										"compare_to": 15
+									},
+									{
+										"type": "origins:resource",
+										"comparison": "==",
+										"resource": "*:*_mode",
+										"compare_to": 2
+									}
+								]
+							},
+							"action": {
+								"type": "origins:change_resource",
+								"resource": "*:*_reinforced",
+								"operation": "set",
+								"change": 0
+							}
+						}
+					]
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:and",
+					"conditions":
+					[
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:on_block"
+								},
+								{
+									"type": "origins:fluid_height",
+									"fluid": "minecraft:water",
+									"comparison": ">",
+									"compare_to": 0
+								},
+								{
+									"type": "origins:fluid_height",
+									"fluid": "minecraft:lava",
+									"comparison": ">",
+									"compare_to": 0
+								}
+							]
+						},
+						{
+							"type": "origins:or",
+							"conditions":
+							[
+								{
+									"type": "origins:resource",
+									"resource": "*:*_dashing",
+									"comparison": ">",
+									"compare_to": 0
+								},
+								{
+									"type": "origins:resource",
+									"comparison": ">",
+									"resource": "*:*_blinked",
+									"compare_to": 0
+								},
+								{
+									"type": "origins:resource",
+									"comparison": ">",
+									"resource": "*:*_airjumped",
+									"compare_to": 0
+								},
+								{
+									"type": "origins:resource",
+									"comparison": "!=",
+									"resource": "*:*_wall_resource",
+									"compare_to": 20
+								},
+								{
+									"type": "origins:resource",
+									"comparison": "!=",
+									"resource": "*:*_antifall_resource",
+									"compare_to": 120
+								}
+							]
+						}
+					]
+				},
+				{
+					"type": "origins:on_fire"
+				},
+				{
+					"type": "origins:and",
+					"conditions":[
+						{
+							"type": "origins:resource",
+							"resource": "*:*_heatcooldown",
+							"comparison": "==",
+							"compare_to": 0
+						},
+						{
+							"type": "origins:resource",
+							"resource": "*:*_overheat",
+							"comparison": ">",
+							"compare_to": 0
+						}
+					]
+				},
+				{
+					"type": "origins:on_block",
+					"block_condition":{
+						"type": "origins:or",
+						"conditions": [
+							{
+								"type": "origins:block",
+								"block": "minecraft:budding_amethyst"
+							},
+							{
+								"type": "origins:block",
+								"block": "apocalypse_origins:gob_complainer"
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:and",
+					"conditions":
+					[
+						{
+							"type": "origins:resource",
+							"resource": "*:*_trapped_light",
+							"comparison": "<",
+							"compare_to": 25
+						},
+						{
+							"type": "origins:resource",
+							"resource": "*:*_veiled",
+							"comparison": "==",
+							"compare_to": 0
+						}
+					]
+				},
+				{
+					"type": "origins:and",
+					"conditions":
+					[
+						{
+							"type": "origins:resource",
+							"resource": "*:*_reinforced",
+							"comparison": "==",
+							"compare_to": 0
+						},
+						{
+							"type": "origins:resource",
+							"resource": "*:*_mode",
+							"comparison": "!=",
+							"compare_to": 2
+						},
+						{
+							"type": "origins:health",
+							"comparison": ">=",
+							"compare_to": 35
+						}
+					]
+				},
+				{
+					"type": "origins:and",
+					"conditions":
+					[
+						{
+							"type": "origins:resource",
+							"resource": "*:*_reinforced",
+							"comparison": "==",
+							"compare_to": 1
+						},
+						{
+							"type": "origins:resource",
+							"resource": "*:*_mode",
+							"comparison": "!=",
+							"compare_to": 2
+						},
+						{
+							"type": "origins:health",
+							"comparison": "<",
+							"compare_to": 35
+						}
+					]
+				},
+				{
+					"type": "origins:and",
+					"conditions":
+					[
+						{
+							"type": "origins:resource",
+							"resource": "*:*_reinforced",
+							"comparison": "==",
+							"compare_to": 0
+						},
+						{
+							"type": "origins:resource",
+							"resource": "*:*_mode",
+							"comparison": "==",
+							"compare_to": 2
+						},
+						{
+							"type": "origins:health",
+							"comparison": ">=",
+							"compare_to": 15
+						}
+					]
+				},
+				{
+					"type": "origins:and",
+					"conditions":
+					[
+						{
+							"type": "origins:resource",
+							"resource": "*:*_reinforced",
+							"comparison": "==",
+							"compare_to": 1
+						},
+						{
+							"type": "origins:resource",
+							"resource": "*:*_mode",
+							"comparison": "==",
+							"compare_to": 2
+						},
+						{
+							"type": "origins:health",
+							"comparison": "<",
+							"compare_to": 15
+						}
+					]
+				}
+			]
+		}
+	},
+	"break_budding":
+	{
+		"type": "origins:action_on_block_break",
+		"entity_action": {
+			"type": "origins:execute_command",
+			"command": "give @s apocalypse_origins:gob_complainer 1"
+		},
+		"block_condition": {
+			"type": "origins:block",
+			"block": "minecraft:budding_amethyst"
+		},
+		"condition": {
+			"type": "origins:command",
+			"command": "execute if data entity @s SelectedItem.tag.Enchantments[{id:\"minecraft:silk_touch\"}]",
+			"comparison": "==",
+			"compare_to": 1
+		}
+	},
+	"break_bud":
+	{
+		"type": "origins:action_on_block_break",
+		"entity_action":{
+			"type": "origins:chance",
+			"action":{
+				"type": "origins:execute_command",
+				"command": "give @s apocalypse_origins:lucky_gemstone 1"
+			},
+			"chance": 0.01
+		},
+		"block_condition": {
+			"type": "origins:block",
+			"block": "minecraft:amethyst_cluster"
+		},
+		"condition": {
+			"type": "origins:command",
+			"command": "execute if data entity @s SelectedItem.tag.Enchantments[{id:\"minecraft:silk_touch\"}]",
+			"comparison": "==",
+			"compare_to": 0
+		}
+	},
+	"fooder": {
+		"type": "origins:resource",
+		"min": 0,
+		"max": 30,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false
+		},
+		"max_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:block.conduit.activate player @a ~ ~ ~ 1 2"
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions":[
+						{
+							"condition":{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_mode",
+								"compare_to": 1
+							},
+							"action":{
+								"type": "origins:change_resource",
+								"resource": "*:*_trapped_light",
+								"change": 5
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition": {
+									"type": "origins:ingredient",
+									"ingredient": {
+										"item": "minecraft:amethyst_shard"
+									}
+								}
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:heal",
+										"amount": 2
+									},
+									{
+										"type": "origins:change_resource",
+										"resource": "*:*_mode",
+										"operation": "set",
+										"change": 0
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power grant @s apocalypse:refractor2/no_armor refractor"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revoke @s apocalypse:refractor2/emerald_passives refractor"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revoke @s apocalypse:refractor2/diamond_passives refractor"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revoke @s apocalypse:refractor2/quartz_passives refractor"
+									},
+									{
+										"type": "origins:equipped_item_action",
+										"equipment_slot": "mainhand",
+										"action": {
+											"type": "origins:consume",
+											"amount": 1
+										}
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition": {
+									"type": "origins:ingredient",
+									"ingredient": {
+										"item": "minecraft:emerald"
+									}
+								}
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:heal",
+										"amount": 2
+									},
+									{
+										"type": "origins:change_resource",
+										"resource": "*:*_mode",
+										"operation": "set",
+										"change": 1
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power grant @s apocalypse:refractor2/emerald_passives refractor"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power grant @s apocalypse:refractor2/no_armor refractor"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revoke @s apocalypse:refractor2/diamond_passives refractor"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revoke @s apocalypse:refractor2/quartz_passives refractor"
+									},
+									{
+										"type": "origins:equipped_item_action",
+										"equipment_slot": "mainhand",
+										"action": {
+											"type": "origins:consume",
+											"amount": 1
+										}
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition": {
+									"type": "origins:ingredient",
+									"ingredient": {
+										"item": "minecraft:diamond"
+									}
+								}
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:heal",
+										"amount": 2
+									},
+									{
+										"type": "origins:change_resource",
+										"resource": "*:*_mode",
+										"operation": "set",
+										"change": 2
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revoke @s apocalypse:refractor2/emerald_passives refractor"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revoke @s apocalypse:refractor2/quartz_passives refractor"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revoke @s apocalypse:refractor2/no_armor refractor"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power grant @s apocalypse:refractor2/diamond_passives refractor"
+									},
+									{
+										"type": "origins:equipped_item_action",
+										"equipment_slot": "mainhand",
+										"action": {
+											"type": "origins:consume",
+											"amount": 1
+										}
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition": {
+									"type": "origins:ingredient",
+									"ingredient": {
+										"item": "minecraft:quartz"
+									}
+								}
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:heal",
+										"amount": 2
+									},
+									{
+										"type": "origins:change_resource",
+										"resource": "*:*_mode",
+										"operation": "set",
+										"change": 3
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revoke @s apocalypse:refractor2/emerald_passives refractor"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revoke @s apocalypse:refractor2/diamond_passives refractor"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revoke @s apocalypse:refractor2/no_armor refractor"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power grant @s apocalypse:refractor2/quartz_passives refractor"
+									},
+									{
+										"type": "origins:equipped_item_action",
+										"equipment_slot": "mainhand",
+										"action": {
+											"type": "origins:consume",
+											"amount": 1
+										}
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition": {
+									"type": "origins:ingredient",
+									"ingredient": {
+										"item": "minecraft:amethyst_shard"
+									}
+								}
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:heal",
+										"amount": 2
+									},
+									{
+										"type": "origins:change_resource",
+										"resource": "*:*_mode",
+										"operation": "set",
+										"change": 0
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revoke @s apocalypse:refractor2/emerald_passives refractor"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power grant @s apocalypse:refractor2/no_armor refractor"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revoke @s apocalypse:refractor2/diamond_passives refractor"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revoke @s apocalypse:refractor2/quartz_passives refractor"
+									},
+									{
+										"type": "origins:equipped_item_action",
+										"equipment_slot": "offhand",
+										"action": {
+											"type": "origins:consume",
+											"amount": 1
+										}
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition": {
+									"type": "origins:ingredient",
+									"ingredient": {
+										"item": "minecraft:emerald"
+									}
+								}
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:heal",
+										"amount": 2
+									},
+									{
+										"type": "origins:change_resource",
+										"resource": "*:*_mode",
+										"operation": "set",
+										"change": 1
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power grant @s apocalypse:refractor2/emerald_passives refractor"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revoke @s apocalypse:refractor2/diamond_passives refractor"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revoke @s apocalypse:refractor2/quartz_passives refractor"
+									},
+									{
+										"type": "origins:equipped_item_action",
+										"equipment_slot": "offhand",
+										"action": {
+											"type": "origins:consume",
+											"amount": 1
+										}
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition": {
+									"type": "origins:ingredient",
+									"ingredient": {
+										"item": "minecraft:diamond"
+									}
+								}
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:heal",
+										"amount": 2
+									},
+									{
+										"type": "origins:change_resource",
+										"resource": "*:*_mode",
+										"operation": "set",
+										"change": 2
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revoke @s apocalypse:refractor2/emerald_passives refractor"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revoke @s apocalypse:refractor2/quartz_passives refractor"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power grant @s apocalypse:refractor2/diamond_passives refractor"
+									},
+									{
+										"type": "origins:equipped_item_action",
+										"equipment_slot": "offhand",
+										"action": {
+											"type": "origins:consume",
+											"amount": 1
+										}
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition": {
+									"type": "origins:ingredient",
+									"ingredient": {
+										"item": "minecraft:quartz"
+									}
+								}
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:heal",
+										"amount": 2
+									},
+									{
+										"type": "origins:change_resource",
+										"resource": "*:*_mode",
+										"operation": "set",
+										"change": 3
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revoke @s apocalypse:refractor2/emerald_passives refractor"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revoke @s apocalypse:refractor2/diamond_passives refractor"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revoke @s apocalypse:refractor2/no_armor refractor"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power grant @s apocalypse:refractor2/quartz_passives refractor"
+									},
+									{
+										"type": "origins:equipped_item_action",
+										"equipment_slot": "offhand",
+										"action": {
+											"type": "origins:consume",
+											"amount": 1
+										}
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_fooder",
+					"operation": "set",
+					"change": 0
+				}
+			]
+		}
+	},
+	"set_to_0": {
+		"type": "origins:active_self",
+		"cooldown": 1,
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_fooder",
+					"change": 0,
+					"operation": "set"
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:or",
+			"inverted": true,
+			"conditions": [
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "mainhand",
+					"item_condition": {
+						"type": "origins:or",
+						"conditions": [
+							{
+								"type": "origins:ingredient",
+								"ingredient": {
+									"item": "minecraft:amethyst_shard"
+								}
+							},
+							{
+								"type": "origins:ingredient",
+								"ingredient": {
+									"item": "minecraft:diamond"
+								}
+							},
+							{
+								"type": "origins:ingredient",
+								"ingredient": {
+									"item": "minecraft:emerald"
+								}
+							},
+							{
+								"type": "origins:ingredient",
+								"ingredient": {
+									"item": "minecraft:quartz"
+								}
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "offhand",
+					"item_condition": {
+						"type": "origins:or",
+						"conditions": [
+							{
+								"type": "origins:ingredient",
+								"ingredient": {
+									"item": "minecraft:amethyst_shard"
+								}
+							},
+							{
+								"type": "origins:ingredient",
+								"ingredient": {
+									"item": "minecraft:diamond"
+								}
+							},
+							{
+								"type": "origins:ingredient",
+								"ingredient": {
+									"item": "minecraft:emerald"
+								}
+							},
+							{
+								"type": "origins:ingredient",
+								"ingredient": {
+									"item": "minecraft:quartz"
+								}
+							}
+						]
+					}
+				}
+			]
+		},
+		"key": {
+			"key": "key.use"
+		}
+	},
+	"use_geode": {
+		"type": "origins:active_self",
+		"cooldown": 1,
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action":{
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":{
+									"type": "origins:ingredient",
+									"ingredient": {
+										"item": "apocalypse_origins:lucky_gemstone"
+									}
+								}
+							},
+							"action":{
+								"type": "origins:equipped_item_action",
+								"equipment_slot": "mainhand",
+								"action": {
+									"type": "origins:consume",
+									"amount": 1
+								}
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition":{
+									"type": "origins:ingredient",
+									"ingredient": {
+										"item": "apocalypse_origins:lucky_gemstone"
+									}
+								}
+							},
+							"action":{
+								"type": "origins:equipped_item_action",
+								"equipment_slot": "offhand",
+								"action": {
+									"type": "origins:consume",
+									"amount": 1
+								}
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:block.decorated_pot.shatter player @a ~ ~ ~ 1 2"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:block.suspicious_gravel.break player @a ~ ~ ~ 1 1"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "execute positioned ~ ~0.2 ~ rotated as @s run particle minecraft:block smooth_basalt ^ ^1.4 ^0.2 0.1 0.1 0.1 0.055 4"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "execute positioned ~ ~0.2 ~ rotated as @s run particle minecraft:block calcite ^ ^1.4 ^0.2 0.1 0.1 0.1 0.055 4"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "power grant @s apocalypse:refractor2/geode_break temprefractor"
+				}
+			]
+		},
+		"condition":{
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "mainhand",
+					"item_condition":{
+						"type": "origins:ingredient",
+						"ingredient": {
+							"item": "apocalypse_origins:lucky_gemstone"
+						}
+					}
+				},
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "offhand",
+					"item_condition":{
+						"type": "origins:ingredient",
+						"ingredient": {
+							"item": "apocalypse_origins:lucky_gemstone"
+						}
+					}
+				}
+			]
+		},
+		"key": {
+			"key": "key.use"
+		}
+	},
+	"increase_food_resource": {
+		"type": "origins:active_self",
+		"cooldown": 1,
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_fooder",
+					"change": 1
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:or",
+					"conditions": [
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "mainhand",
+							"item_condition": {
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "minecraft:amethyst_shard"
+										}
+									},
+									{
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "minecraft:diamond"
+										}
+									},
+									{
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "minecraft:emerald"
+										}
+									},
+									{
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "minecraft:quartz"
+										}
+									}
+								]
+							}
+						},
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "offhand",
+							"item_condition": {
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "minecraft:amethyst_shard"
+										}
+									},
+									{
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "minecraft:diamond"
+										}
+									},
+									{
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "minecraft:emerald"
+										}
+									},
+									{
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "minecraft:quartz"
+										}
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:sneaking"
+				}
+			]
+		},
+		"key": {
+			"key": "key.use",
+			"continuous": true
+		}
+	},
+	"eat_particle": {
+		"type": "origins:active_self",
+		"cooldown": 4,
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition": {
+									"type": "origins:ingredient",
+									"ingredient": {
+										"item": "minecraft:amethyst_shard"
+									}
+								}
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "execute positioned ~ ~0.2 ~ rotated as @s run particle minecraft:item minecraft:amethyst_shard ^ ^1.4 ^0.2 0.1 0.1 0.1 0.055 4"
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition": {
+									"type": "origins:ingredient",
+									"ingredient": {
+										"item": "minecraft:emerald"
+									}
+								}
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "execute positioned ~ ~0.2 ~ rotated as @s run particle minecraft:item minecraft:emerald ^ ^1.4 ^0.2 0.1 0.1 0.1 0.055 4"
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition": {
+									"type": "origins:ingredient",
+									"ingredient": {
+										"item": "minecraft:diamond"
+									}
+								}
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "execute positioned ~ ~0.2 ~ rotated as @s run particle minecraft:item minecraft:diamond ^ ^1.4 ^0.2 0.1 0.1 0.1 0.055 4"
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition": {
+									"type": "origins:ingredient",
+									"ingredient": {
+										"item": "minecraft:quartz"
+									}
+								}
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "execute positioned ~ ~0.2 ~ rotated as @s run particle minecraft:item minecraft:quartz ^ ^1.4 ^0.2 0.1 0.1 0.1 0.055 4"
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition": {
+									"type": "origins:ingredient",
+									"ingredient": {
+										"item": "minecraft:amethyst_shard"
+									}
+								}
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "execute positioned ~ ~0.2 ~ rotated as @s run particle minecraft:item minecraft:amethyst_shard ^ ^1.4 ^0.2 0.1 0.1 0.1 0.055 4"
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition": {
+									"type": "origins:ingredient",
+									"ingredient": {
+										"item": "minecraft:emerald"
+									}
+								}
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "execute positioned ~ ~0.2 ~ rotated as @s run particle minecraft:item minecraft:emerald ^ ^1.4 ^0.2 0.1 0.1 0.1 0.055 4"
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition": {
+									"type": "origins:ingredient",
+									"ingredient": {
+										"item": "minecraft:diamond"
+									}
+								}
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "execute positioned ~ ~0.2 ~ rotated as @s run particle minecraft:item minecraft:diamond ^ ^1.4 ^0.2 0.1 0.1 0.1 0.055 4"
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition": {
+									"type": "origins:ingredient",
+									"ingredient": {
+										"item": "minecraft:quartz"
+									}
+								}
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "execute positioned ~ ~0.2 ~ rotated as @s run particle minecraft:item minecraft:quartz ^ ^1.4 ^0.2 0.1 0.1 0.1 0.055 4"
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:entity.sniffer.eat player @a ~ ~ ~"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:block.amethyst_cluster.step player @a ~ ~ ~ 0.5 2"
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:or",
+					"conditions": [
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "mainhand",
+							"item_condition": {
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "minecraft:amethyst_shard"
+										}
+									},
+									{
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "minecraft:diamond"
+										}
+									},
+									{
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "minecraft:emerald"
+										}
+									},
+									{
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "minecraft:quartz"
+										}
+									}
+								]
+							}
+						},
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "offhand",
+							"item_condition": {
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "minecraft:amethyst_shard"
+										}
+									},
+									{
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "minecraft:diamond"
+										}
+									},
+									{
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "minecraft:emerald"
+										}
+									},
+									{
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "minecraft:quartz"
+										}
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:sneaking"
+				}
+			]
+		},
+		"key": {
+			"key": "key.use",
+			"continuous": true
+		}
+	},
+	"ftl_blink":
+	{
+		"type": "origins:active_self",
+		"cooldown": 5,
+		"hud_render": {
+		  "should_render":false
+		},
+		"entity_action": 
+		{
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_mode",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_dashing",
+								"compare_to": 1
+							},
+							{
+								"type": "origins:resource",
+								"comparison": ">=",
+								"resource": "*:*_trapped_light",
+								"compare_to": 5
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_blinked",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_blinked",
+								"operation": "set",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource set @s apocalypse:refractor2/passives_dashing 0"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:refractor2/passives_trapped_light -5"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "effect give @s minecraft:slow_falling 2 0 true"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "effect give @s minecraft:invisibility 2 0 true"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:flash"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "tp @s ^ ^ ^5"
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 2,
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "effect clear @s minecraft:invisibility"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:block.amethyst_cluster.break master @a ~ ~ ~ 10 2"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "particle minecraft:flash"
+										}
+									]
+								}
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_mode",
+								"compare_to": 2
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_dashing",
+								"compare_to": 1
+							},
+							{
+								"type": "origins:resource",
+								"comparison": ">=",
+								"resource": "*:*_trapped_light",
+								"compare_to": 10
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_blinked",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_blinked",
+								"operation": "set",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource set @s apocalypse:refractor2/passives_immune 1"
+							},
+							{
+								"type": "origins:add_velocity",
+								"y": 0.25,
+								"z": 1,
+								"space": "local"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource set @s apocalypse:refractor2/passives_dashing 0"
+							},
+							{
+								"type": "origins:heal",
+								"amount": 5
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:refractor2/passives_trapped_light -10"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "effect give @s minecraft:invisibility 2 0 true"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:flash"
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 2,
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "effect clear @s minecraft:invisibility"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:block.amethyst_cluster.break master @a ~ ~ ~ 10 2"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "particle minecraft:flash"
+										}
+									]
+								}
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_mode",
+								"compare_to": 3
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_dashing",
+								"compare_to": 1
+							},
+							{
+								"type": "origins:resource",
+								"comparison": ">=",
+								"resource": "*:*_trapped_light",
+								"compare_to": 5
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_blinked",
+								"compare_to": 0
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_blinked",
+								"operation": "set",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource set @s apocalypse:refractor2/passives_immune 1"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "effect clear @s minecraft:invisibility"
+							},
+							{
+								"type": "origins:add_velocity",
+								"y": 0.25,
+								"z": 1.5,
+								"space": "local"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource set @s apocalypse:refractor2/passives_dashing 0"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:refractor2/passives_trapped_light -5"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:flash"
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 2,
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:block.amethyst_cluster.break master @a ~ ~ ~ 10 2"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "particle minecraft:flash"
+										}
+									]
+								}
+							}
+						]
+					}
+				},
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_mode",
+								"compare_to": 1
+							},
+							{
+								"type": "origins:resource",
+								"comparison": ">=",
+								"resource": "*:*_trapped_light",
+								"compare_to": 3
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions":[
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_blinked",
+								"operation": "set",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource set @s apocalypse:refractor2/passives_unfall 1"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource set @s apocalypse:refractor2/passives_dashing 0"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:refractor2/passives_trapped_light -3"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "effect give @s minecraft:invisibility 2 0 true"
+							},
+							{
+								"type": "origins:add_velocity",
+								"y": 0.3,
+								"z": 1.5,
+								"space": "local"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:flash"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "tp @s ^ ^ ^3"
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 2,
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "effect clear @s minecraft:invisibility"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:block.amethyst_cluster.break master @a ~ ~ ~ 10 2"
+										},
+										{
+											"type": "origins:execute_command",
+											"command": "particle minecraft:flash"
+										}
+									]
+								}
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:or",
+					"conditions": [
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "==",
+									"resource": "*:*_dashing",
+									"compare_to": 1
+								},
+								{
+									"type": "origins:resource",
+									"comparison": "!=",
+									"resource": "*:*_mode",
+									"compare_to": 1
+								}
+							]
+						},
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:or",
+									"conditions": [
+										{
+											"type": "origins:resource",
+											"comparison": "==",
+											"resource": "*:*_dashing",
+											"compare_to": 1
+										},
+										{
+											"type": "origins:resource",
+											"comparison": "==",
+											"resource": "*:*_blinked",
+											"compare_to": 1
+										}
+									]
+								},
+								{
+									"type": "origins:resource",
+									"comparison": "==",
+									"resource": "*:*_mode",
+									"compare_to": 1
+								}
+							]
+						}
+					]
+				},
+				{
+					"type": "origins:fall_flying",
+					"inverted": true
+				},
+				{
+					"type": "origins:sneaking",
+					"inverted": true
+				},
+				{
+					"type": "origins:or",
+					"conditions": [
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "mainhand",
+							"item_condition": {
+								"type": "origins:or",
+								"conditions":[
+									{
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "apocalypse_origins:mirror"
+										}
+									},
+									{
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "apocalypse_origins:mirror_nether"
+										}
+									}
+								]
+							}
+						},
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "offhand",
+							"item_condition": {
+								"type": "origins:or",
+								"conditions":[
+									{
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "apocalypse_origins:mirror"
+										}
+									},
+									{
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "apocalypse_origins:mirror_nether"
+										}
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		"key": {
+			"key":"key.origins.primary_active",
+			"continuous": false
+		}
+	},
+	"emerald_cooldown":
+	{
+		"type": "origins:cooldown",
+		"cooldown": 120,
+		"hud_render":{
+			"should_render":true,
+			"sprite_location":"apocalypse_origins:textures/gui/refractor.png",
+			"bar_index": 0,
+			"condition": {
+				"type": "origins:resource",
+				"comparison": "==",
+				"resource": "*:*_mode",
+				"compare_to": 1
+			}
+		}
+	},
+	"diamond_cooldown":
+	{
+		"type": "origins:cooldown",
+		"cooldown": 120,
+		"hud_render":{
+			"should_render":true,
+			"sprite_location":"apocalypse_origins:textures/gui/refractor.png",
+			"bar_index": 2,
+			"condition": {
+				"type": "origins:resource",
+				"comparison": "==",
+				"resource": "*:*_mode",
+				"compare_to": 2
+			}
+		}
+	},
+	"quartz_cooldown":
+	{
+		"type": "origins:cooldown",
+		"cooldown": 120,
+		"hud_render":{
+			"should_render":true,
+			"sprite_location":"apocalypse_origins:textures/gui/refractor.png",
+			"bar_index": 3,
+			"condition": {
+				"type": "origins:resource",
+				"comparison": "==",
+				"resource": "*:*_mode",
+				"compare_to": 3
+			}
+		}
+	},
+	"right_click_emblem":
+	{
+		"type": "origins:active_self",
+		"cooldown": 2,
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action":{
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_fun_movement",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:sneaking"
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "tellraw @s {\"text\":\"Extra [Photon Leap] enabled!\",\"color\":\"dark_aqua\"}"
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_fun_movement",
+								"change": 1
+							}
+						]
+					}
+				},
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_fun_movement",
+								"compare_to": 1
+							},
+							{
+								"type": "origins:sneaking"
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "tellraw @s {\"text\":\"Crystalline movement enabled!\",\"color\":\"dark_aqua\"}"
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_fun_movement",
+								"change": 1
+							}
+						]
+					}
+				},
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_fun_movement",
+								"compare_to": 2
+							},
+							{
+								"type": "origins:sneaking"
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "tellraw @s {\"text\":\"Crystalline movement and extra [Photon Leap] disabled!\",\"color\":\"dark_red\"}"
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_fun_movement",
+								"change": -2
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_wall_resource",
+								"change": 20
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_antifall_resource",
+								"change": 120
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_clinging",
+								"operation": "set",
+								"change": 0
+							},
+							{
+								"type": "origins:clear_effect",
+								"effect": "levitation"
+							},
+							{
+								"type": "origins:clear_effect",
+								"effect": "slow_falling"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "kill @e[tag=killfractor,distance=..10]"
+							}
+						]
+					}
+				},
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "<",
+								"resource": "*:*_trapped_light",
+								"compare_to": 25
+							},
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							}
+						]
+					},
+					"action":{
+						"type": "origins:execute_command",
+						"command": "tellraw @s {\"text\":\"Not enough trapped light!\",\"color\":\"dark_red\"}"
+					}
+				},
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_trapped_light",
+								"compare_to": 25
+							},
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "tellraw @s {\"text\":\"Unleashing trapped light!\",\"color\":\"yellow\"}"
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_trapped_light",
+								"change": -20
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "particle flash"
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 10,
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "particle flash"
+										},
+										{
+											"type": "origins:delay",
+											"ticks": 10,
+											"action":{
+												"type": "origins:and",
+												"actions": [
+													{
+														"type": "origins:execute_command",
+														"command": "particle flash"
+													},
+													{
+														"type": "origins:delay",
+														"ticks": 10,
+														"action":{
+															"type": "origins:and",
+															"actions": [
+																{
+																	"type": "origins:execute_command",
+																	"command": "particle flash"
+																},
+																{
+																	"type": "origins:execute_command",
+																	"command": "playsound minecraft:entity.wither.shoot master @a ~ ~ ~ 1 1"
+																},
+																{
+																	"type": "origins:execute_command",
+																	"command": "playsound minecraft:block.bell.resonate master @a ~ ~ ~ 1 2"
+																},
+																{
+																	"type": "origins:area_of_effect",
+																	"radius": 6,
+																	"bientity_action": {
+																		"type": "origins:target_action",
+																		"action":{
+																			"type": "origins:execute_command",
+																			"command": "power grant @s apocalypse:refractor2/blindness refractor"
+																		}
+																	},
+																	"bientity_condition": {
+																		"type": "origins:and",
+																		"conditions":
+																		[
+																			{
+																				"type": "origins:can_see"
+																			},
+																			{
+																				"type": "origins:both",
+																				"condition": {
+																					"type": "origins:or",
+																					"conditions":
+																					[
+																						{
+																							"type": "origins:and",
+																							"conditions":
+																							[
+																								{
+																									"type": "origins:living"
+																								},
+																								{
+																									"type": "origins:resource",
+																									"comparison": "==",
+																									"resource": "othersider:invisible_otherside_otherside",
+																									"compare_to": 1
+																								},
+																								{
+																									"type": "origins:power",
+																									"power": "othersider:invisible_otherside_otherside"
+																								}
+																							]
+																						},
+																						{
+																							"type": "origins:and",
+																							"conditions":
+																							[
+																								{
+																									"type": "origins:living"
+																								},
+																								{
+																									"type": "origins:or",
+																									"conditions":
+																									[
+																										{
+																											"type": "origins:resource",
+																											"comparison": "==",
+																											"resource": "othersider:invisible_otherside_otherside",
+																											"compare_to": 0
+																										},
+																										{
+																											"type": "origins:power",
+																											"power": "othersider:invisible_otherside_otherside",
+																											"inverted": true
+																										}
+																									]
+																								}
+																							]
+																						}
+																					]
+																				}
+																			}
+																		]
+																	}
+																}
+															]
+														}
+													}
+												]
+											}
+										}
+									]
+								}
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition":{
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "mainhand",
+					"item_condition":
+					{
+						"type": "origins:ingredient",
+						"ingredient":
+						{
+							"item": "apocalypse_origins:crystalline_emblem"
+						}
+					}
+				},
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "offhand",
+					"item_condition":
+					{
+						"type": "origins:ingredient",
+						"ingredient":
+						{
+							"item": "apocalypse_origins:crystalline_emblem"
+						}
+					}
+				}
+			]
+		},
+		"key": {
+			"key":"key.use",
+			"continuous": false
+		}
+	},
+	"change_group_mode":
+	{
+		"type": "origins:action_on_block_use",
+		"entity_action":{
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_tpmodea",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_blockusing",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:power",
+								"power": "apocalypse:refractor2/teleport_normal",
+								"inverted": true
+							},
+							{
+								"type": "origins:power",
+								"power": "apocalypse:refractor2/teleport_reverse",
+								"inverted": true
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "tellraw @s {\"text\":\"Group [FTL: Warp] enabled!\",\"color\":\"dark_aqua\"}"
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_tpmodea",
+								"change": 1
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_blockusing",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:item.lodestone_compass.lock master @a ~ ~ ~ 1 1"
+							}
+						]
+					}
+				},
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_tpmodea",
+								"compare_to": 1
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_blockusing",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:power",
+								"power": "apocalypse:refractor2/teleport_normal",
+								"inverted": true
+							},
+							{
+								"type": "origins:power",
+								"power": "apocalypse:refractor2/teleport_reverse",
+								"inverted": true
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "tellraw @s {\"text\":\"Group [FTL: Warp] disabled!\",\"color\":\"dark_aqua\"}"
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_tpmodea",
+								"change": -1
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_blockusing",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:item.lodestone_compass.lock master @a ~ ~ ~ 1 1"
+							}
+						]
+					}
+				}
+			]
+		},
+		"block_condition":{
+			"type": "origins:block",
+			"block": "minecraft:lodestone"
+		},
+		"item_condition":
+		{
+			"type": "origins:ingredient",
+			"ingredient":
+			{
+				"item": "apocalypse_origins:regulator"
+			}
+		}
+	},
+	"wall_resource":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 20,
+		"start_value": 20,
+		"hud_render":
+		{
+			"should_render": false
+		}
+	},
+	"antifall_resource":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 120,
+		"start_value": 120,
+		"hud_render":
+		{
+			"should_render": false
+		}
+	},
+	"slow_falling":
+	{
+		"type": "origins:modify_falling",
+		"velocity": 0.01,
+		"take_fall_damage": false,
+		"condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"comparison": "!=",
+					"resource": "*:*_antifall_resource",
+					"compare_to": 120
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "*:*_clinging",
+					"compare_to": 1
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "!=",
+					"resource": "*:*_unfall",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"wall_overtime":
+	{
+		"type": "origins:action_over_time",
+		"interval": 1,
+		"entity_action":
+		{
+			"type": "origins:and",
+			"actions":
+			[
+				{
+					"type": "origins:if_else",
+					"condition":
+					{
+						"type": "origins:and",
+						"conditions":
+						[
+							{
+								"type": "origins:on_block",
+								"inverted": true
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "!=",
+								"resource": "*:*_wall_resource",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:on_block",
+								"inverted": true
+							},
+							{    
+								"type": "origins:fall_flying",
+								"inverted": true
+							},
+							{         
+								"type": "origins:creative_flying",
+								"inverted": true
+							},
+							{
+								"type": "origins:gamemode",
+								"gamemode": "spectator",
+								"inverted": true
+							},
+							{    
+								"type": "origins:fluid_height",
+								"fluid": "minecraft:water",
+								"comparison": "==",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:block_collision",
+										"inverted": false,
+										"offset_x": 0.1,
+										"offset_z": 0.1,
+										"offset_y": 0
+									},
+									{
+										"type": "origins:block_collision",
+										"inverted": false,
+										"offset_x": -0.1,
+										"offset_z": -0.1,
+										"offset_y": 0
+									}
+								]
+							}
+						]
+					},
+					"if_action":
+					{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_wall_resource",
+								"change": -1
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_antifall_resource",
+								"change": -120
+							},
+							{
+								"type": "origins:set_fall_distance",
+								"fall_distance": 0
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.powder_snow.break player @a[distance=..32] ~ ~ ~ .2 0"
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:if_else",
+					"condition":
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:or",
+										"inverted": true,
+										"conditions": [
+											{
+												"type": "origins:block_collision",
+												"offset_x": 0.1,
+												"offset_z": 0.1,
+												"offset_y": 0
+											},
+											{
+												"type": "origins:block_collision",
+												"offset_x": -0.1,
+												"offset_z": -0.1,
+												"offset_y": 0
+											}
+										]
+									},
+									{
+										"type": "origins:on_block"
+									}
+								]
+							},
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:resource",
+										"comparison": "!=",
+										"resource": "*:*_wall_resource",
+										"compare_to": 20
+									},
+									{
+										"type": "origins:resource",
+										"comparison": "!=",
+										"resource": "*:*_antifall_resource",
+										"compare_to": 120
+									}
+								]
+							}
+						]
+					},
+					"if_action":
+					{
+						"type": "origins:and",
+						"actions":
+						[
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_wall_resource",
+								"change": 20
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_antifall_resource",
+								"change": 110
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition":{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:or",
+					"conditions": [
+						{
+							"type": "origins:resource",
+							"comparison": "!=",
+							"resource": "*:*_wall_resource",
+							"compare_to": 20
+						},
+						{
+							"type": "origins:resource",
+							"comparison": "!=",
+							"resource": "*:*_antifall_resource",
+							"compare_to": 120
+						},
+						{
+							"type": "origins:and",
+							"conditions":
+							[
+								{
+									"type": "origins:on_block",
+									"inverted": true
+								},
+								{
+									"type": "origins:resource",
+									"comparison": "!=",
+									"resource": "*:*_wall_resource",
+									"compare_to": 0
+								},
+								{
+									"type": "origins:on_block",
+									"inverted": true
+								},
+								{    
+									"type": "origins:fall_flying",
+									"inverted": true
+								},
+								{         
+									"type": "origins:creative_flying",
+									"inverted": true
+								},
+								{
+									"type": "origins:gamemode",
+									"gamemode": "spectator",
+									"inverted": true
+								},
+								{    
+									"type": "origins:fluid_height",
+									"fluid": "minecraft:water",
+									"comparison": "==",
+									"compare_to": 0
+								},
+								{    
+									"type": "origins:fluid_height",
+									"fluid": "minecraft:lava",
+									"comparison": "==",
+									"compare_to": 0
+								},
+								{
+									"type": "origins:or",
+									"conditions": [
+										{
+											"type": "origins:block_collision",
+											"inverted": false,
+											"offset_x": 0.1,
+											"offset_z": 0.1,
+											"offset_y": 0
+										},
+										{
+											"type": "origins:block_collision",
+											"inverted": false,
+											"offset_x": -0.1,
+											"offset_z": -0.1,
+											"offset_y": 0
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "*:*_fun_movement",
+					"compare_to": 2
+				}
+			]
+		}
+	},
+    "walljump":{
+        "type": "origins:active_self",
+        "hud_render": {
+            "should_render": false
+        },
+        "cooldown": 2,
+        "entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_clinging",
+					"operation": "set",
+					"change": 0
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_airjumped",
+					"operation": "set",
+					"change": 0
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_bouncing",
+					"operation": "set",
+					"change": 1
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "apocalypse:refractor2/primary",
+					"operation": "set",
+					"change": 120
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_emerald_cooldown",
+					"operation": "set",
+					"change": 120
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_diamond_cooldown",
+					"operation": "set",
+					"change": 120
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_quartz_cooldown",
+					"operation": "set",
+					"change": 120
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_dashing",
+					"operation": "set",
+					"change": 0
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_blinked",
+					"operation": "set",
+					"change": 0
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_clinging",
+					"operation": "set",
+					"change": 0
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "kill @e[tag=killfractor,distance=..10]"
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_wall_resource",
+					"change": 20
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_antifall_resource",
+					"change": 115
+				},
+				{
+					"type": "origins:add_velocity",
+					"y": 1,
+					"space": "world",
+					"set": true
+				},
+				{
+					"type": "origins:add_velocity",
+					"z": 0.25,
+					"space": "local"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:block.amethyst_block.resonate master @a ~ ~ ~ 1 1"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:item.armor.equip_leather master @a ~ ~ ~ 1 0.9"
+				},
+				{
+					"type": "origins:set_fall_distance",
+					"fall_distance": 0
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_mode",
+								"compare_to": 0
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:block amethyst_block ~ ~0 ~ 0 0.2 0 1 5 normal"
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_mode",
+								"compare_to": 1
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:block emerald_block ~ ~0 ~ 0 0.2 0 1 5 normal"
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_mode",
+								"compare_to": 2
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:block diamond_block ~ ~0 ~ 0 0.2 0 1 5 normal"
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_mode",
+								"compare_to": 3
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:block nether_quartz_ore ~ ~0 ~ 0 0.2 0 1 5 normal"
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:in_block_anywhere",
+								"block_condition": {
+									"type": "origins:offset",
+									"condition": {
+										"type": "origins:movement_blocking"
+									},
+									"x": 1
+								}
+							},
+							"action":{
+								"type": "origins:add_velocity",
+								"x": -0.25,
+								"space": "world"
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:in_block_anywhere",
+								"block_condition": {
+									"type": "origins:offset",
+									"condition": {
+										"type": "origins:movement_blocking"
+									},
+									"x": -1
+								}
+							},
+							"action":{
+								"type": "origins:add_velocity",
+								"x": 0.25,
+								"space": "world"
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:in_block_anywhere",
+								"block_condition": {
+									"type": "origins:offset",
+									"condition": {
+										"type": "origins:movement_blocking"
+									},
+									"z": 1
+								}
+							},
+							"action":{
+								"type": "origins:add_velocity",
+								"z": -0.25,
+								"space": "world"
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:in_block_anywhere",
+								"block_condition": {
+									"type": "origins:offset",
+									"condition": {
+										"type": "origins:movement_blocking"
+									},
+									"z": -1
+								}
+							},
+							"action":{
+								"type": "origins:add_velocity",
+								"z": 0.25,
+								"space": "world"
+							}
+						}
+					]
+				}
+			]
+		},
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:or",
+                    "conditions": [
+                        {
+                            "type": "origins:in_block_anywhere",
+                            "block_condition": {
+                                "type": "origins:offset",
+                                "condition": {
+                                    "type": "origins:movement_blocking"
+                                },
+                                "x": 1
+                            }
+                        },
+                        {
+                            "type": "origins:in_block_anywhere",
+                            "block_condition": {
+                                "type": "origins:offset",
+                                "condition": {
+                                    "type": "origins:movement_blocking"
+                                },
+                                "x": -1
+                            }
+                        },
+                        {
+                            "type": "origins:in_block_anywhere",
+                            "block_condition": {
+                                "type": "origins:offset",
+                                "condition": {
+                                    "type": "origins:movement_blocking"
+                                },
+                                "z": 1
+                            }
+                        },
+                        {
+                            "type": "origins:in_block_anywhere",
+                            "block_condition": {
+                                "type": "origins:offset",
+                                "condition": {
+                                    "type": "origins:movement_blocking"
+                                },
+                                "z": -1
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "origins:on_block",
+                    "inverted": true
+                },
+                {    
+                    "type": "origins:fall_flying",
+                    "inverted": true
+                },
+                {         
+                    "type": "origins:creative_flying",
+                    "inverted": true
+                },
+                {
+                    "type": "origins:gamemode",
+                    "gamemode": "spectator",
+                    "inverted": true
+                },
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:water",
+					"comparison": "==",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:lava",
+					"comparison": "==",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:resource",
+					"inverted": false,
+					"comparison": "!=",
+					"resource": "*:*_antifall_resource",
+					"compare_to": 120
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "*:*_fun_movement",
+					"compare_to": 2
+				}
+            ]
+        },
+        "key": {
+            "key": "key.jump",
+			"continuous": false
+        }
+    },
+    "airjump":{
+        "type": "origins:active_self",
+        "hud_render": {
+            "should_render": false
+        },
+        "cooldown": 2,
+        "entity_action":{
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:set_fall_distance",
+					"fall_distance": 0
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_airjumped",
+					"change": 1
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "resource set @s apocalypse:refractor2/passives_bouncing2 1"
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_bouncing",
+					"operation": "set",
+					"change": 0
+				},
+				{
+					"type": "origins:add_velocity",
+					"y": 0.75,
+					"space": "world",
+					"set": true
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:moving"
+									},
+									{
+										"type": "origins:sprinting",
+										"inverted": true
+									}
+								]
+							},
+							"action":{
+								"type": "origins:add_velocity",
+								"z": 0.2,
+								"space": "local"
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:moving"
+									},
+									{
+										"type": "origins:sprinting"
+									}
+								]
+							},
+							"action":{
+								"type": "origins:add_velocity",
+								"z": 0.4,
+								"space": "local"
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "particle minecraft:flash"
+				},
+				{
+					"type": "origins:clear_effect",
+					"effect": "levitation"
+				},
+				{
+					"type": "origins:clear_effect",
+					"effect": "slow_falling"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:block.amethyst_block.chime master @a ~ ~ ~ 2 0.5"
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 7,
+					"action":{
+						"type": "origins:execute_command",
+						"command": "stopsound @s master minecraft:block.amethyst_block.chime"
+					}
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_mode",
+								"compare_to": 0
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:block amethyst_block ~ ~0 ~ 0 0.2 0 1 5 normal"
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_mode",
+								"compare_to": 1
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:block emerald_block ~ ~0 ~ 0 0.2 0 1 5 normal"
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_mode",
+								"compare_to": 2
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:block diamond_block ~ ~0 ~ 0 0.2 0 1 5 normal"
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_mode",
+								"compare_to": 2
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:block nether_quartz_ore ~ ~0 ~ 0 0.2 0 1 5 normal"
+							}
+						}
+					]
+				}
+			]
+		},
+        "condition":{
+            "type": "origins:and",
+            "conditions": [
+				{
+					"type": "origins:resource",
+					"inverted": false,
+					"comparison": "==",
+					"resource": "*:*_antifall_resource",
+					"compare_to": 120
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "*:*_wall_resource",
+					"compare_to": 20
+				},
+				{
+					"type": "origins:or",
+					"conditions": [
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "<",
+									"resource": "*:*_airjumped",
+									"compare_to": 2
+								},
+								{
+									"type": "origins:resource",
+									"comparison": ">",
+									"resource": "*:*_fun_movement",
+									"compare_to": 0
+								}
+							]
+						},
+						{
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "*:*_airjumped",
+							"compare_to": 0
+						}
+					]
+				},
+                {
+                    "type": "origins:on_block",
+                    "inverted": true
+                },
+                {    
+                    "type": "origins:fall_flying",
+                    "inverted": true
+                },
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "chest",
+					"item_condition": {
+						"type": "origins:ingredient",
+						"ingredient": {
+							"item": "minecraft:elytra"
+						}
+					},
+					"inverted": true
+				},
+                {         
+                    "type": "origins:creative_flying",
+                    "inverted": true
+                },
+                {
+                    "type": "origins:gamemode",
+                    "gamemode": "spectator",
+                    "inverted": true
+                },
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:water",
+					"comparison": "==",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:lava",
+					"comparison": "==",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "*:*_clinging",
+					"compare_to": 0
+				}
+            ]
+        },
+        "key": {
+            "key": "key.jump",
+			"continuous": false
+        }
+    },
+	"on_landing":
+	{
+		"type": "origins:action_on_land",
+		"entity_action":
+		{
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_airjumped",
+					"operation": "set",
+					"change": 0
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 1,
+					"action":{
+						"type": "origins:change_resource",
+						"resource": "*:*_bouncing",
+						"operation": "set",
+						"change": 0
+					}
+				}
+			]
+		},
+		"condition":{
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"comparison": ">",
+					"resource": "*:*_airjumped",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "*:*_bouncing",
+					"compare_to": 1
+				}
+			]
+		}
+	},
+	"pogo":
+	{
+		"type": "origins:self_action_on_hit",
+		"cooldown": 1,
+		"entity_action":{
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:block.amethyst_block.resonate master @a ~ ~ ~ 1 1"
+				},
+				{
+					"type": "origins:play_sound",
+					"sound": "minecraft:item.armor.equip_leather",
+					"volume": 1,
+					"pitch": 0.9
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_mode",
+								"compare_to": 0
+							},
+							"action":{
+								"type": "origins:heal",
+								"amount": 2
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_bouncing",
+					"operation": "set",
+					"change": 1
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_airjumped",
+					"operation": "set",
+					"change": 0
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_dashing",
+					"operation": "set",
+					"change": 0
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_blinked",
+					"operation": "set",
+					"change": 0
+				},
+				{
+					"type": "origins:add_velocity",
+					"y": 1,
+					"space": "world",
+					"set": true
+				},
+				{
+					"type": "origins:set_fall_distance",
+					"fall_distance": 0
+				}
+			]
+		},
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:water",
+					"comparison": "==",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:lava",
+					"comparison": "==",
+					"compare_to": 0
+				},
+                {
+                    "type": "origins:on_block",
+                    "inverted": true
+                }
+            ]
+        }
+	},
+	"poggers":
+	{
+		"type": "origins:active_self",
+		"cooldown": 10,
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action": {
+			"type": "origins:area_of_effect",
+			"radius": 3,
+			"bientity_action":{
+				"type": "origins:and",
+				"actions": [
+					{
+						"type": "origins:actor_action",
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "playsound minecraft:block.amethyst_block.resonate master @a ~ ~ ~ 1 1"
+								},
+								{
+									"type": "origins:play_sound",
+									"sound": "minecraft:item.armor.equip_leather",
+									"volume": 1,
+									"pitch": 0.9
+								},
+								{
+									"type": "origins:change_resource",
+									"resource": "*:*_bouncing",
+									"operation": "set",
+									"change": 1
+								},
+								{
+									"type": "origins:change_resource",
+									"resource": "*:*_airjumped",
+									"operation": "set",
+									"change": 0
+								},
+								{
+									"type": "origins:add_velocity",
+									"y": 1,
+									"space": "world",
+									"set": true
+								}
+							]
+						}
+					},
+					{
+						"type": "origins:target_action",
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "particle minecraft:crit ~ ~1 ~ 0 0 0 0.5 1"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "particle minecraft:block redstone_block ~ ~1 ~ .1 .1 .1 1 1"
+								},
+								{
+									"type": "origins:if_else_list",
+									"actions":[
+										{
+											"condition":{
+												"type": "origins:enchantment",
+												"enchantment": "minecraft:protection",
+												"calculation": "sum",
+												"comparison": "<",
+												"compare_to": 8
+											},
+											"action":{
+												"type": "origins:damage",
+												"amount": 1,
+												"source": {
+													"name": "generic",
+													"bypasses_armor": false,
+													"unblockable": false
+												}
+											}
+										},
+										{
+											"condition":{
+												"type": "origins:and",
+												"conditions": [
+													{
+														"type": "origins:enchantment",
+														"enchantment": "minecraft:protection",
+														"calculation": "sum",
+														"comparison": ">=",
+														"compare_to": 8
+													},
+													{
+														"type": "origins:enchantment",
+														"enchantment": "minecraft:protection",
+														"calculation": "sum",
+														"comparison": "<",
+														"compare_to": 12
+													}
+												]
+											},
+											"action":{
+												"type": "origins:damage",
+												"amount": 5,
+												"source": {
+													"name": "generic",
+													"bypasses_armor": false,
+													"unblockable": false
+												}
+											}
+										},
+										{
+											"condition":{
+												"type": "origins:and",
+												"conditions": [
+													{
+														"type": "origins:enchantment",
+														"enchantment": "minecraft:protection",
+														"calculation": "sum",
+														"comparison": ">=",
+														"compare_to": 12
+													},
+													{
+														"type": "origins:enchantment",
+														"enchantment": "minecraft:protection",
+														"calculation": "sum",
+														"comparison": "<",
+														"compare_to": 16
+													}
+												]
+											},
+											"action":{
+												"type": "origins:damage",
+												"amount": 7,
+												"source": {
+													"name": "generic",
+													"bypasses_armor": false,
+													"unblockable": false
+												}
+											}
+										},
+										{
+											"condition":{
+												"type": "origins:and",
+												"conditions": [
+													{
+														"type": "origins:enchantment",
+														"enchantment": "minecraft:protection",
+														"calculation": "sum",
+														"comparison": ">=",
+														"compare_to": 16
+													},
+													{
+														"type": "origins:enchantment",
+														"enchantment": "minecraft:protection",
+														"calculation": "sum",
+														"comparison": "<",
+														"compare_to": 20
+													}
+												]
+											},
+											"action":{
+												"type": "origins:damage",
+												"amount": 12,
+												"source": {
+													"name": "generic",
+													"bypasses_armor": false,
+													"unblockable": false
+												}
+											}
+										},
+										{
+											"condition":{
+												"type": "origins:or",
+												"conditions": [
+													{
+														"type": "origins:enchantment",
+														"enchantment": "minecraft:protection",
+														"calculation": "sum",
+														"comparison": ">=",
+														"compare_to": 20
+													}
+												]
+											},
+											"action":{
+												"type": "origins:damage",
+												"amount": 17,
+												"source": {
+													"name": "generic",
+													"bypasses_armor": false,
+													"unblockable": false
+												}
+											}
+										}
+									]
+								}
+							]
+						}
+					}
+				]
+			},
+			"bientity_condition": {
+				"type": "origins:and",
+				"conditions":
+				[
+					{
+						"type": "origins:can_see"
+					},
+					{
+						"type": "origins:or",
+						"conditions":
+						[
+							{
+								"type": "origins:both",
+								"condition": {
+									"type": "origins:or",
+									"conditions":
+									[
+										{
+											"type": "origins:and",
+											"conditions":
+											[
+												{
+													"type": "origins:living"
+												},
+												{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "othersider:invisible_otherside_otherside",
+													"compare_to": 1
+												},
+												{
+													"type": "origins:power",
+													"power": "othersider:invisible_otherside_otherside"
+												}
+											]
+										},
+										{
+											"type": "origins:and",
+											"conditions":
+											[
+												{
+													"type": "origins:living"
+												},
+												{
+													"type": "origins:or",
+													"conditions":
+													[
+														{
+															"type": "origins:resource",
+															"comparison": "==",
+															"resource": "othersider:invisible_otherside_otherside",
+															"compare_to": 0
+														},
+														{
+															"type": "origins:power",
+															"power": "othersider:invisible_otherside_otherside",
+															"inverted": true
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							}
+						]
+					}
+				]
+			}
+		},
+        "condition":{
+            "type": "origins:and",
+            "conditions": [
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:water",
+					"comparison": "==",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:lava",
+					"comparison": "==",
+					"compare_to": 0
+				},
+                {
+                    "type": "origins:on_block",
+                    "inverted": true
+                },
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "*:*_fun_movement",
+					"compare_to": 2
+				}
+            ]
+        },
+		"key": {
+			"key": "key.attack",
+			"continuous": false
+		}
+	},
+	"veiled_on_hit":
+	{
+		"type": "origins:self_action_on_hit",
+		"cooldown": 0,
+		"hud_render":{
+			"should_render": false
+		},
+		"entity_action":{
+			"type": "origins:and",
+			"actions": [ 
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:block.amethyst_cluster.break master @a ~ ~ ~ 10 2"
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_veiled",
+					"operation": "set",
+					"change": 0
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "effect clear @s minecraft:invisibility"
+				}, 
+				{
+					"type": "origins:execute_command",
+					"command": "execute at @s at @s run particle flash"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "scale set pehkui:visibility 1 @s"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "power revoke @s origins:water_breathing"
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_aftermath",
+					"operation": "set",
+					"change": 0
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_veil_cooldown",
+					"operation": "set",
+					"change": 0
+				}
+			]
+		},
+		"condition":{
+			"type": "origins:resource",
+			"comparison": "==",
+			"resource": "*:*_veiled",
+			"compare_to": 1
+		}
+	},
+	"veil_over_time_stuff":
+	{
+		"type": "origins:action_over_time",
+		"interval": 10,
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:resource",
+								"comparison": "<",
+								"resource": "*:*_aftermath",
+								"compare_to": 20
+							},
+							"action":{
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:change_resource",
+										"resource": "*:*_aftermath",
+										"change": 1
+									},
+									{
+										"type": "origins:change_resource",
+										"resource": "*:*_veil_cooldown",
+										"change": 1
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "effect clear @s minecraft:water_breathing"
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_veiled",
+								"compare_to": 1
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "effect give @s minecraft:invisibility 2 0 true"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "execute at @e[type=!#apocalypse:non_living,distance=0.1..16,type=!minecraft:player,tag=!provoked] run particle minecraft:effect ~ ~1 ~ 0 0.5 0 0.01 1 normal @a[tag=refractor]"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "execute at @e[distance=0.1..16,type=minecraft:player] run particle entity_effect ~ ~1 ~ 0 1 0 1 1 normal @a[tag=refractor]"
+									},
+									{
+										"type": "origins:if_else_list",
+										"actions": [
+											{
+												"condition": {
+													"type": "origins:and",
+													"conditions": [
+														{
+															"type": "origins:submerged_in",
+															"fluid": "minecraft:water",
+															"inverted":true
+														},
+														{
+															"type": "origins:power",
+															"power": "origins:water_breathing",
+															"inverted": true
+														}
+													]
+												},
+												"action": {
+													"type": "origins:and",
+													"actions": [
+														{
+															"type": "origins:execute_command",
+															"command": "power grant @s origins:water_breathing"
+														}
+													]
+												}
+											},
+											{
+												"condition": {
+													"type": "origins:and",
+													"conditions": [
+														{
+															"type": "origins:submerged_in",
+															"fluid": "minecraft:water",
+															"inverted": false
+														},
+														{
+															"type": "origins:power",
+															"power": "origins:water_breathing"
+														}
+													]
+												},
+												"action": {
+													"type": "origins:and",
+													"actions": [
+														{
+															"type": "origins:execute_command",
+															"command": "power revoke @s origins:water_breathing"
+														}
+													]
+												}
+											}
+										]
+									},
+									{
+										"type": "origins:if_else_list",
+										"actions": [
+											{
+												"condition": {
+													"type": "origins:and",
+													"conditions": [
+														{
+															"type": "origins:air",
+															"comparison": "<",
+															"compare_to": 5
+														}
+													]
+												},
+												"action": {
+													"type": "origins:and",
+													"actions": [
+														{
+														  "type": "origins:damage",
+														  "amount": 2,
+														  "source": {
+															"name": "inWall",
+															"bypasses_armor": true
+															}
+														}
+													]
+												}
+											},
+											{
+												"condition": {
+													"type": "origins:and",
+													"conditions": [
+														{
+															"type": "origins:air",
+															"comparison": ">=",
+															"compare_to": 5
+														},
+														{
+															"type": "origins:in_rain"
+														}
+													]
+												},
+												"action": {
+													"type": "origins:and",
+													"actions": [
+														{
+															"type": "origins:gain_air",
+															"value": -10
+														}
+													]
+												}
+											}
+										]
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		"condition":{
+			"type": "origins:or",
+			"conditions":
+			[
+				{
+					"type": "origins:resource",
+					"comparison": "<",
+					"resource": "*:*_aftermath",
+					"compare_to": 20
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "*:*_veiled",
+					"compare_to": 1
+				}
+			]
+		}
+	},
+	"modify_teleport_positive_x":
+	{
+		"type": "origins:action_on_block_use",
+		"entity_action":{
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_blockusing",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:power",
+								"power": "apocalypse:refractor2/teleport_normal",
+								"inverted": true
+							},
+							{
+								"type": "origins:power",
+								"power": "apocalypse:refractor2/teleport_reverse",
+								"inverted": true
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_blockusing",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:item.spyglass.stop_using master @a ~ ~ ~ 10 1"
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hidden_bufferwarpx",
+								"change": 1
+							},
+							{
+								"type": "origins:if_else_list",
+								"actions":[
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "==",
+											"resource": "apocalypse:hidden_bufferwarpx",
+											"compare_to": 0
+										},
+										"action":{
+											"type": "origins:execute_command",
+											"command": "tellraw @s {\"text\":\"Default X position reached!\",\"color\":\"dark_aqua\"}"
+										}
+									}
+								]
+							}
+						]
+					}
+				}
+			]
+		},
+		"block_condition":{
+			"type": "origins:block",
+			"block": "apocalypse_origins:x_block"
+		},
+		"directions":[
+			"up"
+		],
+		"item_condition":
+		{
+			"type": "origins:ingredient",
+			"ingredient":
+			{
+				"item": "apocalypse_origins:regulator"
+			}
+		}
+	},
+	"modify_teleport_negative_x":
+	{
+		"type": "origins:action_on_block_use",
+		"entity_action":{
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_blockusing",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:power",
+								"power": "apocalypse:refractor2/teleport_normal",
+								"inverted": true
+							},
+							{
+								"type": "origins:power",
+								"power": "apocalypse:refractor2/teleport_reverse",
+								"inverted": true
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_blockusing",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:item.spyglass.stop_using master @a ~ ~ ~ 10 1"
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hidden_bufferwarpx",
+								"change": -1
+							},
+							{
+								"type": "origins:if_else_list",
+								"actions":[
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "==",
+											"resource": "apocalypse:hidden_bufferwarpx",
+											"compare_to": 0
+										},
+										"action":{
+											"type": "origins:execute_command",
+											"command": "tellraw @s {\"text\":\"Default X position reached!\",\"color\":\"dark_aqua\"}"
+										}
+									}
+								]
+							}
+						]
+					}
+				}
+			]
+		},
+		"block_condition":{
+			"type": "origins:block",
+			"block": "apocalypse_origins:x_block"
+		},
+		"directions":[
+			"north",
+			"east",
+			"south",
+			"west",
+			"down"
+		],
+		"item_condition":
+		{
+			"type": "origins:ingredient",
+			"ingredient":
+			{
+				"item": "apocalypse_origins:regulator"
+			}
+		}
+	},
+	"modify_teleport_positive_y":
+	{
+		"type": "origins:action_on_block_use",
+		"entity_action":{
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_blockusing",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:power",
+								"power": "apocalypse:refractor2/teleport_normal",
+								"inverted": true
+							},
+							{
+								"type": "origins:power",
+								"power": "apocalypse:refractor2/teleport_reverse",
+								"inverted": true
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_blockusing",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:item.spyglass.stop_using master @a ~ ~ ~ 10 1"
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hidden_bufferwarpy",
+								"change": 1
+							},
+							{
+								"type": "origins:if_else_list",
+								"actions":[
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "==",
+											"resource": "apocalypse:hidden_bufferwarpy",
+											"compare_to": 0
+										},
+										"action":{
+											"type": "origins:execute_command",
+											"command": "tellraw @s {\"text\":\"Default Y position reached!\",\"color\":\"dark_aqua\"}"
+										}
+									}
+								]
+							}
+						]
+					}
+				}
+			]
+		},
+		"block_condition":{
+			"type": "origins:block",
+			"block": "apocalypse_origins:y_block"
+		},
+		"directions":[
+			"up"
+		],
+		"item_condition":
+		{
+			"type": "origins:ingredient",
+			"ingredient":
+			{
+				"item": "apocalypse_origins:regulator"
+			}
+		}
+	},
+	"modify_teleport_negative_y":
+	{
+		"type": "origins:action_on_block_use",
+		"entity_action":{
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_blockusing",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:power",
+								"power": "apocalypse:refractor2/teleport_normal",
+								"inverted": true
+							},
+							{
+								"type": "origins:power",
+								"power": "apocalypse:refractor2/teleport_reverse",
+								"inverted": true
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_blockusing",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:item.spyglass.stop_using master @a ~ ~ ~ 10 1"
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hidden_bufferwarpy",
+								"change": -1
+							},
+							{
+								"type": "origins:if_else_list",
+								"actions":[
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "==",
+											"resource": "apocalypse:hidden_bufferwarpy",
+											"compare_to": 0
+										},
+										"action":{
+											"type": "origins:execute_command",
+											"command": "tellraw @s {\"text\":\"Default Y position reached!\",\"color\":\"dark_aqua\"}"
+										}
+									}
+								]
+							}
+						]
+					}
+				}
+			]
+		},
+		"block_condition":{
+			"type": "origins:block",
+			"block": "apocalypse_origins:y_block"
+		},
+		"directions":[
+			"north",
+			"east",
+			"south",
+			"west",
+			"down"
+		],
+		"item_condition":
+		{
+			"type": "origins:ingredient",
+			"ingredient":
+			{
+				"item": "apocalypse_origins:regulator"
+			}
+		}
+	},
+	"modify_teleport_positive_z":
+	{
+		"type": "origins:action_on_block_use",
+		"entity_action":{
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_blockusing",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:power",
+								"power": "apocalypse:refractor2/teleport_normal",
+								"inverted": true
+							},
+							{
+								"type": "origins:power",
+								"power": "apocalypse:refractor2/teleport_reverse",
+								"inverted": true
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_blockusing",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:item.spyglass.stop_using master @a ~ ~ ~ 10 1"
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hidden_bufferwarpz",
+								"change": 1
+							},
+							{
+								"type": "origins:if_else_list",
+								"actions":[
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "==",
+											"resource": "apocalypse:hidden_bufferwarpz",
+											"compare_to": 0
+										},
+										"action":{
+											"type": "origins:execute_command",
+											"command": "tellraw @s {\"text\":\"Default Z position reached!\",\"color\":\"dark_aqua\"}"
+										}
+									}
+								]
+							}
+						]
+					}
+				}
+			]
+		},
+		"block_condition":{
+			"type": "origins:block",
+			"block": "apocalypse_origins:z_block"
+		},
+		"directions":[
+			"up"
+		],
+		"item_condition":
+		{
+			"type": "origins:ingredient",
+			"ingredient":
+			{
+				"item": "apocalypse_origins:regulator"
+			}
+		}
+	},
+	"modify_teleport_negative_z":
+	{
+		"type": "origins:action_on_block_use",
+		"entity_action":{
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_blockusing",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:power",
+								"power": "apocalypse:refractor2/teleport_normal",
+								"inverted": true
+							},
+							{
+								"type": "origins:power",
+								"power": "apocalypse:refractor2/teleport_reverse",
+								"inverted": true
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_blockusing",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:item.spyglass.stop_using master @a ~ ~ ~ 10 1"
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hidden_bufferwarpz",
+								"change": -1
+							},
+							{
+								"type": "origins:if_else_list",
+								"actions":[
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "==",
+											"resource": "apocalypse:hidden_bufferwarpz",
+											"compare_to": 0
+										},
+										"action":{
+											"type": "origins:execute_command",
+											"command": "tellraw @s {\"text\":\"Default Z position reached!\",\"color\":\"dark_aqua\"}"
+										}
+									}
+								]
+							}
+						]
+					}
+				}
+			]
+		},
+		"block_condition":{
+			"type": "origins:block",
+			"block": "apocalypse_origins:z_block"
+		},
+		"directions":[
+			"north",
+			"east",
+			"south",
+			"west",
+			"down"
+		],
+		"item_condition":
+		{
+			"type": "origins:ingredient",
+			"ingredient":
+			{
+				"item": "apocalypse_origins:regulator"
+			}
+		}
+	},
+	"fall_damage_up":
+	{
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": 0.25
+		},
+		"condition":{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:water",
+					"comparison": "==",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:lava",
+					"comparison": "==",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:on_block",
+					"inverted": true
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "*:*_mode",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"regulator_damage_up":
+	{
+		"type": "origins:modify_damage_dealt",
+		"modifier":{
+			"operation": "add_base_early",
+			"value": 12
+		},
+		"condition":{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:water",
+					"comparison": "==",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:lava",
+					"comparison": "==",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:on_block",
+					"inverted": true
+				},
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "mainhand",
+					"item_condition":
+					{
+						"type": "origins:ingredient",
+						"ingredient":
+						{
+							"item": "apocalypse_origins:regulator"
+						}
+					}
+				}
+			]
+		}
+	},
+	"drop_damage_up1":
+	{
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "add_base_early",
+			"value": 5
+		},
+		"condition":{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:fall_distance",
+					"comparison": ">=",
+					"compare_to": 5
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "*:*_mode",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"drop_damage_up2":
+	{
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "add_base_early",
+			"value": 5
+		},
+		"condition":{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:fall_distance",
+					"comparison": ">=",
+					"compare_to": 10
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "*:*_mode",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"drop_damage_up3":
+	{
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "add_base_early",
+			"value": 5
+		},
+		"condition":{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:fall_distance",
+					"comparison": ">=",
+					"compare_to": 15
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "*:*_mode",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"drop_damage_up4":
+	{
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "add_base_early",
+			"value": 5
+		},
+		"condition":{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:fall_distance",
+					"comparison": ">=",
+					"compare_to": 20
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "*:*_mode",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"drop_damage_up5":
+	{
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "add_base_early",
+			"value": 5
+		},
+		"condition":{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:fall_distance",
+					"comparison": ">=",
+					"compare_to": 25
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "*:*_mode",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"drop_damage_up6":
+	{
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "add_base_early",
+			"value": 5
+		},
+		"condition":{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:fall_distance",
+					"comparison": ">=",
+					"compare_to": 30
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "*:*_mode",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"ignore_water":
+	{
+		"type": "origins:ignore_water"
+	},
+	"status_bar":
+	{
+		"type": "origins:status_bar_texture",
+		"texture": "apocalypse_origins:textures/gui/refractor_bars.png",
+		"condition":{
+			"type": "origins:resource",
+			"comparison": "==",
+			"resource": "*:*_mode",
+			"compare_to": 0
+		}
+	},
+	"status_bar_e":
+	{
+		"type": "origins:status_bar_texture",
+		"texture": "apocalypse_origins:textures/gui/refractor_bars_emerald.png",
+		"condition":{
+			"type": "origins:resource",
+			"comparison": "==",
+			"resource": "*:*_mode",
+			"compare_to": 1
+		}
+	},
+	"status_bar_d":
+	{
+		"type": "origins:status_bar_texture",
+		"texture": "apocalypse_origins:textures/gui/refractor_bars_diamond.png",
+		"condition":{
+			"type": "origins:resource",
+			"comparison": "==",
+			"resource": "*:*_mode",
+			"compare_to": 2
+		}
+	},
+	"status_bar_q":
+	{
+		"type": "origins:status_bar_texture",
+		"texture": "apocalypse_origins:textures/gui/refractor_bars_quartz.png",
+		"condition":{
+			"type": "origins:resource",
+			"comparison": "==",
+			"resource": "*:*_mode",
+			"compare_to": 3
+		}
+	},
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "apocalypse_origins:textures/gui/badge_modes.png",
+			"text": "While sneaking, you can eat §5Amethyst§f, §bDiamond§f, §aEmerald§f and §7Quartz§f to change up your passive features, heal for 1 heart and refill your §5[Trapped Light]§f."
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "apocalypse_origins:textures/gui/badge_resistance.png",
+			"text": "§e§lDamage Resistances:§r§f Non-physical (-50%), Lightning (-100%), Falling (-100%, §aEmerald§f form only).\n \n§c§lDamage Vulnerabilities:§r§f Explosions & Kinetic Damage (+50%, only while not in §bDiamond§f form), Pickaxes (+100%).\n \n§c§lEffect Immunities:§r§f Instant Health, Regeneration, Poison, Hunger."
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "apocalypse_origins:textures/gui/badge_moon.png",
+			"text": "§5[True Blindness]§f reduces melee damage by 25% and makes all projectile attacks miss.\n§5[Trapped Light]§f is generated 10% of the time every half a second."
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "apocalypse_origins:textures/gui/badge_crystalline.png",
+			"text": "§5[Crystalline Movement]§f is toggled when you use a Crystalline Emblem while sneaking, granting you the following:\n -[Reflective Jump]: Jump while sliding off a wall or while anchored.\n -[Photon Bounce]: You can attack to bounce off nearby enemies, even if you didn't hit them directly. If this ability is off, you will only bounce if you hit an enemy directly.\n -[Photon Leap]: You can triple jump. Can be toggled independently from the other abilities. If this ability is off, you will double jump instead."
+		}
+	],
+	"name": "Passives",
+	"description": "§a[Positive Passives]§r\n - Your max HP is 40, 20 in §bDiamond§r form.\n \n- You can mine budding amethyst with silk touch. The resulting block is a deactivated amethyst block which does not grow amethyst clusters.\n \n - You recover health if you stand on a magma block or a budding amethyst block (deactivated amethyst works), or if you are on fire or take fire damage. While in §bDiamond§r form, you can only regain health like this 10 times before overheating, but you can avoid overheating by spending some time outside of fire.\n \n - You inflict §5[True§r §5Blindness]§r for 2 seconds on whoever hits you with a projectile attack.\n \n - You can not be killed in one hit if you are above 35 hp (15 in §bDiamond§r form), you will instead drop to 20 hp (10 in §bDiamond§r form).\n \n§4[Negative Passives]§r\n - You can not use potions directly.\n \n - You can not wear armor or wield shields.\n \n - You do not regenerate health naturally \n \n - You sink like a rock in water.\n \n - Your trapped light generation slows down significantly when not under direct sunlight.\n \n§5[Amethyst Passives]§r\n -§5[Kinetic§r §5Resonance]§r: You deal increased damage while falling, 25% +5 for every 5 blocks, up to +30.\n \n§b[Diamond Passives]§r\n -§b[Diamond§r §bis§r §bUnbreakable]§r: Your max HP is halved and you overheat when you heal with fire, but you can wear all armor and use shields.\n \n§a[Emerald Passives]§r\n -§a[Four§r §aLeaf§r §aGem]§r: You have the Luck II potion effect permanently, your speed increases by 30% and you are immune to fall damage. Eating emeralds refills your trapped light gauge. You generate twice as much §5[Trapped§r §5Light]§r and you are are twice as likely to generate §5[Trapped§r §5Light]§r if it is not guaranteed. You are frail and take double damage from all sources, quadruple if you were already vulnerable to them.\n \n§4[Quartz Passives]§r\n -§4[Unstable§r §4Berserker]§r: By attacking while holding your mirror, you reduce the damage you take by 75% for 1 second, extended by 1 second if you get hit. After parrying successfully, you deal 5 more melee damage for every 5 hit points you are missing with your next melee attack and regain 10 hit points. You heal 5 hit points when you kill a creature. You can wear all armor, but gain no armor points or toughness from it, your speed increases by 15%, you deal an additional 12.5% melee damage while airborne and you are immune to fall damage. You are reckless and take four times damage from all sources, or eight times as much if you were already vulnerable to them."
+}

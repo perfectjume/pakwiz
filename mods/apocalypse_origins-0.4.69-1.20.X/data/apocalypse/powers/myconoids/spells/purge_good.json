@@ -1,0 +1,229 @@
+{
+	"type": "origins:multiple",
+	"durationbar": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 60,
+		"start_value": 60,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse:textures/gui/zzz_buff_warped.png",
+			"bar_index": 0,
+			"condition": {
+				"type": "origins:resource",
+				"resource": "*:*_durationbar",
+				"comparison": ">",
+				"compare_to": 0
+			}
+		}
+	},
+	"timer": 
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": ">",
+								"resource": "*:*_durationbar",
+								"compare_to": 2
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [				
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_durationbar",
+								"change": -1
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": ">=",
+								"resource": "*:*_durationbar",
+								"compare_to": 1
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "<=",
+								"resource": "*:*_durationbar",
+								"compare_to": 2
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_durationbar",
+								"change": -1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.note_block.iron_xylophone master @s ~ ~ ~ 1 1.8"
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "*:*_durationbar",
+								"comparison": "==",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.note_block.iron_xylophone master @s ~ ~ ~ 1 2"
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:execute_command",
+									"command": "power revoke @s apocalypse:myconoids/spells/purge_good afungus",
+									"permission_level": 4
+								}
+							}							
+						]
+					}
+				}
+			]
+		},
+		"interval": 20
+	},
+	"oofouchmybones":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:entity.guardian.hurt master @a ~ ~ ~ 1 2"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "particle minecraft:happy_villager ~ ~1 ~ 0.5 0.5 0.5 0.05 8"
+				},
+				{
+					"type": "origins:extinguish"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "effect clear @s minecraft:slowness"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "effect clear @s minecraft:mining_fatigue"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "effect clear @s minecraft:blindness"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "effect clear @s minecraft:hunger"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "effect clear @s minecraft:weakness"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "effect clear @s minecraft:poison"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "effect clear @s minecraft:wither"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "effect clear @s minecraft:levitation"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "effect clear @s minecraft:glowing"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "effect clear @s minecraft:nausea"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "effect clear @s minecraft:unluck"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "effect clear @s minecraft:bad_omen"
+				}
+			]
+		}
+	},
+	"noeffects": 
+	{
+		"type": "origins:effect_immunity",
+		"effects": [
+			"minecraft:slowness",
+			"minecraft:mining_fatigue",
+			"minecraft:blindness",
+			"minecraft:hunger",
+			"minecraft:weakness",
+			"minecraft:poison",
+			"minecraft:wither",
+			"minecraft:levitation",
+			"minecraft:glowing",
+			"minecraft:nausea",
+			"minecraft:unluck",
+			"minecraft:bad_omen"
+		]
+	},
+	"fire_protection":
+	{
+		"type": "origins:fire_immunity"
+	},
+	"glow":
+	{
+		"type": "origins:self_glow",
+		"use_teams": false,
+		"red": 0,
+		"green": 0.16,
+		"blue": 0,
+		"entity_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:origin",
+					"origin": "apocalypse:myconoid_wart",
+					"layer": "origins:origin"
+				}
+			]
+		},
+		"hidden": true
+	},
+	"hidden": true
+}

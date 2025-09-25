@@ -1,0 +1,345 @@
+{
+	"type": "origins:multiple",
+	"callback":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:apocalypse.ost.bonk master @a[distance=..10] ~ ~ ~ 2 1",
+					"permission_level": 4
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": "<",
+										"compare_to": 8
+									}
+								]
+							},
+							"action": {
+								"type": "origins:damage",
+								"amount": 2,
+								"source": {
+									"name": "anvil",
+									"bypasses_armor": true
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": ">=",
+										"compare_to": 8
+									},
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": "<",
+										"compare_to": 12
+									}
+								]
+							},
+							"action": {
+								"type": "origins:damage",
+								"amount": 3,
+								"source": {
+									"name": "anvil",
+									"bypasses_armor": true
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": ">=",
+										"compare_to": 12
+									},
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": "<",
+										"compare_to": 16
+									}
+								]
+							},
+							"action": {
+								"type": "origins:damage",
+								"amount": 4,
+								"source": {
+									"name": "anvil",
+									"bypasses_armor": true
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": ">=",
+										"compare_to": 16
+									}
+								]
+							},
+							"action": {
+								"type": "origins:damage",
+								"amount": 8,
+								"source": {
+									"name": "anvil",
+									"bypasses_armor": true
+								}
+							}
+						}
+					]
+				}
+			]
+		},
+		"execute_chosen_when_orb": true,
+		"hidden": true
+	},
+	"durationbar": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 10,
+		"start_value": 10,
+		"hidden": true,
+		"name": "Duration",
+		"description": "How long?",
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse:textures/gui/stomped_bar.png",
+			"bar_index": 0,
+			"condition": {
+				"type": "origins:resource",
+				"resource": "apocalypse:classes/stomped_player_durationbar",
+				"comparison": ">",
+				"compare_to": 0
+			}
+		}
+	},
+	"timer": 
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "apocalypse:classes/stomped_player_durationbar",
+								"compare_to": 10
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [						
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:classes/stomped_player_durationbar",
+								"change": -1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "execute at @s run particle entity_effect ~ ~1 ~ 0 1 0 0 3 normal @a"
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": ">",
+								"resource": "apocalypse:classes/stomped_player_durationbar",
+								"compare_to": 7
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "<=",
+								"resource": "apocalypse:classes/stomped_player_durationbar",
+								"compare_to": 9
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:classes/stomped_player_durationbar",
+								"change": -1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "execute at @s run particle entity_effect ~ ~1 ~ 0 1 0 0 3 normal @a"
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "apocalypse:classes/stomped_player_durationbar",
+								"compare_to": 7
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:classes/stomped_player_durationbar",
+								"change": -1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "power revoke @s apocalypse:classes/stomped_player_speed smallbane"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "power revoke @s apocalypse:classes/stomped_player_jump smallbane"
+							}					
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": ">",
+								"resource": "apocalypse:classes/stomped_player_durationbar",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "<=",
+								"resource": "apocalypse:classes/stomped_player_durationbar",
+								"compare_to": 6
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:classes/stomped_player_durationbar",
+								"change": -1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "execute at @s run particle entity_effect ~ ~1 ~ 0 1 0 0 3 normal @a"
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "apocalypse:classes/stomped_player_durationbar",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.amethyst_cluster.break master @a[distance=..5] ~ ~ ~ 10 2"
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:execute_command",
+									"command": "power revoke @s apocalypse:classes/stomped_player smallbane"
+								}
+							}							
+						]
+					}
+				}
+			]
+		},
+		"interval": 20
+	},
+	"speed":
+	{
+		"type": "origins:attribute",
+		"modifier": {
+			"attribute": "minecraft:generic.movement_speed",
+			"operation": "multiply_total",
+			"value": -1
+		}
+	},
+	"jump":
+	{
+		"type": "origins:modify_jump",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -1
+		},
+		"entity_action": {
+			"type": "origins:execute_command",
+			"command": "tellraw @s {\"text\":\"You have been stomped!\",\"color\":\"red\"}"
+		}
+	},
+	"elytra_disable":
+	{
+		"type": "origins:prevent_elytra_flight",
+		"entity_action": {
+			"type": "origins:execute_command",
+			"command": "tellraw @s {\"text\": \"No flying, you have been stomped!\", \"color\": \"red\"}"
+		}
+	},
+	"prevent_sprinting":
+	{
+		"type": "origins:prevent_sprinting"
+	},
+	"hidden": true
+}

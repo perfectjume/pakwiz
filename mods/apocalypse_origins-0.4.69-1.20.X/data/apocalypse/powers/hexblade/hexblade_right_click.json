@@ -1,0 +1,640 @@
+{
+	"type": "origins:multiple",
+	"parrying_resource": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hidden": true,
+		"hud_render": {
+			"should_render": false,
+			"bar_index": 3,
+			"sprite_location": "origins:textures/gui/resource_bar.png",
+			"condition": {
+				"type": "origins:resource",
+				"resource": "apocalypse:hexblade/hexblade_right_click_parrying_resource",
+				"comparison": ">",
+				"compare_to": 0
+			}
+		}
+	},
+	"success_parry": 
+	{
+		"type": "origins:self_action_when_hit",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "effect give @s minecraft:glowing 2 0 true"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "execute at @s at @s run particle flash"
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 15,
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:and",
+								"actions": [ 
+									{
+										"type": "origins:execute_command",
+										"command": "resource set @s apocalypse:hexblade/hexblade_right_click_parrying_resource 0"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "effect clear @s minecraft:glowing"
+									}
+								]
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:choice",
+					"actions": [
+						{
+						  "element": {
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.anvil.land master @a[distance=..10] ~ ~ ~ 1 1.5"
+							},
+							"weight": 1
+						},
+						{
+						  "element": {
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.anvil.land master @a[distance=..10] ~ ~ ~ 1 1.6"
+							},
+							"weight": 1
+						},
+						{
+						  "element": {
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.anvil.land master @a[distance=..10] ~ ~ ~ 1 1.7"
+							},
+							"weight": 1
+						},
+						{
+						  "element": {
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.anvil.land master @a[distance=..10] ~ ~ ~ 1 1.8"
+							},
+							"weight": 1
+						},
+						{
+						  "element": {
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.anvil.land master @a[distance=..10] ~ ~ ~ 1 1.9"
+							},
+							"weight": 1
+						},
+						{
+						  "element": {
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.anvil.land master @a[distance=..10] ~ ~ ~ 1 2"
+							},
+							"weight": 1
+						}
+					]
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "resource change @s apocalypse:hexblade/hexblade_resource_souls 5"
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 1,
+					"action": {
+						"type": "origins:execute_command",
+						"command": "resource change @s apocalypse:hexblade/hexblade_resource_risk 2"
+					}
+				},
+				{
+					"type": "origins:feed",
+					"food": 2,
+					"saturation": 0
+				}
+			]
+		},
+		"damage_condition":{
+			"type":"origins:or",
+			"inverted": true,
+			"conditions":[
+				{
+					"type": "origins:name",
+					"name": "wither"
+				},
+				{
+					"type": "origins:name",
+					"name": "inFire"
+				},
+				{
+					"type": "origins:name",
+					"name": "onFire"
+				},
+				{
+					"type": "origins:name",
+					"name": "lava"
+				},
+				{
+					"type": "origins:name",
+					"name": "outOfWorld"
+				},
+				{
+					"type": "origins:name",
+					"name": "hotFloor"
+				},
+				{
+					"type": "origins:name",
+					"name": "dragonBreath"
+				},
+				{
+					"type": "origins:name",
+					"name": "drown"
+				},
+				{
+					"type": "origins:name",
+					"name": "inWall"
+				},
+				{
+					"type": "origins:name",
+					"name": "freeze"
+				}
+			]
+		},
+		"condition":
+		{
+			"type": "origins:and",
+			"conditions":
+			[
+				{
+					"type": "origins:resource",
+					"comparison": ">",
+					"resource": "apocalypse:hexblade/hexblade_right_click_parrying_resource",
+					"compare_to": 0
+				}
+			]
+		},
+		"cooldown": 0,
+		"hud_render": {
+			"should_render": false
+		},
+		"hidden": true
+	},
+	"active_parry": 
+	{
+		"type": "origins:active_self",
+		"cooldown": 600,
+		"hud_render": {
+			"should_render":true,
+			"sprite_location":"apocalypse_origins:textures/gui/hexblade_parry.png",
+			"bar_index": 0
+		},
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "mainhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"inverted": false,
+											"ingredient":
+											{
+												"item": "minecraft:wooden_sword"
+											}
+										}
+									},
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "offhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"inverted": false,
+											"ingredient":
+											{
+												"item": "minecraft:wooden_sword"
+											}
+										}
+									}
+								]
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<",
+								"compare_to": 999
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:entity.ghast.shoot master @a[distance=..10] ~ ~ ~ 2 0.7"
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "resource set @s apocalypse:hexblade/hexblade_right_click_parrying_resource 1"
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "effect give @s minecraft:glowing 1 0 true"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "execute at @s at @s run particle flash"
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 20,
+								"action": {
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "resource set @s apocalypse:hexblade/hexblade_right_click_parrying_resource 0"
+										}
+									]
+								}
+							},
+							{
+							  "type": "origins:extinguish"
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "effect clear @s"
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "scoreboard players set @s elf_wetTimer 400"
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "power revokeall @s apoli:command"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "function redwood:hiromi/domain/end"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "scale reset @s"
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:execute_command",
+									"command": "resource change @s apocalypse:hexblade/hexblade_resource_souls -3"
+								}
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "mainhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"inverted": false,
+											"ingredient":
+											{
+												"item": "minecraft:wooden_sword"
+											}
+										}
+									},
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "offhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"inverted": false,
+											"ingredient":
+											{
+												"item": "minecraft:wooden_sword"
+											}
+										}
+									}
+								]
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<",
+								"compare_to": 1999
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:entity.ghast.shoot master @a[distance=..10] ~ ~ ~ 2 0.7"
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "resource set @s apocalypse:hexblade/hexblade_right_click_parrying_resource 1"
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "effect give @s minecraft:glowing 1 0 true"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "execute at @s at @s run particle flash"
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 20,
+								"action": {
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "resource set @s apocalypse:hexblade/hexblade_right_click_parrying_resource 0"
+										}
+									]
+								}
+							},
+							{
+							  "type": "origins:extinguish"
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "effect clear @s"
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "scoreboard players set @s elf_wetTimer 400"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "function redwood:hiromi/domain/end"
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "power revokeall @s apoli:command"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "scale reset @s"
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:execute_command",
+									"command": "resource change @s apocalypse:hexblade/hexblade_resource_souls -3"
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action": {
+									"type": "origins:execute_command",
+									"command": "resource set @s apocalypse:hexblade/hexblade_right_click_active_parry 150"
+								}
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "mainhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"inverted": false,
+											"ingredient":
+											{
+												"item": "minecraft:wooden_sword"
+											}
+										}
+									},
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "offhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"inverted": false,
+											"ingredient":
+											{
+												"item": "minecraft:wooden_sword"
+											}
+										}
+									}
+								]
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": ">=",
+								"compare_to": 1999
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_storage",
+								"comparison": "<=",
+								"compare_to": 4000
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:entity.ghast.shoot master @a[distance=..10] ~ ~ ~ 2 0.7"
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "resource set @s apocalypse:hexblade/hexblade_right_click_parrying_resource 1"
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "effect give @s minecraft:glowing 1 0 true"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "execute at @s at @s run particle flash"
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 20,
+								"action": {
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "resource set @s apocalypse:hexblade/hexblade_right_click_parrying_resource 0"
+										}
+									]
+								}
+							},
+							{
+							  "type": "origins:extinguish"
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "effect clear @s"
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "scoreboard players set @s elf_wetTimer 400"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "function redwood:hiromi/domain/end"
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "power revokeall @s apoli:command"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "scale reset @s"
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:execute_command",
+									"command": "resource change @s apocalypse:hexblade/hexblade_resource_souls -3"
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action": {
+									"type": "origins:execute_command",
+									"command": "resource set @s apocalypse:hexblade/hexblade_right_click_active_parry 300"
+								}
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition":
+		{
+			"type": "origins:and",
+			"conditions":
+			[
+				{
+					"type": "origins:origin",
+					"origin": "apocalypse:hexblade",
+					"layer": "origins:origin"
+				},
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "mainhand",
+					"item_condition":
+					{
+						"type": "origins:ingredient",
+						"inverted": false,
+						"ingredient":
+						{
+							"item": "minecraft:wooden_sword"
+						}
+					}
+				},
+				{
+				  "type": "origins:gamemode",
+				  "inverted": true,
+				  "gamemode": "spectator"
+				}
+			]
+		},
+		"hidden": true,	
+		"key": {
+			"key":"key.use",
+			"continuous": false
+		}
+	},
+	"sigil_interactions": 
+	{
+		"type": "origins:active_self",
+		"cooldown": 20,
+		"hud_render":{
+			"should_render":false
+		},
+		"entity_action":{
+			"type": "origins:execute_command",
+			"command": "power revoke @s apocalypse:hexblade/sigil_seas_status hexblade_bars"
+		},
+		"condition":{
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:command",
+					"command": "data get entity @s SelectedItem.tag.CustomModelData",
+					"comparison": "==",
+					"compare_to": 8
+				},
+				{
+					"type": "origins:command",
+					"command": "data get entity @s Inventory[{Slot: -106b}].tag.CustomModelData",
+					"comparison": "==",
+					"compare_to": 8
+				}
+			]
+		},
+		"key":{
+			"key":"key.use",
+			"continuous": false
+		}
+	},
+	"hidden": true
+}

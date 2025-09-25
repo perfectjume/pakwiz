@@ -1,0 +1,13 @@
+name = "Configurable Skeleton"
+filename = "config_skeleton-1.0.0-fabric.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "5a9aa5c8645f3c161a5452bf341c862cb395e71b"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 6143094
+project-id = 1187512

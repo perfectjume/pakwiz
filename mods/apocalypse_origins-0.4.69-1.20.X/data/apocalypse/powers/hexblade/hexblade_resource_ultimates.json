@@ -1,0 +1,43 @@
+{
+	"type": "origins:multiple",
+	"ddd":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hidden": true,
+		"hud_render": {
+			"should_render": false,
+			"bar_index": 1,
+			"sprite_location": "apocalypse_origins:textures/gui/hexblade_parry.png"
+		}
+	},
+	"fff":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hidden": true,
+		"hud_render": {
+			"should_render": false,
+			"bar_index": 1,
+			"sprite_location": "apocalypse_origins:textures/gui/hexblade_parry.png"
+		}
+	},
+	"sss":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hidden": true,
+		"hud_render": {
+			"should_render": false,
+			"bar_index": 1,
+			"sprite_location": "apocalypse_origins:textures/gui/hexblade_parry.png"
+		}
+	},
+	"hidden": true
+}

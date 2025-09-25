@@ -1,0 +1,43 @@
+{
+    "type": "origins:self_action_on_kill",
+    "cooldown": 0,
+    "hud_render": {
+        "should_render": false,
+        "bar_index": 5
+    },
+	"target_condition": {
+		"type": "origins:or",
+		"conditions": [
+			{
+				"type": "origins:entity_type",
+				"entity_type": "minecraft:magma_cube"
+			}
+		]
+	},
+    "entity_action": {
+		"type": "origins:choice",
+		"actions": [
+			{
+				"element": {
+					"type": "origins:execute_command",
+					"command": "give @s minecraft:ochre_froglight"
+				},
+				"weight": 1
+			},
+			{
+				"element": {
+					"type": "origins:execute_command",
+					"command": "give @s minecraft:pearlescent_froglight"
+				},
+				"weight": 1
+			},
+			{
+				"element": {
+					"type": "origins:execute_command",
+					"command": "give @s minecraft:verdant_froglight"
+				},
+				"weight": 1
+			}
+		]
+	}
+}

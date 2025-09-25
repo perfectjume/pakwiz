@@ -1,0 +1,13 @@
+name = "Create Cobblestone"
+filename = "createcobblestone-1.4.4+fabric-1.20.1-95.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "3a4ab402386b21a9d7a136c21fecc2372e9629f8"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 6250720
+project-id = 1023532

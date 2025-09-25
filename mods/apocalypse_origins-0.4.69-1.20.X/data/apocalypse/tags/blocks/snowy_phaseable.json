@@ -1,0 +1,10 @@
+{
+	"replace": false,
+	"values":
+	[
+		"minecraft:sweet_berry_bush",
+		"minecraft:powder_snow",
+		"minecraft:snow_block",
+		"minecraft:snow"
+	]
+}

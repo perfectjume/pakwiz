@@ -1,0 +1,112 @@
+{
+	"type": "origins:action_on_callback",
+	"entity_action_gained": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:choice",
+				"actions": [
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/generic/bulky mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/generic/resilient mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/generic/healthy mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/generic/quick mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/generic/energetic mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/generic/strong mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/generic/accurate mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/generic/metabolic mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/generic/frugal mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/generic/lightweight mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/generic/swimmer mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/generic/clever mutation"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/generic/armored mutation"
+						},
+						"weight": 1
+					}
+				]
+			},
+			{
+				"type": "origins:delay",
+				"ticks": 1,
+				"action": {
+					"type": "origins:execute_command",
+					"command": "power revoke @s apocalypse:geneticist/genes/generic_mutation_granter mutation"
+				}
+			}
+		]
+	}
+}

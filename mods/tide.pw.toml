@@ -1,0 +1,13 @@
+name = "Tide"
+filename = "tide-fabric-1.20.1-1.6.4.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "e033ea96f4d7057e13897a2edfaead64b8e4376b"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 6972965
+project-id = 884685

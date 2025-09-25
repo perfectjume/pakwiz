@@ -1,0 +1,223 @@
+{
+    "type": "origins:multiple",
+	"regulator":
+	{
+		"type": "origins:recipe",
+		"recipe": {
+			"type": "minecraft:crafting_shaped",
+			"id": "apocalypse_origins:regulator",
+			"pattern": [
+				"a^o",
+				"^#^",
+				"-^+"
+			],
+			"key": {
+				"#": {
+					"item": "apocalypse_origins:gob_complainer"
+				},
+				"^": {
+					"item": "minecraft:iron_ingot"
+				},
+				"-": {
+					"item": "minecraft:redstone"
+				},
+				"+": {
+					"item": "minecraft:diamond"
+				},
+				"a": {
+					"item": "minecraft:amethyst_shard"
+				},
+				"o": {
+					"item": "minecraft:emerald"
+				}
+			},
+			"result": {
+				"item": "apocalypse_origins:regulator"
+			}
+		}
+	},
+	"mirror":
+	{
+		"type": "origins:recipe",
+		"recipe": {
+			"type": "minecraft:crafting_shaped",
+			"id": "apocalypse_origins:mirror",
+			"pattern": [
+				" ^ ",
+				"^#^",
+				" ^ "
+			],
+			"key":{
+				"#": {
+					"item": "minecraft:amethyst_shard"
+				},
+				"^": {
+					"item": "minecraft:iron_ingot"
+				}
+			},
+			"result":{
+				"item": "apocalypse_origins:mirror"
+			}
+		}
+	},
+	"crystalline_emblem":
+	{
+		"type": "origins:recipe",
+		"recipe": {
+			"type": "minecraft:crafting_shaped",
+			"id": "apocalypse_origins:crystalline_emblem",
+			"pattern": [
+				"r#e",
+				"^#^",
+				"q#d"
+			],
+			"key":{
+				"#": {
+					"item": "minecraft:amethyst_shard"
+				},
+				"^": {
+					"item": "minecraft:gold_ingot"
+				},
+				"r": {
+					"item": "minecraft:redstone"
+				},
+				"q": {
+					"item": "minecraft:quartz"
+				},
+				"e": {
+					"item": "minecraft:emerald"
+				},
+				"d": {
+					"item": "minecraft:diamond"
+				}
+			},
+			"result":{
+				"item": "apocalypse_origins:crystalline_emblem"
+			}
+		}
+	},
+	"name": "Tools",
+	"description": "§b§lRefractor Mirror§r\n- Holding this item in your main hand or off-hand allows you to use some of your active abilities, like §e[FTL]§r, §e[FTL:§r §eBlink]§r and §e[Veil§r §eof§r §eIllusions]§r.\n \n§b§lPhoton Regulator§r:\n- Using this item on Photon Coordinators or a Lodestone allows you to configure the coordinates and mode of your §e[FTL:§r §eWarp]§r ability. This item also deals increased damage with aerial attacks.\n \n§b§lReturn Shard§r:\n- Consuming this item allows any player to reverse their latest §e[FTL:§r §eWarp]§r teleportation, and sets their Y coordinate to 320. This item can be crafted by anyone.\n \n§b§lCrystalline Emblem§r:\n- Using this item when your §5[Trapped§r §5Light]§r is full allows you to unleash a blinding flash of light after one and a half seconds, which depletes your §5[Trapped§r §5Light]§r. Creatures that can see you are affected by §5[True§r §5Blindness]§r for 30 seconds. Right clicking this item while sneaking will toggle §5[Crystalline§r §5Movement]§r.",
+	"badges": [
+		{	
+			"type": "origins:crafting_recipe",
+			"sprite": "apocalypse_origins:textures/item/regulator.png",
+			"recipe": {
+				"type": "minecraft:crafting_shaped",
+				"id": "apocalypse_origins:regulator",
+				"pattern": [
+					"a^o",
+					"^#^",
+					"-^+"
+				],
+				"key": {
+					"#": {
+						"item": "apocalypse_origins:gob_complainer"
+					},
+					"^": {
+						"item": "minecraft:iron_ingot"
+					},
+					"-": {
+						"item": "minecraft:redstone"
+					},
+					"+": {
+						"item": "minecraft:diamond"
+					},
+					"a": {
+						"item": "minecraft:amethyst_shard"
+					},
+					"o": {
+						"item": "minecraft:emerald"
+					}
+				},
+				"result": {
+					"item": "apocalypse_origins:regulator"
+				}
+			}
+		},
+		{
+			"type": "origins:crafting_recipe",
+			"sprite": "apocalypse_origins:textures/item/mirror.png",
+			"recipe": {
+				"type": "minecraft:crafting_shaped",
+				"id": "apocalypse_origins:mirror",
+				"pattern": [
+					" ^ ",
+					"^#^",
+					" ^ "
+				],
+				"key":{
+					"#": {
+						"item": "minecraft:amethyst_shard"
+					},
+					"^": {
+						"item": "minecraft:iron_ingot"
+					}
+				},
+				"result":{
+					"item": "apocalypse_origins:mirror"
+				}
+			}
+		},
+		{
+			"type": "origins:crafting_recipe",
+			"sprite": "apocalypse_origins:textures/item/return_shard.png",
+			"recipe": {
+				"type": "minecraft:crafting_shaped",
+				"id": "apocalypse_origins:return_shard",
+				"pattern": [
+					" # ",
+					"^#^",
+					" # "
+				],
+				"key":{
+					"#": {
+						"item": "minecraft:amethyst_shard"
+					},
+					"^": {
+						"item": "minecraft:gold_nugget"
+					}
+				},
+				"result":{
+					"item": "apocalypse_origins:return_shard"
+				}
+			}
+		},
+		{
+			"type": "origins:crafting_recipe",
+			"sprite": "apocalypse_origins:textures/item/crystalline_emblem.png",
+			"recipe": {
+				"type": "minecraft:crafting_shaped",
+				"id": "apocalypse_origins:crystalline_emblem",
+				"pattern": [
+					"r#e",
+					"^#^",
+					"q#d"
+				],
+				"key":{
+					"#": {
+						"item": "minecraft:amethyst_shard"
+					},
+					"^": {
+						"item": "minecraft:gold_ingot"
+					},
+					"r": {
+						"item": "minecraft:redstone"
+					},
+					"q": {
+						"item": "minecraft:quartz"
+					},
+					"e": {
+						"item": "minecraft:emerald"
+					},
+					"d": {
+						"item": "minecraft:diamond"
+					}
+				},
+				"result":{
+					"item": "apocalypse_origins:crystalline_emblem"
+				}
+			}
+		}
+	]
+}

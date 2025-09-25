@@ -1,0 +1,33 @@
+{
+    "type": "origins:fire_projectile",
+    "entity_type": "minecraft:llama_spit",
+    "cooldown": 40,
+    "hud_render": {
+        "should_render": false
+    },
+    "count": 4,
+    "interval": 5,
+	"sound": "minecraft:entity.llama.spit",
+	"condition":
+	{
+		"type": "origins:and",
+		"conditions": [
+			{
+				"type": "origins:sneaking",
+				"inverted": true
+			},
+			{
+				"type": "origins:resource",
+				"comparison": ">=",
+				"resource": "apocalypse:myconoids/wart_passives_stamina_spores",
+				"compare_to": 2
+			}
+		]
+	},
+    "key": {
+        "key": "key.origins.primary_active",
+        "continuous": true
+    },
+	"name": "Spore Burst",
+	"description": "You shoot your spores at whoever you are looking at. They don't deal a lot of damage, but it sends a message."
+}

@@ -1,0 +1,165 @@
+{
+	"type": "origins:multiple",
+	"callback":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "power grant @p[tag=smallbane] apocalypse:classes/bounce smallbane"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "scale delay set pehkui:height 0 @s"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "scale delay set pehkui:width 0 @s"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "scale set pehkui:height 0.2 @s"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "scale set pehkui:width 1.2 @s"
+				}
+			]
+		},
+		"execute_chosen_when_orb": true,
+		"hidden": true
+	},
+	"durationbar": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 5,
+		"start_value": 5,
+		"hidden": true,
+		"name": "Duration",
+		"description": "How long?",
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse:textures/gui/stomped_bar.png",
+			"bar_index": 0,
+			"condition": {
+				"type": "origins:resource",
+				"resource": "apocalypse:classes/stomped_mob_durationbar",
+				"comparison": ">",
+				"compare_to": 0
+			}
+		}
+	},
+	"timer": 
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "apocalypse:myconoids/chorus_stomped_status_durationbar",
+								"compare_to": 5
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:myconoids/chorus_stomped_status_durationbar",
+								"change": -1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "execute at @s run particle entity_effect ~ ~1 ~ 0 1 0 0 3 normal @a"
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": ">",
+								"resource": "apocalypse:myconoids/chorus_stomped_status_durationbar",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "<=",
+								"resource": "apocalypse:myconoids/chorus_stomped_status_durationbar",
+								"compare_to": 6
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:myconoids/chorus_stomped_status_durationbar",
+								"change": -1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "execute at @s run particle entity_effect ~ ~1 ~ 0 1 0 0 3 normal @a"
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "apocalypse:myconoids/chorus_stomped_status_durationbar",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "scale delay set pehkui:height 20 @s"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "scale delay set pehkui:width 20 @s"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "scale reset @s"
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:execute_command",
+									"command": "power revoke @s apocalypse:myconoids/chorus_stomped_status afungus"
+								}
+							}							
+						]
+					}
+				}
+			]
+		},
+		"interval": 20,
+		"hidden": true
+	},
+	"hidden": true
+}

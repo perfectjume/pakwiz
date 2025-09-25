@@ -1,0 +1,13 @@
+name = "Deeper Oceans"
+filename = "deeper-oceans-2.0.0-fabric-1.20.1.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "24de74d79367f5a4efc7e9f2d051f4dcd3333858"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 6668829
+project-id = 714177

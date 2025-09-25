@@ -1,0 +1,13 @@
+name = "Ore Harvester"
+filename = "oreharvester-1.20.1-1.5.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "5870ac1f2f17243f265bfbf0af487c81a82d4e8f"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 6185435
+project-id = 1022944

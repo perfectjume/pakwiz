@@ -1,0 +1,13 @@
+name = "Health Regeneration Overhaul"
+filename = "health-regeneration-overhaul-1.3.1.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "fd0aee32948a0fb5f25b3484c9fa8ce57ecb7315"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 5995474
+project-id = 1061161

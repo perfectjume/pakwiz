@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "apocalypse_origins:x_block",
+    "apocalypse_origins:y_block",
+    "apocalypse_origins:z_block",
+    "apocalypse_origins:gob_complainer",
+    "apocalypse_origins:hexaltar",
+    "apocalypse_origins:hexaltar2",
+    "apocalypse_origins:hexaltar3",
+    "apocalypse_origins:world",
+    "apocalypse_origins:world_hell",
+    "apocalypse_origins:world_end",
+    "apocalypse_origins:gene_duplicator"
+  ]
+}

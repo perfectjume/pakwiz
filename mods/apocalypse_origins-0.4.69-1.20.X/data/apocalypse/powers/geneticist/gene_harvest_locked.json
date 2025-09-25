@@ -1,0 +1,1895 @@
+{
+    "type": "origins:action_on_hit",
+    "bientity_action":{
+		"type": "origins:target_action",
+		"action":{
+			"type": "origins:and",
+			"actions":[
+				{
+					"type": "origins:chance",
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+							},
+							{
+								"type": "origins:choice",
+								"actions": [
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "give @p[tag=geneticist] apocalypse_origins:syringe_living{CustomModelData:1,display:{Name:'[{\"text\":\"Generic Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"AAAA\",\"italic\":false}]']}} 1"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "give @p[tag=geneticist] apocalypse_origins:syringe_living{CustomModelData:2,display:{Name:'[{\"text\":\"Generic Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"AAAT\",\"italic\":false}]']}} 1"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "give @p[tag=geneticist] apocalypse_origins:syringe_living{CustomModelData:3,display:{Name:'[{\"text\":\"Generic Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"AATT\",\"italic\":false}]']}} 1"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "give @p[tag=geneticist] apocalypse_origins:syringe_living{CustomModelData:4,display:{Name:'[{\"text\":\"Generic Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"ATTT\",\"italic\":false}]']}} 1"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "give @p[tag=geneticist] apocalypse_origins:syringe_living{CustomModelData:5,display:{Name:'[{\"text\":\"Generic Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"TTTA\",\"italic\":false}]']}} 1"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "give @p[tag=geneticist] apocalypse_origins:syringe_living{CustomModelData:6,display:{Name:'[{\"text\":\"Generic Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"TTAA\",\"italic\":false}]']}} 1"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "give @p[tag=geneticist] apocalypse_origins:syringe_living{CustomModelData:7,display:{Name:'[{\"text\":\"Generic Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"TAAA\",\"italic\":false}]']}} 1"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "give @p[tag=geneticist] apocalypse_origins:syringe_living{CustomModelData:8,display:{Name:'[{\"text\":\"Generic Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"TTTT\",\"italic\":false}]']}} 1"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "give @p[tag=geneticist] apocalypse_origins:syringe_living{CustomModelData:9,display:{Name:'[{\"text\":\"Generic Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"CCCC\",\"italic\":false}]']}} 1"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "give @p[tag=geneticist] apocalypse_origins:syringe_living{CustomModelData:10,display:{Name:'[{\"text\":\"Generic Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GGGG\",\"italic\":false}]']}} 1"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "give @p[tag=geneticist] apocalypse_origins:syringe_living{CustomModelData:11,display:{Name:'[{\"text\":\"Generic Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"CCCA\",\"italic\":false}]']}} 1"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "give @p[tag=geneticist] apocalypse_origins:syringe_living{CustomModelData:12,display:{Name:'[{\"text\":\"Generic Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"CCAA\",\"italic\":false}]']}} 1"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "give @p[tag=geneticist] apocalypse_origins:syringe_living{CustomModelData:13,display:{Name:'[{\"text\":\"Generic Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"CAAA\",\"italic\":false}]']}} 1"
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:execute_command",
+											"command": "give @p[tag=geneticist] apocalypse_origins:syringe_living{CustomModelData:20,display:{Name:'[{\"text\":\"Generic Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"ACAT\",\"italic\":false}]']}} 1"
+										},
+										"weight": 1
+									}
+								]
+							}
+						]
+					},
+					"chance": 1
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions":[
+						{
+							"condition":{
+								"type": "origins:entity_group",
+								"group": "aquatic"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_aquatic{CustomModelData:2,display:{Name:'[{\"text\":\"Aquatic Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"AACC\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_aquatic{CustomModelData:4,display:{Name:'[{\"text\":\"Aquatic Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"CTAG\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions":[
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:axolotl"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_aquatic{CustomModelData:1,display:{Name:'[{\"text\":\"Aquatic Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"AAAC\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_aquatic{CustomModelData:6,display:{Name:'[{\"text\":\"Aquatic Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"TACG\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:pufferfish"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_aquatic{CustomModelData:3,display:{Name:'[{\"text\":\"Aquatic Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"ACCC\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:guardian"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_aquatic{CustomModelData:3,display:{Name:'[{\"text\":\"Aquatic Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"ACCC\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:elder_guardian"
+							},
+							"action":{
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+									},
+									{
+										"type": "origins:choice",
+										"actions": [
+											{
+												"element": {
+													"type": "origins:execute_command",
+													"command": "give @p[tag=geneticist] apocalypse_origins:syringe_aquatic{CustomModelData:3,display:{Name:'[{\"text\":\"Aquatic Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"ACCC\",\"italic\":false}]']}} 1"
+												},
+												"weight": 1
+											},
+											{
+												"element": {
+													"type": "origins:execute_command",
+													"command": "give @p[tag=geneticist] apocalypse_origins:syringe_aquatic{CustomModelData:5,display:{Name:'[{\"text\":\"Aquatic Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"AGGG\",\"italic\":false}]']}} 1"
+												},
+												"weight": 1
+											},
+											{
+												"element": {
+													"type": "origins:execute_command",
+													"command": "give @p[tag=geneticist] apocalypse_origins:syringe_active{CustomModelData:3,display:{Name:'[{\"text\":\"Active Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"AAGG\",\"italic\":false}]']}} 1"
+												},
+												"weight": 1
+											}
+										]
+									}
+								]
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:squid"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_active{CustomModelData:6,display:{Name:'[{\"text\":\"Active Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"AAAG\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:glow_squid"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_active{CustomModelData:7,display:{Name:'[{\"text\":\"Active Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GGGA\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:spider"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_arthropod{CustomModelData:1,display:{Name:'[{\"text\":\"Arthropod Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GGAA\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_arthropod{CustomModelData:5,display:{Name:'[{\"text\":\"Arthropod Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GAAA\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_arthropod{CustomModelData:6,display:{Name:'[{\"text\":\"Arthropod Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GACT\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:cave_spider"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_arthropod{CustomModelData:1,display:{Name:'[{\"text\":\"Arthropod Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GGAA\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_arthropod{CustomModelData:2,display:{Name:'[{\"text\":\"Arthropod Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GGGT\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_arthropod{CustomModelData:5,display:{Name:'[{\"text\":\"Arthropod Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GAAA\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_arthropod{CustomModelData:6,display:{Name:'[{\"text\":\"Arthropod Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GACT\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_arthropod{CustomModelData:7,display:{Name:'[{\"text\":\"Arthropod Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"CAGT\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:silverfish"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_arthropod{CustomModelData:3,display:{Name:'[{\"text\":\"Arthropod Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GGTT\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_arthropod{CustomModelData:4,display:{Name:'[{\"text\":\"Arthropod Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GTTT\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:endermite"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_arthropod{CustomModelData:3,display:{Name:'[{\"text\":\"Arthropod Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GGTT\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:creeper"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_creeper{CustomModelData:1,display:{Name:'[{\"text\":\"Odd Mob Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"TTGG\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_creeper{CustomModelData:2,display:{Name:'[{\"text\":\"Odd Mob Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"TTTG\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:frog"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_creeper{CustomModelData:3,display:{Name:'[{\"text\":\"Odd Mob Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"CCCG\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:warden"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_creeper{CustomModelData:4,display:{Name:'[{\"text\":\"Odd Mob Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"CCGG\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_active{CustomModelData:4,display:{Name:'[{\"text\":\"Active Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"CGGG\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:blaze"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_nether{CustomModelData:1,display:{Name:'[{\"text\":\"Nether Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GGGC\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_nether{CustomModelData:2,display:{Name:'[{\"text\":\"Nether Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GGCC\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_nether{CustomModelData:4,display:{Name:'[{\"text\":\"Nether Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GCCC\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:magma_cube"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_nether{CustomModelData:1,display:{Name:'[{\"text\":\"Nether Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GGGC\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:strider"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_nether{CustomModelData:1,display:{Name:'[{\"text\":\"Nether Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GGGC\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_nether{CustomModelData:6,display:{Name:'[{\"text\":\"Nether Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"CCCT\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:zombified_piglin"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_nether{CustomModelData:1,display:{Name:'[{\"text\":\"Nether Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GGGC\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:zoglin"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_nether{CustomModelData:1,display:{Name:'[{\"text\":\"Nether Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GGGC\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:wither_skeleton"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_nether{CustomModelData:1,display:{Name:'[{\"text\":\"Nether Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GGGC\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_nether{CustomModelData:3,display:{Name:'[{\"text\":\"Nether Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"CCTT\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_nether{CustomModelData:5,display:{Name:'[{\"text\":\"Nether Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GCAT\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:wither"
+							},
+							"action":{
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+									},
+									{
+										"type": "origins:choice",
+										"actions": [
+											{
+												"element": {
+													"type": "origins:execute_command",
+													"command": "give @p[tag=geneticist] apocalypse_origins:syringe_nether{CustomModelData:1,display:{Name:'[{\"text\":\"Nether Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GGGC\",\"italic\":false}]']}} 1"
+												},
+												"weight": 1
+											},
+											{
+												"element": {
+													"type": "origins:execute_command",
+													"command": "give @p[tag=geneticist] apocalypse_origins:syringe_nether{CustomModelData:3,display:{Name:'[{\"text\":\"Nether Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"CCTT\",\"italic\":false}]']}} 1"
+												},
+												"weight": 1
+											},
+											{
+												"element": {
+													"type": "origins:execute_command",
+													"command": "give @p[tag=geneticist] apocalypse_origins:syringe_nether{CustomModelData:5,display:{Name:'[{\"text\":\"Nether Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GCAT\",\"italic\":false}]']}} 1"
+												},
+												"weight": 1
+											},
+											{
+												"element": {
+													"type": "origins:execute_command",
+													"command": "give @p[tag=geneticist] apocalypse_origins:syringe_active{CustomModelData:1,display:{Name:'[{\"text\":\"Active Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"CTTT\",\"italic\":false}]']}} 1"
+												},
+												"weight": 1
+											}
+										]
+									}
+								]
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:enderman"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_end{CustomModelData:1,display:{Name:'[{\"text\":\"End Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"TTTC\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element":{
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_active{CustomModelData:8,display:{Name:'[{\"text\":\"Active Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"ACTA\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:shulker"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_end{CustomModelData:1,display:{Name:'[{\"text\":\"End Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"TTTC\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_end{CustomModelData:2,display:{Name:'[{\"text\":\"End Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"TTCC\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_end{CustomModelData:3,display:{Name:'[{\"text\":\"End Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"TCCC\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element":{
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_active{CustomModelData:10,display:{Name:'[{\"text\":\"Active Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"ACTT\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:ender_dragon"
+							},
+							"action":{
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+									},
+									{
+										"type": "origins:choice",
+										"actions": [
+											{
+												"element": {
+													"type": "origins:execute_command",
+													"command": "give @p[tag=geneticist] apocalypse_origins:syringe_end{CustomModelData:4,display:{Name:'[{\"text\":\"End Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"ACAC\",\"italic\":false}]']}} 1"
+												},
+												"weight": 1
+											},
+											{
+												"element": {
+													"type": "origins:execute_command",
+													"command": "give @p[tag=geneticist] apocalypse_origins:syringe_active{CustomModelData:2,display:{Name:'[{\"text\":\"Active Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"CACA\",\"italic\":false}]']}} 1"
+												},
+												"weight": 1
+											}
+										]
+									}
+								]
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:drowned"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_undead{CustomModelData:1,display:{Name:'[{\"text\":\"Undead Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"ATAT\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_undead{CustomModelData:4,display:{Name:'[{\"text\":\"Undead Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GAGA\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:husk"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_undead{CustomModelData:2,display:{Name:'[{\"text\":\"Undead Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"TATA\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_undead{CustomModelData:4,display:{Name:'[{\"text\":\"Undead Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GAGA\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:zombie"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_undead{CustomModelData:4,display:{Name:'[{\"text\":\"Undead Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GAGA\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:zombie_villager"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_undead{CustomModelData:4,display:{Name:'[{\"text\":\"Undead Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GAGA\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:zombie_horse"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_undead{CustomModelData:4,display:{Name:'[{\"text\":\"Undead Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GAGA\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:phantom"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_undead{CustomModelData:3,display:{Name:'[{\"text\":\"Undead Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"AGAG\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:skeleton"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_undead{CustomModelData:5,display:{Name:'[{\"text\":\"Undead Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"ACCA\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:stray"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_undead{CustomModelData:5,display:{Name:'[{\"text\":\"Undead Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"ACCA\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_undead{CustomModelData:6,display:{Name:'[{\"text\":\"Undead Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"CAAC\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:allay"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_undead{CustomModelData:3,display:{Name:'[{\"text\":\"Undead Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"AGAG\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_arthropod{CustomModelData:3,display:{Name:'[{\"text\":\"Arthropod Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GGTT\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_aquatic{CustomModelData:6,display:{Name:'[{\"text\":\"Aquatic Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"TACG\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:parrot"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_undead{CustomModelData:3,display:{Name:'[{\"text\":\"Undead Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"AGAG\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_arthropod{CustomModelData:3,display:{Name:'[{\"text\":\"Arthropod Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GGTT\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element":{
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_active{CustomModelData:9,display:{Name:'[{\"text\":\"Active Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"ACTC\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:bat"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_undead{CustomModelData:3,display:{Name:'[{\"text\":\"Undead Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"AGAG\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_arthropod{CustomModelData:3,display:{Name:'[{\"text\":\"Arthropod Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GGTT\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:cow"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_living{CustomModelData:14,display:{Name:'[{\"text\":\"Living Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"TAAT\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:cow"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:sheep"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_living{CustomModelData:15,display:{Name:'[{\"text\":\"Living Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"ATTA\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:chicken"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_living{CustomModelData:17,display:{Name:'[{\"text\":\"Living Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GAAG\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:polar_bear"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_living{CustomModelData:19,display:{Name:'[{\"text\":\"Living Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"AGGA\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:cat"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_living{CustomModelData:21,display:{Name:'[{\"text\":\"Living Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"TACA\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_living{CustomModelData:4,display:{Name:'[{\"text\":\"Generic Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"ATTT\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:iron_golem"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element":{
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_active{CustomModelData:10,display:{Name:'[{\"text\":\"Active Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"ACTT\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:pillager"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element":{
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_active{CustomModelData:10,display:{Name:'[{\"text\":\"Active Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"ACTT\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:evoker"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_living{CustomModelData:16,display:{Name:'[{\"text\":\"Living Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GTTG\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:vex"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_undead{CustomModelData:3,display:{Name:'[{\"text\":\"Undead Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"AGAG\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												},
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_arthropod{CustomModelData:3,display:{Name:'[{\"text\":\"Arthropod Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"GGTT\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:vindicator"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_living{CustomModelData:18,display:{Name:'[{\"text\":\"Living Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"TGGT\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:ravager"
+							},
+							"action":{
+								"type": "origins:chance",
+								"action":{
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:apocalypse.ost.syringe master @a ~ ~ ~ 1 1"
+										},
+										{
+											"type": "origins:choice",
+											"actions": [
+												{
+													"element": {
+														"type": "origins:execute_command",
+														"command": "give @p[tag=geneticist] apocalypse_origins:syringe_active{CustomModelData:5,display:{Name:'[{\"text\":\"Active Gene\",\"italic\":false,\"color\":\"white\"}]',Lore:['[{\"text\":\"CGGC\",\"italic\":false}]']}} 1"
+													},
+													"weight": 1
+												}
+											]
+										}
+									]
+								},
+								"chance": 1
+							}
+						}
+					]
+				}
+			]
+		}
+	},
+	"bientity_condition":{
+		"type": "origins:and",
+		"conditions":[
+			{
+				"type": "origins:target_condition",
+				"condition":{
+					"type": "origins:health",
+					"comparison": "<=",
+					"compare_to": 0
+				}
+			},
+			{
+				"type": "origins:actor_condition",
+				"condition":{
+					"type": "origins:and",
+					"conditions":[
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition": {
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "apocalypse_origins:syringe"
+										}
+									}
+								},
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "mainhand",
+									"item_condition": {
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "apocalypse_origins:syringe_reinforced"
+										}
+									}
+								}
+							]
+						},
+						{
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "apocalypse:geneticist/geneticist_passives_genelock_resource",
+							"compare_to": 1
+						}
+					]
+				}
+			}
+		]
+	},
+	"damage_condition": {
+		"type": "origins:and",
+		"conditions": [
+			{
+				"type": "origins:projectile",
+				"inverted": true
+			},
+			{
+				"type": "origins:in_tag",
+				"tag": "minecraft:is_explosion",
+				"inverted": true
+			}
+		]
+	},
+	"hidden": true
+}

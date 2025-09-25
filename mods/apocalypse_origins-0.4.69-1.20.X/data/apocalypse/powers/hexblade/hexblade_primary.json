@@ -1,0 +1,724 @@
+{
+	"type": "origins:multiple",
+	"grayscale":
+	{
+		"type": "origins:cooldown",
+		"cooldown": 20,
+		"hud_render":{
+			"should_render": false
+		}
+	},
+	"critdash":
+	{
+		"type": "origins:cooldown",
+		"cooldown": 10,
+		"hud_render":{
+			"should_render": false
+		}
+	},
+	"dash":
+	{
+		"type": "origins:cooldown",
+		"cooldown": 250,
+		"hud_render":{
+			"should_render": true,
+			"bar_index": 1,
+			"sprite_location": "apocalypse_origins:textures/gui/hexblade_parry.png"
+		}
+	},
+	"slashcount": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 4,
+		"start_value": 0,
+		"hud_render":{
+			"should_render": true,
+			"bar_index": 3,
+			"sprite_location": "apocalypse_origins:textures/gui/hexblade_parry.png",
+			"condition":{
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "*:*_slashcount",
+						"comparison": ">",
+						"compare_to": 0
+					},
+					{
+						"type": "origins:resource",
+						"resource": "*:*_dash",
+						"comparison": ">",
+						"compare_to": 2
+					}
+				]
+			}
+		}
+	},
+	"slashcount_ddd": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 4,
+		"start_value": 0,
+		"hud_render":{
+			"should_render": true,
+			"bar_index": 4,
+			"sprite_location": "apocalypse_origins:textures/gui/hexblade_parry.png",
+			"condition":{
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "*:*_slashcount_ddd",
+						"comparison": ">",
+						"compare_to": 0
+					},
+					{
+						"type": "origins:resource",
+						"resource": "*:*_dash",
+						"comparison": ">",
+						"compare_to": 2
+					},
+					{
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "apocalypse:hexblade/hexblade_resource_ultimates_ddd",
+						"compare_to": 1
+					}
+				]
+			}
+		}
+	},
+	"crit_damage": 
+	{
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": 0.5
+		},
+		"condition": {
+			"type": "origins:resource",
+			"resource": "*:*_critdash",
+			"comparison": "==",
+			"compare_to": 1
+		}
+	},
+	"trigger": 
+	{
+		"type": "origins:active_self",
+		"cooldown": 11,
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action":{
+			"type": "origins:and",
+			"actions":[
+				{
+					"type": "origins:set_fall_distance",
+					"fall_distance": 0
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions":[
+						{
+							"condition":{
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:resource",
+										"resource": "*:*_slashcount",
+										"comparison": "==",
+										"compare_to": 0
+									},
+									{
+										"type": "origins:resource",
+										"comparison": "==",
+										"resource": "apocalypse:hexblade/hexblade_resource_ultimates_ddd",
+										"compare_to": 1
+									}
+								]
+							},
+							"action":{
+								"type": "origins:and",
+								"actions":[
+									{
+										"type": "origins:change_resource",
+										"resource": "*:*_slashcount_ddd",
+										"change": -1
+									},
+									{
+										"type": "origins:change_resource",
+										"resource": "apocalypse:hexblade/hexblade_resource_storage",
+										"change": -1
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_slashcount",
+					"change": -1
+				},
+				{
+					"type": "origins:add_velocity",
+					"z": 1,
+					"space": "local",
+					"set": true
+				},
+				{
+					"type": "origins:play_sound",
+					"sound": "minecraft:ambient.soul_sand_valley.additions",
+					"volume": 4,
+					"pitch": 2
+				},
+				{
+					"type": "origins:play_sound",
+					"sound": "minecraft:item.trident.throw",
+					"volume": 4,
+					"pitch": 1.2
+				},
+				{
+					"type": "origins:trigger_cooldown",
+					"power": "*:*_critdash"
+				},
+				{
+					"type": "origins:trigger_cooldown",
+					"power": "*:*_dash"
+				},
+				{
+					"type": "origins:trigger_cooldown",
+					"power": "*:*_grayscale"
+				},
+				{
+					"type": "origins:apply_effect",
+					"effect": {
+						"effect": "minecraft:invisibility",
+						"duration": 10,
+						"is_ambient": true,
+						"show_particles": false,
+						"show_icon": false
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 10,
+					"action":{
+						"type": "origins:set_fall_distance",
+						"fall_distance": 0
+					}
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:resource",
+										"resource": "apocalypse:hexblade/hexblade_resource_storage",
+										"comparison": ">=",
+										"compare_to": 250
+									},
+									{
+										"type": "origins:resource",
+										"resource": "apocalypse:hexblade/hexblade_resource_storage",
+										"comparison": "<",
+										"compare_to": 999
+									}
+								]
+							},
+							"action":{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:change_resource",
+									"resource": "*:*_dash",
+									"change": 60,
+									"operation": "set"
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:resource",
+										"resource": "apocalypse:hexblade/hexblade_resource_storage",
+										"comparison": ">=",
+										"compare_to": 999
+									},
+									{
+										"type": "origins:resource",
+										"resource": "apocalypse:hexblade/hexblade_resource_storage",
+										"comparison": "<",
+										"compare_to": 1999
+									}
+								]
+							},
+							"action":{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:change_resource",
+									"resource": "*:*_dash",
+									"change": 120,
+									"operation": "set"
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:resource",
+										"resource": "apocalypse:hexblade/hexblade_resource_storage",
+										"comparison": ">=",
+										"compare_to": 1999
+									},
+									{
+										"type": "origins:resource",
+										"resource": "apocalypse:hexblade/hexblade_resource_storage",
+										"comparison": "<=",
+										"compare_to": 4000
+									}
+								]
+							},
+							"action":{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:change_resource",
+									"resource": "*:*_dash",
+									"change": 180,
+									"operation": "set"
+								}
+							}
+						}
+					]
+				}
+			]
+		},
+		"condition":
+		{
+			"type": "origins:and",
+			"conditions":
+			[
+				{
+					"type": "origins:or",
+					"conditions":
+					[
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "mainhand",
+							"item_condition":
+							{
+								"type": "origins:ingredient",
+								"inverted": false,
+								"ingredient":
+								{
+									"item": "minecraft:wooden_sword"
+								}
+							}
+						},
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "offhand",
+							"item_condition":
+							{
+								"type": "origins:ingredient",
+								"inverted": false,
+								"ingredient":
+								{
+									"item": "minecraft:wooden_sword"
+								}
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:sneaking",
+					"inverted": true
+				},
+				{
+				  "type": "origins:gamemode",
+				  "gamemode": "spectator",
+				  "inverted": true
+				},
+				{
+					"type": "origins:or",
+					"conditions":[
+						{
+							"type": "origins:resource",
+							"comparison": ">",
+							"resource": "*:*_slashcount",
+							"compare_to": 0
+						},
+						{
+							"type": "origins:resource",
+							"resource": "*:*_dash",
+							"comparison": "==",
+							"compare_to": 0
+						},
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"resource": "*:*_slashcount_ddd",
+									"comparison": ">",
+									"compare_to": 0
+								},
+								{
+									"type": "origins:resource",
+									"comparison": "==",
+									"resource": "apocalypse:hexblade/hexblade_resource_ultimates_ddd",
+									"compare_to": 1
+								}
+							]
+						}
+					]
+				}
+			]
+		},	
+		"key": {
+			"key":"key.origins.primary_active",
+			"continuous": true
+		}
+	},
+	"slashccelerate":
+	{
+		"type": "origins:action_over_time",
+		"interval": 1,
+		"entity_action":{
+			"type": "origins:if_else_list",
+			"actions":[
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions":[
+							{
+								"type": "origins:resource",
+								"resource": "*:*_critdash",
+								"comparison": ">",
+								"compare_to": 1
+							},
+							{
+								"type": "origins:resource",
+								"resource": "*:*_critdash",
+								"comparison": "<=",
+								"compare_to": 3
+							}
+						]
+					},
+					"action":{
+						"type": "origins:add_velocity",
+						"z": 2.5,
+						"space": "local",
+						"set": true
+					}
+				},
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions":[
+							{
+								"type": "origins:resource",
+								"resource": "*:*_critdash",
+								"comparison": ">",
+								"compare_to": 3
+							},
+							{
+								"type": "origins:resource",
+								"resource": "*:*_critdash",
+								"comparison": "<=",
+								"compare_to": 5
+							}
+						]
+					},
+					"action":{
+						"type": "origins:add_velocity",
+						"z": 2,
+						"space": "local",
+						"set": true
+					}
+				},
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions":[
+							{
+								"type": "origins:resource",
+								"resource": "*:*_critdash",
+								"comparison": ">",
+								"compare_to": 5
+							},
+							{
+								"type": "origins:resource",
+								"resource": "*:*_critdash",
+								"comparison": "<=",
+								"compare_to": 7
+							}
+						]
+					},
+					"action":{
+						"type": "origins:add_velocity",
+						"z": 1.5,
+						"space": "local",
+						"set": true
+					}
+				},
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions":[
+							{
+								"type": "origins:resource",
+								"resource": "*:*_critdash",
+								"comparison": ">",
+								"compare_to": 7
+							},
+							{
+								"type": "origins:resource",
+								"resource": "*:*_critdash",
+								"comparison": "<=",
+								"compare_to": 9
+							}
+						]
+					},
+					"action":{
+						"type": "origins:add_velocity",
+						"z": 1,
+						"space": "local",
+						"set": true
+					}
+				},
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions":[
+							{
+								"type": "origins:resource",
+								"resource": "*:*_critdash",
+								"comparison": "==",
+								"compare_to": 1
+							}
+						]
+					},
+					"action":{
+						"type": "origins:add_velocity",
+						"z": 0,
+						"space": "local",
+						"set": true
+					}
+				}
+			]
+		},
+		"condition":{
+			"type": "origins:and",
+			"conditions":[
+				{
+					"type": "origins:resource",
+					"resource": "*:*_critdash",
+					"comparison": ">",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:resource",
+					"resource": "*:*_dash",
+					"comparison": ">",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"extradashes":
+	{
+		"type": "origins:action_over_time",
+		"interval": 1,
+		"entity_action":{
+			"type": "origins:and",
+			"actions":[
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_slashcount_ddd",
+					"change": 1
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions":[
+						{
+							"condition":{
+								"type": "origins:and",
+								"conditions":[
+									{
+										"type": "origins:resource",
+										"resource": "apocalypse:hexblade/hexblade_resource_storage",
+										"comparison": ">=",
+										"compare_to": 250
+									},
+									{
+										"type": "origins:resource",
+										"resource": "apocalypse:hexblade/hexblade_resource_storage",
+										"comparison": "<",
+										"compare_to": 999
+									},
+									{
+										"type": "origins:resource",
+										"resource": "*:*_slashcount",
+										"comparison": "<",
+										"compare_to": 2
+									}
+								]
+							},
+							"action":{
+								"type": "origins:change_resource",
+								"resource": "*:*_slashcount",
+								"change": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:and",
+								"conditions":[
+									{
+										"type": "origins:resource",
+										"resource": "apocalypse:hexblade/hexblade_resource_storage",
+										"comparison": ">=",
+										"compare_to": 999
+									},
+									{
+										"type": "origins:resource",
+										"resource": "apocalypse:hexblade/hexblade_resource_storage",
+										"comparison": "<=",
+										"compare_to": 1999
+									},
+									{
+										"type": "origins:resource",
+										"resource": "*:*_slashcount",
+										"comparison": "<",
+										"compare_to": 3
+									}
+								]
+							},
+							"action":{
+								"type": "origins:change_resource",
+								"resource": "*:*_slashcount",
+								"change": 1
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:and",
+								"conditions":[
+									{
+										"type": "origins:resource",
+										"resource": "apocalypse:hexblade/hexblade_resource_storage",
+										"comparison": ">=",
+										"compare_to": 2000
+									},
+									{
+										"type": "origins:resource",
+										"resource": "*:*_slashcount",
+										"comparison": "<",
+										"compare_to": 4
+									}
+								]
+							},
+							"action":{
+								"type": "origins:change_resource",
+								"resource": "*:*_slashcount",
+								"change": 1
+							}
+						}
+					]
+				}
+			]
+		},
+		"condition":{
+			"type": "origins:and",
+			"conditions":[
+				{
+					"type": "origins:resource",
+					"resource": "*:*_dash",
+					"comparison": "==",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:or",
+					"conditions":[
+						{
+							"type": "origins:and",
+							"conditions":[
+								{
+									"type": "origins:resource",
+									"resource": "apocalypse:hexblade/hexblade_resource_storage",
+									"comparison": ">=",
+									"compare_to": 250
+								},
+								{
+									"type": "origins:resource",
+									"resource": "apocalypse:hexblade/hexblade_resource_storage",
+									"comparison": "<",
+									"compare_to": 999
+								},
+								{
+									"type": "origins:resource",
+									"resource": "*:*_slashcount",
+									"comparison": "<",
+									"compare_to": 2
+								}
+							]
+						},
+						{
+							"type": "origins:and",
+							"conditions":[
+								{
+									"type": "origins:resource",
+									"resource": "apocalypse:hexblade/hexblade_resource_storage",
+									"comparison": ">=",
+									"compare_to": 999
+								},
+								{
+									"type": "origins:resource",
+									"resource": "apocalypse:hexblade/hexblade_resource_storage",
+									"comparison": "<=",
+									"compare_to": 1999
+								},
+								{
+									"type": "origins:resource",
+									"resource": "*:*_slashcount",
+									"comparison": "<",
+									"compare_to": 3
+								}
+							]
+						},
+						{
+							"type": "origins:and",
+							"conditions":[
+								{
+									"type": "origins:resource",
+									"resource": "apocalypse:hexblade/hexblade_resource_storage",
+									"comparison": ">=",
+									"compare_to": 2000
+								},
+								{
+									"type": "origins:resource",
+									"resource": "*:*_slashcount",
+									"comparison": "<",
+									"compare_to": 4
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	},
+	"hidden": true
+}

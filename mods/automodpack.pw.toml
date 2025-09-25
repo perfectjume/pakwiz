@@ -1,0 +1,13 @@
+name = "AutoModpack"
+filename = "automodpack-mc1.20.1-fabric-4.0.0-beta38.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "e07a08d67357aaf8a5bd90c82378f43a97a515ed"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 6694482
+project-id = 639211

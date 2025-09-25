@@ -1,0 +1,5 @@
+{
+	"type": "origins:simple",
+	"name": "Parry",
+	"description": "If you are holding your sword, press [Right Click] to cleanse status effects and some variations of time-stop, shrinking and enlarging from you and activate a parry at the cost of 3 units of [Soul Barrier]. If you successfully block a physical hit, you gain 5 units of [Soul Barrier] back and 2 stacks of [Risk]. This ability can still be used even if you have no [Soul Barrier] left."
+}

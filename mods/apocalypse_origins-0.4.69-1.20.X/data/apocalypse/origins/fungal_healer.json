@@ -1,0 +1,15 @@
+{
+	"powers": [
+		"apocalypse:classes/fungal_healer"
+	],
+	"icon": {
+		"item": "minecraft:amethyst_shard",
+		"tag": "{CustomModelData:21}"
+	},
+	"unchoosable": false,
+	"order": 10,
+	"impact": 3,
+  "name": "Fungal Healer",
+  "description": "An accomplished mycologist, you have discovered much about the medicinal properties of common mushrooms."
+}
+//Umena says hi

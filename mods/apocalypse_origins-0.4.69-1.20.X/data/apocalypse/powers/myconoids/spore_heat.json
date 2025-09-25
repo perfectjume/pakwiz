@@ -1,0 +1,107 @@
+{
+	"type": "origins:action_over_time",
+	"interval": 20,
+	"entity_action": {
+		"type": "origins:if_else_list",
+		"actions": [
+			{
+				"condition": {
+				  "type": "origins:and",
+				  "conditions": [
+						{
+							"type": "origins:resource",
+							"comparison": "<",
+							"resource": "apocalypse:myconoids/resource_temperature_hotness",
+							"compare_to": 7
+						},
+						{
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "apocalypse:myconoids/resource_temperature_coolness",
+							"compare_to": 7
+						},
+						{
+							"type": "origins:dimension",
+							"inverted": true,
+							"dimension": "minecraft:the_end"
+						},
+						{
+						  "type": "origins:or",
+						  "conditions": [
+								{
+									"type": "origins:biome",
+									"condition": {
+										"type": "origins:temperature",
+										"comparison": ">=",
+										"compare_to": 0.95
+									}
+								},
+								{
+									"type": "origins:dimension",
+									"dimension": "minecraft:the_nether"
+								}
+							]
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [ 
+						{	
+							"type": "origins:execute_command",
+							"command": "resource change @s apocalypse:myconoids/resource_temperature_hotness 1"
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+				  "type": "origins:and",
+				  "conditions": [
+						{
+							"type": "origins:resource",
+							"comparison": ">",
+							"resource": "apocalypse:myconoids/resource_temperature_hotness",
+							"compare_to": 0
+						},
+						{
+						  "type": "origins:or",
+						  "conditions": [
+								{
+								  "type": "origins:and",
+								  "conditions": [
+										{
+											"type": "origins:biome",
+											"condition": {
+												"type": "origins:temperature",
+												"inverted": false,
+												"comparison": "<",
+												"compare_to": 0.95
+											}
+										},
+										{
+											"type": "origins:dimension",
+											"dimension": "minecraft:the_nether",
+											"inverted": true
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [ 
+						{	
+							"type": "origins:execute_command",
+							"command": "resource change @s apocalypse:myconoids/resource_temperature_hotness -1"
+						}
+					]
+				}
+			}
+		]
+	},
+	"name": "Hot Biomes",
+	"description": "Being in a hot biome such a desert or the nether dimension allows you to evolve into your Warped, Crimson and Wart forms. Your desert form is also able to evolve in hot biomes, but keep a bucket of water or a cauldron handy! You will know a biome is hot if you see a red thermometer indicator showing up on the bottom right of your screen."
+}

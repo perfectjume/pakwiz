@@ -1,0 +1,31 @@
+{
+    "parent": "minecraft:item/generated",
+    "textures": {
+        "layer0": "apocalypse_origins:item/syringe_living"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "custom_model_data": 1
+            },
+            "model": "apocalypse_origins:item/modeldata/syringe_generic"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 14
+            },
+            "model": "apocalypse_origins:item/modeldata/syringe_living"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 20
+            },
+            "model": "apocalypse_origins:item/modeldata/syringe_generic"
+        },        {
+            "predicate": {
+                "custom_model_data": 21
+            },
+            "model": "apocalypse_origins:item/modeldata/syringe_living"
+        }
+    ]
+}

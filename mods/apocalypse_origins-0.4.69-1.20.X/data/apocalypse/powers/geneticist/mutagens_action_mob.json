@@ -1,0 +1,453 @@
+{
+	"type": "origins:multiple",
+	"callback":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:guardian"
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "summon minecraft:elder_guardian"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "tp @s ~ ~-300 ~"
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:zombie"
+							},
+							"action": {
+								"type": "origins:choice",
+								"actions": [
+									{
+										"element": {
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "summon minecraft:husk"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ ~-300 ~"
+												}
+											]
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "summon minecraft:drowned"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ ~-300 ~"
+												}
+											]
+										},
+										"weight": 1
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:skeleton"
+							},
+							"action": {
+								"type": "origins:choice",
+								"actions": [
+									{
+										"element": {
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "summon minecraft:stray"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ ~-300 ~"
+												}
+											]
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "summon minecraft:wither_skeleton"
+												},
+												{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ ~-300 ~"
+												}
+											]
+										},
+										"weight": 1
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:panda"
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "summon minecraft:polar_bear"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "tp @s ~ ~-300 ~"
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:polar_bear"
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "summon minecraft:panda"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "tp @s ~ ~-300 ~"
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:slime"
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "summon minecraft:magma_cube"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "tp @s ~ ~-300 ~"
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:magma_cube"
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "summon minecraft:slime"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "tp @s ~ ~-300 ~"
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:vex"
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "summon minecraft:allay"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "tp @s ~ ~-300 ~"
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:blaze"
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "summon minecraft:ghast"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "tp @s ~ ~-300 ~"
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:pillager"
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "summon minecraft:villager"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "tp @s ~ ~-300 ~"
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:endermite"
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "summon minecraft:silverfish"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "tp @s ~ ~-300 ~"
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:silverfish"
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "summon minecraft:endermite"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "tp @s ~ ~-300 ~"
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:spider"
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "summon minecraft:cave_spider"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "tp @s ~ ~-300 ~"
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:piglin"
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "summon minecraft:piglin_brute"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "tp @s ~ ~-300 ~"
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:cave_spider"
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "summon minecraft:silverfish"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "tp @s ~ ~-300 ~"
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:frog"
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "summon minecraft:axolotl"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "tp @s ~ ~-300 ~"
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:axolotl"
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "summon minecraft:frog"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "tp @s ~ ~-300 ~"
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:cow"
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "summon minecraft:mooshroom"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "tp @s ~ ~-300 ~"
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:phantom"
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "summon minecraft:bat"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "tp @s ~ ~-300 ~"
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:bat"
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "summon minecraft:phantom"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "tp @s ~ ~-300 ~"
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 6,
+					"action": {
+						"type": "origins:execute_command",
+						"command": "power revoke @s apocalypse:geneticist/mutagens_action_mob geneticist"
+					}
+				}
+			]
+		}
+	}
+}

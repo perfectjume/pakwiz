@@ -1,0 +1,294 @@
+{
+	"type": "origins:multiple",
+	"brown":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 30,
+		"start_value": 0,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 0,
+			"sprite_location": "apocalypse:textures/gui/shroomba.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "apocalypse:myconoids/resource_evolve_brown",
+						"comparison": ">",
+						"compare_to": 0
+					},
+					{
+						"type": "origins:origin",
+						"origin": "apocalypse:myconoid_spore",
+						"layer": "origins:origin"
+					}
+				]
+			}
+		}
+	},
+	"red":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 30,
+		"start_value": 0,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 1,
+			"sprite_location": "apocalypse:textures/gui/shroomba.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "apocalypse:myconoids/resource_evolve_red",
+						"comparison": ">",
+						"compare_to": 0
+					},
+					{
+						"type": "origins:origin",
+						"origin": "apocalypse:myconoid_spore",
+						"layer": "origins:origin"
+					}
+				]
+			}
+		}
+	},
+	"cactus":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 30,
+		"start_value": 0,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 0,
+			"sprite_location": "apocalypse:textures/gui/mycocactus.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "apocalypse:myconoids/resource_evolve_cactus",
+						"comparison": ">",
+						"compare_to": 0
+					},
+					{
+						"type": "origins:origin",
+						"origin": "apocalypse:myconoid_spore",
+						"layer": "origins:origin"
+					}
+				]
+			}
+		}
+	},
+	"moss":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 30,
+		"start_value": 0,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 0,
+			"sprite_location": "apocalypse:textures/gui/mycomoss.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "apocalypse:myconoids/resource_evolve_moss",
+						"comparison": ">",
+						"compare_to": 0
+					},
+					{
+						"type": "origins:origin",
+						"origin": "apocalypse:myconoid_spore",
+						"layer": "origins:origin"
+					}
+				]
+			}
+		}
+	},
+	"berry":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 30,
+		"start_value": 0,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 0,
+			"sprite_location": "apocalypse:textures/gui/mycoberry.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "apocalypse:myconoids/resource_evolve_berry",
+						"comparison": ">",
+						"compare_to": 0
+					},
+					{
+						"type": "origins:origin",
+						"origin": "apocalypse:myconoid_spore",
+						"layer": "origins:origin"
+					}
+				]
+			}
+		}
+	},
+	"warped":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 30,
+		"start_value": 0,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 0,
+			"sprite_location": "apocalypse:textures/gui/mycowarped.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "apocalypse:myconoids/resource_evolve_warped",
+						"comparison": ">",
+						"compare_to": 0
+					},
+					{
+						"type": "origins:origin",
+						"origin": "apocalypse:myconoid_spore",
+						"layer": "origins:origin"
+					}
+				]
+			}
+		}
+	},
+	"crimson":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 30,
+		"start_value": 0,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 0,
+			"sprite_location": "apocalypse:textures/gui/mycocrimson.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "apocalypse:myconoids/resource_evolve_crimson",
+						"comparison": ">",
+						"compare_to": 0
+					},
+					{
+						"type": "origins:origin",
+						"origin": "apocalypse:myconoid_spore",
+						"layer": "origins:origin"
+					}
+				]
+			}
+		}
+	},
+	"wart":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 30,
+		"start_value": 0,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 0,
+			"sprite_location": "apocalypse:textures/gui/mycowart.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "apocalypse:myconoids/resource_evolve_wart",
+						"comparison": ">",
+						"compare_to": 0
+					},
+					{
+						"type": "origins:origin",
+						"origin": "apocalypse:myconoid_spore",
+						"layer": "origins:origin"
+					}
+				]
+			}
+		}
+	},
+	"chorus":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 30,
+		"start_value": 0,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 0,
+			"sprite_location": "apocalypse:textures/gui/mycochorus.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "apocalypse:myconoids/resource_evolve_chorus",
+						"comparison": ">",
+						"compare_to": 0
+					},
+					{
+						"type": "origins:origin",
+						"origin": "apocalypse:myconoid_spore",
+						"layer": "origins:origin"
+					}
+				]
+			}
+		}
+	},
+	"skulk":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 30,
+		"start_value": 0,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 0,
+			"sprite_location": "apocalypse:textures/gui/mycoskulk.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "apocalypse:myconoids/resource_evolve_skulk",
+						"comparison": ">",
+						"compare_to": 0
+					},
+					{
+						"type": "origins:origin",
+						"origin": "apocalypse:myconoid_spore",
+						"layer": "origins:origin"
+					}
+				]
+			}
+		}
+	},
+	"hidden": true
+}

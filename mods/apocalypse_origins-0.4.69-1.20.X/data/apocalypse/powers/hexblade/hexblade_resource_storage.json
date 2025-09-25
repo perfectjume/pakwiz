@@ -1,0 +1,81 @@
+{
+    "type": "origins:resource",
+    "min": 0,
+    "max": 4000,
+    "start_value": 0,
+	"hidden": true,
+    "hud_render": {
+        "should_render": true,
+        "bar_index": 0,
+        "sprite_location": "apocalypse_origins:textures/gui/hexblade_altar.png",
+        "condition":{
+            "type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:origin",
+							"origin": "apocalypse:hexblade",
+							"layer": "origins:origin"
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:block_in_radius",
+									"block_condition": {
+										"type": "origins:block",
+										"block": "apocalypse_origins:hexaltar"
+									},
+									"radius": 3,
+									"comparison": ">=",
+									"compare_to": 1
+								},
+								{
+									"type": "origins:block_in_radius",
+									"block_condition": {
+										"type": "origins:block",
+										"block": "apocalypse_origins:hexaltar2"
+									},
+									"radius": 3,
+									"comparison": ">=",
+									"compare_to": 1
+								},
+								{
+									"type": "origins:block_in_radius",
+									"block_condition": {
+										"type": "origins:block",
+										"block": "apocalypse_origins:hexaltar3"
+									},
+									"radius": 3,
+									"comparison": ">=",
+									"compare_to": 1
+								}
+							]
+						}
+					]
+				},
+				{
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:resource",
+							"resource": "apocalypse:hexblade/hexblade_resource_storage",
+							"comparison": ">",
+							"compare_to": 0
+						},
+						{
+							"type": "origins:origin",
+							"origin": "apocalypse:hexblade",
+							"layer": "origins:origin"
+						},
+						{
+							"type": "origins:sneaking"
+						}
+					]
+				}
+			]
+		}
+    }
+}

@@ -1,0 +1,94 @@
+{
+    "type": "origins:damage_over_time",
+    "interval": 20,
+    "damage": 4,
+    "damage_source": {
+        "name": "freeze",
+        "unblockable": true,
+        "bypasses_armor": true
+    },
+    "condition": {
+		"type": "origins:and",
+		"conditions": [
+			{
+				"type": "origins:block_in_radius",	
+				"radius": 3,
+				"inverted": true,
+				"block_condition": {
+					"type": "origins:in_tag",
+					"tag": "apocalypse:hot_blocks"
+				}
+			},
+			{
+				"type": "origins:on_fire",
+				"inverted": true
+			},
+			{
+				"type": "origins:or",
+				"conditions": [
+					{
+						"type": "origins:equipped_item",
+						"equipment_slot": "head",
+						"inverted": true,
+						"item_condition": {
+							"type": "origins:ingredient",
+							"ingredient": {
+								"item": "minecraft:leather_helmet"
+							}
+						}
+					},
+					{
+						"type": "origins:equipped_item",
+						"equipment_slot": "chest",
+						"inverted": true,
+						"item_condition": {
+							"type": "origins:ingredient",
+							"ingredient": {
+								"item": "minecraft:leather_chestplate"
+							}
+						}
+					},
+					{
+						"type": "origins:equipped_item",
+						"equipment_slot": "legs",
+						"inverted": true,
+						"item_condition": {
+							"type": "origins:ingredient",
+							"ingredient": {
+								"item": "minecraft:leather_leggings"
+							}
+						}
+					},
+					{
+						"type": "origins:equipped_item",
+						"equipment_slot": "feet",
+						"inverted": true,
+						"item_condition": {
+							"type": "origins:ingredient",
+							"ingredient": {
+								"item": "minecraft:leather_boots"
+							}
+						}
+					}
+				]
+			},
+			{
+			  "type": "origins:or",
+			  "conditions": [
+					{
+						"type": "origins:biome",
+						"condition": {
+							"type": "origins:temperature",
+							"comparison": "<=",
+							"compare_to": 0.2
+						}
+					},
+					{
+						"type": "origins:dimension",
+						"dimension": "minecraft:the_end"
+					}
+				]
+			}
+		]
+	}
+}

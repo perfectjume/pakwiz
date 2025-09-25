@@ -1,0 +1,241 @@
+{
+    "type": "origins:multiple",
+	"world":
+	{
+		"type": "origins:recipe",
+		"recipe": {
+			"type": "minecraft:crafting_shaped",
+			"id": "apocalypse_origins:world",
+			"pattern": [
+				"sar",
+				"m#+",
+				"---"
+			],
+			"key": {
+				"#": {
+					"item": "apocalypse_origins:crystalline_emblem"
+				},
+				"-": {
+					"item": "minecraft:deepslate"
+				},
+				"+": {
+					"item": "minecraft:stone"
+				},
+				"s": {
+					"item": "minecraft:snow_block"
+				},
+				"a": {
+					"item": "minecraft:sand"
+				},
+				"r": {
+					"item": "minecraft:red_sand"
+				},
+				"m": {
+					"item": "minecraft:moss_block"
+				}
+			},
+			"result": {
+				"item": "apocalypse_origins:world"
+			}
+		}
+	},
+	"world_hell":
+	{
+		"type": "origins:recipe",
+		"recipe": {
+			"type": "minecraft:crafting_shaped",
+			"id": "apocalypse_origins:world_hell",
+			"pattern": [
+				"slr",
+				"m#+",
+				"ban"
+			],
+			"key": {
+				"#": {
+					"item": "apocalypse_origins:crystalline_emblem"
+				},
+				"+": {
+					"item": "minecraft:soul_soil"
+				},
+				"l": {
+					"item": "minecraft:blaze_rod"
+				},
+				"s": {
+					"item": "minecraft:warped_wart_block"
+				},
+				"a": {
+					"item": "minecraft:basalt"
+				},
+				"r": {
+					"item": "minecraft:nether_wart_block"
+				},
+				"m": {
+					"item": "minecraft:soul_sand"
+				},
+				"n": {
+					"item": "minecraft:netherrack"
+				},
+				"b": {
+					"item": "minecraft:blackstone"
+				}
+			},
+			"result": {
+				"item": "apocalypse_origins:world_hell"
+			}
+		}
+	},
+	"world_end":
+	{
+		"type": "origins:recipe",
+		"recipe": {
+			"type": "minecraft:crafting_shaped",
+			"id": "apocalypse_origins:world_end",
+			"pattern": [
+				"ses",
+				"+#+",
+				"---"
+			],
+			"key": {
+				"#": {
+					"item": "apocalypse_origins:crystalline_emblem"
+				},
+				"+": {
+					"item": "minecraft:chorus_flower"
+				},
+				"-": {
+					"item": "minecraft:end_stone"
+				},
+				"e": {
+					"item": "minecraft:elytra"
+				},
+				"s": {
+					"item": "minecraft:shulker_shell"
+				}
+			},
+			"result": {
+				"item": "apocalypse_origins:world_end"
+			}
+		}
+	},
+	"name": "World Shards",
+	"description": "§b§lOverworld Shard§r\n- Right clicking this block with an empty hand while not in the overworld will cause any player to teleport to the overworld, preserving their coordinates. A Refractor who has §e[FTL:§r §eWarp]§r set to group mode will also teleport all entities within 2 blocks of themselves.\n \n§b§lNether Shard§r\n- Right clicking this block with an empty hand while not in the nether and above Y=5 will cause any player to teleport to the nether, preserving their coordinates. A Refractor who has §e[FTL:§r §eWarp]§r set to group mode will also teleport all entities within 2 blocks of themselves.\n \n§b§lEnd Shard§r\n- Right clicking this block with an empty hand while not in the end and above Y=5 will cause any player to teleport to the end, preserving their coordinates. A Refractor who has §e[FTL:§r §eWarp]§r set to group mode will also teleport all entities within 2 blocks of themselves.",
+	"badges": [
+		{	
+			"type": "origins:crafting_recipe",
+			"sprite": "apocalypse_origins:textures/block/world_side.png",
+			"recipe": {
+				"type": "minecraft:crafting_shaped",
+				"id": "apocalypse_origins:world",
+				"pattern": [
+					"sar",
+					"m#+",
+					"---"
+				],
+				"key": {
+					"#": {
+						"item": "apocalypse_origins:crystalline_emblem"
+					},
+					"-": {
+						"item": "minecraft:deepslate"
+					},
+					"+": {
+						"item": "minecraft:stone"
+					},
+					"s": {
+						"item": "minecraft:snow_block"
+					},
+					"a": {
+						"item": "minecraft:sand"
+					},
+					"r": {
+						"item": "minecraft:red_sand"
+					},
+					"m": {
+						"item": "minecraft:moss_block"
+					}
+				},
+				"result": {
+					"item": "apocalypse_origins:world"
+				}
+			}
+		},
+		{
+			"type": "origins:crafting_recipe",
+			"sprite": "apocalypse_origins:textures/block/world_hell_side.png",
+			"recipe": {
+				"type": "minecraft:crafting_shaped",
+				"id": "apocalypse_origins:world_hell",
+				"pattern": [
+					"slr",
+					"m#+",
+					"ban"
+				],
+				"key": {
+					"#": {
+						"item": "apocalypse_origins:crystalline_emblem"
+					},
+					"+": {
+						"item": "minecraft:soul_soil"
+					},
+					"l": {
+						"item": "minecraft:blaze_rod"
+					},
+					"s": {
+						"item": "minecraft:warped_wart_block"
+					},
+					"a": {
+						"item": "minecraft:basalt"
+					},
+					"r": {
+						"item": "minecraft:nether_wart_block"
+					},
+					"m": {
+						"item": "minecraft:soul_sand"
+					},
+					"n": {
+						"item": "minecraft:netherrack"
+					},
+					"b": {
+						"item": "minecraft:blackstone"
+					}
+				},
+				"result": {
+					"item": "apocalypse_origins:world_hell"
+				}
+			}
+		},
+		{
+			"type": "origins:crafting_recipe",
+			"sprite": "apocalypse_origins:textures/block/world_end_top.png",
+			"recipe": {
+				"type": "minecraft:crafting_shaped",
+				"id": "apocalypse_origins:world_end",
+				"pattern": [
+					"ses",
+					"+#+",
+					"---"
+				],
+				"key": {
+					"#": {
+						"item": "apocalypse_origins:crystalline_emblem"
+					},
+					"+": {
+						"item": "minecraft:chorus_flower"
+					},
+					"-": {
+						"item": "minecraft:end_stone"
+					},
+					"e": {
+						"item": "minecraft:elytra"
+					},
+					"s": {
+						"item": "minecraft:shulker_shell"
+					}
+				},
+				"result": {
+					"item": "apocalypse_origins:world_end"
+				}
+			}
+		}
+	]
+}

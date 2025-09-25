@@ -1,0 +1,326 @@
+{
+	"type": "origins:action_over_time",
+	"interval": 40,
+	"entity_action": {
+		"type": "origins:if_else_list",
+		"actions": [
+			{
+				"condition": {
+				  "type": "origins:and",
+				  "conditions": [
+						{
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "apocalypse:myconoids/resource_temperature_coolness",
+							"compare_to": 0
+						},
+						{
+							"type": "origins:power",
+							"power": "apocalypse:geneticist/genes/living/frostproof",
+							"inverted": true
+						},
+						{
+							"type": "origins:block_in_radius",	
+							"radius": 3,
+							"inverted": true,
+							"block_condition": {
+								"type": "origins:in_tag",
+								"tag": "apocalypse:hot_blocks"
+							}
+						},
+						{
+							"type": "origins:on_fire",
+							"inverted": true
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "head",
+									"inverted": true,
+									"item_condition": {
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "minecraft:leather_helmet"
+										}
+									}
+								},
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "chest",
+									"inverted": true,
+									"item_condition": {
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "minecraft:leather_chestplate"
+										}
+									}
+								},
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "legs",
+									"inverted": true,
+									"item_condition": {
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "minecraft:leather_leggings"
+										}
+									}
+								},
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "feet",
+									"inverted": true,
+									"item_condition": {
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "minecraft:leather_boots"
+										}
+									}
+								}
+							]
+						},
+						{
+						  "type": "origins:or",
+						  "conditions": [
+								{
+									"type": "origins:biome",
+									"condition": {
+										"type": "origins:temperature",
+										"comparison": "<=",
+										"compare_to": 0.2
+									}
+								},
+								{
+									"type": "origins:dimension",
+									"dimension": "minecraft:the_end"
+								}
+							]
+						},
+						{
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "apocalypse:myconoids/turf_penalty_in_turf_resource",
+							"compare_to": 0
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [ 
+						{	
+							"type": "origins:execute_command",
+							"command": "playsound minecraft:entity.blaze.ambient master @s ~ ~ ~ 10 2 1",
+							"permission_level": 4	
+						},
+						{
+							"type": "origins:damage",
+							"amount": 2,
+							"source": {
+								"name": "freeze",
+								"bypasses_armor": true
+							}
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+				  "type": "origins:and",
+				  "conditions": [
+						{
+							"type": "origins:gamemode",
+							"gamemode": "survival"
+						},
+						{
+							"type": "origins:resource",
+							"comparison": ">",
+							"resource": "apocalypse:myconoids/resource_temperature_coolness",
+							"compare_to": 0
+						},
+						{
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "apocalypse:myconoids/resource_temperature_hotness",
+							"compare_to": 0
+						},
+						{
+							"type": "origins:power",
+							"power": "apocalypse:geneticist/genes/living/frostproof",
+							"inverted": true
+						},
+						{
+							"type": "origins:block_in_radius",	
+							"radius": 3,
+							"inverted": true,
+							"block_condition": {
+								"type": "origins:in_tag",
+								"tag": "apocalypse:hot_blocks"
+							}
+						},
+						{
+							"type": "origins:on_fire",
+							"inverted": true
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "head",
+									"inverted": true,
+									"item_condition": {
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "minecraft:leather_helmet"
+										}
+									}
+								},
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "chest",
+									"inverted": true,
+									"item_condition": {
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "minecraft:leather_chestplate"
+										}
+									}
+								},
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "legs",
+									"inverted": true,
+									"item_condition": {
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "minecraft:leather_leggings"
+										}
+									}
+								},
+								{
+									"type": "origins:equipped_item",
+									"equipment_slot": "feet",
+									"inverted": true,
+									"item_condition": {
+										"type": "origins:ingredient",
+										"ingredient": {
+											"item": "minecraft:leather_boots"
+										}
+									}
+								}
+							]
+						},
+						{
+						  "type": "origins:or",
+						  "conditions": [
+								{
+									"type": "origins:biome",
+									"condition": {
+										"type": "origins:temperature",
+										"comparison": "<=",
+										"compare_to": 0.2
+									}
+								},
+								{
+									"type": "origins:dimension",
+									"dimension": "minecraft:the_end"
+								}
+							]
+						},
+						{
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "apocalypse:myconoids/turf_penalty_in_turf_resource",
+							"compare_to": 0
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [ 
+						{	
+							"type": "origins:execute_command",
+							"command": "resource change @s apocalypse:myconoids/resource_temperature_coolness -1",
+							"permission_level": 4	
+						}
+					]
+				}
+			},
+			{
+				"condition": {
+				  "type": "origins:and",
+				  "conditions": [
+						{
+							"type": "origins:resource",
+							"comparison": "<",
+							"resource": "apocalypse:myconoids/resource_temperature_coolness",
+							"compare_to": 7
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:block_in_radius",	
+									"radius": 3,
+									"block_condition": {
+										"type": "origins:in_tag",
+										"tag": "apocalypse:hot_blocks"
+									}
+								},
+								{
+									"type": "origins:on_fire"
+								},
+								{
+									"type": "origins:biome",
+									"condition": {
+										"type": "origins:temperature",
+										"comparison": ">",
+										"compare_to": 0.2
+									}
+								},
+								{
+								  "type": "origins:and",
+								  "conditions": [
+										{
+											"type": "origins:biome",
+											"condition": {
+												"type": "origins:temperature",
+												"comparison": ">",
+												"compare_to": 0.2
+											}
+										},
+										{
+											"type": "origins:dimension",
+											"inverted": true,
+											"dimension": "minecraft:the_end"
+										}
+									]
+								},
+								{
+									"type": "origins:resource",
+									"comparison": ">",
+									"resource": "apocalypse:myconoids/turf_penalty_in_turf_resource",
+									"compare_to": 0
+								}
+							]
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [ 
+						{	
+							"type": "origins:execute_command",
+							"command": "resource change @s apocalypse:myconoids/resource_temperature_coolness 1",
+							"permission_level": 4	
+						}
+					]
+				}
+			}
+		]
+	},
+	"name": "Cold Aversion",
+	"description": "Being in a cold biome such a tundra or the end dimension hurts you, unless you are near campfires or other sources of heat.\n \nLeather armor can stop the buildup of cold, but won't warm you up."
+}

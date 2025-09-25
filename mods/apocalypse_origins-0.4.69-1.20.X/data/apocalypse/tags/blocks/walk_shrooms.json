@@ -1,0 +1,13 @@
+{
+	"replace": false,
+	"values":
+	[
+		"minecraft:brown_mushroom",
+		"minecraft:red_mushroom",
+		"minecraft:crimson_fungus",
+		"minecraft:warped_fungus",
+		"minecraft:nether_wart",
+		"minecraft:moss_carpet",
+		"minecraft:sweet_berry_bush"
+	]
+}

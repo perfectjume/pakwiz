@@ -1,0 +1,73 @@
+{
+	"type": "origins:active_self",
+	"cooldown": 20,
+	"hud_render": {
+		"should_render": false,
+		"sprite_location":"apocalypse:textures/gui/shroomba.png",
+		"bar_index": 1,
+		"condition": {
+			"type": "origins:resource",
+			"resource": "apocalypse:myconoids/red_active_buff_durationbar",
+			"comparison": "==",
+			"compare_to": 0
+		}
+	},
+	"entity_action": {
+		"type": "origins:if_else_list",
+		"actions": [
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:sneaking",
+							"inverted": true
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:execute_command",
+							"command": "playsound minecraft:apocalypse.ost.growl master @a[distance=..20] ~ ~ ~ 1 0.75"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "particle minecraft:block red_mushroom_block ~ ~0 ~ 1 0.1 1 1 50"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "resource change @s apocalypse:myconoids/red_passives_stamina_spores -20"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "summon villager ^ ^ ^ {Tags:[\"standard\"],VillagerData:{profession:nitwit,level:2,type:plains},Silent:1,NoAI:1,ActiveEffects:[{Id:14,Amplifier:0,Duration:999999,ShowParticles:0b}]}"
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "power grant @e[type=villager,tag=standard,distance=..5] apocalypse:myconoids/red_granter afungus"
+						}
+					]
+				}
+			}
+		]
+	},
+	"condition": {
+		"type": "origins:and",
+		"conditions": [
+			{
+				"type": "origins:resource",
+				"comparison": ">=",
+				"resource": "apocalypse:myconoids/red_passives_stamina_spores",
+				"compare_to": 20
+			}
+		]
+	},
+	"name": "Defender's Banner",
+	"description": "[Primary]: You deploy a battle standard at your current location to empower yourself and any other red myconoids in the area for three seconds. While you or other myconoids are within 15 blocks of your standard, they are considered to be on a turf block. Additionally, red myconoids are healed for 1 hp per second, receive a 25% damage resistance to all damage (Stacks with your innate 75% resistance to projectiles), as well as a 50% bonus to your movement speed. Costs 25 spores.\n \nThe standard has no armor value, 30 hp and lasts for 15 seconds or until it is destroyed by an enemy, whichever happens first.",
+	"key": {
+		"key":"key.origins.primary_active",
+		"continuous": false
+	}
+}

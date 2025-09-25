@@ -1,0 +1,102 @@
+{
+	"type": "origins:multiple",
+	"callback":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_chosen": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s add smallbane"
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "apocalypse:classes/extra_jump_jumps",
+					"change": 1
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "apocalypse:classes/extra_jump_antifall_resource",
+					"change": 1
+				}
+			]
+		},
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s add smallbane"
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "apocalypse:classes/extra_jump_jumps",
+					"change": 1
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "apocalypse:classes/extra_jump_antifall_resource",
+					"change": 1
+				}
+			]
+		},
+		"entity_action_respawned": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s add smallbane"
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "apocalypse:classes/extra_jump_jumps",
+					"change": 1
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "apocalypse:classes/extra_jump_antifall_resource",
+					"change": 1
+				}
+			]
+		},
+		"entity_action_removed": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s remove smallbane"
+				}
+			]
+		},
+		"execute_chosen_when_orb": true,
+		"hidden": true
+	},
+	"stomp_jump":
+	{
+		"type": "origins:action_over_time",
+		"interval": 1,
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "power grant @a[distance=..1.5] apocalypse:classes/stomp_or_not smallbane",
+					"permission_level": 4
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "power grant @e[type=#apocalypse:small,distance=..1.5] apocalypse:classes/stomped_mob smallbane",
+					"permission_level": 4
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:fall_distance",
+			"comparison": ">",
+			"compare_to": 1
+		}
+	},
+	"name": "Stomping Jump",
+	"description": "Falling from more than 2 blocks high on mobs or players that are 1 block tall or less, or half a block thick or less will stomp them, temporarily paralyzing them."
+}

@@ -1,0 +1,317 @@
+{
+	"type": "origins:multiple",
+	"breakself":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 10,
+		"start_value": 0,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 0,
+			"sprite_location": "apocalypse:textures/gui/mycodevolve.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "apocalypse:myconoids/overworld_secondaries_breakself",
+						"comparison": ">",
+						"compare_to": 0
+					}
+				]
+			}
+		}
+	},
+	"active":
+	{
+		"type": "origins:active_self",
+		"cooldown": 20,
+		"hud_render": {
+		  "should_render":false,
+		  "sprite_location":"apocalypse:textures/gui/refractor.png",
+		  "bar_index": 1
+		},
+		"entity_action": 
+		{
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:sneaking"
+							},
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "mainhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"ingredient":
+											{
+												"item": "minecraft:netherite_hoe"
+											}
+										}
+									},
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "offhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"ingredient":
+											{
+												"item": "minecraft:netherite_hoe"
+											}
+										}
+									}
+								]
+							},
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:on_block",
+										"block_condition": {
+											"type": "origins:block",
+											"block": "minecraft:dirt"
+										}
+									},
+									{
+										"type": "origins:on_block",
+										"block_condition": {
+											"type": "origins:block",
+											"block": "minecraft:grass_block"
+										}
+									}
+								]
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:ash ~ ~0.5 ~ 0.5 0 0.5 0.2 100 normal @a",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "fill ~-1 ~-1 ~-1 ~1 ~ ~1 minecraft:mycelium replace minecraft:dirt",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "fill ~-1 ~-1 ~-1 ~1 ~ ~1 minecraft:mycelium replace minecraft:grass_block",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "power grant @e[type=minecraft:cow,distance=..2] apocalypse:myconoids/overworld_mooshroom afungus",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:entity.villager.work_farmer master @a[distance=..10] ~ ~ ~ 2 1",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:damage",
+								"amount": 4,
+								"source": {
+									"name": "magic",
+									"bypasses_armor": true
+								}
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:on_block",
+										"inverted": true,
+										"block_condition": {
+											"type": "origins:block",
+											"block": "minecraft:dirt"
+										}
+									},
+									{
+										"type": "origins:on_block",
+										"inverted": true,
+										"block_condition": {
+											"type": "origins:block",
+											"block": "minecraft:grass_block"
+										}
+									}
+								]
+							},
+							{
+								"type": "origins:sneaking"
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:myconoids/overworld_secondaries_breakself",
+								"comparison": ">",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "resource set @s apocalypse:myconoids/overworld_secondaries_breakself 0",
+								"permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:myconoids/overworld_secondaries_breakself",
+								"comparison": "<",
+								"compare_to": 10
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/overworld_secondaries_breakself 1",
+								"permission_level": 4
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:myconoids/overworld_secondaries_breakself",
+								"comparison": "==",
+								"compare_to": 10
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "power grant @s apocalypse:myconoids/shake afungus",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:clear_effect"
+							},
+							{
+								"type": "origins:extinguish"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:entity.tnt.primed master @a[distance=..10] ~ ~ ~ 4 0.5",
+								"permission_level": 4
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition":
+		{
+			"type": "origins:and",
+			"conditions":
+			[
+				{
+					"type": "origins:gamemode",
+					"inverted": true,
+					"gamemode": "spectator"
+				},
+				{
+					"type": "origins:or",
+					"conditions": [
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "mainhand",
+							"inverted": false,
+							"item_condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:ingredient",
+										"ingredient":{
+												"tag": "apocalypse:good_hoes"
+											}
+									}
+								]
+							}
+						},
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "offhand",
+							"inverted": false,
+							"item_condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:ingredient",
+										"ingredient":{
+												"tag": "apocalypse:good_hoes"
+											}
+									}
+								]
+							}
+						},
+						{
+							"type": "origins:on_block",
+							"inverted": true,
+							"block_condition": {
+								"type": "origins:block",
+								"block": "minecraft:dirt"
+							}
+						}
+					]
+				}
+			]
+		},
+		"hidden": false,
+		"name": "Spore Spread",
+		"description": "[Secondary] Spread mycelium over dirt.",
+		"key": {
+			"key":"key.origins.secondary_active",
+			"continuous": true
+		}
+	},
+	"name": "Manage Spores",
+	"description": "[Secondary+Shift] If you are holding a hoe made with netherite, spread mycelium while standing on dirt or grass.\n \n[Hold Secondary] Devolve into a spore.\n \n[Secondary + Shift] If you aren't on dirt or grass, reset your devolve progress."
+}

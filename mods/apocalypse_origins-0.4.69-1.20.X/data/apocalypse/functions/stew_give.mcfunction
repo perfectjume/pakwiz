@@ -1,0 +1,1 @@
+summon item ~ ~ ~ {Glowing:1b,Item:{id:"minecraft:mushroom_stew",Count:1b,tag:{display:{Name:'{"text":"Blessed Stew","color":"yellow","bold":false}',Lore:['{"text":"A true cure-all.","color":"white"}']},HideFlags:122,CustomModelData:1}}}

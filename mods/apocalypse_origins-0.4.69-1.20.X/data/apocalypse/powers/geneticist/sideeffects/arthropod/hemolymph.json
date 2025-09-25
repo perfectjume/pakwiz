@@ -1,0 +1,90 @@
+{
+	"type": "origins:multiple",
+	"callback":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_gained": {
+			"type": "origins:execute_command",
+			"command": "tag @s add arthropod"
+		},
+		"entity_action_lost":{
+			"type": "origins:execute_command",
+			"command": "tag @s remove arthropod"
+		},
+		"execute_chosen_when_orb": true
+	},
+	"enchantment_damage":
+	{
+		"type": "origins:modify_damage_taken",
+		"damage_condition": {
+			"type": "origins:attacker",
+			"entity_condition": {
+				"type": "origins:equipped_item",
+				"equipment_slot": "mainhand",
+				"item_condition": {
+					"type": "origins:enchantment",
+					"enchantment": "minecraft:bane_of_arthropods",
+					"comparison": ">=",
+					"compare_to": 1
+				}
+			}
+		},
+		"modifier": {
+			"operation": "multiply_base_additive",
+			"value": 1
+		}
+	},
+	"fire_weak":
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": 1,
+			"operation":"multiply_base_additive"
+		},
+		"damage_condition":{
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:name",
+					"name": "fireball.item"
+				},
+				{
+					"type": "origins:name",
+					"name": "fireball"
+				},
+				{
+					"type": "origins:name",
+					"name": "hotFloor.player"
+				},
+				{
+					"type": "origins:name",
+					"name": "hotFloor"
+				},
+				{
+					"type": "origins:name",
+					"name": "inFire.player"
+				},
+				{
+					"type": "origins:name",
+					"name": "inFire"
+				},
+				{
+					"type": "origins:name",
+					"name": "lava.player"
+				},
+				{
+					"type": "origins:name",
+					"name": "lava"
+				},
+				{
+					"type": "origins:name",
+					"name": "onFire.player"
+				},
+				{
+					"type": "origins:name",
+					"name": "onFire"
+				}
+			]
+		}
+	}
+}

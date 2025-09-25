@@ -1,0 +1,91 @@
+{
+	"type": "origins:recipe",
+	"recipe": {
+		"type": "minecraft:crafting_shaped",
+		"id": "apocalypse_origins:syringe",
+		"pattern": [
+			" ^ ",
+			"# #",
+			"#_#"
+		],
+		"key": {
+			"#": {
+				"item": "minecraft:glass_pane"
+			},
+			"^": {
+				"item": "minecraft:iron_nugget"
+			},
+			"_": {
+				"item": "minecraft:stone_button"
+			}
+		},
+		"result": {
+			"item": "apocalypse_origins:syringe"
+		}
+	},
+	"name": "Labware: Syringes",
+	"description": "You know how to create syringes with glass panes, iron nuggets and stone buttons.\n \n- Syringes are weak and frail tools which can be used to extract a [Gene] when used to deal the final hit to an opponent.\n \n- You are convinced that this world might have a means to improve your syringes which could prove useful to you.",
+	"badges": [
+		{
+			"type": "origins:crafting_recipe",
+			"sprite": "apocalypse_origins:textures/item/syringe.png",
+			"recipe": {
+				"type": "minecraft:crafting_shaped",
+				"id": "apocalypse_origins:syringe",
+				"pattern": [
+					" ^ ",
+					"# #",
+					"#_#"
+				],
+				"key": {
+					"#": {
+						"item": "minecraft:glass_pane"
+					},
+					"^": {
+						"item": "minecraft:iron_nugget"
+					},
+					"_": {
+						"item": "minecraft:stone_button"
+					}
+				},
+				"result": {
+					"item": "apocalypse_origins:syringe"
+				}
+			}
+		},
+		{
+			"type": "origins:crafting_recipe",
+			"sprite": "apocalypse_origins:textures/item/syringe_reinforced.png",
+			"recipe": {
+				"type": "minecraft:crafting_shaped",
+				"id": "apocalypse_origins:syringe_reinforced",
+				"pattern": [
+					" ^ ",
+					"#o#",
+					"#_#"
+				],
+				"key": {
+					"#": {
+						"item": "minecraft:netherite_ingot"
+					},	
+					"^": {
+						"item": "minecraft:gold_nugget"
+					},
+					"o": {
+						"item": "apocalypse_origins:syringe"
+					},
+					"_": {
+						"item": "minecraft:gold_ingot"
+					}
+				},
+				"result": {
+					"item": "apocalypse_origins:syringe_reinforced"
+				}
+			}
+		},
+		{	
+			"sprite": "apocalypse_origins:textures/item/syringe.png",
+			"text": "Tips: Struggling to get the final hit on a mob? Try enchanting your [Syringe] with unbreaking, mending, bane of the arthropods, smite or sharpness! Potions of strength are helpful, too!"
+		}
+	]
+}

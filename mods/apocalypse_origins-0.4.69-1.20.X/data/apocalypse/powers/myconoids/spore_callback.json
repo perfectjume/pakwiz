@@ -1,0 +1,133 @@
+{
+	"type": "origins:action_on_callback",
+	"entity_action_chosen": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s add spore"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s add myconoid"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "effect give @s minecraft:instant_health 1 0 true"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "scale set pehkui:height 0.1 @s"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "scale set pehkui:width 0.1 @s"
+			},
+			{	
+				"type": "origins:execute_command",
+				"command": "resource set @s apocalypse:myconoids/resource_temperature_coolness 7"
+			},
+			{	
+				"type": "origins:execute_command",
+				"command": "resource set @s apocalypse:myconoids/resource_temperature_hotness 0"
+			},
+			{	
+				"type": "origins:execute_command",
+				"command": "resource set @s apocalypse:myconoids/resource_temperature_wetness 0"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power grant @s apocalypse:myconoids/resource_evolve afungus"
+			}
+		]
+	},
+	"entity_action_added": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s add spore"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s add myconoid"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "scale set pehkui:height 0.1 @s"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "scale set pehkui:width 0.1 @s"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power grant @s apocalypse:myconoids/resource_evolve afungus"
+			}
+		]
+	},
+    "entity_action_respawned": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s add spore"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s add myconoid"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "effect give @s minecraft:instant_health 1 0 true"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "scale set pehkui:height 0.1 @s"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "scale set pehkui:width 0.1 @s"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power grant @s apocalypse:myconoids/resource_evolve afungus"
+			}
+		]
+	},
+	"entity_action_removed": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "power revoke @s apocalypse:myconoids/shake afungus"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s remove spore"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s remove myconoid"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "scale reset @s"
+			},
+			{	
+				"type": "origins:execute_command",
+				"command": "resource set @s apocalypse:myconoids/resource_temperature_coolness 7"
+			},
+			{	
+				"type": "origins:execute_command",
+				"command": "resource set @s apocalypse:myconoids/resource_temperature_hotness 0"
+			},
+			{	
+				"type": "origins:execute_command",
+				"command": "resource set @s apocalypse:myconoids/resource_temperature_wetness 0"
+			}
+		]
+	},
+	"execute_chosen_when_orb": true,
+	"hidden": true
+}

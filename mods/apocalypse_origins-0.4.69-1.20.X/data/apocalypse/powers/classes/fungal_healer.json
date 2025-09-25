@@ -1,0 +1,543 @@
+{
+	"type": "origins:multiple",
+	"callback":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_chosen": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s add funhealer",
+					"permission_level": 4
+				}
+			]
+		},
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s add funhealer",
+					"permission_level": 4
+				}
+			]
+		},
+		"entity_action_respawned": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s add funhealer",
+					"permission_level": 4
+				}
+			]
+		},
+		"entity_action_removed": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s remove funhealer",
+					"permission_level": 4
+				}
+			]
+		},
+		"execute_chosen_when_orb": true,
+		"hidden": true
+	},
+	"convert_and_consume":
+	{
+		"type": "origins:active_self",
+		"cooldown": 600,
+		"hud_render": {
+			"should_render":true,
+			"sprite_location":"apocalypse:textures/gui/zfungal_healer.png",
+			"bar_index": 0
+		},
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:mushroom_stew"
+									}
+								}
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:golden_carrot"
+									}
+								}
+							},
+							{
+								"type": "origins:command",
+								"command": "data get entity @s SelectedItem.tag.CustomModelData",
+								"comparison": "<",
+								"compare_to": 1
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:execute_command",
+							  "command": "item modify entity @s weapon.mainhand apocalypse:model1",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "clear @s minecraft:golden_carrot 1",
+							  "permission_level": 4
+							},
+							{
+								"type": "origins:choice",
+								"actions": [
+									{
+										"element": {
+											"type": "origins:and",
+											"actions": [
+												{
+												  "type": "origins:execute_command",
+												  "command": "playsound minecraft:block.note_block.chime master @a[distance=..5] ~ ~ ~ 2 0.793701",
+												  "permission_level": 4
+												}
+											]
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:and",
+											"actions": [
+												{
+												  "type": "origins:execute_command",
+												  "command": "playsound minecraft:block.note_block.chime master @a[distance=..5] ~ ~ ~ 2 1.587401",
+												  "permission_level": 4
+												}
+											]
+										},
+										"weight": 1
+									},
+									{
+										"element": {
+											"type": "origins:and",
+											"actions": [
+												{
+												  "type": "origins:execute_command",
+												  "command": "playsound minecraft:block.note_block.chime master @a[distance=..5] ~ ~ ~ 2 0.594604",
+												  "permission_level": 4
+												}
+											]
+										},
+										"weight": 1
+									}
+								]
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"inverted": false,
+									"ingredient":
+									{
+										"item": "minecraft:mushroom_stew"
+									}
+								}
+							},
+							{
+								"type": "origins:command",
+								"command": "data get entity @s SelectedItem.tag.CustomModelData",
+								"comparison": "==",
+								"compare_to": 1
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+							  "type": "origins:heal",
+							  "amount": 10
+							},
+							{
+								"type": "origins:extinguish"
+							},
+							{
+								"type": "origins:feed",
+								"food": 6,
+								"saturation": 15
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:entity.villager.work_leatherworker master @a[distance=..10] ~ ~ ~ 2 1",
+							  "permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "item replace entity @s weapon.mainhand with minecraft:bowl",
+							  "permission_level": 4
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:heart ~ ~2 ~",
+								"permission_level": 4
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "effect clear @s",
+							  "permission_level": 4
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition":
+		{
+			"type": "origins:and",
+			"conditions":
+			[
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "mainhand",
+					"item_condition":
+					{
+						"type": "origins:ingredient",
+						"inverted": false,
+						"ingredient":
+						{
+							"item": "minecraft:mushroom_stew"
+						}
+					}
+				}
+			]
+		},
+		"hidden": true,	
+		"key": {
+			"key":"key.use",
+			"continuous": false
+		}
+	},
+	"splash": 
+	{
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -1
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "mainhand",
+					"item_condition":
+					{
+						"type": "origins:ingredient",
+						"inverted": false,
+						"ingredient":
+						{
+							"item": "minecraft:mushroom_stew"
+						}
+					}
+				},
+				{
+					"type": "origins:command",
+					"command": "data get entity @s SelectedItem.tag.CustomModelData",
+					"comparison": "==",
+					"compare_to": 1
+				}
+			]
+		},
+		"target_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+				  "type": "origins:heal",
+				  "amount": 10
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "effect clear @s",
+				  "permission_level": 4
+				},
+				{
+					"type": "origins:extinguish"
+				},
+				{
+					"type": "origins:feed",
+					"food": 6,
+					"saturation": 15
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "playsound minecraft:entity.villager.work_leatherworker master @a[distance=..10] ~ ~ ~ 2 1",
+				  "permission_level": 4
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "particle minecraft:heart ~ ~2 ~",
+					"permission_level": 4
+				},
+				{
+					"type": "origins:choice",
+					"actions": [
+						{
+							"element": {
+								"type": "origins:and",
+								"actions": [
+									{
+									  "type": "origins:execute_command",
+									  "command": "playsound minecraft:block.note_block.chime master @a[distance=..5] ~ ~ ~ 2 0.793701",
+									  "permission_level": 4
+									}
+								]
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:and",
+								"actions": [
+									{
+									  "type": "origins:execute_command",
+									  "command": "playsound minecraft:block.note_block.chime master @a[distance=..5] ~ ~ ~ 2 1.587401",
+									  "permission_level": 4
+									}
+								]
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:and",
+								"actions": [
+									{
+									  "type": "origins:execute_command",
+									  "command": "playsound minecraft:block.note_block.chime master @a[distance=..5] ~ ~ ~ 2 0.594604",
+									  "permission_level": 4
+									}
+								]
+							},
+							"weight": 1
+						}
+					]
+				}
+			]
+		},
+		"self_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+				  "type": "origins:execute_command",
+				  "command": "item replace entity @s weapon.mainhand with minecraft:bowl",
+				  "permission_level": 4
+				}
+			]
+		},
+		"hidden": true
+	},
+	"shroomheal": 
+	{
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -1
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:or",
+					"conditions": [
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "mainhand",
+							"item_condition":
+							{
+								"type": "origins:ingredient",
+								"ingredient":
+								{
+									"item": "minecraft:warped_fungus"
+								}
+							}
+						},
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "mainhand",
+							"item_condition":
+							{
+								"type": "origins:ingredient",
+								"ingredient":
+								{
+									"item": "minecraft:crimson_fungus"
+								}
+							}
+						},
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "mainhand",
+							"item_condition":
+							{
+								"type": "origins:ingredient",
+								"ingredient":
+								{
+									"item": "minecraft:brown_mushroom"
+								}
+							}
+						},
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "mainhand",
+							"item_condition":
+							{
+								"type": "origins:ingredient",
+								"ingredient":
+								{
+									"item": "minecraft:red_mushroom"
+								}
+							}
+						}
+					]
+				}
+			]
+		},
+		"target_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:heal",
+					"amount": 2
+				},
+				{
+					"type": "origins:feed",
+					"food": 2,
+					"saturation": 2
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "particle minecraft:heart ~ ~2 ~",
+					"permission_level": 4
+				},
+				{
+					"type": "origins:choice",
+					"actions": [
+						{
+							"element": {
+								"type": "origins:and",
+								"actions": [
+									{
+									  "type": "origins:execute_command",
+									  "command": "playsound minecraft:block.note_block.chime master @a[distance=..5] ~ ~ ~ 2 0.793701",
+									  "permission_level": 4
+									}
+								]
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:and",
+								"actions": [
+									{
+									  "type": "origins:execute_command",
+									  "command": "playsound minecraft:block.note_block.chime master @a[distance=..5] ~ ~ ~ 2 1.587401",
+									  "permission_level": 4
+									}
+								]
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:and",
+								"actions": [
+									{
+									  "type": "origins:execute_command",
+									  "command": "playsound minecraft:block.note_block.chime master @a[distance=..5] ~ ~ ~ 2 0.594604",
+									  "permission_level": 4
+									}
+								]
+							},
+							"weight": 1
+						}
+					]
+				}
+			]
+		},
+		"self_action": {
+			"type": "origins:and",
+			"actions": [
+                {
+                    "type": "origins:equipped_item_action",
+                    "equipment_slot": "mainhand",
+                    "action":
+					{
+						"type": "origins:consume",
+						"amount": 1
+					}
+                }
+			]
+		},
+		"hidden": true
+	},
+	"nobowls":
+	{
+		"type": "origins:prevent_item_use",
+		"item_condition": {
+			"type": "origins:ingredient",
+			"ingredient": {
+				"item": "minecraft:mushroom_stew"
+			}
+		}
+	},
+	"gapples":
+	{
+		"type": "origins:modify_crafting",
+		"recipe": "minecraft:golden_apple",
+		"result": {
+			"item": "minecraft:golden_apple",
+			"amount": 2
+		}
+	},
+	"gcarrots":
+	{
+		"type": "origins:modify_crafting",
+		"recipe": "minecraft:golden_carrot",
+		"result": {
+			"item": "minecraft:golden_carrot",
+			"amount": 2
+		}
+	},
+	"name": "Fungal Blessing",
+	"description": "You know the secrets of the mushrooms and gain the following benefits:\n \n- You craft two golden vegetables for the price of one.\n \n- Hitting an entity with a mushroom will consume that mushroom and heal them for 2 hp.\n \n- Right clicking with mushroom stew in your main hand and a golden carrot in your offhand will bless the stew.\n \n- Hitting an entity with the blessed stew will cleanse potion effects and restore 10 HP.\n \n- You can consume this blessed stew instantly to gain its benefits."
+}

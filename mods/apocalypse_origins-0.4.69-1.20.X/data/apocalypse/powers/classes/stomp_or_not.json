@@ -1,0 +1,158 @@
+{
+	"type": "origins:multiple",
+	"durationbar": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 1,
+		"hidden": true,
+		"name": "Duration",
+		"description": "How long?",
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse:textures/gui/stomped_bar.png",
+			"bar_index": 0,
+			"condition": {
+				"type": "origins:resource",
+				"resource": "apocalypse:classes/stomp_or_not_durationbar",
+				"comparison": ">",
+				"compare_to": 0
+			}
+		}
+	},
+	"stomp":
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:command",
+								"command": "scale get pehkui:base @s 10",
+								"comparison": ">",
+								"compare_to": 5
+							},
+							{
+								"type": "origins:command",
+								"command": "scale get pehkui:height @s 10",
+								"comparison": ">",
+								"compare_to": 5
+							},
+							{
+								"type": "origins:command",
+								"command": "scale get pehkui:width @s 10",
+								"comparison": ">",
+								"compare_to": 5
+							},
+							{
+								"type": "origins:command",
+								"command": "scale get @s 10",
+								"comparison": ">",
+								"compare_to": 5
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "apocalypse:classes/stomp_or_not_durationbar",
+								"compare_to": 1
+							},
+							{
+								"type": "origins:origin",
+								"origin": "extraorigins:inchling",
+								"layer": "origins:origin",
+								"inverted": true
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:classes/stomp_or_not_durationbar",
+								"change": -1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "power revoke @s apocalypse:classes/stomp_or_not smallbane"
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:command",
+										"command": "scale get pehkui:base @s 10",
+										"comparison": "<=",
+										"compare_to": 5
+									},
+									{
+										"type": "origins:command",
+										"command": "scale get pehkui:height @s 10",
+										"comparison": "<=",
+										"compare_to": 5
+									},
+									{
+										"type": "origins:command",
+										"command": "scale get pehkui:width @s 10",
+										"comparison": "<=",
+										"compare_to": 5
+									},
+									{
+										"type": "origins:command",
+										"command": "scale get @s 10",
+										"comparison": "<=",
+										"compare_to": 5
+									},
+									{
+										"type": "origins:origin",
+										"origin": "extraorigins:inchling",
+										"layer": "origins:origin"
+									}
+								]
+							},
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "apocalypse:classes/stomp_or_not_durationbar",
+								"compare_to": 1
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:classes/stomp_or_not_durationbar",
+								"change": -1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "power grant @s apocalypse:classes/stomped_player smallbane"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "power revoke @s apocalypse:classes/stomp_or_not smallbane"
+							}
+						]
+					}
+				}
+			]
+		},
+		"interval": 5,
+		"hidden": true
+	},
+	"hidden": true
+}

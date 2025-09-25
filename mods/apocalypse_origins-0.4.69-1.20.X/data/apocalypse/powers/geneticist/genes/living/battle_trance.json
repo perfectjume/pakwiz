@@ -1,0 +1,138 @@
+{
+	"type": "origins:multiple",
+	"resource":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 5,
+		"start_value": 5,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 1,
+			"sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_02.png",
+			"condition": {
+				"type": "origins:resource",
+				"comparison": ">",
+				"resource": "*:*_resource",
+				"compare_to": 0
+			}
+		}
+	},
+	"damage1":
+	{
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "addition",
+			"value": 1
+		},
+		"condition": {
+			"type": "origins:resource",
+			"comparison": ">=",
+			"resource": "*:*_resource",
+			"compare_to": 1
+		}
+	},
+	"damage2":
+	{
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "addition",
+			"value": 1
+		},
+		"condition": {
+			"type": "origins:resource",
+			"comparison": ">=",
+			"resource": "*:*_resource",
+			"compare_to": 2
+		}
+	},
+	"damage3":
+	{
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "addition",
+			"value": 1
+		},
+		"condition": {
+			"type": "origins:resource",
+			"comparison": ">=",
+			"resource": "*:*_resource",
+			"compare_to": 3
+		}
+	},
+	"damage4":
+	{
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "addition",
+			"value": 1
+		},
+		"condition": {
+			"type": "origins:resource",
+			"comparison": ">=",
+			"resource": "*:*_resource",
+			"compare_to": 4
+		}
+	},
+	"damage5":
+	{
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "addition",
+			"value": 1
+		},
+		"condition": {
+			"type": "origins:resource",
+			"comparison": "==",
+			"resource": "*:*_resource",
+			"compare_to": 5
+		}
+	},
+	"gain_stacks":
+	{
+		"type": "origins:self_action_on_kill",
+		"entity_action": {
+			"type": "origins:change_resource",
+			"resource": "*:*_resource",
+			"change": 1
+		},
+		"cooldown": 0,
+		"hud_render": {
+			"should_render": false,
+			"bar_index": 0
+		}
+	},
+	"recharge":
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": ">",
+								"resource": "*:*_resource",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_resource",
+								"change": -1
+							}
+						]
+					}
+				}
+			]
+		},
+		"interval": 180
+	}
+}

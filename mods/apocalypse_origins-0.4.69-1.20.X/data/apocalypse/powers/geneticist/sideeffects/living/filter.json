@@ -1,0 +1,70 @@
+{
+	"type": "origins:multiple",
+	"resource":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false,
+			"bar_index": 6
+		}
+	},
+	"resist_up":{
+		"type": "origins:modify_damage_taken",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -0.99
+		},
+		"condition": {
+			"type": "origins:resource",
+			"comparison": "==",
+			"resource": "*:*_resource",
+			"compare_to": 0
+		}
+	},
+	"resist_down":{
+		"type": "origins:modify_damage_taken",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": 1.5
+		},
+		"condition": {
+			"type": "origins:resource",
+			"comparison": "==",
+			"resource": "*:*_resource",
+			"compare_to": 1
+		}
+	},
+	"big_detect":
+	{
+		"type": "origins:self_action_when_hit",
+		"cooldown": 1,
+		"entity_action": {
+			"type": "origins:change_resource",
+			"resource": "*:*_resource",
+			"change": -1
+		},
+		"damage_condition": {
+			"type": "origins:amount",
+			"comparison": ">=",
+			"compare_to": 2
+		}
+	},
+	"small_detect":
+	{
+		"type": "origins:self_action_when_hit",
+		"cooldown": 1,
+		"entity_action": {
+			"type": "origins:change_resource",
+			"resource": "*:*_resource",
+			"change": 1
+		},
+		"damage_condition": {
+			"type": "origins:amount",
+			"comparison": "<",
+			"compare_to": 2
+		}
+	}
+}

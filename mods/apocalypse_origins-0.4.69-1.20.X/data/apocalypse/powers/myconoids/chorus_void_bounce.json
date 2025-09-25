@@ -1,0 +1,80 @@
+{
+	"type": "origins:self_action_when_hit",
+	"cooldown": 1,
+	"hud_render": {
+		"should_render": false
+	},
+	"entity_action": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "playsound minecraft:entity.guardian.death master @a ~ ~ ~ 2 0.5",
+				"permission_level": 4
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "tp @s",
+				"permission_level": 4
+			},
+			{
+				"type": "origins:delay",
+				"ticks": 5,
+				"action":{
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:if_else_list",
+							"actions": [
+								{
+									"condition": {
+										"type": "origins:and",
+										"conditions": [
+											{
+												"type": "origins:resource",
+												"comparison": "==",
+												"resource": "apocalypse:myconoids/universal_toggle_binary",
+												"compare_to": 0
+											}
+										]
+									},
+									"action": {
+										"type": "origins:and",
+										"actions": [
+											{
+												"type": "origins:execute_command",
+												"command": "resource set @s apocalypse:myconoids/universal_toggle_binary 1",
+												"permission_level": 4
+											},
+											{
+												"type": "origins:execute_command",
+												"command": "title @s actionbar {\"text\":\"Toggle: ON\",\"color\":\"dark_green\"}",
+												"permission_level": 4
+											}
+										]
+									}
+								}
+							]
+						},
+						{
+							"type": "origins:add_velocity",
+							"z": 0.5,
+							"space": "local"
+						},
+						{
+							"type": "origins:add_velocity",
+							"y": 3.5,
+							"space": "world"
+						}
+					]
+				}
+			}
+		]
+	},
+	"damage_condition": {
+		"type": "origins:name",
+		"name": "outOfWorld"
+	},
+	"name": "Void Leap",
+	"description": "If you take void damage, you will automatically leap high into the air and activate your passive abilities."
+}

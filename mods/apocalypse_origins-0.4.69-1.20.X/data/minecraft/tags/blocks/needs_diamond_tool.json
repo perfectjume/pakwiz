@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "apocalypse_origins:world",
+    "apocalypse_origins:world_hell",
+    "apocalypse_origins:world_end",
+    "apocalypse_origins:gene_duplicator"
+  ]
+}

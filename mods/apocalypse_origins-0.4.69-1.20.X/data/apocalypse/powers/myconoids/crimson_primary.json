@@ -1,0 +1,56 @@
+{
+	"type": "origins:active_self",
+	"cooldown": 1200,
+	"hud_render": {
+		"should_render": true,
+		"sprite_location":"apocalypse:textures/gui/mycostamina.png",
+		"bar_index": 0
+	},
+	"entity_action": {
+		"type": "origins:if_else_list",
+		"actions": [
+			{
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:sneaking",
+							"inverted": true
+						}
+					]
+				},
+				"action": {
+					"type": "origins:and",
+					"actions": [
+						{
+							"type": "origins:execute_command",
+							"command": "playsound minecraft:block.brewing_stand.brew master @a[distance=..15] ~ ~ ~ 1 0.7",
+							"permission_level": 4
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "playsound minecraft:block.brewing_stand.brew master @a[distance=..15] ~ ~ ~ 1 1",
+							"permission_level": 4
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "playsound minecraft:block.brewing_stand.brew master @a[distance=..15] ~ ~ ~ 1 1.3",
+							"permission_level": 4
+						},
+						{
+							"type": "origins:execute_command",
+							"command": "resource set @s apocalypse:myconoids/crimson_passives_stamina_spores 30",
+							"permission_level": 4
+						}
+					]
+				}
+			}
+		]
+	},
+	"name": "Second Wind",
+	"description": "[Primary] You refill your spores to be used in your special moves.",
+	"key": {
+		"key":"key.origins.primary_active",
+		"continuous": true
+	}
+}

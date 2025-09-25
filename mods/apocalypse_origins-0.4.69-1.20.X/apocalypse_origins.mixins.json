@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "net.apocalypse.origins.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "ExampleMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "apocalypse_origins-refmap.json"
+}

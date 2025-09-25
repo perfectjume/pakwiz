@@ -1,0 +1,14 @@
+{
+    "parent": "minecraft:item/generated",
+    "textures": {
+        "layer0": "apocalypse_origins:item/focus_scrying"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "custom_model_data": 1
+            },
+            "model": "apocalypse_origins:item/modeldata/focus_scrying_b"
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+	"type": "origins:recipe",
+	"recipe": {
+		"type": "minecraft:crafting_shaped",
+		"id": "apocalypse_origins:syringe_reinforced",
+		"pattern": [
+			" ^ ",
+			"#o#",
+			"#_#"
+		],
+		"key": {
+			"#": {
+				"item": "minecraft:netherite_ingot"
+			},	
+			"^": {
+				"item": "minecraft:gold_nugget"
+			},
+			"o": {
+				"item": "apocalypse_origins:syringe"
+			},
+			"_": {
+				"item": "minecraft:gold_ingot"
+			}
+		},
+		"result": {
+			"item": "apocalypse_origins:syringe_reinforced"
+		}
+	},
+	"hidden": true
+}

@@ -1,0 +1,72 @@
+{
+    "apocalypse.ost.sss" : {
+        "sounds": [
+            "ost/sss"
+        ]
+    },
+    "apocalypse.ost.sagacity" : {
+        "sounds": [
+            "ost/sagacity"
+        ]
+    },
+    "apocalypse.ost.smite" : {
+        "sounds": [
+            "ost/smite"
+        ]
+    },
+    "apocalypse.ost.bonk" : {
+        "sounds": [
+            "ost/bonk"
+        ]
+    },
+    "apocalypse.ost.fwomp" : {
+        "sounds": [
+            "ost/fwomp"
+        ]
+    },
+    "apocalypse.ost.echolocation" : {
+        "sounds": [
+            "ost/echolocation"
+        ]
+    },
+    "apocalypse.ost.growl" : {
+        "sounds": [
+            "ost/growl"
+        ]
+    },
+    "apocalypse.ost.scan" : {
+        "sounds": [
+            "ost/scan"
+        ]
+    },
+    "apocalypse.ost.syringe" : {
+        "sounds": [
+            "ost/stimuse"
+        ]
+    },
+    "apocalypse.ost.click" : {
+        "sounds": [
+            "ost/click"
+        ]
+    },
+    "apocalypse.ost.beamstart" : {
+        "sounds": [
+            "ost/beamstart"
+        ]
+    },
+    "apocalypse.ost.beamo" : {
+        "sounds": [
+            "ost/beamo"
+        ]
+    },
+    "apocalypse.ost.brrr" : {
+        "sounds": [
+            "ost/brrr"
+        ]
+    },
+    "apocalypse.ost.recharged" : {
+        "sounds": [
+            "ost/recharged"
+        ]
+    }
+}

@@ -1,0 +1,280 @@
+{
+	"type": "origins:action_on_callback",
+	"entity_action_gained": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:choice",
+				"actions": [
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/aquatic/aquatic_predator innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/aquatic/fatiguer innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/aquatic/liquid_vision innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/aquatic/quilled innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/aquatic/regenerator innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/aquatic/waterproof innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/arthropod/burrower innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/arthropod/climber innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/arthropod/tiny innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/arthropod/venomous innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/arthropod/webslinger innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/end/ancient_behemoth innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/end/dodger innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/end/juggernaut innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/end/levitator innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/living/afterlife_research innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/living/battle_trance innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/living/frostproof innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/living/lightfall innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/living/milker innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/living/wooly innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/nether/fireproof innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/nether/flamestrike innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/nether/poisonproof innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/nether/striding innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/nether/witherproof innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/nether/witherstrike innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/odd/blastproof innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/odd/camouflage innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/odd/silent innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/odd/swallow innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/undead/arrow_toss innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/undead/drowner innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/undead/gliding innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/undead/rigor_mortis innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/undead/soporiferous innateg"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/undead/waster innateg"
+						},
+						"weight": 1
+					}
+				]
+			},
+			{
+				"type": "origins:delay",
+				"ticks": 1,
+				"action": {
+					"type": "origins:execute_command",
+					"command": "power revoke @s apocalypse:geneticist/genes/starter_boon_granter geneticist"
+				}
+			}
+		]
+	}
+}

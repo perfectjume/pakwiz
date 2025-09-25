@@ -1,0 +1,13 @@
+name = "The Afterdark"
+filename = "the_afterdark-1.20.1-fabric-1.0.3.1.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "0658d3b05d4391baa80263f03c8d92f326a95927"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 5887169
+project-id = 1110531

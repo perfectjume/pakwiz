@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "apocalypse_origins:block/refractor_block_blank",
+    "north": "apocalypse_origins:block/refractor_block_blank",
+    "south": "apocalypse_origins:block/refractor_block_blank",
+    "east": "apocalypse_origins:block/refractor_block_blank",
+    "west": "apocalypse_origins:block/refractor_block_blank",
+    "up": "apocalypse_origins:block/y_block_top",
+    "down": "apocalypse_origins:block/refractor_block_bottom"
+  }
+}

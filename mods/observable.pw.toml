@@ -1,0 +1,13 @@
+name = "Observable"
+filename = "observable-4.4.1.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "363aeb6f8e7e88ec3008be47f5f0c15039f5acda"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 5080063
+project-id = 509575

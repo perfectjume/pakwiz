@@ -1,0 +1,140 @@
+{
+	"type": "origins:multiple",
+	"rnabackup_resource":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 3,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false
+		}
+	},
+	"is_gmo":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false
+		}
+	},
+	"callback":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_gained": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s add gmo"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "power grant @s apocalypse:geneticist/stabilize_active geneticist"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "power grant @s apocalypse:geneticist/craft_stabilizer geneticist"
+				}
+			]
+		},
+		"entity_action_respawned": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_rnabackup_resource",
+								"compare_to": 0
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "power revokeall @s gene"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revokeall @s sideeffect"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revokeall @s primary"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revokeall @s secondary"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revokeall @s primarys"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revokeall @s secondarys"
+									},
+									{
+										"type": "origins:change_resource",
+										"resource": "apocalypse:geneticist/genes/active/active_resource",
+										"change": -1
+									},
+									{
+										"type": "origins:change_resource",
+										"resource": "apocalypse:geneticist/hasgenes_is_gmo",
+										"change": -3
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_rnabackup_resource",
+								"compare_to": 1
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "tellraw @s {\"text\":\"RNA Backup: Lost\",\"color\":\"green\"}"
+									},
+									{
+										"type": "origins:change_resource",
+										"resource": "*:*_rnabackup_resource",
+										"change": -1
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		"entity_action_lost":{
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s remove gmo"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "power revoke @s apocalypse:geneticist/stabilize_active geneticist"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "power revoke @s apocalypse:geneticist/craft_stabilizer geneticist"
+				}
+			]
+		}
+	}
+}

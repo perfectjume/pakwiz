@@ -1,0 +1,153 @@
+{
+    "type": "origins:multiple",
+	"hexaltar":
+	{
+		"type": "origins:recipe",
+		"recipe": {
+			"type": "minecraft:crafting_shaped",
+			"id": "apocalypse_origins:hexaltar",
+			"pattern": [
+				"-+-",
+				"+#+",
+				"-+-"
+			],
+			"key": {
+				"#": {
+					"item": "minecraft:soul_sand"
+				},
+				"+": {
+					"item": "minecraft:iron_block"
+				},
+				"-": {
+					"item": "minecraft:polished_blackstone"
+				}
+			},
+			"result": {
+				"item": "apocalypse_origins:hexaltar"
+			}
+		}
+	},
+	"hexaltar2":
+	{
+		"type": "origins:recipe",
+		"recipe": {
+			"type": "minecraft:crafting_shapeless",
+			"id": "apocalypse_origins:hexaltar2",
+			"ingredients": [
+				{
+					"item": "apocalypse_origins:hexaltar"
+				},
+				{
+					"item": "minecraft:diamond_block"
+				},
+				{
+					"item": "minecraft:diamond_block"
+				}
+			],
+			"result": {
+				"item": "apocalypse_origins:hexaltar2"
+			}
+		}
+	},
+	"hexaltar3":
+	{
+		"type": "origins:recipe",
+		"recipe":{
+			"type": "minecraft:crafting_shapeless",
+			"id": "apocalypse_origins:hexaltar3",
+			"ingredients": [
+				{
+					"item": "apocalypse_origins:hexaltar2"
+				},
+				{
+					"item": "minecraft:netherite_block"
+				},
+				{
+					"item": "minecraft:netherite_block"
+				}
+			],
+			"result":{
+				"item": "apocalypse_origins:hexaltar3"
+			}
+		}
+	},
+	"name": "Hexblade Altar",
+	"description": "You know how to create a structure capable of imprisoning souls for long term storage.",
+	"badges":[
+		{
+			"type": "origins:crafting_recipe",
+			"sprite": "origins:textures/gui/badge/info.png",
+			"recipe":{
+				"type": "minecraft:crafting_shaped",
+				"id": "apocalypse_origins:hexaltar",
+				"pattern":[
+					"-+-",
+					"+#+",
+					"-+-"
+				],
+				"key":{
+					"#":{
+						"item": "minecraft:soul_sand"
+					},
+					"+":{
+						"item": "minecraft:iron_block"
+					},
+					"-":{
+						"item": "minecraft:polished_blackstone"
+					}
+				},
+				"result":{
+					"item": "apocalypse_origins:hexaltar"
+				}
+			}
+		},
+		{
+			"type": "origins:crafting_recipe",
+			"sprite": "origins:textures/gui/badge/info.png",
+			"recipe":{
+				"type": "minecraft:crafting_shaped",
+				"id": "apocalypse_origins:hexaltar2",
+				"pattern":[
+					"+  ",
+					" # ",
+					"  +"
+				],
+				"key":{
+					"#":{
+						"item": "apocalypse_origins:hexaltar"
+					},
+					"+":{
+						"item": "minecraft:diamond_block"
+					}
+				},
+				"result":{
+					"item": "apocalypse_origins:hexaltar2"
+				}
+			}
+		},
+		{
+			"type": "origins:crafting_recipe",
+			"sprite": "origins:textures/gui/badge/info.png",
+			"recipe":{
+				"type": "minecraft:crafting_shaped",
+				"id": "apocalypse_origins:hexaltar3",
+				"pattern":[
+					"+  ",
+					" # ",
+					"  +"
+				],
+				"key":{
+					"#":{
+						"item": "apocalypse_origins:hexaltar2"
+					},
+					"+":{
+						"item": "minecraft:netherite_block"
+					}
+				},
+				"result":{
+					"item": "apocalypse_origins:hexaltar3"
+				}
+			}
+		}
+	]
+}

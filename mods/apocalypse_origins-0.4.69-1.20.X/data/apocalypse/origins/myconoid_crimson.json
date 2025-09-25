@@ -1,0 +1,21 @@
+{
+	"powers": [
+		"apocalypse:myconoids/crimson_callback",
+		"apocalypse:myconoids/crimson_passives",
+		"apocalypse:myconoids/crimson_primary",
+		"apocalypse:myconoids/crimson_secondary",
+		"apocalypse:myconoids/cold_weakness",
+		"apocalypse:myconoids/resource_temperature",
+		"apocalypse:myconoids/turf_penalty",
+		"apocalypse:myconoids/universal_toggle"
+	],
+	"icon": {
+		"item": "minecraft:crimson_fungus"
+	},
+	"unchoosable": true,
+	"order": 10,
+	"impact": 3,
+	"name": "Crimson Myconoid",
+	"description": "Bloodlust is unavoidable for any warrior, and this statement holds even truer in the unforgiving conditions of the nether. Accustomed to fend off hordes of enemies on their own, the crimson myconoids have a wide variety of moves to turn the tide of battle against the hellish hordes of the nether."
+}
+//Umena says hi

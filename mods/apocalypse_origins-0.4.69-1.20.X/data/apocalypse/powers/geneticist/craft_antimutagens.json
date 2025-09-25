@@ -1,0 +1,63 @@
+{
+	"type": "origins:recipe",
+	"recipe": {
+		"type": "minecraft:crafting_shaped",
+		"id": "apocalypse_origins:antimutagens",
+		"pattern": [
+			"#_#",
+			"#o#",
+			" ^ "
+		],
+		"key": {
+			"#": {
+				"item": "minecraft:glass_pane"
+			},
+			"^": {
+				"item": "minecraft:iron_nugget"
+			},
+			"o": {
+				"item": "minecraft:blue_ice"
+			},
+			"_": {
+				"item": "minecraft:stone_button"
+			}
+		},
+		"result": {
+			"item": "apocalypse_origins:antimutagens"
+		}
+	},
+	"name": "Labware: Antimutagens",
+	"description": "Preserving the integrity of one's genome can be a challenge. However, the preservative properties of blue ice give you an idea...\n \nUpon use, every [Gene] and [Side Effect] that the player randomly evolved as a result of [Unstable Genome] is stabilized. Alternatively, the player can sneak while using antimutagens to instead prevent the random evolution of a [Gene] or [Side Effect] for 10 minutes. For the duration, other geneticists can not use [Mutagens] on you, and when you use [Mutagens] on yourself, you do not reroll any [Innate Genes].",
+	"badges": [
+		{	
+			"type": "origins:crafting_recipe",
+			"sprite": "apocalypse_origins:textures/item/antimutagens.png",
+			"recipe": {
+				"type": "minecraft:crafting_shaped",
+				"id": "apocalypse_origins:antimutagens",
+				"pattern": [
+					"#_#",
+					"#o#",
+					" ^ "
+				],
+				"key": {
+					"#": {
+						"item": "minecraft:glass_pane"
+					},
+					"^": {
+						"item": "minecraft:iron_nugget"
+					},
+					"o": {
+						"item": "minecraft:blue_ice"
+					},
+					"_": {
+						"item": "minecraft:stone_button"
+					}
+				},
+				"result": {
+					"item": "apocalypse_origins:antimutagens"
+				}
+			}
+		}
+	]
+}

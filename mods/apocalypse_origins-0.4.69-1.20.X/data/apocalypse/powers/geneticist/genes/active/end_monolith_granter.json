@@ -1,0 +1,156 @@
+{
+	"type": "origins:multiple",
+	"callback":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+				  "type": "origins:execute_command",
+				  "command": "particle minecraft:falling_dust obsidian ~ ~1.5 ~ 0.2 2 0.2 0 25"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "scale set pehkui:height 2 @s"
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 300,
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "kill @s"
+							}
+						]
+					}
+				}
+			]
+		}
+	},
+	"heal":
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "particle minecraft:falling_dust obsidian ~ ~1.5 ~ 0.2 2 0.2 0 25"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "particle minecraft:damage_indicator ~ ~-0.25 ~ -5 0 5 0 15"
+				},
+				{
+					"type": "origins:area_of_effect",
+					"radius": 10,
+					"bientity_action": {
+						"type": "origins:target_action",
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:heal",
+									"amount": 1
+								}
+							]
+						}
+					},
+					"bientity_condition":
+					{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:can_see"
+							},
+							{
+								"type": "origins:target_condition",
+								"condition": 
+								{
+									"type": "origins:and",
+									"conditions": [
+										{
+											"type": "origins:living"
+										},
+										{
+											"type": "origins:or",
+											"conditions": [
+												{
+													"type": "origins:power",
+													"power": "apocalypse:geneticist/genes/active/end_monolith_primary"
+												},
+												{
+													"type": "origins:power",
+													"power": "apocalypse:geneticist/genes/active/end_monolith_secondary"
+												}
+											]
+										}
+									]
+								}
+							}
+						]
+					}
+				}
+			]
+		},
+		"interval": 5
+	},
+	"basehealth": 
+	{
+		"type": "origins:attribute",
+		"update_health": true,
+		"modifiers": {
+			"attribute": "minecraft:generic.max_health",
+			"operation": "multiply_total",
+			"value": -0.5
+		}
+	},
+	"immunities": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type":"origins:or",
+			"conditions":[
+				{
+					"type": "origins:name",
+					"name": "drown"
+				},
+				{
+					"type": "origins:name",
+					"name": "inWall"
+				}
+			]
+		}
+	},
+	"explode":
+	{
+		"type": "origins:prevent_death",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:explode",
+					"power": 3,
+					"destruction_type": "none",
+					"damage_self": false,
+					"create_fire": false
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "power revoke @s apocalypse:geneticist/genes/active/end_monolith_granter_explode geneticist"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "kill @s"
+				}
+			]
+		}
+	}
+}

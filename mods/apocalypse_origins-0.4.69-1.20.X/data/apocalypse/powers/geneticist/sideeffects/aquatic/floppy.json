@@ -1,0 +1,109 @@
+{
+	"type": "origins:multiple",
+	"flop":
+	{
+		"type": "origins:action_over_time",
+		"interval": 20,
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [ 
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:entity.guardian.flop master @a ~ ~ ~ 1 1"
+				},	
+				{
+					"type": "origins:choice",
+					"actions": [
+						{
+							"element": {
+								"type": "origins:add_velocity",
+								"y": 0.4,
+								"z": 0.5
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:add_velocity",
+								"y": 0.4,
+								"z": -0.5
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:add_velocity",
+								"y": 0.4,
+								"x": 0.5
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:add_velocity",
+								"y": 0.4,
+								"x": -0.5
+							},
+							"weight": 1
+						}
+					]
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:on_block"
+				},
+				{
+					"type": "origins:in_rain",
+					"inverted": true
+				},
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:water",
+					"comparison": "<=",
+					"compare_to": 0.1
+				},
+				{
+					"type": "origins:status_effect",
+					"effect": "minecraft:water_breathing",
+					"inverted": true
+				},
+				{
+					"type": "origins:status_effect",
+					"effect": "minecraft:conduit_power",
+					"inverted": true
+				},
+				{
+					"type": "origins:in_block",
+					"inverted": true,
+					"block_condition": {
+						"type": "origins:block",
+						"block": "minecraft:water_cauldron"
+					}
+				}
+			]
+		}
+	},
+	"jump_sound":
+	{
+		"type": "origins:active_self",
+		"cooldown": 10,
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action": {
+			"type": "origins:execute_command",
+			"command": "playsound minecraft:entity.guardian.flop master @a ~ ~ ~ 1 1"
+		},
+		"condition": {
+			"type": "origins:on_block"
+		},
+		"key": {
+			"key": "key.jump",
+			"continuous": false
+		}
+	}
+}

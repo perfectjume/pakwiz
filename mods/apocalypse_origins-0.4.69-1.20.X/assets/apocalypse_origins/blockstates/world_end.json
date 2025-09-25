@@ -1,0 +1,7 @@
+{
+  "variants":{
+    "": {
+      "model": "apocalypse_origins:block/world_end"
+    }
+  }
+}

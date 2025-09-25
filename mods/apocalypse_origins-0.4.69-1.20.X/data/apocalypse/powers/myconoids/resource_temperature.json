@@ -1,0 +1,76 @@
+{
+	"type": "origins:multiple",
+	"coolness":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 7,
+		"start_value": 7,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 0,
+			"sprite_location": "apocalypse:textures/gui/temperature.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "apocalypse:myconoids/resource_temperature_coolness",
+						"comparison": "<",
+						"compare_to": 7
+					}
+				]
+			}
+		}
+	},
+	"hotness":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 7,
+		"start_value": 0,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 0,
+			"sprite_location": "apocalypse:textures/gui/temperature_hot.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "apocalypse:myconoids/resource_temperature_hotness",
+						"comparison": ">",
+						"compare_to": 0
+					}
+				]
+			}
+		}
+	},
+	"wetness":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 120,
+		"start_value": 0,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 0,
+			"sprite_location": "apocalypse:textures/gui/wetness.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "apocalypse:myconoids/resource_temperature_wetness",
+						"comparison": ">",
+						"compare_to": 0
+					}
+				]
+			}
+		}
+	},
+	"hidden": true
+}

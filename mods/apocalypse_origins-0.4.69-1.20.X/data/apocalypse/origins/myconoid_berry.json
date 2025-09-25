@@ -1,0 +1,21 @@
+{
+	"powers": [
+		"apocalypse:myconoids/berry_callback",
+		"apocalypse:myconoids/berry_passives",
+		"apocalypse:myconoids/berry_primary",
+		"apocalypse:myconoids/overworld_secondaries",
+		"apocalypse:myconoids/heat_weakness",
+		"apocalypse:myconoids/resource_temperature",
+		"apocalypse:myconoids/turf_penalty",
+		"apocalypse:myconoids/universal_toggle"
+	],
+	"icon": {
+		"item": "minecraft:sweet_berries"
+	},
+	"unchoosable": true,
+	"order": 10,
+	"impact": 3,
+	"name": "Snowy Myconoid",
+	"description": "You are an expert survivalist, resilient against cold and terrifying in combat due to your large size."
+}
+//Umena says hi

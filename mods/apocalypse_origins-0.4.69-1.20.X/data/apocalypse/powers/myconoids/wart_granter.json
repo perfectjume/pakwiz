@@ -1,0 +1,239 @@
+{
+	"type": "origins:multiple",
+	"callback":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+				  "type": "origins:execute_command",
+				  "command": "particle minecraft:falling_dust obsidian ~ ~ ~ 0.2 1 0.2 0 25"
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 300,
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "kill @s"
+							}
+						]
+					}
+				}
+			]
+		}
+	},
+	"cast":
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "particle minecraft:falling_dust obsidian ~ ~ ~ 0.2 1 0.2 0 15"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "particle minecraft:electric_spark ~ ~ ~ 0.2 1 0.2 0 15"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "power grant @e[tag=red,distance=..15] apocalypse:myconoids/red_active_buff afungus"
+				},
+				{
+					"type": "origins:choice",
+					"actions": [
+						{
+							"element": {
+								"type": "origins:and",
+								"actions": [
+									{
+									  "type": "origins:execute_command",
+									  "command": "power grant @e[tag=!myconoid,tag=!surge,distance=..10] apocalypse:myconoids/spells/burning afungus"
+									}
+								]
+							},
+							"weight": 2
+						},
+						{
+							"element": {
+								"type": "origins:and",
+								"actions": [
+									{
+									  "type": "origins:execute_command",
+									  "command": "power grant @e[tag=!myconoid,tag=!surge,distance=..10] apocalypse:myconoids/spells/freezing afungus"
+									}
+								]
+							},
+							"weight": 2
+						},
+						{
+							"element": {
+								"type": "origins:and",
+								"actions": [
+									{
+									  "type": "origins:execute_command",
+									  "command": "power grant @e[tag=!myconoid,tag=!surge,distance=..10] apocalypse:myconoids/spells/magic_strike afungus"
+									}
+								]
+							},
+							"weight": 3
+						},
+						{
+							"element": {
+								"type": "origins:and",
+								"actions": [
+									{
+									  "type": "origins:execute_command",
+									  "command": "power grant @e[tag=!myconoid,tag=!surge,distance=..10] apocalypse:myconoids/spells/sundering afungus"
+									}
+								]
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:and",
+								"actions": [
+									{
+									  "type": "origins:execute_command",
+									  "command": "power grant @e[tag=!myconoid,tag=!surge,distance=..10] apocalypse:myconoids/spells/hex afungus"
+									}
+								]
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:and",
+								"actions": [
+									{
+									  "type": "origins:execute_command",
+									  "command": "power grant @e[tag=!myconoid,tag=!surge,distance=..10] apocalypse:myconoids/spells/magnify_gravity afungus"
+									}
+								]
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:and",
+								"actions": [
+									{
+									  "type": "origins:execute_command",
+									  "command": "power grant @e[tag=myconoid,distance=..10] apocalypse:myconoids/spells/heal afungus"
+									}
+								]
+							},
+							"weight": 3
+						},
+						{
+							"element": {
+								"type": "origins:and",
+								"actions": [
+									{
+									  "type": "origins:execute_command",
+									  "command": "power grant @e[tag=myconoid,distance=..10] apocalypse:myconoids/spells/purge_good afungus"
+									}
+								]
+							},
+							"weight": 2
+						},
+						{
+							"element": {
+								"type": "origins:and",
+								"actions": [
+									{
+									  "type": "origins:execute_command",
+									  "command": "power grant @e[tag=myconoid,distance=..10] apocalypse:myconoids/spells/mage_armor afungus"
+									}
+								]
+							},
+							"weight": 2
+						},
+						{
+							"element": {
+								"type": "origins:and",
+								"actions": [
+									{
+									  "type": "origins:execute_command",
+									  "command": "power grant @e[tag=myconoid,distance=..10] apocalypse:myconoids/spells/gaseous_form afungus"
+									}
+								]
+							},
+							"weight": 2
+						},
+						{
+							"element": {
+								"type": "origins:and",
+								"actions": [
+									{
+									  "type": "origins:execute_command",
+									  "command": "power grant @e[tag=myconoid,distance=..10] apocalypse:myconoids/spells/wings afungus"
+									}
+								]
+							},
+							"weight": 1
+						},
+						{
+							"element": {
+								"type": "origins:and",
+								"actions": [
+									{
+									  "type": "origins:execute_command",
+									  "command": "power grant @e[tag=myconoid,distance=..10] apocalypse:myconoids/spells/fire_shield afungus"
+									}
+								]
+							},
+							"weight": 2
+						}
+					]
+				}
+			]
+		},
+		"interval": 40
+	},
+	"basehealth": 
+	{
+		"type": "origins:attribute",
+		"update_health": true,
+		"modifiers": {
+			"attribute": "minecraft:generic.max_health",
+			"operation": "multiply_total",
+			"value": -0.5
+		}
+	},
+	"dietowall":
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": 10,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:name",
+					"name": "cramming.player"
+				},
+				{
+					"type": "origins:name",
+					"name": "cramming"
+				},
+				{
+					"type": "origins:name",
+					"name": "inWall.player"
+				},
+				{
+					"type": "origins:name",
+					"name": "inWall"
+				}
+			]
+		}
+	}
+}

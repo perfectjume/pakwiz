@@ -1,0 +1,21 @@
+{
+	"powers": [
+		"apocalypse:myconoids/warped_callback",
+		"apocalypse:myconoids/warped_passives",
+		"apocalypse:myconoids/warped_primary",
+		"apocalypse:myconoids/warped_secondary",
+		"apocalypse:myconoids/cold_weakness",
+		"apocalypse:myconoids/resource_temperature",
+		"apocalypse:myconoids/turf_penalty",
+		"apocalypse:myconoids/universal_toggle"
+	],
+	"icon": {
+		"item": "minecraft:warped_fungus"
+	},
+	"unchoosable": true,
+	"order": 10,
+	"impact": 3,
+	"name": "Warped Myconoid",
+	"description": "When colonizing the nether, resilient explorers with good eyesight are needed. The humble warped myconoid may not look like much, but its unique qualities make it a natural pioneer at conquering and scouting oceans, be it lava or water."
+}
+//Umena says hi

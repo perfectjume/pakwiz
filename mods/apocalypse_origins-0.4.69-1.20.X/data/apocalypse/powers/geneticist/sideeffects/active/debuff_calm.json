@@ -1,0 +1,71 @@
+{
+	"type": "origins:multiple",
+	"resource":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 3,
+		"start_value": 3,
+		"hud_render": {
+			"should_render": false,
+			"bar_index": 6
+		}
+	},
+	"timer":
+	{
+		"type": "origins:action_over_time",
+		"interval": 20,
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:resource",
+						"comparison": ">",
+						"resource": "*:*_resource",
+						"compare_to": 0
+					},
+					"action": {
+						"type": "origins:change_resource",
+						"resource": "*:*_resource",
+						"change": -1
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "*:*_resource",
+						"compare_to": 0
+					},
+					"action": {
+						"type": "origins:execute_command",
+						"command": "power revoke @s apocalypse:geneticist/sideeffects/active/debuff_calm sideeffect"
+					}
+				}
+			]
+		}
+	},
+	"debuff":
+	{
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -1
+		},
+		"target_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+				  "type": "origins:heal",
+				  "amount": 3
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "particle minecraft:heart ~ ~2 ~",
+					"permission_level": 4
+				}
+			]
+		}
+	}
+}

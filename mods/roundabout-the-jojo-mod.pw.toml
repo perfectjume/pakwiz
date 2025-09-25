@@ -1,0 +1,13 @@
+name = "Roundabout: The JoJo Mod"
+filename = "Roundabout-fabric-1.20.1-1.9.8.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "0d464cada5a75612067f5908631f38000c3b755d"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 7009820
+project-id = 1115305

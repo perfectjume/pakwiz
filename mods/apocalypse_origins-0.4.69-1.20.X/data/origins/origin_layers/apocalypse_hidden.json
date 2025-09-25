@@ -1,0 +1,11 @@
+{
+	"name": "Apocalypse Hidden",
+    "missing_name": "None",
+    "missing_description": "Jasel hidden layer.",
+	"hidden": true,
+	"auto_choose": true,
+	"replace": false,
+	"origins": [
+		"apocalypse:apocalypse_hidden"
+	]
+}

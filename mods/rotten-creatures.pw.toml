@@ -1,0 +1,13 @@
+name = "Rotten Creatures"
+filename = "rottencreatures-fabric-1.20.1-1.1.0.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "9b56ba6a17b25fe57244bf4d8728486703e33b6a"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 6336749
+project-id = 371033

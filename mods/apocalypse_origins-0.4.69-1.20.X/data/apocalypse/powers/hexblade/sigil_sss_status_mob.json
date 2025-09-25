@@ -1,0 +1,293 @@
+{
+	"type": "origins:multiple",
+	"durationbar": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 1,
+		"hidden": true,
+		"name": "Duration",
+		"description": "How long?",
+		"hud_render": {
+			"should_render": false,
+			"sprite_location":"apocalypse_origins:textures/gui/seas_bar.png",
+			"bar_index": 0,
+			"condition": {
+				"type": "origins:resource",
+				"resource": "apocalypse:hexblade/sigil_sss_status_mob_durationbar",
+				"comparison": ">",
+				"compare_to": 0
+			}
+		}
+	},
+	"timer": 
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "apocalypse:hexblade/sigil_sss_status_mob_durationbar",
+								"compare_to": 1
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [				
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/sigil_sss_status_mob_durationbar",
+								"change": -1
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 10,
+								"action": {
+									"type": "origins:and",
+									"actions": [ 
+										{
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:block.note_block.hat master @a[distance=..10] ~ ~ ~ 10 1.5 1",
+											"permission_level": 4	
+										},
+										{	
+											"type": "origins:execute_command",
+											"command": "data merge entity @s {NoAI:1b,Silent:1}",
+											"permission_level": 4	
+										}
+									]
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 20,
+								"action": {
+									"type": "origins:and",
+									"actions": [ 
+										{	
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:block.note_block.hat master @a[distance=..10] ~ ~ ~ 10 1.2 1",
+											"permission_level": 4	
+										}
+									]
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 30,
+								"action": {
+									"type": "origins:and",
+									"actions": [ 
+										{	
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:block.note_block.hat master @a[distance=..10] ~ ~ ~ 10 0.7 1",
+											"permission_level": 4	
+										}
+									]
+								}
+							},
+							{
+								"type": "origins:delay",
+								"ticks": 40,
+								"action": {
+									"type": "origins:and",
+									"actions": [ 
+										{	
+											"type": "origins:execute_command",
+											"command": "playsound minecraft:block.note_block.hat master @a[distance=..10] ~ ~ ~ 10 0.3 1",
+											"permission_level": 4	
+										}
+									]
+								}
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "apocalypse:hexblade/sigil_sss_status_mob_durationbar",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:delay",
+								"ticks": 1,
+								"action":{
+									"type": "origins:execute_command",
+									"command": "power revoke @s apocalypse:hexblade/sigil_sss_status_mob_timer hexblade_bars",
+									"permission_level": 4
+								}
+							}							
+						]
+					}
+				}
+			]
+		},
+		"interval": 20,
+		"hidden": true
+	},
+	"speed":
+	{
+		"type": "origins:attribute",
+		"modifier": {
+			"attribute": "minecraft:generic.movement_speed",
+			"operation": "multiply_total",
+			"value": -1
+		}
+	},
+	"jump":
+	{
+		"type": "origins:modify_jump",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -1
+		}
+	},
+	"interruption": 
+	{
+		"type": "origins:self_action_when_hit",
+	    "cooldown": 0,
+		"hidden": true,
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:delay",
+					"ticks": 10,
+					"action": {
+						"type": "origins:and",
+						"actions": [ 
+							{	
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.note_block.hat master @a[distance=..10] ~ ~ ~ 10 0.3 1",
+								"permission_level": 4	
+							},
+							{	
+								"type": "origins:execute_command",
+								"command": "data merge entity @s {NoAI:0b,Silent:0}",
+								"permission_level": 4	
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 20,
+					"action": {
+						"type": "origins:and",
+						"actions": [ 
+							{	
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.note_block.hat master @a[distance=..10] ~ ~ ~ 10 0.7 1",
+								"permission_level": 4	
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 30,
+					"action": {
+						"type": "origins:and",
+						"actions": [ 
+							{	
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.note_block.hat master @a[distance=..10] ~ ~ ~ 10 1.2 1",
+								"permission_level": 4	
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 40,
+					"action": {
+						"type": "origins:and",
+						"actions": [ 
+							{	
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.note_block.hat master @a[distance=..10] ~ ~ ~ 10 1.5 1",
+								"permission_level": 4	
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 1,
+					"action":{
+						"type": "origins:execute_command",
+						"command": "power revoke @s apocalypse:hexblade/sigil_sss_status_mob hexblade_bars",
+						"permission_level": 4
+					}
+				}							
+			]
+		}
+	},
+	"melee":
+	{
+		"type": "origins:modify_damage_dealt",
+		"target_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:player",
+					"inverted": true
+				},
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:player",
+					"inverted": false
+				}
+			]
+		},
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -1
+		},
+		"hidden": true
+	},
+	"projectile":
+	{
+		"type": "origins:modify_projectile_damage",
+		"target_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:player",
+					"inverted": true
+				},
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:player",
+					"inverted": false
+				}
+			]
+		},
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -1
+		},
+		"hidden": true
+	},
+	"hidden": true
+}

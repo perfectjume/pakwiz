@@ -1,0 +1,136 @@
+{
+	"type": "origins:multiple",
+	"oofouchmybones":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:delay",
+					"ticks": 2,
+					"action":{
+						"type": "origins:if_else_list",
+						"actions": [
+							{
+								"condition": {
+									"type": "origins:and",
+									"conditions": [
+										{
+											"type": "origins:enchantment",
+											"enchantment": "minecraft:protection",
+											"calculation": "sum",
+											"comparison": "<",
+											"compare_to": 8
+										}
+									]
+								},
+								"action": {
+									"type": "origins:damage",
+									"amount": 1,
+									"source": {
+										"name": "anvil",
+										"bypasses_armor": true
+									}
+								}
+							},
+							{
+								"condition": {
+									"type": "origins:and",
+									"conditions": [
+										{
+											"type": "origins:enchantment",
+											"enchantment": "minecraft:protection",
+											"calculation": "sum",
+											"comparison": ">=",
+											"compare_to": 8
+										},
+										{
+											"type": "origins:enchantment",
+											"enchantment": "minecraft:protection",
+											"calculation": "sum",
+											"comparison": "<",
+											"compare_to": 12
+										}
+									]
+								},
+								"action": {
+									"type": "origins:damage",
+									"amount": 2,
+									"source": {
+										"name": "anvil",
+										"bypasses_armor": true
+									}
+								}
+							},
+							{
+								"condition": {
+									"type": "origins:and",
+									"conditions": [
+										{
+											"type": "origins:enchantment",
+											"enchantment": "minecraft:protection",
+											"calculation": "sum",
+											"comparison": ">=",
+											"compare_to": 12
+										},
+										{
+											"type": "origins:enchantment",
+											"enchantment": "minecraft:protection",
+											"calculation": "sum",
+											"comparison": "<",
+											"compare_to": 16
+										}
+									]
+								},
+								"action": {
+									"type": "origins:damage",
+									"amount": 3,
+									"source": {
+										"name": "anvil",
+										"bypasses_armor": true
+									}
+								}
+							},
+							{
+								"condition": {
+									"type": "origins:and",
+									"conditions": [
+										{
+											"type": "origins:enchantment",
+											"enchantment": "minecraft:protection",
+											"calculation": "sum",
+											"comparison": ">=",
+											"compare_to": 16
+										}
+									]
+								},
+								"action": {
+									"type": "origins:damage",
+									"amount": 6,
+									"source": {
+										"name": "anvil",
+										"bypasses_armor": true
+									}
+								}
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 10,
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "power revoke @s apocalypse:classes/aoe_damage smallbane"
+							}
+						]
+					}
+				}
+			]
+		}
+	}
+}

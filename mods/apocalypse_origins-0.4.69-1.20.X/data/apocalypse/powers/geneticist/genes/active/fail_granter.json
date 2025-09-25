@@ -1,0 +1,16 @@
+{
+	"type": "origins:action_on_callback",
+	"entity_action_added": {
+		"type": "origins:delay",
+		"ticks": 2,
+		"action":{
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "kill @s"
+				}
+			]
+		}
+	}
+}

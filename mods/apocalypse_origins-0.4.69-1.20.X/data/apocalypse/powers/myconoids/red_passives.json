@@ -1,0 +1,288 @@
+{
+	"type": "origins:multiple",
+	"color":
+	{
+		"type": "origins:model_color",
+		"red": 0.74,
+		"green": 0.14,
+		"blue": 0.13
+	},
+	"basehealth": 
+	{
+		"type": "origins:attribute",
+		"update_health": true,
+		"modifiers": {
+			"attribute": "minecraft:generic.max_health",
+			"operation": "multiply_total",
+			"value": 0.5
+		},
+		"name": "Sturdy defender",
+		"description": "Your max HP is increased by 50%."
+	},
+	"noeffects": 
+	{
+		"type": "origins:effect_immunity",
+		"effects": [
+			"minecraft:poison"
+		],
+		"hidden": true
+	},
+	"resistances": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -0.75,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:projectile",
+					"projectile": "minecraft:arrow"
+				},
+				{
+					"type": "origins:name",
+					"name": "witherSkull"
+				},
+				{
+					"type": "origins:name",
+					"name": "fireworks"
+				},
+				{
+					"type": "origins:name",
+					"name": "trident"
+				},
+				{
+					"type": "origins:name",
+					"name": "trident"
+				},
+				{
+					"type": "origins:name",
+					"name": "thrown"
+				}
+			]
+		},
+		"hidden": true
+	},
+	"flammable":
+	{
+		"type": "origins:self_action_when_hit",
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:set_on_fire",
+					"duration": 5
+				}
+			]
+		},
+		"damage_condition": {
+			"type": "origins:fire"
+		},
+		"cooldown": 0,
+		"name": "Flammable",
+		"description": "You are flammable and fire will not be put out on its own."
+	},
+	"melee":
+	{
+		"type": "origins:modify_damage_dealt",
+		"target_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:player",
+					"inverted": true
+				},
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:player",
+					"inverted": false
+				}
+			]
+		},
+		"modifier": {
+			"operation": "multiply_total",
+			"value": 0.15
+		},
+		"hidden": true
+	},
+	"projectile":
+	{
+		"type": "origins:modify_projectile_damage",
+		"target_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:player",
+					"inverted": true
+				},
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:player",
+					"inverted": false
+				}
+			]
+		},
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -1
+		},
+		"hidden": true
+	},
+	"basespeed": 
+	{
+		"type": "origins:attribute",
+		"update_health": true,
+		"modifiers": {
+			"attribute": "minecraft:generic.movement_speed",
+			"operation": "multiply_total",
+			"value": -0.15
+		},
+		"name": "Slow",
+		"description": "Your speed decreases by 15%."
+	},
+	"toxic":
+	{
+		"type": "origins:target_action_on_hit",
+		"cooldown": 400,
+		"hud_render": {
+			"should_render": false,
+			"bar_index": 8
+		  },
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "execute as @e[tag=red,distance=0.2..5,sort=nearest,limit=1] run resource change @s apocalypse:myconoids/red_passives_stamina_spores -2"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "effect give @s minecraft:poison 5 1 true"
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"comparison": ">=",
+					"resource": "apocalypse:myconoids/red_passives_stamina_spores",
+					"compare_to": 2
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "apocalypse:myconoids/universal_toggle_binary",
+					"compare_to": 1
+				}
+			]
+		}
+	},
+	"stamina_spores":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 30,
+		"start_value": 30,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 1,
+			"sprite_location": "apocalypse:textures/gui/shroomba.png"
+		}
+	},
+	"spore_regen":
+	{
+		"type": "origins:action_over_time",
+		"interval": 100,
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:resource",
+						"comparison": ">",
+						"resource": "apocalypse:myconoids/turf_penalty_in_turf_resource",
+						"compare_to": 0
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/red_passives_stamina_spores 5"
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "apocalypse:myconoids/turf_penalty_in_turf_resource",
+						"compare_to": 0
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/red_passives_stamina_spores 1"
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"comparison": "<",
+					"resource": "apocalypse:myconoids/red_passives_stamina_spores",
+					"compare_to": 30
+				}
+			]
+		}
+	},
+	"devolve":
+	{
+		"type": "origins:prevent_death",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "power grant @s apocalypse:myconoids/shake afungus",
+					"permission_level": 4
+				},
+				{
+					"type": "origins:clear_effect"
+				},
+				{
+					"type": "origins:extinguish"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:entity.tnt.primed master @a[distance=..10] ~ ~ ~ 4 0.5",
+					"permission_level": 4
+				}
+			]
+		}
+	},
+	"status_bar":
+	{
+		"type": "origins:status_bar_texture",
+		"texture": "apocalypse:textures/gui/myconoid_red_bars.png"
+	},
+	"hidden": true
+}

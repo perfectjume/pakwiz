@@ -1,0 +1,83 @@
+{
+	"type": "origins:multiple",
+	"callback":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added":{
+			"type": "origins:execute_command",
+			"command": "scale set pehkui:step_height 2 @s"
+		},
+		"entity_action_respawned":{
+			"type": "origins:execute_command",
+			"command": "scale set pehkui:step_height 2 @s"
+		},
+		"entity_action_lost":{
+			"type": "origins:execute_command",
+			"command": "scale reset pehkui:step_height @s"
+		}
+	},
+	"speed":
+	{
+		"type": "origins:attribute",
+		"modifiers": {
+			"attribute": "minecraft:generic.movement_speed",
+			"operation": "multiply_total",
+			"value": 0.3
+		}
+	},
+	"vulnerability":
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": 1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type":"origins:or",
+			"inverted": true,
+			"conditions":[
+				{
+					"type": "origins:name",
+					"name": "inFire"
+				},
+				{
+					"type": "origins:name",
+					"name": "fire"
+				},
+				{
+					"type": "origins:name",
+					"name": "onFire"
+				},
+				{
+					"type": "origins:name",
+					"name": "lava"
+				},
+				{
+					"type": "origins:name",
+					"name": "hotFloor"
+				}
+			]
+		}
+	},
+	"immunity": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type": "origins:name",
+			"name": "fall"
+		}
+	},
+	"lucky":
+	{
+		"type": "origins:action_over_time",
+		"entity_action":{
+			"type": "origins:execute_command",
+			"command": "effect give @s minecraft:luck 10 1 true"
+		},
+		"interval": 100
+	}
+}

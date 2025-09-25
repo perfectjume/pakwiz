@@ -1,0 +1,16 @@
+{
+	"powers": [
+		"apocalypse:classes/smallbane_callback",
+		"apocalypse:classes/extra_jump"
+	],
+	"icon": {
+		"item": "minecraft:emerald",
+		"tag": "{CustomModelData:5}"
+	},
+	"unchoosable": false,
+	"order": 10,
+	"impact": 3,
+	"name": "Bane of the Small",
+	"description": "You hate tiny creatures. Those little monsters deserve no mercy, they are hard to hit and their advantage in pvp is far too great...\n \nDo not pick this class as a small origin, it will only hurt you."
+}
+//Umena says hi

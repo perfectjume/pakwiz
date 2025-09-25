@@ -1,0 +1,1 @@
+give @s minecraft:suspicious_stew{display:{Lore:['[{"text":"Red like blood","italic":false}]']},Effects:[{EffectId:10b,EffectDuration:600}]} 1

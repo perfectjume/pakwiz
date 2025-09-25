@@ -1,0 +1,22 @@
+{
+	"powers": [
+		"apocalypse:myconoids/cactus_callback",
+		"apocalypse:myconoids/cactus_passives",
+		"apocalypse:myconoids/cactus_primary",
+		"apocalypse:myconoids/overworld_secondaries",
+		"apocalypse:myconoids/cold_weakness",
+		"apocalypse:myconoids/heat_weakness",
+		"apocalypse:myconoids/resource_temperature",
+		"apocalypse:myconoids/turf_penalty",
+		"apocalypse:myconoids/universal_toggle"
+	],
+	"icon": {
+		"item": "minecraft:cactus"
+	},
+	"unchoosable": true,
+	"order": 10,
+	"impact": 3,
+	"name": "Desert Myconoid",
+	"description": "You are an expert hunter and are good at surviving hot environments."
+}
+//Umena says hi

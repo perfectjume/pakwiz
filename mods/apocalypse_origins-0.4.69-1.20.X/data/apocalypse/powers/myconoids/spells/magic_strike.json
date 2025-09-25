@@ -1,0 +1,160 @@
+{
+	"type": "origins:multiple",
+	"oofouchmybones":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:entity.guardian.hurt master @a ~ ~ ~ 1 2"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "particle minecraft:electric_spark ~ ~1 ~ 0.5 0.5 0.5 0.1 8"
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": "<",
+										"compare_to": 8
+									}
+								]
+							},
+							"action": {
+								"type": "origins:damage",
+								"amount": 6,
+								"source": {
+									"name": "magic",
+									"bypasses_armor": true
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": ">=",
+										"compare_to": 8
+									},
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": "<",
+										"compare_to": 12
+									}
+								]
+							},
+							"action": {
+								"type": "origins:damage",
+								"amount": 7,
+								"source": {
+									"name": "magic",
+									"bypasses_armor": true
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": ">=",
+										"compare_to": 12
+									},
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": "<",
+										"compare_to": 16
+									}
+								]
+							},
+							"action": {
+								"type": "origins:damage",
+								"amount": 9,
+								"source": {
+									"name": "magic",
+									"bypasses_armor": true
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:enchantment",
+										"enchantment": "minecraft:protection",
+										"calculation": "sum",
+										"comparison": ">=",
+										"compare_to": 16
+									}
+								]
+							},
+							"action": {
+								"type": "origins:damage",
+								"amount": 16,
+								"source": {
+									"name": "magic",
+									"bypasses_armor": true
+								}
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 10,
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "power revoke @s apocalypse:myconoids/spells/magic_strike afungus"
+							}
+						]
+					}
+				}
+			]
+		}
+	},
+	"glow":
+	{
+		"type": "origins:self_glow",
+		"use_teams": false,
+		"red": 0.71,
+		"green": 0.16,
+		"blue": 0.20,
+		"entity_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:origin",
+					"origin": "apocalypse:myconoid_wart",
+					"layer": "origins:origin"
+				}
+			]
+		},
+		"hidden": true
+	},
+	"hidden": true
+}

@@ -1,0 +1,46 @@
+{
+	"type": "origins:multiple",
+	"callback":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:add_velocity",
+					"y": 1.5
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 1,
+					"action":{
+						"type": "origins:execute_command",
+						"command": "power revoke @s[tag=smallbane] apocalypse:classes/bounce smallbane",
+						"permission_level": 4
+					}
+				}	
+			]
+		},
+		"execute_chosen_when_orb": true,
+		"hidden": true
+	},
+	"immunities": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type":"origins:or",
+			"conditions":[
+				{
+					"type": "origins:name",
+					"name": "fall"
+				}
+			]
+		},
+		"hidden": true
+	},
+	"hidden": true
+}

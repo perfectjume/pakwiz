@@ -1,0 +1,23 @@
+{
+	"type": "origins:multiple",
+	"hahanowurblind": 
+	{
+		"type": "origins:prevent_entity_render",
+		"bientity_condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:distance",
+					"comparison": ">",
+					"compare_to": 5
+				}
+			]
+		}
+	},
+	"blindvision": 
+	{
+		"type": "origins:shader",
+		"shader": "minecraft:shaders/post/sobel.json",
+		"toggleable": false
+	}
+}

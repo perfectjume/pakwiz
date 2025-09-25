@@ -1,0 +1,170 @@
+[
+	{
+		"function": "minecraft:set_nbt",
+		"tag": "{Enchanted:1b}",
+		"conditions": [
+		  {
+			"condition": "minecraft:inverted",
+			"term": {
+			  "condition": "minecraft:entity_properties",
+			  "entity": "this",
+			  "predicate": {
+				"equipment": {
+				  "mainhand": {
+					"nbt": "{Enchanted:1b}"
+				  }
+				}
+			  }
+			}
+		  }
+		]
+	},
+	{
+		"function": "enchant_with_levels",
+		"levels": 50,
+		"treasure": true,
+		"conditions": [
+		  {
+			"condition": "minecraft:inverted",
+			"term": {
+			  "condition": "minecraft:entity_properties",
+			  "entity": "this",
+			  "predicate": {
+				"equipment": {
+				  "mainhand": {
+					"nbt": "{Enchanted:1b}"
+				  }
+				}
+			  }
+			}
+		  }
+		]
+	},
+	{
+		"function": "set_lore",
+		"lore": [
+			{
+				"text": "It has been done",
+				"obfuscated": true
+			}
+		],
+		"replace": true,
+		"conditions":[
+		  {
+			"condition": "minecraft:inverted",
+			"term": {
+			  "condition": "minecraft:entity_properties",
+			  "entity": "this",
+			  "predicate": {
+				"equipment": {
+				  "mainhand": {
+					"nbt": "{Enchanted:1b}"
+				  }
+				}
+			  }
+			}
+		  }
+		]
+	}
+]
+[
+  {
+    "function": "minecraft:set_name",
+    "name": "Sword of coolness"
+  },
+	{
+		"function": "minecraft:set_nbt",
+		"tag": "{Enchanted:1b}",
+		"conditions": [
+			{
+				"condition": "minecraft:any_of",
+				"terms": [
+					{
+						"condition": "minecraft:inverted",
+						"term": {
+							"condition": "minecraft:entity_properties",
+							"entity": "this",
+							"predicate": {
+								"equipment": {
+									"feet": {
+										"nbt": "{Enchanted:1b}"
+									}
+								}
+							}
+						}
+					},
+					{
+						"condition": "minecraft:inverted",
+						"term": {
+							"condition": "minecraft:entity_properties",
+							"entity": "this",
+							"predicate": {
+								"equipment": {
+									"legs": {
+										"nbt": "{Enchanted:1b}"
+									}
+								}
+							}
+						}
+					},
+					{
+						"condition": "minecraft:inverted",
+						"term": {
+							"condition": "minecraft:entity_properties",
+							"entity": "this",
+							"predicate": {
+								"equipment": {
+									"chest": {
+										"nbt": "{Enchanted:1b}"
+									}
+								}
+							}
+						}
+					},
+					{
+						"condition": "minecraft:inverted",
+						"term": {
+							"condition": "minecraft:entity_properties",
+							"entity": "this",
+							"predicate": {
+								"equipment": {
+									"head": {
+										"nbt": "{Enchanted:1b}"
+									}
+								}
+							}
+						}
+					},
+					{
+						"condition": "minecraft:inverted",
+						"term": {
+							"condition": "minecraft:entity_properties",
+							"entity": "this",
+							"predicate": {
+								"equipment": {
+									"offhand": {
+										"nbt": "{Enchanted:1b}"
+									}
+								}
+							}
+						}
+					},
+					{
+						"condition": "minecraft:inverted",
+						"term": {
+							"condition": "minecraft:entity_properties",
+							"entity": "this",
+							"predicate": {
+								"equipment": {
+									"offhand": {
+										"nbt": "{Enchanted:1b}"
+									}
+								}
+							}
+						}
+					}
+				]
+			}
+		]
+	}
+]

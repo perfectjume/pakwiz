@@ -1,0 +1,777 @@
+{
+	"type": "origins:multiple",
+	"in_turf_resource":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 2,
+		"start_value": 0,
+		"hidden": true,
+		"hud_render": {
+			"should_render": false,
+			"bar_index": 0,
+			"sprite_location": "apocalypse:textures/gui/mycocrimson.png"
+		}
+	},
+	"noeffects": 
+	{
+		"type": "origins:effect_immunity",
+		"effects": [
+			"minecraft:hunger"
+		],
+		"hidden": true
+	},
+	"in_turf_dectection":
+	{
+		"type": "origins:action_over_time",
+		"interval": 20,
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:or",
+						"conditions": [
+							{
+								"type": "origins:on_block",
+								"block_condition": {
+									"type": "origins:in_tag",
+									"tag": "apocalypse:mushrooms"
+								}
+							},
+							{
+								"type": "origins:in_block",
+								"block_condition": {
+									"type": "origins:in_tag",
+									"tag": "apocalypse:walk_shrooms"
+								}
+							},
+							{
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:or",
+										"conditions": [
+											{
+												"type": "origins:on_block",
+												"block_condition": {
+													"type": "origins:in_tag",
+													"tag": "apocalypse:cold_blocks"
+												}
+											},
+											{
+												"type": "origins:in_block",
+												"block_condition": {
+													"type": "origins:in_tag",
+													"tag": "apocalypse:cold_blocks"
+												}
+											}
+										]
+									},
+									{
+										"type": "origins:origin",
+										"origin": "apocalypse:myconoid_berry",
+										"layer": "origins:origin"
+									}
+								]
+							},
+							{
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:or",
+										"conditions": [
+											{
+												"type": "origins:on_block",
+												"block_condition": {
+													"type": "origins:block",
+													"block": "minecraft:soul_soil"
+												}
+											},
+											{
+												"type": "origins:in_block",
+												"block_condition": {
+													"type": "origins:block",
+													"block": "minecraft:soul_sand"
+												}
+											}
+										]
+									},
+									{
+										"type": "origins:origin",
+										"origin": "apocalypse:myconoid_wart",
+										"layer": "origins:origin"
+									}
+								]
+							},
+							{
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:or",
+										"conditions": [
+											{
+												"type": "origins:submerged_in",
+												"fluid": "minecraft:lava"
+											},
+											{    
+											  "type": "origins:fluid_height",
+											  "fluid": "minecraft:lava",
+											  "comparison": ">",
+											  "compare_to": 0
+											}
+										]
+									},
+									{
+										"type": "origins:origin",
+										"origin": "apocalypse:myconoid_warped",
+										"layer": "origins:origin"
+									}
+								]
+							},
+							{
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:on_block",
+										"block_condition": {
+											"type": "origins:block",
+											"block": "minecraft:end_stone"
+										}
+									},
+									{
+										"type": "origins:origin",
+										"origin": "apocalypse:myconoid_chorus",
+										"layer": "origins:origin"
+									}
+								]
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_in_turf_resource",
+								"change": 2
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:or",
+						"inverted": true,
+						"conditions": [
+							{
+								"type": "origins:on_block",
+								"block_condition": {
+									"type": "origins:in_tag",
+									"tag": "apocalypse:mushrooms"
+								}
+							},
+							{
+								"type": "origins:in_block",
+								"block_condition": {
+									"type": "origins:in_tag",
+									"tag": "apocalypse:walk_shrooms"
+								}
+							},
+							{
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:or",
+										"conditions": [
+											{
+												"type": "origins:on_block",
+												"block_condition": {
+													"type": "origins:in_tag",
+													"tag": "apocalypse:cold_blocks"
+												}
+											},
+											{
+												"type": "origins:in_block",
+												"block_condition": {
+													"type": "origins:in_tag",
+													"tag": "apocalypse:cold_blocks"
+												}
+											}
+										]
+									},
+									{
+										"type": "origins:origin",
+										"origin": "apocalypse:myconoid_berry",
+										"layer": "origins:origin"
+									}
+								]
+							},
+							{
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:or",
+										"conditions": [
+											{
+												"type": "origins:on_block",
+												"block_condition": {
+													"type": "origins:block",
+													"block": "minecraft:soul_soil"
+												}
+											},
+											{
+												"type": "origins:in_block",
+												"block_condition": {
+													"type": "origins:block",
+													"block": "minecraft:soul_sand"
+												}
+											}
+										]
+									},
+									{
+										"type": "origins:origin",
+										"origin": "apocalypse:myconoid_wart",
+										"layer": "origins:origin"
+									}
+								]
+							},
+							{
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:or",
+										"conditions": [
+											{
+												"type": "origins:submerged_in",
+												"fluid": "minecraft:lava"
+											},
+											{    
+											  "type": "origins:fluid_height",
+											  "fluid": "minecraft:lava",
+											  "comparison": ">",
+											  "compare_to": 0
+											}
+										]
+									},
+									{
+										"type": "origins:origin",
+										"origin": "apocalypse:myconoid_warped",
+										"layer": "origins:origin"
+									}
+								]
+							},
+							{
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:on_block",
+										"block_condition": {
+											"type": "origins:block",
+											"block": "minecraft:end_stone"
+										}
+									},
+									{
+										"type": "origins:origin",
+										"origin": "apocalypse:myconoid_chorus",
+										"layer": "origins:origin"
+									}
+								]
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_in_turf_resource",
+								"change": -1
+							}
+						]
+					}
+				}
+			]
+		}
+	},
+	"food":
+	{
+		"type": "origins:modify_food",
+		"food_modifier": {
+			"operation": "multiply_total",
+			"value": -0.5
+		},
+		"saturation_modifier": {
+			"operation": "multiply_total",
+			"value": -0.5
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "*:*_in_turf_resource",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:origin",
+					"origin": "apocalypse:myconoid_desert",
+					"layer": "origins:origin",
+					"inverted": true
+				},
+				{
+					"type": "origins:origin",
+					"origin": "apocalypse:myconoid_moss",
+					"layer": "origins:origin",
+					"inverted": true
+				}
+			]
+		}
+	},
+	"pain":
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": 0.6,
+			"operation":"multiply_total"
+		},
+		"condition":{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "*:*_in_turf_resource",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:origin",
+					"origin": "apocalypse:myconoid_desert",
+					"layer": "origins:origin",
+					"inverted": true
+				},
+				{
+					"type": "origins:origin",
+					"origin": "apocalypse:myconoid_moss",
+					"layer": "origins:origin",
+					"inverted": true
+				}
+			]
+		}
+	},
+	"weakness_hoe": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"operation": "addition",
+			"value": 11
+		},
+		"damage_condition":
+		{
+			"type": "origins:attacker",
+			"entity_condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:entity_type",
+						"entity_type": "minecraft:player"
+					},
+					{
+						"type": "origins:equipped_item",
+						"equipment_slot": "mainhand",
+						"item_condition":
+						{
+							"type": "origins:ingredient",
+							"ingredient": {
+								"tag": "apocalypse:hoes"
+							}
+						}
+					}
+				]
+			}
+		},
+		"hidden": true
+	},
+	"advantage":
+	{
+		"type": "origins:action_over_time",
+		"interval": 200,
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+				  "type": "origins:heal",
+				  "amount": 1
+				},
+				{
+					"type": "origins:feed",
+					"food": 1,
+					"saturation": 0.5
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:resource",
+			"comparison": ">",
+			"resource": "*:*_in_turf_resource",
+			"compare_to": 0
+		},
+		"name": "Regenerate spores",
+		"description": "Being near mycellium or nylium helps you heal up and recharge your spores. On top of that, the mycelium will share nutrients with you."
+	},
+	"brown_help":
+	{
+		"type": "origins:target_action_on_hit",
+		"cooldown":200,
+		"hud_render": {
+			"should_render": false,
+			"bar_index": 21,
+			"sprite_location":"origins:textures/gui/community/spiderkolo/resource_bar_01.png"
+		  },
+		"entity_action": {
+			"type": "origins:choice",
+			"actions": [
+				{
+					"element": {
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:apply_effect",
+								"effect": {
+									"effect": "minecraft:slowness",
+									"duration": 200,
+									"amplifier": 0
+								}
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:entity.guardian.hurt master @a[distance=..10] ~ ~ ~ 2 1.5",
+							  "permission_level": 4
+							}
+						]
+					},
+					"weight": 45
+				},
+				{
+					"element": {
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:apply_effect",
+								"effect": {
+									"effect": "minecraft:hunger",
+									"duration": 200,
+									"amplifier": 0
+								}
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:entity.guardian.hurt master @a[distance=..10] ~ ~ ~ 2 1.5",
+							  "permission_level": 4
+							}
+						]
+					},
+					"weight": 45
+				},
+				{
+					"element": {
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:apply_effect",
+								"effect": {
+									"effect": "minecraft:levitation",
+									"duration": 200,
+									"amplifier": 0
+								}
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:entity.guardian.hurt master @a[distance=..10] ~ ~ ~ 2 1.5",
+							  "permission_level": 4
+							}
+						]
+					},
+					"weight": 10
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:block_in_radius",
+						"block_condition": {
+							"type": "origins:block",
+							"block": "minecraft:brown_mushroom"
+						},
+						"radius": 3
+					}
+				]
+		},
+		"name": "Brown mushroom's help",
+		"description": "While near a brown mushroom, you inflict a random negative potion effect on enemies you hit."
+	},
+	"red_help":
+	{
+		"type": "origins:target_action_on_hit",
+		"cooldown":200,
+		"hud_render": {
+			"should_render": false,
+			"bar_index": 23,
+			"sprite_location":"origins:textures/gui/community/spiderkolo/resource_bar_01.png"
+		  },
+		"entity_action": {
+			"type": "origins:choice",
+			"actions": [
+				{
+					"element": {
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:apply_effect",
+								"effect": {
+									"effect": "minecraft:poison",
+									"duration": 200,
+									"amplifier": 0
+								}
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:entity.guardian.hurt master @a[distance=..10] ~ ~ ~ 2 1.5",
+							  "permission_level": 4
+							}
+						]
+					},
+					"weight": 1
+				},
+				{
+					"element": {
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:apply_effect",
+								"effect": {
+									"effect": "minecraft:mining_fatigue",
+									"duration": 200,
+									"amplifier": 0
+								}
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:entity.guardian.hurt master @a[distance=..10] ~ ~ ~ 2 1.5",
+							  "permission_level": 4
+							}
+						]
+					},
+					"weight": 2
+				},
+				{
+					"element": {
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:apply_effect",
+								"effect": {
+									"effect": "minecraft:weakness",
+									"duration": 200,
+									"amplifier": 0
+								}
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:entity.guardian.hurt master @a[distance=..10] ~ ~ ~ 2 1.5",
+							  "permission_level": 4
+							}
+						]
+					},
+					"weight": 4
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:block_in_radius",
+						"block_condition": {
+							"type": "origins:block",
+							"block": "minecraft:red_mushroom"
+						},
+						"radius": 3
+					}
+				]
+		},
+		"name": "Red mushroom's help",
+		"description": "While near a red mushroom, you inflict a random negative potion effect on enemies you hurt or shoot your spores at."
+	},
+	"crimson_help":
+	{
+		"type": "origins:target_action_on_hit",
+		"cooldown":200,
+		"hud_render": {
+			"should_render": false,
+			"bar_index": 10,
+			"sprite_location":"origins:textures/gui/community/spiderkolo/resource_bar_01.png"
+		  },
+		"entity_action": {
+			"type": "origins:choice",
+			"actions": [
+				{
+					"element": {
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:apply_effect",
+								"effect": {
+									"effect": "minecraft:wither",
+									"duration": 300,
+									"amplifier": 0
+								}
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:entity.guardian.hurt master @a[distance=..10] ~ ~ ~ 2 1.5",
+							  "permission_level": 4
+							}
+						]
+					},
+					"weight": 20
+				},
+				{
+					"element": {
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:damage",
+								"amount": 6,
+								"source": {
+									"name": "onFire",
+									"fire": true,
+									"bypasses_armor": true
+								}
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:entity.guardian.hurt master @a[distance=..10] ~ ~ ~ 2 1.5",
+							  "permission_level": 4
+							}
+						]
+					},
+					"weight": 5
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:block_in_radius",
+						"block_condition": {
+							"type": "origins:block",
+							"block": "minecraft:crimson_fungus"
+						},
+						"radius": 3
+					}
+				]
+		},
+		"name": "Crimson mushroom's help",
+		"description": "While near a crimson mushroom, you inflict a random negative potion effect on enemies you hurt or shoot your spores at."
+	},
+	"warped_help":
+	{
+		"type": "origins:target_action_on_hit",
+		"cooldown":200,
+		"hud_render": {
+			"should_render": false,
+			"bar_index": 18,
+			"sprite_location":"origins:textures/gui/community/spiderkolo/resource_bar_01.png"
+		  },
+		"entity_action": {
+			"type": "origins:choice",
+			"actions": [
+				{
+					"element": {
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:apply_effect",
+								"effect": {
+									"effect": "minecraft:blindness",
+									"duration": 300,
+									"amplifier": 0
+								}
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:entity.guardian.hurt master @a[distance=..10] ~ ~ ~ 2 1.5",
+							  "permission_level": 4
+							}
+						]
+					},
+					"weight": 5
+				},
+				{
+					"element": {
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:apply_effect",
+								"effect": {
+									"effect": "minecraft:nausea",
+									"duration": 300,
+									"amplifier": 0
+								}
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:entity.guardian.hurt master @a[distance=..10] ~ ~ ~ 2 1.5",
+							  "permission_level": 4
+							}
+						]
+					},
+					"weight": 5
+				},
+				{
+					"element": {
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:apply_effect",
+								"effect": {
+									"effect": "minecraft:glowing",
+									"duration": 300,
+									"amplifier": 0
+								}
+							},
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:entity.guardian.hurt master @a[distance=..10] ~ ~ ~ 2 1.5",
+							  "permission_level": 4
+							}
+						]
+					},
+					"weight": 5
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:block_in_radius",
+						"block_condition": {
+							"type": "origins:block",
+							"block": "minecraft:warped_fungus"
+						},
+						"radius": 3
+					}
+				]
+		},
+		"name": "Warped mushroom's help",
+		"description": "While near a warped mushroom, you inflict a random negative potion effect on enemies you hurt or shoot your spores at."
+	},
+	"name": "Home Advantage",
+	"description": "You often miss your home, but your talent at spreading your colony rewards you, causing the following effects\n \n1) You are immune to temperature changes while you are standing on a mushroom turf block.\n \n2) You will be periodically fed and healed while you stand on a mushroom turf block\n \n3) Nearby mushrooms will infuse your attacks with various status effects every 10 seconds.\n \n4) Food is only half as effective when you are not standing on a mushroom turf block.\n \n5) You take 60% more damage if you are not standing on a mushroom turf block."
+}

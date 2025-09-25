@@ -1,0 +1,154 @@
+{
+	"type": "origins:multiple",
+	"callback":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:apocalypse.ost.syringe master @a[distance=..16] ~ ~ ~ 1 1"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "tellraw @s {\"text\":\"--->Activating Mutagens<---\",\"color\":\"aqua\"}"
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "tellraw @s {\"text\":\"...patient is not sneaking, mutating active side-effects...\",\"color\":\"aqua\"}"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revokeall @s primarys"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revokeall @s secondarys"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power grant @s[tag=!geneticist] apocalypse:geneticist/hasgenes geneticist"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power grant @s apocalypse:geneticist/sideeffects/active_primary_granter geneticist"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power grant @s apocalypse:geneticist/sideeffects/active_secondary_granter geneticist"
+									},
+									{
+										"type": "origins:if_else_list",
+										"actions": [
+											{
+												"condition":{
+													"type": "origins:and",
+													"conditions":[
+														{
+															"type": "origins:power",
+															"power": "apocalypse:geneticist/antimutagens_buff",
+															"inverted": true
+														},
+														{
+															"type": "origins:origin",
+															"origin": "apocalypse:geneticist",
+															"layer": "origins:origin"
+														}
+													]
+												},
+												"action": {
+													"type": "origins:and",
+													"actions": [
+														{
+															"type": "origins:execute_command",
+															"command": "tellraw @s {\"text\":\"...and innate genes...\",\"color\":\"aqua\"}"
+														},
+														{
+															"type": "origins:execute_command",
+															"command": "power revokeall @s innateg"
+														},
+														{
+															"type": "origins:execute_command",
+															"command": "power grant @s apocalypse:geneticist/genes/starter_boon_granter geneticist"
+														},
+														{
+															"type": "origins:delay",
+															"ticks": 10,
+															"action":{
+																"type": "origins:and",
+																"actions":[
+																	{
+																		"type": "origins:execute_command",
+																		"command": "power grant @s apocalypse:geneticist/genes/starter_boon_granter geneticist"
+																	},
+																	{
+																		"type": "origins:delay",
+																		"ticks": 10,
+																		"action":{
+																			"type": "origins:execute_command",
+																			"command": "power grant @s apocalypse:geneticist/genes/starter_boon_granter geneticist"
+																		}
+																	}
+																]
+															}
+														}
+													]
+												}
+											}
+										]
+									}
+								]
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:sneaking"
+							},
+							"action": {
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:execute_command",
+										"command": "tellraw @s {\"text\":\"...patient is sneaking, mutating genome...\",\"color\":\"aqua\"}"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power grant @s apocalypse:geneticist/reroll_genes geneticist"
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 5,
+					"action": {
+						"type": "origins:execute_command",
+						"command": "tellraw @s {\"text\":\"--->Mutagens Administered<---\",\"color\":\"aqua\"}"
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 6,
+					"action": {
+						"type": "origins:execute_command",
+						"command": "power revoke @s apocalypse:geneticist/mutagens_action geneticist"
+					}
+				}
+			]
+		}
+	}
+}

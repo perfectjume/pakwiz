@@ -1,0 +1,22 @@
+{
+	"type": "origins:multiple",
+	"callback":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_lost":{
+			"type": "origins:drop_inventory",
+			"inventory_type": "power",
+			"power": "apocalypse:geneticist/genes/active/suitcase_primary"
+		}
+	},
+	"inventory": 
+	{
+		"type": "origins:inventory",
+		"title": "container.suitcase_primary_power",
+		"drop_on_death": false,
+		"key": {
+			"key": "key.origins.primary_active",
+			"continuous": false
+		}
+	}
+}

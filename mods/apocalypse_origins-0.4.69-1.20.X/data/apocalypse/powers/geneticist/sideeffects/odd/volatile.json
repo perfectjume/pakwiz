@@ -1,0 +1,100 @@
+{
+	"type": "origins:multiple",
+	"callback":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:delay",
+			"ticks": 1,
+			"action": {
+				"type": "origins:execute_command",
+				"command": "power revoke @s apocalypse:geneticist/sideeffects/odd/volatile_color sideeffect"
+			}
+		}
+	},
+	"explosion":
+	{
+		"type": "origins:self_action_when_hit",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:entity.creeper.primed master @a ~ ~ ~ 1 1"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "scale multiply pehkui:height 1.2 @s"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "scale multiply pehkui:width 1.2 @s"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "power grant @s apocalypse:geneticist/sideeffects/odd/volatile_color sideeffect"
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 20,
+					"action": {
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:execute_command",
+								"command": "scale divide pehkui:height 1.2 @s"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "scale divide pehkui:width 1.2 @s"
+							},
+							{
+								"type": "origins:explode",
+								"power": 2,
+								"destruction_type": "none",
+								"damage_self": false,
+								"create_fire": false
+							},
+							{
+								"type": "origins:add_velocity",
+								"y": 1,
+								"space": "world"
+							},
+							{
+								"type": "origins:add_velocity",
+								"z": -1.2,
+								"space": "local"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "power revoke @s apocalypse:geneticist/sideeffects/odd/volatile_color sideeffect"
+							}
+						]
+					}
+				}
+			]
+		},
+		"damage_condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:amount",
+					"comparison": ">=",
+					"compare_to": 4.0
+				},
+				{
+					"type": "origins:explosive",
+					"inverted": true
+				}
+			]
+		},
+		"cooldown": 200
+	},
+	"color": 
+	{
+		"type": "origins:model_color",
+		"red": 0.2,
+		"green": 0.2,
+		"blue": 0.2
+	}
+}

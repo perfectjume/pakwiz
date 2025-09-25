@@ -1,0 +1,133 @@
+{
+	"type": "origins:active_self",
+	"cooldown": 100,
+	"hud_render": {
+	  "should_render":false,
+	  "bar_index": 7
+	},
+	"entity_action": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "playsound minecraft:entity.dragon_fireball.explode master @a ~ ~ ~ 1"
+			},
+			{
+				"type": "origins:add_velocity",
+				"z": -2,
+				"space": "local"
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:enchantment",
+									"enchantment": "minecraft:protection",
+									"calculation": "sum",
+									"comparison": "<",
+									"compare_to": 8
+								}
+							]
+						},
+						"action": {
+							"type": "origins:damage",
+							"amount": 5,
+							"source": {
+								"name": "explosion",
+								"bypasses_armor": true
+							}
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:enchantment",
+									"enchantment": "minecraft:protection",
+									"calculation": "sum",
+									"comparison": ">=",
+									"compare_to": 8
+								},
+								{
+									"type": "origins:enchantment",
+									"enchantment": "minecraft:protection",
+									"calculation": "sum",
+									"comparison": "<",
+									"compare_to": 12
+								}
+							]
+						},
+						"action": {
+							"type": "origins:damage",
+							"amount": 6,
+							"source": {
+								"name": "explosion",
+								"bypasses_armor": true
+							}
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:enchantment",
+									"enchantment": "minecraft:protection",
+									"calculation": "sum",
+									"comparison": ">=",
+									"compare_to": 12
+								},
+								{
+									"type": "origins:enchantment",
+									"enchantment": "minecraft:protection",
+									"calculation": "sum",
+									"comparison": "<",
+									"compare_to": 16
+								}
+							]
+						},
+						"action": {
+							"type": "origins:damage",
+							"amount": 6,
+							"source": {
+								"name": "explosion",
+								"bypasses_armor": true
+							}
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:enchantment",
+									"enchantment": "minecraft:protection",
+									"calculation": "sum",
+									"comparison": ">=",
+									"compare_to": 16
+								}
+							]
+						},
+						"action": {
+							"type": "origins:damage",
+							"amount": 10,
+							"source": {
+								"name": "explosion",
+								"bypasses_armor": true
+							}
+						}
+					}
+				]
+			}
+		]
+	},
+	"key": {
+		"key":"key.origins.primary_active",
+		"continuous": false
+	}
+}

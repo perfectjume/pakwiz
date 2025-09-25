@@ -1,0 +1,51 @@
+{
+	"type": "origins:prevent_entity_render",
+	"hidden": true,
+	"entity_condition": {
+		"type": "origins:or",
+		"conditions": [
+			{
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:moving",
+						"inverted": true
+					},
+					{
+						"type": "origins:sprinting",
+						"inverted": true
+					},
+					{
+						"type": "origins:climbing",
+						"inverted": true
+					},
+					{
+						"type": "origins:creative_flying",
+						"inverted": true
+					},
+					{
+						"type": "origins:fall_flying",
+						"inverted": true
+					},
+					{
+						"type": "origins:fall_distance",
+						"comparison": ">",
+						"compare_to": 0,
+						"inverted": true
+					},
+					{
+						"type": "origins:using_item",
+						"inverted": true
+					},
+					{
+						"type": "origins:using_effective_tool",
+						"inverted": true
+					}	
+				]
+			},
+			{
+				"type": "origins:sneaking"
+			}
+		]
+	}
+}

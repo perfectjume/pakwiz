@@ -1,0 +1,22 @@
+{
+	"powers": [
+		"apocalypse:myconoids/brown_callback",
+		"apocalypse:myconoids/brown_passives",
+		"apocalypse:myconoids/brown_primary",
+		"apocalypse:myconoids/overworld_secondaries",
+		"apocalypse:myconoids/cold_weakness",
+		"apocalypse:myconoids/heat_weakness",
+		"apocalypse:myconoids/resource_temperature",
+		"apocalypse:myconoids/turf_penalty",
+		"apocalypse:myconoids/universal_toggle"
+	],
+	"icon": {
+		"item": "minecraft:brown_mushroom"
+	},
+	"unchoosable": true,
+	"order": 10,
+	"impact": 3,
+	"name": "Brown Myconoid",
+	"description": "You are an expert miner and excel at finding ores and useful materials."
+}
+//Umena says hi

@@ -1,0 +1,55 @@
+{
+	"type": "origins:multiple",
+	"callback":
+	{
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:apocalypse.ost.scan master @a[distance=..5] ~ ~ ~ 1 1"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"--->Analysis Start<---\",\"color\":\"gold\"}"
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 7,
+					"action": {
+						"type": "origins:execute_command",
+						"command": "power grant @s apocalypse:geneticist/gene_reader geneticist"
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 15,
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "tellraw @a[tag=geneticist,distance=..5] {\"text\":\"--->Analysis Complete<---\",\"color\":\"gold\"}"
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 20,
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "power revoke @s apocalypse:geneticist/genome_inspection geneticist"
+							}
+						]
+					}
+				}
+			]
+		}
+	}
+}
+//Umena says hi

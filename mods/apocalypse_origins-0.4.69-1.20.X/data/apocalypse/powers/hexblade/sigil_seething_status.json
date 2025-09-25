@@ -1,0 +1,72 @@
+{
+	"type": "origins:multiple",
+	"durationbar": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 1,
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse_origins:textures/gui/seething_bar.png",
+			"bar_index": 0
+		}
+	},
+    "angery":
+    {
+        "type": "origins:target_action_on_hit",
+        "cooldown": 5,
+        "entity_action":
+        {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s add seether"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "power grant @e[type=!area_effect_cloud,type=!item,distance=..40] apocalypse:hexblade/sigil_seething_status_mob hexblade_bars"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "resource change @s apocalypse:hexblade/sigil_seething_status_mob_durationbar 2"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "execute at @e[type=!player,type=!area_effect_cloud,type=!item,distance=0.5..40] run summon area_effect_cloud ~ ~0.5 ~ {Tags:[\"seething\"],Particle:\"minecraft:ash\",Radius:0.4f,Duration:20,Effects:[{Id:6,Amplifier:30,Duration:1,ShowParticles:0b},{Id:7,Amplifier:30,Duration:20,ShowParticles:0b}]}"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "execute as @e[tag=seething] run data modify entity @s Owner set from entity @e[tag=seether,limit=1] UUID"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "tag @s remove seether"
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 1,
+					"action": {
+						"type": "origins:execute_command",
+						"command": "tag @e remove seething"
+					}
+				}
+			]
+		}
+	},
+    "no_angery":
+    {
+        "type": "origins:self_action_on_hit",
+        "cooldown": 0,
+        "entity_action":
+		{
+			"type": "origins:delay",
+			"ticks": 1,
+			"action":{
+				"type": "origins:execute_command",
+				"command": "power revoke @s apocalypse:hexblade/sigil_seething_status hexblade_bars"
+			}
+		}
+	}
+}

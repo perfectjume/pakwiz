@@ -1,0 +1,313 @@
+{
+	"type": "origins:multiple",
+	"breakself":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 10,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 0,
+			"sprite_location": "apocalypse:textures/gui/mycodevolve.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "*:*_breakself",
+						"comparison": ">",
+						"compare_to": 0
+					}
+				]
+			}
+		}
+	},
+	"active":
+	{
+		"type": "origins:active_self",
+		"cooldown": 20,
+		"hud_render": {
+		  "should_render":false,
+		  "sprite_location":"apocalypse:textures/gui/refractor.png",
+		  "bar_index": 1
+		},
+		"entity_action": 
+		{
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "mainhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"ingredient":
+											{
+												"item": "minecraft:netherite_hoe"
+											}
+										}
+									},
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "offhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"ingredient":
+											{
+												"item": "minecraft:netherite_hoe"
+											}
+										}
+									}
+								]
+							},
+							{
+								"type": "origins:resource",
+								"comparison": ">=",
+								"resource": "apocalypse:myconoids/wart_passives_stamina_spores",
+								"compare_to": 20
+							},
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.end_portal.spawn master @a[distance=..20] ~ ~ ~ 1 1.5"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "particle minecraft:block nether_wart_block ~ ~0 ~ 1 0.1 1 1 50"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:myconoids/wart_passives_stamina_spores -20"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "summon villager ^ ^ ^ {Tags:[\"surge\"],VillagerData:{profession:nitwit,level:2,type:plains},Silent:1,NoAI:1,ActiveEffects:[{Id:14,Amplifier:0,Duration:999999,ShowParticles:0b}]}"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "power grant @e[type=villager,tag=surge,distance=..5] apocalypse:myconoids/wart_granter afungus"
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:sneaking"
+							},
+							{
+								"type": "origins:or",
+								"inverted": true,
+								"conditions": [
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "mainhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"ingredient":
+											{
+												"item": "minecraft:netherite_hoe"
+											}
+										}
+									},
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "offhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"ingredient":
+											{
+												"item": "minecraft:netherite_hoe"
+											}
+										}
+									}
+								]
+							},
+							{
+								"type": "origins:resource",
+								"resource": "*:*_breakself",
+								"comparison": ">",
+								"compare_to": 0
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_breakself",
+								"operation": "set",
+								"change": 0
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:or",
+								"inverted": true,
+								"conditions": [
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "mainhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"ingredient":
+											{
+												"item": "minecraft:netherite_hoe"
+											}
+										}
+									},
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "offhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"ingredient":
+											{
+												"item": "minecraft:netherite_hoe"
+											}
+										}
+									}
+								]
+							},
+							{
+								"type": "origins:resource",
+								"resource": "*:*_breakself",
+								"comparison": "<",
+								"compare_to": 10
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_breakself",
+								"change": 1
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:sneaking",
+								"inverted": true
+							},
+							{
+								"type": "origins:or",
+								"inverted": true,
+								"conditions": [
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "mainhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"ingredient":
+											{
+												"item": "minecraft:netherite_hoe"
+											}
+										}
+									},
+									{
+										"type": "origins:equipped_item",
+										"equipment_slot": "offhand",
+										"item_condition":
+										{
+											"type": "origins:ingredient",
+											"ingredient":
+											{
+												"item": "minecraft:netherite_hoe"
+											}
+										}
+									}
+								]
+							},
+							{
+								"type": "origins:resource",
+								"resource": "*:*_breakself",
+								"comparison": "==",
+								"compare_to": 10
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "power grant @s apocalypse:myconoids/shake afungus",
+								"permission_level": 4
+							},
+							{
+								"type": "origins:clear_effect"
+							},
+							{
+								"type": "origins:extinguish"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:entity.tnt.primed master @a[distance=..10] ~ ~ ~ 4 0.5",
+								"permission_level": 4
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition":
+		{
+			"type": "origins:and",
+			"conditions":
+			[
+				{
+					"type": "origins:gamemode",
+					"inverted": true,
+					"gamemode": "spectator"
+				}
+			]
+		},
+		"key": {
+			"key":"key.origins.secondary_active",
+			"continuous": true
+		}
+	},
+	"name": "Manage Spores",
+	"description": "[Hold Secondary] Devolve into a spore.\n \n[Secondary + Shift] Reset your devolve progress.\n \nWild Magic Surge:\n \n[Secondary]: If you are holding a netherite hoe, you cause a Wild Magic Surge to spawn, which will cast a random spell every two seconds in a 10 block radius. If this effect is positive, it will affect myconoids. If this effect is negative, it will affect everything else. Costs 20 spores.\n \nThe position of the Wild Magic Surge is telegraphed by particles. It has no armor value, 20 hp and lasts for 15 seconds or until it is destroyed by an enemy, whichever happens first."
+}

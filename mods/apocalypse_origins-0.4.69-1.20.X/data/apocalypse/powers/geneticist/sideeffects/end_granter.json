@@ -1,0 +1,245 @@
+{
+	"type": "origins:action_on_callback",
+	"entity_action_gained": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:choice",
+				"actions": [
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/end/hydrophobia sideeffect"
+						},
+						"weight": 2.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/end/panicked_teleportation sideeffect"
+						},
+						"weight": 2.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s origins:no_shield sideeffect"
+						},
+						"weight": 2.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s origins:pumpkin_hate sideeffect"
+						},
+						"weight": 2.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/exhausted sideeffect"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/frail sideeffect"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/heavy sideeffect"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/hungry sideeffect"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/inaccurate sideeffect"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/insatiable sideeffect"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/landlocked sideeffect"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/obtuse sideeffect"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/sickly sideeffect"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/slowstrikes sideeffect"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/sluggish sideeffect"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/sundered sideeffect"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/vulnerable sideeffect"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/weak sideeffect"
+						},
+						"weight": 1.25
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xexhausted sideeffect"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xfrail sideeffect"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xheavy sideeffect"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xhungry sideeffect"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xinaccurate sideeffect"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xinsatiable sideeffect"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xlandlocked sideeffect"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xobtuse sideeffect"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xsickly sideeffect"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xslowstrikes sideeffect"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xsluggish sideeffect"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xsundered sideeffect"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xvulnerable sideeffect"
+						},
+						"weight": 1
+					},
+					{
+						"element": {
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/sideeffects/generic/xweak sideeffect"
+						},
+						"weight": 1
+					}
+				]
+			},
+			{
+				"type": "origins:delay",
+				"ticks": 1,
+				"action": {
+					"type": "origins:execute_command",
+					"command": "power revoke @s apocalypse:geneticist/sideeffects/end_granter geneticist"
+				}
+			}
+		]
+	}
+}

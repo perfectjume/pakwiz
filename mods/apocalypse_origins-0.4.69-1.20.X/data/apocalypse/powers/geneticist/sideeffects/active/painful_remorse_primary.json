@@ -1,0 +1,16 @@
+{
+	"type": "origins:active_self",
+	"cooldown": 5,
+	"hud_render": {
+		"should_render": false,
+		"bar_index": 0
+	},
+	"entity_action": {
+		"type": "origins:execute_command",
+		"command": "power grant @s apocalypse:geneticist/sideeffects/active/debuff_remorse sideeffect"
+	},
+	"key": {
+		"key":"key.origins.primary_active",
+		"continuous": false
+	}
+}

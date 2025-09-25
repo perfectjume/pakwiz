@@ -1,0 +1,122 @@
+{
+	"type": "origins:multiple",
+	"resource":
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hidden": true,
+		"name": "Mounted?",
+		"description": "Is there a rider?",
+		"hud_render": {
+			"should_render": false,
+			"sprite_location":"apocalypse:textures/gui/zberry_mounted.png",
+			"bar_index": 0
+		}
+	},
+	"invis":
+	{
+		"type": "origins:prevent_entity_render",
+		"hidden": true,
+		"entity_condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:living"
+				},
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "apocalypse:myconoids/moss_passives_hide_to_mount_resource",
+					"compare_to": 1
+				},
+				{
+					"type": "origins:riding"
+				}
+			]
+		}
+	},
+	"kick_rider_out":{
+		"type": "origins:active_self",
+		"cooldown": 1,
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:sneaking"
+							},
+							{
+								"type": "origins:passenger"
+							}
+						]
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:passenger_action",
+								"action": {
+									"type": "origins:dismount"
+								}
+							}
+						]
+					}
+				}
+			]
+		},
+		"key": {
+		  "key": "key.jump"
+		}
+	},
+	"rider_resistance": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":
+		{
+			"type": "origins:attacker",
+			"entity_condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:origin",
+						"origin": "apocalypse:myconoid_moss",
+						"layer": "origins:origin"
+					},
+					{
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "apocalypse:myconoids/moss_passives_hide_to_mount_resource",
+						"compare_to": 1
+					}
+				]
+			}
+		},
+		"hidden": true,
+		"condition":
+		{
+			"type": "origins:and",
+			"conditions":
+			[
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "apocalypse:myconoids/mounted_resource",
+					"compare_to": 1
+				}
+			]
+		}
+	},
+	"hidden": true
+}

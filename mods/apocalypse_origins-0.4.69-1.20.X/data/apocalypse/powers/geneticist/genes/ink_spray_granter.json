@@ -1,0 +1,82 @@
+{
+	"type": "origins:action_on_callback",
+	"entity_action_gained": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "power grant @s apocalypse:geneticist/genes/active/active_resource genepermanent"
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": {
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "apocalypse:geneticist/genes/active/active_resource",
+							"compare_to": 0
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power revokeall @s primary"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/active/ink_spray_primary primary"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/active_primary_granter geneticist"
+								},
+								{
+									"type": "origins:change_resource",
+									"resource": "apocalypse:geneticist/genes/active/active_resource",
+									"change": 1
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "apocalypse:geneticist/genes/active/active_resource",
+							"compare_to": 1
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power revokeall @s secondary"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/genes/active/ink_spray_secondary secondary"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power grant @s apocalypse:geneticist/sideeffects/active_secondary_granter geneticist"
+								},
+								{
+									"type": "origins:change_resource",
+									"resource": "apocalypse:geneticist/genes/active/active_resource",
+									"change": -1
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power revoke @s apocalypse:geneticist/genes/ink_spray_granter geneticist"
+			}
+		]
+	}
+}
+//Umena says hi

@@ -1,0 +1,105 @@
+{
+	"type": "origins:action_on_callback",
+	"entity_action_chosen": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s add brown"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s add myconoid"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power revoke @s apocalypse:myconoids/shake afungus"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "effect give @s minecraft:instant_health 1 0 true"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "scale set pehkui:height 0.5 @s"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "scale set pehkui:width 0.5 @s"
+			}
+		]
+	},
+	"entity_action_added": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s add brown"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s add myconoid"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power revoke @s apocalypse:myconoids/shake afungus"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "scale set pehkui:height 0.5 @s"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "scale set pehkui:width 0.5 @s"
+			}
+		]
+	},
+    "entity_action_respawned": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s add brown"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s add myconoid"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power revoke @s apocalypse:myconoids/shake afungus"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "effect give @s minecraft:instant_health 1 0 true"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "scale set pehkui:height 0.5 @s"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "scale set pehkui:width 0.5 @s"
+			}
+		]
+	},
+	"entity_action_removed": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s remove brown"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s remove myconoid"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "scale reset @s"
+			}
+		]
+	},
+	"execute_chosen_when_orb": true,
+	"hidden": true
+}

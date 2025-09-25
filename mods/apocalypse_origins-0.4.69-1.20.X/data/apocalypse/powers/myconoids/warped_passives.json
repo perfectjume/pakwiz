@@ -1,0 +1,241 @@
+{
+	"type": "origins:multiple",
+	"color":
+	{
+		"type": "origins:model_color",
+		"red": 0.08,
+		"green": 0.71,
+		"blue": 0.52
+	},
+	"noeffects": 
+	{
+		"type": "origins:effect_immunity",
+		"effects": [
+			"minecraft:wither",
+			"minecraft:nausea",
+			"minecraft:blindness"
+		],
+		"hidden": true
+	},
+	"immunities": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type":"origins:or",
+			"conditions":[
+				{
+					"type": "origins:name",
+					"name": "drown"
+				},
+				{
+					"type": "origins:name",
+					"name": "onFire"
+				},
+				{
+					"type": "origins:name",
+					"name": "inFire"
+				}
+			]
+		},
+		"hidden": true
+	},
+	"resistances": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": -0.5,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:name",
+					"name": "lava"
+				},
+				{
+					"type": "origins:name",
+					"name": "hotFloor"
+				}
+			]
+		},
+		"hidden": true
+	},
+	"immunities2": 
+	{
+		"type": "origins:fire_immunity",
+		"condition": {
+			"type": "origins:advancement",
+			"advancement": "minecraft:end/kill_dragon"
+		}
+	},
+	"mortal": 
+	{
+		"type":"origins:modify_damage_taken",
+		"modifier":{
+			"value": 1,
+			"operation":"multiply_total"
+		},
+		"damage_condition":{
+			"type":"origins:or",
+			"conditions":[
+				{
+					"type": "origins:name",
+					"name": "freeze"
+				}
+			]
+		},
+		"hidden": true
+	},
+	"melee":
+	{
+		"type": "origins:modify_damage_dealt",
+		"target_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:player",
+					"inverted": true
+				},
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:player",
+					"inverted": false
+				}
+			]
+		},
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -0.2
+		},
+		"hidden": true
+	},
+	"projectile":
+	{
+		"type": "origins:modify_projectile_damage",
+		"target_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:player",
+					"inverted": true
+				},
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:player",
+					"inverted": false
+				}
+			]
+		},
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -0.2
+		},
+		"hidden": true
+	},
+	"lavaswim":
+	{
+		"type": "origins:swimming",
+		"condition": {
+		  "type": "origins:or",
+		  "conditions": [
+			{
+				"type": "origins:submerged_in",
+				"fluid": "minecraft:lava",
+				"inverted": false
+			},
+			{    
+			  "type": "origins:fluid_height",
+			  "fluid": "minecraft:lava",
+			  "comparison": ">",
+			  "compare_to": 0,
+			  "inverted": false
+			}
+		  ]
+		},
+		"name": "Lava Swimming",
+		"description": "You are able to swim in lava."
+	},
+	"lavavision_a":
+	{
+		"type": "origins:lava_vision",
+		"s": 0,
+		"v": 30,
+		"name": "Lava vision",
+		"description": "Lava does not impair your vision as much."
+	},
+	"lavavision_b":
+	{
+		"type": "origins:modify_camera_submersion",
+		"from": "lava",
+		"to": "none",
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:submerged_in",
+					"fluid": "minecraft:lava"
+				}
+			]
+		}
+	},
+	"lavaspeed":
+	{
+		"type": "origins:modify_lava_speed",
+		"modifier": {
+			"name": "Additional lava speed",
+			"value": 0.42,
+			"operation": "addition"
+		},
+		"name": "Lava Affinity",
+		"description": "You move swiftly through lava."
+	},
+	"nightvision":
+	{
+		"type": "origins:night_vision",
+		"strength": 0.5,
+		"condition": {
+			"type": "origins:resource",
+			"comparison": "==",
+			"resource": "apocalypse:myconoids/universal_toggle_binary",
+			"compare_to": 1
+		}
+	},
+	"devolve":
+	{
+		"type": "origins:prevent_death",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "power grant @s apocalypse:myconoids/shake afungus",
+					"permission_level": 4
+				},
+				{
+					"type": "origins:clear_effect"
+				},
+				{
+					"type": "origins:extinguish"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:entity.tnt.primed master @a[distance=..10] ~ ~ ~ 4 0.5",
+					"permission_level": 4
+				}
+			]
+		}
+	},
+	"status_bar":
+	{
+		"type": "origins:status_bar_texture",
+		"texture": "apocalypse:textures/gui/myconoid_warped_bars.png"
+	},
+	"hidden": true
+}

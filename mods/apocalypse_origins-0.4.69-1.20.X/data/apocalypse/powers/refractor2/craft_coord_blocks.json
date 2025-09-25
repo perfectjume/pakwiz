@@ -1,0 +1,169 @@
+{
+    "type": "origins:multiple",
+	"x_block":
+	{
+		"type": "origins:recipe",
+		"recipe": {
+			"type": "minecraft:crafting_shaped",
+			"id": "apocalypse_origins:x_block",
+			"pattern": [
+				"-^-",
+				"^#^",
+				"-^-"
+			],
+			"key": {
+				"#": {
+					"item": "minecraft:diamond"
+				},
+				"^": {
+					"item": "minecraft:calcite"
+				},
+				"-": {
+					"item": "minecraft:amethyst_shard"
+				}
+			},
+			"result": {
+				"item": "apocalypse_origins:x_block"
+			}
+		}
+	},
+	"y_block":
+	{
+		"type": "origins:recipe",
+		"recipe": {
+			"type": "minecraft:crafting_shaped",
+			"id": "apocalypse_origins:y_block",
+			"pattern": [
+				"-#-",
+				"^-^",
+				"^-^"
+			],
+			"key": {
+				"#": {
+					"item": "minecraft:diamond"
+				},
+				"^": {
+					"item": "minecraft:calcite"
+				},
+				"-": {
+					"item": "minecraft:amethyst_shard"
+				}
+			},
+			"result": {
+				"item": "apocalypse_origins:y_block"
+			}
+		}
+	},
+	"z_block":
+	{
+		"type": "origins:recipe",
+		"recipe": {
+			"type": "minecraft:crafting_shaped",
+			"id": "apocalypse_origins:z_block",
+			"pattern": [
+				"-#-",
+				"^-^",
+				"-^^"
+			],
+			"key": {
+				"#": {
+					"item": "minecraft:diamond"
+				},
+				"^": {
+					"item": "minecraft:calcite"
+				},
+				"-": {
+					"item": "minecraft:amethyst_shard"
+				}
+			},
+			"result": {
+				"item": "apocalypse_origins:z_block"
+			}
+		}
+	},
+	"name": "Coordinators",
+	"description": "You know how to create photon coordinator blocks with amethyst shards, calcite and a diamond.\n \n- Three variants of this block exist, X Block, Y Block and Z Block. Jumping or sneaking while on one of these blocks will teleport any player 10 blocks (positive for jumping, negative for sneaking) in the axis they represent. Interacting with one of these blocks while holding a Regulator increases or decreases the coordinates on the axis that matches the block for the settings of your §e[FTL:§r §eWarp]§r ability depending on the face you right-clicked. Right click the top face of the block to increase the teleportation’s value, and right click any other face to decrease it.",
+	"badges": [
+		{	
+			"type": "origins:crafting_recipe",
+			"sprite": "apocalypse_origins:textures/block/x_block_top.png",
+			"recipe": {
+				"type": "minecraft:crafting_shaped",
+				"id": "apocalypse_origins:x_block",
+				"pattern": [
+					"-^-",
+					"^#^",
+					"-^-"
+				],
+				"key": {
+					"#": {
+						"item": "minecraft:diamond"
+					},
+					"^": {
+						"item": "minecraft:calcite"
+					},
+					"-": {
+						"item": "minecraft:amethyst_shard"
+					}
+				},
+				"result": {
+					"item": "apocalypse_origins:x_block"
+				}
+			}
+		},
+		{	
+			"type": "origins:crafting_recipe",
+			"sprite": "apocalypse_origins:textures/block/y_block_top.png",
+			"recipe": {
+				"type": "minecraft:crafting_shaped",
+				"id": "apocalypse_origins:y_block",
+				"pattern": [
+					"-#-",
+					"^-^",
+					"^-^"
+				],
+				"key": {
+					"#": {
+						"item": "minecraft:diamond"
+					},
+					"^": {
+						"item": "minecraft:calcite"
+					},
+					"-": {
+						"item": "minecraft:amethyst_shard"
+					}
+				},
+				"result": {
+					"item": "apocalypse_origins:y_block"
+				}
+			}
+		},
+		{	
+			"type": "origins:crafting_recipe",
+			"sprite": "apocalypse_origins:textures/block/z_block_top.png",
+			"recipe": {
+				"type": "minecraft:crafting_shaped",
+				"id": "apocalypse_origins:z_block",
+				"pattern": [
+					"-#-",
+					"^-^",
+					"-^^"
+				],
+				"key": {
+					"#": {
+						"item": "minecraft:diamond"
+					},
+					"^": {
+						"item": "minecraft:calcite"
+					},
+					"-": {
+						"item": "minecraft:amethyst_shard"
+					}
+				},
+				"result": {
+					"item": "apocalypse_origins:z_block"
+				}
+			}
+		}
+	]
+}

@@ -1,0 +1,4 @@
+{
+    "function": "set_nbt",
+    "tag": "{mirror:1b,display:{Name:'{\"text\":\"Reflected Item\",\"color\":\"yellow\",\"bold\":false}',Lore:['{\"text\":\"You have one minute...\",\"color\":\"white\"}','{\"text\":\"Make the most out of it.\",\"color\":\"white\"}']}}"
+}

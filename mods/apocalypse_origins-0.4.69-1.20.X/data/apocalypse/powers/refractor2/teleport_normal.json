@@ -1,0 +1,1302 @@
+{
+	"type": "origins:multiple",
+	"shader":
+	{
+		"type": "origins:shader",
+		"shader": "minecraft:shaders/post/phosphor.json",
+		"condition":{
+			"type": "origins:resource",
+			"resource": "*:*_windup_teleport",
+			"comparison": "<=",
+			"compare_to": 6
+		}
+	},
+	"windup_teleport": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 25,
+		"start_value": 25,
+		"hud_render":{
+			"should_render": true,
+			"sprite_location":"apocalypse_origins:textures/gui/refractor_mirrors.png",
+			"bar_index": 1,
+			"condition":{
+				"type": "origins:resource",
+				"resource": "*:*_windup_teleport",
+				"comparison": ">",
+				"compare_to": 0
+			}
+		},
+		"min_action":{
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:block.beacon.deactivate master @a ~ ~ ~ 1 2"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "effect give @s minecraft:blindness 2 0 true"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "effect give @s minecraft:slow_falling 2 0 true"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "stopsound @a[distance=..10] master minecraft:block.beacon.ambient"
+				}
+			]
+		}
+	},
+	"glowing":
+	{
+		"type": "origins:self_glow",
+		"use_teams": false,
+		"red": 1,
+		"green": 1,
+		"blue": 1,
+		"condition":{
+			"type": "origins:resource",
+			"resource": "*:*_windup_teleport",
+			"comparison": "!=",
+			"compare_to": 25
+		}
+	},
+	"windup_timer": 
+	{
+		"type": "origins:action_over_time",
+		"interval": 20,
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition":{
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "*:*_windup_teleport",
+						"compare_to": 6
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.beacon.ambient master @a ~ ~ ~ 2 0.5"
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_windup_teleport",
+								"change": -1
+							}
+						]
+					}
+				},
+				{
+					"condition":{
+						"type": "origins:resource",
+						"comparison": ">",
+						"resource": "*:*_windup_teleport",
+						"compare_to": 0
+					},
+					"action":{
+						"type": "origins:change_resource",
+						"resource": "*:*_windup_teleport",
+						"change": -1
+					}
+				}
+			]
+		},
+		"condition":{
+			"type": "origins:resource",
+			"resource": "*:*_windup_teleport",
+			"comparison": ">",
+			"compare_to": 0
+		}
+	},
+	"interruption": 
+	{
+		"type": "origins:self_action_when_hit",
+	    "cooldown": 0,
+		"hidden": true,
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:block.amethyst_cluster.break master @a ~ ~ ~ 10 0.7"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "stopsound @a[distance=..10] master minecraft:block.beacon.ambient"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "effect clear @s minecraft:blindness"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "power revoke @s apocalypse:refractor2/teleport_normal temprefractor"
+				}
+			]
+		},
+		"condition":{
+			"type": "origins:resource",
+			"comparison": ">",
+			"resource": "*:*_windup_teleport",
+			"compare_to": 0
+		}
+	},
+	"actual_teleport": 
+	{
+		"type": "origins:action_over_time",
+		"interval": 1,
+		"entity_action":{
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:resource",
+								"comparison": "!=",
+								"resource": "apocalypse:hidden_warpx",
+								"compare_to": 0
+							},
+							"action":{
+								"type": "origins:if_else_list",
+								"actions": [
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": ">=",
+											"resource": "apocalypse:hidden_warpx",
+											"compare_to": 20
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "tp @s ~2000 ~ ~"
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_warpx",
+													"change": -20
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_bufferwarpx",
+													"change": 20
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "<=",
+											"resource": "apocalypse:hidden_warpx",
+											"compare_to": -20
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "tp @s ~-2000 ~ ~"
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_warpx",
+													"change": 20
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_bufferwarpx",
+													"change": -20
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": ">=",
+											"resource": "apocalypse:hidden_warpx",
+											"compare_to": 10
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "tp @s ~1000 ~ ~"
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_warpx",
+													"change": -10
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_bufferwarpx",
+													"change": 10
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "<=",
+											"resource": "apocalypse:hidden_warpx",
+											"compare_to": -10
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "tp @s ~-1000 ~ ~"
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_warpx",
+													"change": 10
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_bufferwarpx",
+													"change": -10
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": ">=",
+											"resource": "apocalypse:hidden_warpx",
+											"compare_to": 5
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "tp @s ~500 ~ ~"
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_warpx",
+													"change": -5
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_bufferwarpx",
+													"change": 5
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "<=",
+											"resource": "apocalypse:hidden_warpx",
+											"compare_to": -5
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "tp @s ~-500 ~ ~"
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_warpx",
+													"change": 5
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_bufferwarpx",
+													"change": -5
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": ">=",
+											"resource": "apocalypse:hidden_warpx",
+											"compare_to": 2
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "tp @s ~200 ~ ~"
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_warpx",
+													"change": -2
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_bufferwarpx",
+													"change": 2
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "<=",
+											"resource": "apocalypse:hidden_warpx",
+											"compare_to": -2
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "tp @s ~-200 ~ ~"
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_warpx",
+													"change": 2
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_bufferwarpx",
+													"change": -2
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": ">=",
+											"resource": "apocalypse:hidden_warpx",
+											"compare_to": 1
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "tp @s ~100 ~ ~"
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_warpx",
+													"change": -1
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_bufferwarpx",
+													"change": 1
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "<=",
+											"resource": "apocalypse:hidden_warpx",
+											"compare_to": -1
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "tp @s ~-100 ~ ~"
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_warpx",
+													"change": 1
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_bufferwarpx",
+													"change": -1
+												}
+											]
+										}
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:resource",
+								"comparison": "!=",
+								"resource": "apocalypse:hidden_warpz",
+								"compare_to": 0
+							},
+							"action":{
+								"type": "origins:if_else_list",
+								"actions": [
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": ">=",
+											"resource": "apocalypse:hidden_warpz",
+											"compare_to": 20
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ ~ ~2000"
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_warpz",
+													"change": -20
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_bufferwarpz",
+													"change": 20
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "<=",
+											"resource": "apocalypse:hidden_warpz",
+											"compare_to": -20
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ ~ ~-2000"
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_warpz",
+													"change": 20
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_bufferwarpz",
+													"change": -20
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": ">=",
+											"resource": "apocalypse:hidden_warpz",
+											"compare_to": 10
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ ~ ~1000"
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_warpz",
+													"change": -10
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_bufferwarpz",
+													"change": 10
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "<=",
+											"resource": "apocalypse:hidden_warpz",
+											"compare_to": -10
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ ~ ~-1000"
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_warpz",
+													"change": 10
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_bufferwarpz",
+													"change": -10
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": ">=",
+											"resource": "apocalypse:hidden_warpz",
+											"compare_to": 5
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ ~ ~500"
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_warpz",
+													"change": -5
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_bufferwarpz",
+													"change": 5
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "<=",
+											"resource": "apocalypse:hidden_warpz",
+											"compare_to": -5
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ ~ ~-500"
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_warpz",
+													"change": 5
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_bufferwarpz",
+													"change": -5
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": ">=",
+											"resource": "apocalypse:hidden_warpz",
+											"compare_to": 2
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ ~ ~200"
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_warpz",
+													"change": -2
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_bufferwarpz",
+													"change": 2
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "<=",
+											"resource": "apocalypse:hidden_warpz",
+											"compare_to": -2
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ ~ ~-200"
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_warpz",
+													"change": 2
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_bufferwarpz",
+													"change": -2
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": ">=",
+											"resource": "apocalypse:hidden_warpz",
+											"compare_to": 1
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ ~ ~100"
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_warpz",
+													"change": -1
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_bufferwarpz",
+													"change": 1
+												}
+											]
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "<=",
+											"resource": "apocalypse:hidden_warpz",
+											"compare_to": -1
+										},
+										"action":{
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ ~ ~-100"
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_warpz",
+													"change": 1
+												},
+												{
+													"type": "origins:change_resource",
+													"resource": "apocalypse:hidden_bufferwarpz",
+													"change": -1
+												}
+											]
+										}
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:resource",
+								"comparison": "!=",
+								"resource": "apocalypse:hidden_warpy",
+								"compare_to": 0
+							},
+							"action":{
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:if_else_list",
+										"actions": [
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 32
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 320 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 31
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 310 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 30
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 300 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 29
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 290 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 28
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 280 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 27
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 270 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 26
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 260 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 25
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 250 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 24
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 240 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 23
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 230 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 22
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 220 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 21
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 210 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 20
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 200 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 19
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 190 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 18
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 180 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 17
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 170 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 16
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 160 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 15
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 150 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 14
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 140 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 13
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 130 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 12
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 120 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 11
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 110 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 10
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 100 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 9
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 90 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 8
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 80 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 7
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 70 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 6
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 60 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 5
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 50 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 4
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 40 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 3
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 30 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 2
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 20 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": 1
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ 10 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": -1
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ -10 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": -2
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ -20 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": -3
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ -30 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": -4
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ -40 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": -5
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ -50 ~"
+												}
+											},
+											{
+												"condition":{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:hidden_warpy",
+													"compare_to": -6
+												},
+												"action":{
+													"type": "origins:execute_command",
+													"command": "tp @s ~ -60 ~"
+												}
+											}
+										]
+									},
+									{
+										"type": "origins:change_resource",
+										"resource": "apocalypse:hidden_revwarpy",
+										"change": 1
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:resource",
+										"comparison": "==",
+										"resource": "apocalypse:hidden_warpx",
+										"compare_to": 0
+									},
+									{
+										"type": "origins:or",
+										"conditions": [
+											{
+												"type": "origins:resource",
+												"comparison": "==",
+												"resource": "apocalypse:hidden_warpy",
+												"compare_to": 0
+											},
+											{
+												"type": "origins:resource",
+												"comparison": "==",
+												"resource": "apocalypse:hidden_revwarpy",
+												"compare_to": 1
+											}
+										]
+									},
+									{
+										"type": "origins:resource",
+										"comparison": "==",
+										"resource": "apocalypse:hidden_warpz",
+										"compare_to": 0
+									}
+								]
+							},
+							"action":{
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:change_resource",
+										"resource": "apocalypse:hidden_revwarpy",
+										"change": -1
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "effect clear @s"
+									},
+									{
+										"type": "origins:extinguish"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "playsound minecraft:block.beacon.power_select master @a ~ ~ ~ 1 2"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "summon area_effect_cloud ~ ~ ~ {Particle:\"minecraft:dripping_obsidian_tear\",Radius:2f,Duration:300,RadiusPerTick:-0.1f}"
+									},
+									{
+										"type": "origins:execute_command",
+										"command": "power revoke @s apocalypse:refractor2/teleport_normal temprefractor"
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"comparison": "==",
+					"resource": "*:*_windup_teleport",
+					"compare_to": 0
+				}
+			]
+		}
+	}
+}

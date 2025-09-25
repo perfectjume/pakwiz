@@ -1,0 +1,1667 @@
+{
+	"type": "origins:multiple",
+	"friendcheck":{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 3,
+		"start_value": 3,
+		"hidden": true,
+		"hud_render": {
+			"should_render": false
+		}
+	},
+	"checkfriend":
+	{
+		"type": "origins:action_over_time",
+		"interval": 20,
+		"entity_action":{
+			"type": "origins:if_else_list",
+			"actions":[
+				{
+					"condition":{
+						"type": "origins:command",
+						"command": "execute if entity @e[type=minecraft:player,distance=..1]",
+						"comparison": ">",
+						"compare_to": 1
+					},
+					"action":{
+						"type": "origins:change_resource",
+						"resource": "*:*_friendcheck",
+						"change": 1
+					}
+				},
+				{
+					"condition":{
+						"type": "origins:command",
+						"command": "execute if entity @e[type=minecraft:player,distance=..1]",
+						"comparison": "<",
+						"compare_to": 2
+					},
+					"action":{
+						"type": "origins:change_resource",
+						"resource": "*:*_friendcheck",
+						"change": -1
+					}
+				}
+			]
+		}
+	},
+	"barrier_ally": {
+		"type": "origins:resource",
+		"min": 0,
+		"max": 5,
+		"start_value": 5,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 0,
+			"sprite_location": "apocalypse_origins:textures/gui/a_hexblade_storage_ally.png",
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:resource",
+						"resource": "apocalypse:hexblade/hexblade_spectating_controls_barrier_ally",
+						"comparison": ">",
+						"compare_to": 0
+					}
+				]
+			}
+		}
+	},
+	"risk_ally":{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 7,
+		"start_value": 0,
+		"hidden": true,
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 0,
+			"sprite_location": "apocalypse_origins:textures/gui/hexblade_risk_ally.png",
+			"condition": {
+				"type": "origins:resource",
+				"resource": "apocalypse:hexblade/hexblade_spectating_controls_risk_ally",
+				"comparison": ">",
+				"compare_to": 0
+			}
+		}
+	},
+	"first": {
+		"type": "origins:active_self",
+		"cooldown": 0,
+		"hud_render": {
+		  "should_render":false,
+		  "sprite_location":"origins:textures/gui/resource_bar.png",
+		  "bar_index": 4
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [ 
+				{
+				  "type": "origins:execute_command",
+				  "command": "playsound minecraft:entity.vex.ambient master @a[distance=..20] ~ ~ ~ 2 0.7"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "execute at @s run function apocalypse:hexblade_spectate_no"
+				}
+			]
+		},
+		"condition":{
+		  "type": "origins:gamemode",
+		  "gamemode": "spectator"
+		},
+		"key": {
+			"key":"key.hotbar.1",
+			"continuous": false
+		}
+	},
+	"second": {
+		"type": "origins:active_self",
+		"cooldown": 0,
+		"hud_render": {
+		  "should_render":false,
+		  "sprite_location":"origins:textures/gui/resource_bar.png",
+		  "bar_index": 4
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [ 
+				{
+				  "type": "origins:execute_command",
+				  "command": "playsound minecraft:entity.vex.ambient master @a[distance=..20] ~ ~ ~ 2 0.7"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "execute at @s run function apocalypse:hexblade_spectate_no"
+				}
+			]
+		},
+		"condition":{
+		  "type": "origins:gamemode",
+		  "gamemode": "spectator"
+		},
+		"key": {
+			"key":"key.hotbar.2",
+			"continuous": false
+		}
+	},
+	"third": {
+		"type": "origins:active_self",
+		"cooldown": 0,
+		"hud_render": {
+		  "should_render":false,
+		  "sprite_location":"origins:textures/gui/resource_bar.png",
+		  "bar_index": 4
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [ 
+				{
+				  "type": "origins:execute_command",
+				  "command": "playsound minecraft:entity.vex.ambient master @a[distance=..20] ~ ~ ~ 2 0.7"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "execute at @s run function apocalypse:hexblade_spectate_no"
+				}
+			]
+		},
+		"condition":{
+		  "type": "origins:gamemode",
+		  "gamemode": "spectator"
+		},
+		"key": {
+			"key":"key.hotbar.3",
+			"continuous": false
+		}
+	},
+	"fourth": {
+		"type": "origins:active_self",
+		"cooldown": 0,
+		"hud_render": {
+		  "should_render":false,
+		  "sprite_location":"origins:textures/gui/resource_bar.png",
+		  "bar_index": 4
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [ 
+				{
+				  "type": "origins:execute_command",
+				  "command": "playsound minecraft:entity.vex.ambient master @a[distance=..20] ~ ~ ~ 2 0.7"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "execute at @s run function apocalypse:hexblade_spectate_no"
+				}
+			]
+		},
+		"condition":{
+		  "type": "origins:gamemode",
+		  "gamemode": "spectator"
+		},
+		"key": {
+			"key":"key.hotbar.4",
+			"continuous": false
+		}
+	},
+	"fifth": {
+		"type": "origins:active_self",
+		"cooldown": 0,
+		"hud_render": {
+		  "should_render":false,
+		  "sprite_location":"origins:textures/gui/resource_bar.png",
+		  "bar_index": 4
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [ 
+				{
+				  "type": "origins:execute_command",
+				  "command": "playsound minecraft:entity.vex.ambient master @a[distance=..20] ~ ~ ~ 2 0.7"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "execute at @s run function apocalypse:hexblade_spectate_no"
+				}
+			]
+		},
+		"condition":{
+		  "type": "origins:gamemode",
+		  "gamemode": "spectator"
+		},
+		"key": {
+			"key":"key.hotbar.5",
+			"continuous": false
+		}
+	},
+	"sixth": {
+		"type": "origins:active_self",
+		"cooldown": 0,
+		"hud_render": {
+		  "should_render":false,
+		  "sprite_location":"origins:textures/gui/resource_bar.png",
+		  "bar_index": 4
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [ 
+				{
+				  "type": "origins:execute_command",
+				  "command": "playsound minecraft:entity.vex.ambient master @a[distance=..20] ~ ~ ~ 2 0.7"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "execute at @s run function apocalypse:hexblade_spectate_no"
+				}
+			]
+		},
+		"condition":{
+		  "type": "origins:gamemode",
+		  "gamemode": "spectator"
+		},
+		"key": {
+			"key":"key.hotbar.6",
+			"continuous": false
+		}
+	},
+	"seventh": {
+		"type": "origins:active_self",
+		"cooldown": 0,
+		"hud_render": {
+		  "should_render":false,
+		  "sprite_location":"origins:textures/gui/resource_bar.png",
+		  "bar_index": 4
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [ 
+				{
+				  "type": "origins:execute_command",
+				  "command": "playsound minecraft:entity.vex.ambient master @a[distance=..20] ~ ~ ~ 2 0.7"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "execute at @s run function apocalypse:hexblade_spectate_no"
+				}
+			]
+		},
+		"condition":{
+		  "type": "origins:gamemode",
+		  "gamemode": "spectator"
+		},
+		"key": {
+			"key":"key.hotbar.7",
+			"continuous": false
+		}
+	},
+	"eighth": {
+		"type": "origins:active_self",
+		"cooldown": 0,
+		"hud_render": {
+		  "should_render":false,
+		  "sprite_location":"origins:textures/gui/resource_bar.png",
+		  "bar_index": 4
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [ 
+				{
+				  "type": "origins:execute_command",
+				  "command": "playsound minecraft:entity.vex.ambient master @a[distance=..20] ~ ~ ~ 2 0.7"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "execute at @s run function apocalypse:hexblade_spectate_no"
+				}
+			]
+		},
+		"condition":{
+		  "type": "origins:gamemode",
+		  "gamemode": "spectator"
+		},
+		"key": {
+			"key":"key.hotbar.8",
+			"continuous": false
+		}
+	},
+	"ninth": {
+		"type": "origins:active_self",
+		"cooldown": 0,
+		"hud_render": {
+		  "should_render":false,
+		  "sprite_location":"origins:textures/gui/resource_bar.png",
+		  "bar_index": 4
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [ 
+				{
+				  "type": "origins:execute_command",
+				  "command": "playsound minecraft:entity.vex.ambient master @a[distance=..20] ~ ~ ~ 2 0.7"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "execute at @s run function apocalypse:hexblade_spectate_no"
+				}
+			]
+		},
+		"condition":{
+		  "type": "origins:gamemode",
+		  "gamemode": "spectator"
+		},
+		"key": {
+			"key":"key.hotbar.9",
+			"continuous": false
+		}
+	},
+	"tenth": {
+		"type": "origins:active_self",
+		"cooldown": 0,
+		"hud_render": {
+		  "should_render":false,
+		  "sprite_location":"origins:textures/gui/resource_bar.png",
+		  "bar_index": 4
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [ 
+				{
+				  "type": "origins:execute_command",
+				  "command": "playsound minecraft:entity.vex.ambient master @a[distance=..20] ~ ~ ~ 2 0.7"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "execute at @s run function apocalypse:hexblade_spectate_no"
+				}
+			]
+		},
+		"condition":{
+		  "type": "origins:gamemode",
+		  "gamemode": "spectator"
+		},
+		"key": {
+			"key":"key.sneak",
+			"continuous": false
+		}
+	},
+	"eleventh": {
+		"type": "origins:active_self",
+		"cooldown": 11,
+		"hud_render": {
+		  "should_render":false
+		},
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions":[
+				{
+					"condition":{
+						"type": "origins:resource",
+						"resource": "*:*_friendcheck",
+						"comparison": "==",
+						"compare_to": 0
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [ 
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:entity.vex.ambient master @a[distance=..20] ~ ~ ~ 2 0.7"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "execute at @s run function apocalypse:hexblade_spectate_no"
+							}
+						]
+					}
+				},
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions":
+						[
+							{
+								"type": "origins:resource",
+								"resource": "*:*_friendcheck",
+								"comparison": "!=",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:or",
+								"conditions":[
+									{
+										"type": "origins:resource",
+										"comparison": ">",
+										"resource": "apocalypse:hexblade/hexblade_primary_slashcount",
+										"compare_to": 0
+									},
+									{
+										"type": "origins:resource",
+										"resource": "apocalypse:hexblade/hexblade_primary_dash",
+										"comparison": "==",
+										"compare_to": 0
+									}
+								]
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions":[
+							{
+								"type": "origins:area_of_effect",
+								"radius": 1,
+								"bientity_action":{
+									"type": "origins:target_action",
+									"action":{
+										"type": "origins:change_resource",
+										"resource": "apocalypse:hexblade/hexfriend_powers_direction",
+										"change": 3,
+										"operation": "set"
+									}
+								}
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_primary_slashcount",
+								"change": -1
+							},
+							{
+								"type": "origins:trigger_cooldown",
+								"power": "apocalypse:hexblade/hexblade_primary_grayscale"
+							},
+							{
+								"type": "origins:if_else_list",
+								"actions": [
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": ">=",
+													"compare_to": 250
+												},
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": "<",
+													"compare_to": 999
+												}
+											]
+										},
+										"action":{
+											"type": "origins:delay",
+											"ticks": 1,
+											"action":{
+												"type": "origins:change_resource",
+												"resource": "apocalypse:hexblade/hexblade_primary_dash",
+												"change": 60,
+												"operation": "set"
+											}
+										}
+									},
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": ">=",
+													"compare_to": 999
+												},
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": "<",
+													"compare_to": 1999
+												}
+											]
+										},
+										"action":{
+											"type": "origins:delay",
+											"ticks": 1,
+											"action":{
+												"type": "origins:change_resource",
+												"resource": "apocalypse:hexblade/hexblade_primary_dash",
+												"change": 120,
+												"operation": "set"
+											}
+										}
+									},
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": ">=",
+													"compare_to": 1999
+												},
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": "<=",
+													"compare_to": 4000
+												}
+											]
+										},
+										"action":{
+											"type": "origins:delay",
+											"ticks": 1,
+											"action":{
+												"type": "origins:change_resource",
+												"resource": "apocalypse:hexblade/hexblade_primary_dash",
+												"change": 180,
+												"operation": "set"
+											}
+										}
+									}
+								]
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition":{
+		  "type": "origins:gamemode",
+		  "gamemode": "spectator"
+		},
+		"key": {
+			"key":"key.left",
+			"continuous": false
+		}
+	},
+	"twelfth": {
+		"type": "origins:active_self",
+		"cooldown": 11,
+		"hud_render": {
+		  "should_render":false
+		},
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions":[
+				{
+					"condition":{
+						"type": "origins:resource",
+						"resource": "*:*_friendcheck",
+						"comparison": "==",
+						"compare_to": 0
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [ 
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:entity.vex.ambient master @a[distance=..20] ~ ~ ~ 2 0.7"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "execute at @s run function apocalypse:hexblade_spectate_no"
+							}
+						]
+					}
+				},
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions":
+						[
+							{
+								"type": "origins:resource",
+								"resource": "*:*_friendcheck",
+								"comparison": "!=",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:or",
+								"conditions":[
+									{
+										"type": "origins:resource",
+										"comparison": ">",
+										"resource": "apocalypse:hexblade/hexblade_primary_slashcount",
+										"compare_to": 0
+									},
+									{
+										"type": "origins:resource",
+										"resource": "apocalypse:hexblade/hexblade_primary_dash",
+										"comparison": "==",
+										"compare_to": 0
+									}
+								]
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions":[
+							{
+								"type": "origins:area_of_effect",
+								"radius": 1,
+								"bientity_action":{
+									"type": "origins:target_action",
+									"action":{
+										"type": "origins:change_resource",
+										"resource": "apocalypse:hexblade/hexfriend_powers_direction",
+										"change": 4,
+										"operation": "set"
+									}
+								}
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_primary_slashcount",
+								"change": -1
+							},
+							{
+								"type": "origins:trigger_cooldown",
+								"power": "apocalypse:hexblade/hexblade_primary_grayscale"
+							},
+							{
+								"type": "origins:if_else_list",
+								"actions": [
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": ">=",
+													"compare_to": 250
+												},
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": "<",
+													"compare_to": 999
+												}
+											]
+										},
+										"action":{
+											"type": "origins:delay",
+											"ticks": 1,
+											"action":{
+												"type": "origins:change_resource",
+												"resource": "apocalypse:hexblade/hexblade_primary_dash",
+												"change": 60,
+												"operation": "set"
+											}
+										}
+									},
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": ">=",
+													"compare_to": 999
+												},
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": "<",
+													"compare_to": 1999
+												}
+											]
+										},
+										"action":{
+											"type": "origins:delay",
+											"ticks": 1,
+											"action":{
+												"type": "origins:change_resource",
+												"resource": "apocalypse:hexblade/hexblade_primary_dash",
+												"change": 120,
+												"operation": "set"
+											}
+										}
+									},
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": ">=",
+													"compare_to": 1999
+												},
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": "<=",
+													"compare_to": 4000
+												}
+											]
+										},
+										"action":{
+											"type": "origins:delay",
+											"ticks": 1,
+											"action":{
+												"type": "origins:change_resource",
+												"resource": "apocalypse:hexblade/hexblade_primary_dash",
+												"change": 180,
+												"operation": "set"
+											}
+										}
+									}
+								]
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition":{
+		  "type": "origins:gamemode",
+		  "gamemode": "spectator"
+		},
+		"key": {
+			"key":"key.right",
+			"continuous": false
+		}
+	},
+	"thirteenth": {
+		"type": "origins:active_self",
+		"cooldown": 11,
+		"hud_render": {
+		  "should_render":false
+		},
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions":[
+				{
+					"condition":{
+								"type": "origins:resource",
+								"resource": "*:*_friendcheck",
+								"comparison": "==",
+								"compare_to": 0
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [ 
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:entity.vex.ambient master @a[distance=..20] ~ ~ ~ 2 0.7"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "execute at @s run function apocalypse:hexblade_spectate_no"
+							}
+						]
+					}
+				},
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions":
+						[
+							{
+								"type": "origins:resource",
+								"resource": "*:*_friendcheck",
+								"comparison": "!=",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:or",
+								"conditions":[
+									{
+										"type": "origins:resource",
+										"comparison": ">",
+										"resource": "apocalypse:hexblade/hexblade_primary_slashcount",
+										"compare_to": 0
+									},
+									{
+										"type": "origins:resource",
+										"resource": "apocalypse:hexblade/hexblade_primary_dash",
+										"comparison": "==",
+										"compare_to": 0
+									}
+								]
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions":[
+							{
+								"type": "origins:area_of_effect",
+								"radius": 1,
+								"bientity_action":{
+									"type": "origins:target_action",
+									"action":{
+										"type": "origins:change_resource",
+										"resource": "apocalypse:hexblade/hexfriend_powers_direction",
+										"change": 1,
+										"operation": "set"
+									}
+								}
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_primary_slashcount",
+								"change": -1
+							},
+							{
+								"type": "origins:trigger_cooldown",
+								"power": "apocalypse:hexblade/hexblade_primary_grayscale"
+							},
+							{
+								"type": "origins:if_else_list",
+								"actions": [
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": ">=",
+													"compare_to": 250
+												},
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": "<",
+													"compare_to": 999
+												}
+											]
+										},
+										"action":{
+											"type": "origins:delay",
+											"ticks": 1,
+											"action":{
+												"type": "origins:change_resource",
+												"resource": "apocalypse:hexblade/hexblade_primary_dash",
+												"change": 60,
+												"operation": "set"
+											}
+										}
+									},
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": ">=",
+													"compare_to": 999
+												},
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": "<",
+													"compare_to": 1999
+												}
+											]
+										},
+										"action":{
+											"type": "origins:delay",
+											"ticks": 1,
+											"action":{
+												"type": "origins:change_resource",
+												"resource": "apocalypse:hexblade/hexblade_primary_dash",
+												"change": 120,
+												"operation": "set"
+											}
+										}
+									},
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": ">=",
+													"compare_to": 1999
+												},
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": "<=",
+													"compare_to": 4000
+												}
+											]
+										},
+										"action":{
+											"type": "origins:delay",
+											"ticks": 1,
+											"action":{
+												"type": "origins:change_resource",
+												"resource": "apocalypse:hexblade/hexblade_primary_dash",
+												"change": 180,
+												"operation": "set"
+											}
+										}
+									}
+								]
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition":{
+		  "type": "origins:gamemode",
+		  "gamemode": "spectator"
+		},
+		"key": {
+			"key":"key.forward",
+			"continuous": false
+		}
+	},
+	"fourteenth": {
+		"type": "origins:active_self",
+		"cooldown": 11,
+		"hud_render": {
+		  "should_render":false
+		},
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions":[
+				{
+					"condition":{
+						"type": "origins:resource",
+						"resource": "*:*_friendcheck",
+						"comparison": "==",
+						"compare_to": 0
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [ 
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:entity.vex.ambient master @a[distance=..20] ~ ~ ~ 2 0.7"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "execute at @s run function apocalypse:hexblade_spectate_no"
+							}
+						]
+					}
+				},
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions":
+						[
+							{
+								"type": "origins:resource",
+								"resource": "*:*_friendcheck",
+								"comparison": "!=",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:or",
+								"conditions":[
+									{
+										"type": "origins:resource",
+										"comparison": ">",
+										"resource": "apocalypse:hexblade/hexblade_primary_slashcount",
+										"compare_to": 0
+									},
+									{
+										"type": "origins:resource",
+										"resource": "apocalypse:hexblade/hexblade_primary_dash",
+										"comparison": "==",
+										"compare_to": 0
+									}
+								]
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions":[
+							{
+								"type": "origins:area_of_effect",
+								"radius": 1,
+								"bientity_action":{
+									"type": "origins:target_action",
+									"action":{
+										"type": "origins:change_resource",
+										"resource": "apocalypse:hexblade/hexfriend_powers_direction",
+										"change": 2,
+										"operation": "set"
+									}
+								}
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_primary_slashcount",
+								"change": -1
+							},
+							{
+								"type": "origins:trigger_cooldown",
+								"power": "apocalypse:hexblade/hexblade_primary_grayscale"
+							},
+							{
+								"type": "origins:if_else_list",
+								"actions": [
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": ">=",
+													"compare_to": 250
+												},
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": "<",
+													"compare_to": 999
+												}
+											]
+										},
+										"action":{
+											"type": "origins:delay",
+											"ticks": 1,
+											"action":{
+												"type": "origins:change_resource",
+												"resource": "apocalypse:hexblade/hexblade_primary_dash",
+												"change": 60,
+												"operation": "set"
+											}
+										}
+									},
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": ">=",
+													"compare_to": 999
+												},
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": "<",
+													"compare_to": 1999
+												}
+											]
+										},
+										"action":{
+											"type": "origins:delay",
+											"ticks": 1,
+											"action":{
+												"type": "origins:change_resource",
+												"resource": "apocalypse:hexblade/hexblade_primary_dash",
+												"change": 120,
+												"operation": "set"
+											}
+										}
+									},
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": ">=",
+													"compare_to": 1999
+												},
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": "<=",
+													"compare_to": 4000
+												}
+											]
+										},
+										"action":{
+											"type": "origins:delay",
+											"ticks": 1,
+											"action":{
+												"type": "origins:change_resource",
+												"resource": "apocalypse:hexblade/hexblade_primary_dash",
+												"change": 180,
+												"operation": "set"
+											}
+										}
+									}
+								]
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition":{
+		  "type": "origins:gamemode",
+		  "gamemode": "spectator"
+		},
+		"key": {
+			"key":"key.back",
+			"continuous": false
+		}
+	},
+	"fifteenth": {
+		"type": "origins:active_self",
+		"cooldown": 11,
+		"hud_render": {
+		  "should_render":false
+		},
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions":[
+				{
+					"condition":{
+						"type": "origins:resource",
+						"resource": "*:*_friendcheck",
+						"comparison": "==",
+						"compare_to": 0
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [ 
+							{
+							  "type": "origins:execute_command",
+							  "command": "playsound minecraft:entity.vex.ambient master @a[distance=..20] ~ ~ ~ 2 0.7"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "execute at @s run function apocalypse:hexblade_spectate_no"
+							}
+						]
+					}
+				},
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions":
+						[
+							{
+								"type": "origins:resource",
+								"resource": "*:*_friendcheck",
+								"comparison": "!=",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:or",
+								"conditions":[
+									{
+										"type": "origins:resource",
+										"comparison": ">",
+										"resource": "apocalypse:hexblade/hexblade_primary_slashcount",
+										"compare_to": 0
+									},
+									{
+										"type": "origins:resource",
+										"resource": "apocalypse:hexblade/hexblade_primary_dash",
+										"comparison": "==",
+										"compare_to": 0
+									}
+								]
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions":[
+							{
+								"type": "origins:area_of_effect",
+								"radius": 1,
+								"bientity_action":{
+									"type": "origins:target_action",
+									"action":{
+										"type": "origins:change_resource",
+										"resource": "apocalypse:hexblade/hexfriend_powers_direction",
+										"change": 5,
+										"operation": "set"
+									}
+								}
+							},
+							{
+								"type": "origins:change_resource",
+								"resource": "apocalypse:hexblade/hexblade_primary_slashcount",
+								"change": -1
+							},
+							{
+								"type": "origins:trigger_cooldown",
+								"power": "apocalypse:hexblade/hexblade_primary_grayscale"
+							},
+							{
+								"type": "origins:if_else_list",
+								"actions": [
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": ">=",
+													"compare_to": 250
+												},
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": "<",
+													"compare_to": 999
+												}
+											]
+										},
+										"action":{
+											"type": "origins:delay",
+											"ticks": 1,
+											"action":{
+												"type": "origins:change_resource",
+												"resource": "apocalypse:hexblade/hexblade_primary_dash",
+												"change": 60,
+												"operation": "set"
+											}
+										}
+									},
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": ">=",
+													"compare_to": 999
+												},
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": "<",
+													"compare_to": 1999
+												}
+											]
+										},
+										"action":{
+											"type": "origins:delay",
+											"ticks": 1,
+											"action":{
+												"type": "origins:change_resource",
+												"resource": "apocalypse:hexblade/hexblade_primary_dash",
+												"change": 120,
+												"operation": "set"
+											}
+										}
+									},
+									{
+										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": ">=",
+													"compare_to": 1999
+												},
+												{
+													"type": "origins:resource",
+													"resource": "apocalypse:hexblade/hexblade_resource_storage",
+													"comparison": "<=",
+													"compare_to": 4000
+												}
+											]
+										},
+										"action":{
+											"type": "origins:delay",
+											"ticks": 1,
+											"action":{
+												"type": "origins:change_resource",
+												"resource": "apocalypse:hexblade/hexblade_primary_dash",
+												"change": 180,
+												"operation": "set"
+											}
+										}
+									}
+								]
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition":{
+		  "type": "origins:gamemode",
+		  "gamemode": "spectator"
+		},
+		"key": {
+			"key":"key.jump",
+			"continuous": false
+		}
+	},
+	"sixteenth": {
+		"type": "origins:active_self",
+		"cooldown": 0,
+		"hud_render": {
+		  "should_render":false,
+		  "sprite_location":"origins:textures/gui/resource_bar.png",
+		  "bar_index": 4
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [ 
+				{
+				  "type": "origins:execute_command",
+				  "command": "playsound minecraft:entity.vex.ambient master @a[distance=..20] ~ ~ ~ 2 0.7"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "tellraw @s {\"text\":\"Trying to find your ally!\",\"color\":\"dark_purple\"}"
+				},
+				{
+				  "type": "origins:execute_command",
+				  "command": "function apocalypse:hexblade_spectatetrigger_second"
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 5,
+					"action":{
+						"type": "origins:execute_command",
+						"command": "power grant @a[tag=!hexblade,distance=..0.5,limit=1,sort=nearest] apocalypse:hexblade/hexfriend_powers hexblade_bars"
+					}
+				}
+			]
+		},
+		"condition":
+		{
+			"type": "origins:and",
+			"conditions":
+			[
+				{
+				  "type": "origins:gamemode",
+				  "gamemode": "spectator"
+				}
+			]
+		},
+		"key": {
+			"key":"key.use",
+			"continuous": false
+		}
+	},
+	"seventeenth": {
+		"type": "origins:active_self",
+		"cooldown": 0,
+		"hud_render": {
+		  "should_render":false,
+		  "sprite_location":"origins:textures/gui/resource_bar.png",
+		  "bar_index": 4
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [ 
+				{
+				  "type": "origins:execute_command",
+				  "command": "playsound minecraft:entity.vex.ambient master @a[distance=..20] ~ ~ ~ 2 0.7"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "execute at @s run function apocalypse:hexblade_spectate_no"
+				}
+			]
+		},
+		"condition":
+		{
+			"type": "origins:and",
+			"conditions":
+			[
+				{
+				  "type": "origins:gamemode",
+				  "gamemode": "spectator"
+				}
+			]
+		},
+		"key": {
+			"key":"key.attack",
+			"continuous": false
+		}
+	},
+	"pass_barrier": {
+		"type": "origins:active_self",
+		"cooldown": 60,
+		"hud_render": {
+		  "should_render":false,
+		  "sprite_location":"origins:textures/gui/resource_bar.png",
+		  "bar_index": 4
+		},
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": 		
+					{
+						"type": "origins:and",
+						"conditions":
+						[
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"comparison": ">=",
+								"compare_to": 2
+							}
+						]
+					},
+					"action": 
+					{
+						"type": "origins:and",
+						"actions": [ 
+							{
+							  "type": "origins:execute_command",
+							  "command": "resource change @s apocalypse:hexblade/hexblade_resource_souls -2"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @a[distance=..1,tag=!hexblade,limit=1,sort=nearest] apocalypse:hexblade/hexfriend_powers_barrier 1"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:hexblade/hexblade_spectating_controls_barrier_ally 1"
+							}
+						]
+					}
+				},
+				{
+					"condition": 		
+					{
+						"type": "origins:and",
+						"conditions":
+						[
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"comparison": "==",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_risk",
+								"comparison": ">=",
+								"compare_to": 3
+							}
+						]
+					},
+					"action": 
+					{
+						"type": "origins:and",
+						"actions": [ 
+							{
+							  "type": "origins:execute_command",
+							  "command": "resource change @s apocalypse:hexblade/hexblade_resource_risk -3"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @a[distance=..1,tag=!hexblade,limit=1,sort=nearest] apocalypse:hexblade/hexfriend_powers_barrier 1"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:hexblade/hexblade_spectating_controls_barrier_ally 1"
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition":
+		{
+			"type": "origins:and",
+			"conditions":
+			[
+				{
+				  "type": "origins:gamemode",
+				  "gamemode": "spectator"
+				}
+			]
+		},
+		"key": {
+			"key":"key.origins.secondary_active",
+			"continuous": false
+		}
+	},
+	"pass_risk": 
+	{
+		"type": "origins:active_self",
+		"cooldown": 60,
+		"hud_render": {
+			"should_render":false
+		},
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": 		
+					{
+						"type": "origins:and",
+						"conditions":
+						[
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_risk",
+								"comparison": ">=",
+								"compare_to": 1
+							}
+						]
+					},
+					"action": 
+					{
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:hexblade/hexblade_resource_risk -1"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @a[distance=..1,tag=!hexblade,limit=1,sort=nearest] apocalypse:hexblade/hexfriend_powers_risk 1"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:hexblade/hexblade_spectating_controls_risk_ally 1"
+							}
+						]
+					}
+				},
+				{
+					"condition": 		
+					{
+						"type": "origins:and",
+						"conditions":
+						[
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_risk",
+								"comparison": "==",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:resource",
+								"resource": "apocalypse:hexblade/hexblade_resource_souls",
+								"comparison": ">=",
+								"compare_to": 4
+							}
+						]
+					},
+					"action": 
+					{
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:hexblade/hexblade_resource_souls -4"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @a[distance=..1,tag=!hexblade,limit=1,sort=nearest] apocalypse:hexblade/hexfriend_powers_risk 1"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "resource change @s apocalypse:hexblade/hexblade_spectating_controls_risk_ally 1"
+							}
+						]
+					}
+				}
+			]
+		},
+		"condition":
+		{
+			"type": "origins:and",
+			"conditions":
+			[
+				{
+				  "type": "origins:gamemode",
+				  "gamemode": "spectator"
+				}
+			]
+		},
+		"key": {
+			"key":"key.origins.primary_active",
+			"continuous": false
+		}
+	},
+	"grant":
+	{
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "tellraw @s {\"text\":\"Assisting your ally!\",\"color\":\"dark_purple\"}"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "tellraw @s {\"text\":\"Right-click if you are not inside your ally to try again.\",\"color\":\"red\"}"
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 1,
+					"action":{
+						"type": "origins:execute_command",
+						"command": "power grant @a[tag=!hexblade,distance=..0.5,limit=1,sort=nearest] apocalypse:hexblade/hexfriend_powers hexblade_bars"
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 2,
+					"action":{
+						"type": "origins:execute_command",
+						"command": "power revoke @s apocalypse:hexblade/hexblade_spectating_controls_grant hexblade_bars"
+					}
+				}
+			]
+		},
+		"interval": 3
+	},
+	"hidden": true
+}

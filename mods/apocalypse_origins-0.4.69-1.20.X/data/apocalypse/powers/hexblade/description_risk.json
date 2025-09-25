@@ -1,0 +1,5 @@
+{
+	"type": "origins:simple",
+	"name": "Risk",
+	"description": "As your end approaches, your grudge for all that’s stronger empowers you.\n \nIf your [Soul Barrier] is at 5 or less souls, you gain a damage up over time. Every time you kill a mob, risk is reduced by 1 stack. The final stack of risk makes you deal 50% additional damage but you lose 1 stack of risk when you hit a mob with it."
+}

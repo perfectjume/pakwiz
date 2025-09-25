@@ -1,0 +1,1 @@
+give @s minecraft:suspicious_stew{display:{Lore:['[{"text":"Is it radioactive?","italic":false}]']},Effects:[{EffectId:24b,EffectDuration:600}]} 1

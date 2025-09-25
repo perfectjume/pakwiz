@@ -1,0 +1,13 @@
+name = "NiftyCarts"
+filename = "niftycarts-20.1.4-hotfix.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "1576d80d6a6dafbfc446065d8928e969544d224a"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 6962653
+project-id = 900093

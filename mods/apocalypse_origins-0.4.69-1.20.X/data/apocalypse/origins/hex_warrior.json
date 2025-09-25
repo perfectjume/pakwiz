@@ -1,0 +1,15 @@
+{
+	"powers": [
+		"apocalypse:classes/hex_warrior"
+	],
+	"icon": {
+		"item": "minecraft:wooden_sword",
+		"tag": "{CustomModelData:1}"
+	},
+	"unchoosable": false,
+	"order": 10,
+	"impact": 3,
+  "name": "Hex Warrior",
+  "description": "An ally of the hexblade, versed in the art of using the most humble weapons with great results."
+}
+//Umena says hi

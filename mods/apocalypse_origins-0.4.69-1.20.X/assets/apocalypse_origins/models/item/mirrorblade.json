@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:item/wooden_sword",
+    "textures": {
+        "layer0": "apocalypse_origins:item/mirrorblade"
+    }
+}

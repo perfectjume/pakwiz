@@ -1,0 +1,1420 @@
+{
+	"type": "origins:multiple",
+	"blockusing": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false
+		},
+		"max_action":{
+			"type": "origins:delay",
+			"ticks": 1,
+			"action":{
+				"type": "origins:change_resource",
+				"resource": "*:*_blockusing",
+				"operation": "set",
+				"change": 0
+			}
+		}
+	},
+	"no_see_refractor":
+	{
+		"type": "origins:prevent_entity_render",
+		"entity_condition": {
+			"type": "origins:or",
+			"conditions":[
+				{
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:origin",
+							"origin": "apocalypse:refractor",
+							"layer": "origins:origin"
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "==",
+									"resource": "apocalypse:refractor2/passives_dashing",
+									"compare_to": 1
+								},
+								{
+									"type": "origins:resource",
+									"comparison": "==",
+									"resource": "apocalypse:refractor/secondary_veiled",
+									"compare_to": 1
+								},
+								{
+									"type": "origins:status_effect",
+									"effect": "minecraft:invisibility",
+									"min_amplifier": 0
+								}
+							]
+						}
+					]
+				},
+				{
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:origin",
+							"origin": "apocalypse:myconoid_desert",
+							"layer": "origins:origin"
+						},
+						{
+							"type": "origins:or",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"comparison": "==",
+									"resource": "apocalypse:myconoids/cactus_passives_invis_resource",
+									"compare_to": 0
+								},
+								{
+									"type": "origins:status_effect",
+									"effect": "minecraft:invisibility",
+									"min_amplifier": 0
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	},
+	"warpx": 
+	{
+		"type": "origins:resource",
+		"min": -20,
+		"max": 20,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false,
+			"sprite_location":"apocalypse_origins:textures/gui/refractor_mirrors.png"
+		}
+	},
+	"bufferwarpx": 
+	{
+		"type": "origins:resource",
+		"min": -20,
+		"max": 20,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse_origins:textures/gui/refractor_mirrors.png",
+			"bar_index": 6,
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:or",
+						"conditions": [
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient":
+									{
+										"item": "apocalypse_origins:regulator"
+									}
+								}
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient":
+									{
+										"item": "apocalypse_origins:regulator"
+									}
+								}
+							}
+						]
+					},
+					{
+						"type": "origins:and",
+						"inverted": true,
+						"conditions": [
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient":
+									{
+										"item": "apocalypse_origins:return_shard"
+									}
+								}
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient":
+									{
+										"item": "apocalypse_origins:return_shard"
+									}
+								}
+							}
+						]
+					}
+				]
+			}
+		},
+		"max_action":{
+			"type": "origins:execute_command",
+			"command": "tellraw @s {\"text\":\"Maximum positive X reached!\",\"color\":\"dark_aqua\"}"
+		},
+		"min_action":{
+			"type": "origins:execute_command",
+			"command": "tellraw @s {\"text\":\"Maximum negative X reached!\",\"color\":\"dark_aqua\"}"
+		}
+	},
+	"revwarpx": 
+	{
+		"type": "origins:resource",
+		"min": -20,
+		"max": 20,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse_origins:textures/gui/refractor_mirrors.png",
+			"bar_index": 9,
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:or",
+						"conditions": [
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient":
+									{
+										"item": "apocalypse_origins:return_shard"
+									}
+								}
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient":
+									{
+										"item": "apocalypse_origins:return_shard"
+									}
+								}
+							}
+						]
+					},
+					{
+						"type": "origins:and",
+						"inverted": true,
+						"conditions": [
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient":
+									{
+										"item": "apocalypse_origins:regulator"
+									}
+								}
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient":
+									{
+										"item": "apocalypse_origins:regulator"
+									}
+								}
+							}
+						]
+					}
+				]
+			}
+		}
+	},
+	"warpy": 
+	{
+		"type": "origins:resource",
+		"min": -6,
+		"max": 32,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false
+		}
+	},
+	"bufferwarpy": 
+	{
+		"type": "origins:resource",
+		"min": -6,
+		"max": 32,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse_origins:textures/gui/refractor_mirrors.png",
+			"bar_index": 7,
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:or",
+						"conditions": [
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient":
+									{
+										"item": "apocalypse_origins:regulator"
+									}
+								}
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient":
+									{
+										"item": "apocalypse_origins:regulator"
+									}
+								}
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient":
+									{
+										"item": "apocalypse_origins:return_shard"
+									}
+								}
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient":
+									{
+										"item": "apocalypse_origins:return_shard"
+									}
+								}
+							}
+						]
+					}
+				]
+			}
+		},
+		"max_action":{
+			"type": "origins:execute_command",
+			"command": "tellraw @s {\"text\":\"Maximum positive Y reached!\",\"color\":\"dark_aqua\"}"
+		},
+		"min_action":{
+			"type": "origins:execute_command",
+			"command": "tellraw @s {\"text\":\"Maximum negative Y reached!\",\"color\":\"dark_aqua\"}"
+		}
+	},
+	"revwarpy": 
+	{
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false
+		}
+	},
+	"warpz": 
+	{
+		"type": "origins:resource",
+		"min": -20,
+		"max": 20,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false
+		}
+	},
+	"bufferwarpz": 
+	{
+		"type": "origins:resource",
+		"min": -20,
+		"max": 20,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse_origins:textures/gui/refractor_mirrors.png",
+			"bar_index": 8,
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:or",
+						"conditions": [
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient":
+									{
+										"item": "apocalypse_origins:regulator"
+									}
+								}
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient":
+									{
+										"item": "apocalypse_origins:regulator"
+									}
+								}
+							}
+						]
+					},
+					{
+						"type": "origins:and",
+						"inverted": true,
+						"conditions": [
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient":
+									{
+										"item": "apocalypse_origins:return_shard"
+									}
+								}
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient":
+									{
+										"item": "apocalypse_origins:return_shard"
+									}
+								}
+							}
+						]
+					}
+				]
+			}
+		},
+		"max_action":{
+			"type": "origins:execute_command",
+			"command": "tellraw @s {\"text\":\"Maximum positive Z reached!\",\"color\":\"dark_aqua\"}"
+		},
+		"min_action":{
+			"type": "origins:execute_command",
+			"command": "tellraw @s {\"text\":\"Maximum negative Z reached!\",\"color\":\"dark_aqua\"}"
+		}
+	},
+	"revwarpz": 
+	{
+		"type": "origins:resource",
+		"min": -20,
+		"max": 20,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": true,
+			"sprite_location":"apocalypse_origins:textures/gui/refractor_mirrors.png",
+			"bar_index": 11,
+			"condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:or",
+						"conditions": [
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient":
+									{
+										"item": "apocalypse_origins:return_shard"
+									}
+								}
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient":
+									{
+										"item": "apocalypse_origins:return_shard"
+									}
+								}
+							}
+						]
+					},
+					{
+						"type": "origins:and",
+						"inverted": true,
+						"conditions": [
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient":
+									{
+										"item": "apocalypse_origins:regulator"
+									}
+								}
+							},
+							{
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient":
+									{
+										"item": "apocalypse_origins:regulator"
+									}
+								}
+							}
+						]
+					}
+				]
+			}
+		}
+	},
+	"use_nether_shard":
+	{
+		"type": "origins:action_on_block_use",
+		"entity_action":{
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_blockusing",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:dimension",
+								"dimension": "minecraft:the_nether",
+								"inverted": true
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_blockusing",
+								"change": 1
+							},
+							{
+								"type": "origins:if_else_list",
+								"actions": [
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "==",
+											"resource": "apocalypse:refractor2/passives_tpmodea",
+											"compare_to": 1
+										},
+										"action":{
+											"type": "origins:execute_command",
+											"command": "execute as @e[distance=..2] run execute in minecraft:the_nether run tp @s ~ ~ ~"
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:or",
+											"conditions": [
+												{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:refractor2/passives_tpmodea",
+													"compare_to": 0
+												},
+												{
+													"type": "origins:origin",
+													"origin": "apocalypse:refractor",
+													"layer": "origins:origin",
+													"inverted": true
+												}
+											]
+										},
+										"action":{
+											"type": "origins:execute_command",
+											"command": "execute in minecraft:the_nether run tp @s ~ ~ ~"
+										}
+									}
+								]
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "effect clear @s"
+							},
+							{
+								"type": "origins:extinguish"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.beacon.power_select master @a ~ ~ ~ 1 2"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "summon area_effect_cloud ~ ~ ~ {Particle:\"minecraft:dripping_obsidian_tear\",Radius:2f,Duration:300,RadiusPerTick:-0.1f}"
+							}
+						]
+					}
+				}
+			]
+		},
+		"item_condition": {
+			"type": "origins:empty"
+		},
+		"block_condition":{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:block",
+					"block": "apocalypse_origins:world_hell"
+				},
+				{
+					"type": "origins:height",
+					"comparison": ">=",
+					"compare_to": 5
+				}
+			]
+		}
+	},
+	"fail_nether_shard":
+	{
+		"type": "origins:action_on_block_use",
+		"entity_action":{
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition":{
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "*:*_blockusing",
+						"compare_to": 0
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_blockusing",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.beacon.deactivate master @a ~ ~ ~ 0.5 2"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "tellraw @s {\"text\":\"You must be above Y=5 and not in the Nether to use this block!\",\"color\":\"dark_red\"}"
+							}
+						]
+					}
+				}
+			]
+		},
+		"item_condition": {
+			"type": "origins:empty"
+		},
+		"block_condition":{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:block",
+					"block": "apocalypse_origins:world_hell"
+				},
+				{
+					"type": "origins:height",
+					"comparison": "<",
+					"compare_to": 5
+				}
+			]
+		}
+	},
+	"use_end_shard":
+	{
+		"type": "origins:action_on_block_use",
+		"entity_action":{
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_blockusing",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:dimension",
+								"dimension": "minecraft:the_end",
+								"inverted": true
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_blockusing",
+								"change": 1
+							},
+							{
+								"type": "origins:if_else_list",
+								"actions": [
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "==",
+											"resource": "apocalypse:refractor2/passives_tpmodea",
+											"compare_to": 1
+										},
+										"action":{
+											"type": "origins:execute_command",
+											"command": "execute as @e[distance=..2] run execute in minecraft:the_end run tp @s ~ ~ ~"
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:or",
+											"conditions": [
+												{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:refractor2/passives_tpmodea",
+													"compare_to": 0
+												},
+												{
+													"type": "origins:origin",
+													"origin": "apocalypse:refractor",
+													"layer": "origins:origin",
+													"inverted": true
+												}
+											]
+										},
+										"action":{
+											"type": "origins:execute_command",
+											"command": "execute in minecraft:the_end run tp @s ~ ~ ~"
+										}
+									}
+								]
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "effect clear @s"
+							},
+							{
+								"type": "origins:extinguish"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.beacon.power_select master @a ~ ~ ~ 1 2"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "summon area_effect_cloud ~ ~ ~ {Particle:\"minecraft:dripping_obsidian_tear\",Radius:2f,Duration:300,RadiusPerTick:-0.1f}"
+							}
+						]
+					}
+				}
+			]
+		},
+		"item_condition": {
+			"type": "origins:empty"
+		},
+		"block_condition":{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:block",
+					"block": "apocalypse_origins:world_end"
+				},
+				{
+					"type": "origins:height",
+					"comparison": ">=",
+					"compare_to": 5
+				}
+			]
+		}
+	},
+	"fail_end_shard":
+	{
+		"type": "origins:action_on_block_use",
+		"entity_action":{
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition":{
+						"type": "origins:resource",
+						"comparison": "==",
+						"resource": "*:*_blockusing",
+						"compare_to": 0
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_blockusing",
+								"change": 1
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.beacon.deactivate master @a ~ ~ ~ 0.5 2"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "tellraw @s {\"text\":\"You must be above Y=5 and not in the End to use this block!\",\"color\":\"dark_red\"}"
+							}
+						]
+					}
+				}
+			]
+		},
+		"item_condition": {
+			"type": "origins:empty"
+		},
+		"block_condition":{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:block",
+					"block": "apocalypse_origins:world_end"
+				},
+				{
+					"type": "origins:height",
+					"comparison": "<",
+					"compare_to": 5
+				}
+			]
+		}
+	},
+	"use_overworld_shard":
+	{
+		"type": "origins:action_on_block_use",
+		"entity_action":{
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition":{
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"comparison": "==",
+								"resource": "*:*_blockusing",
+								"compare_to": 0
+							},
+							{
+								"type": "origins:dimension",
+								"dimension": "minecraft:overworld",
+								"inverted": true
+							}
+						]
+					},
+					"action":{
+						"type": "origins:and",
+						"actions": [ 
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_blockusing",
+								"change": 1
+							},
+							{
+								"type": "origins:if_else_list",
+								"actions": [
+									{
+										"condition":{
+											"type": "origins:resource",
+											"comparison": "==",
+											"resource": "apocalypse:refractor2/passives_tpmodea",
+											"compare_to": 1
+										},
+										"action":{
+											"type": "origins:execute_command",
+											"command": "execute as @e[distance=..2] run execute in minecraft:overworld run tp @s ~ ~ ~"
+										}
+									},
+									{
+										"condition":{
+											"type": "origins:or",
+											"conditions": [
+												{
+													"type": "origins:resource",
+													"comparison": "==",
+													"resource": "apocalypse:refractor2/passives_tpmodea",
+													"compare_to": 0
+												},
+												{
+													"type": "origins:origin",
+													"origin": "apocalypse:refractor",
+													"layer": "origins:origin",
+													"inverted": true
+												}
+											]
+										},
+										"action":{
+											"type": "origins:execute_command",
+											"command": "execute in minecraft:overworld run tp @s ~ ~ ~"
+										}
+									}
+								]
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "effect clear @s"
+							},
+							{
+								"type": "origins:extinguish"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "playsound minecraft:block.beacon.power_select master @a ~ ~ ~ 1 2"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "summon area_effect_cloud ~ ~ ~ {Particle:\"minecraft:dripping_obsidian_tear\",Radius:2f,Duration:300,RadiusPerTick:-0.1f}"
+							}
+						]
+					}
+				}
+			]
+		},
+		"item_condition": {
+			"type": "origins:empty"
+		},
+		"block_condition":{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:block",
+					"block": "apocalypse_origins:world"
+				},
+				{
+					"type": "origins:height",
+					"comparison": ">=",
+					"compare_to": -60
+				}
+			]
+		}
+	},
+	"return_shard":
+	{
+		"type": "origins:recipe",
+		"recipe": {
+			"type": "minecraft:crafting_shaped",
+			"id": "apocalypse_origins:return_shard",
+			"pattern": [
+				" # ",
+				"^#^",
+				" # "
+			],
+			"key":{
+				"#": {
+					"item": "minecraft:amethyst_shard"
+				},
+				"^": {
+					"item": "minecraft:gold_nugget"
+				}
+			},
+			"result":{
+				"item": "apocalypse_origins:return_shard"
+			}
+		}
+	},
+	"right_click_return":
+	{
+		"type": "origins:active_self",
+		"cooldown": 20,
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action":{
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:block.respawn_anchor.deplete master @a ~ ~ ~ 1 2"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "tp @s ~ 320 ~"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:block.respawn_anchor.deplete master @a ~ ~ ~ 1 2"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "resource set @s apocalypse:refractor2/passives_bouncing 0"
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient":
+									{
+										"item": "apocalypse_origins:return_shard"
+									}
+								}
+							},
+							"action":{
+								"type": "origins:equipped_item_action",
+								"equipment_slot": "mainhand",
+								"action": {
+									"type": "origins:consume",
+									"amount": 1
+								}
+							}
+						},
+						{
+							"condition":{
+								"type": "origins:equipped_item",
+								"equipment_slot": "offhand",
+								"item_condition":
+								{
+									"type": "origins:ingredient",
+									"ingredient":
+									{
+										"item": "apocalypse_origins:return_shard"
+									}
+								}
+							},
+							"action":{
+								"type": "origins:equipped_item_action",
+								"equipment_slot": "offhand",
+								"action": {
+									"type": "origins:consume",
+									"amount": 1
+								}
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:or",
+								"conditions": [
+									{
+										"type": "origins:resource",
+										"comparison": "!=",
+										"resource": "apocalypse:hidden_revwarpx",
+										"compare_to": 0
+									},
+									{
+										"type": "origins:resource",
+										"comparison": "!=",
+										"resource": "apocalypse:hidden_revwarpz",
+										"compare_to": 0
+									}
+								]
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "power grant @s apocalypse:refractor2/teleport_reverse temprefractor"
+							}
+						}
+					]
+				}
+			]
+		},
+		"condition":{
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "mainhand",
+					"item_condition":
+					{
+						"type": "origins:ingredient",
+						"ingredient":
+						{
+							"item": "apocalypse_origins:return_shard"
+						}
+					}
+				},
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "offhand",
+					"item_condition":
+					{
+						"type": "origins:ingredient",
+						"ingredient":
+						{
+							"item": "apocalypse_origins:return_shard"
+						}
+					}
+				}
+			]
+		},
+		"key": {
+			"key":"key.use",
+			"continuous": false
+		}
+	},
+	"elevator_positive":
+	{
+		"type": "origins:active_self",
+		"cooldown": 20,
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action":{
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:entity.enderman.teleport master @a ~ ~ ~ 1 1.2"
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:on_block",
+								"block_condition": {
+									"type": "origins:block",
+									"block": "apocalypse_origins:x_block"
+								}
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "tp @s ~10 ~ ~"
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:on_block",
+								"block_condition": {
+									"type": "origins:block",
+									"block": "apocalypse_origins:y_block"
+								}
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "tp @s ~ ~10 ~"
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:on_block",
+								"block_condition": {
+									"type": "origins:block",
+									"block": "apocalypse_origins:z_block"
+								}
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "tp @s ~ ~ ~10"
+							}
+						}
+					]
+				}
+			]
+		},
+		"condition":{
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:on_block",
+					"block_condition": {
+						"type": "origins:block",
+						"block": "apocalypse_origins:x_block"
+					}
+				},
+				{
+					"type": "origins:on_block",
+					"block_condition": {
+						"type": "origins:block",
+						"block": "apocalypse_origins:y_block"
+					}
+				},
+				{
+					"type": "origins:on_block",
+					"block_condition": {
+						"type": "origins:block",
+						"block": "apocalypse_origins:z_block"
+					}
+				}
+			]
+		},
+		"key": {
+			"key":"key.jump",
+			"continuous": false
+		}
+	},
+	"elevator_negative":
+	{
+		"type": "origins:active_self",
+		"cooldown": 20,
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action":{
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "playsound minecraft:entity.enderman.teleport master @a ~ ~ ~ 1 1.2"
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:on_block",
+								"block_condition": {
+									"type": "origins:block",
+									"block": "apocalypse_origins:x_block"
+								}
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "tp @s ~-10 ~ ~"
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:on_block",
+								"block_condition": {
+									"type": "origins:block",
+									"block": "apocalypse_origins:y_block"
+								}
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "tp @s ~ ~-10 ~"
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition":{
+								"type": "origins:on_block",
+								"block_condition": {
+									"type": "origins:block",
+									"block": "apocalypse_origins:z_block"
+								}
+							},
+							"action":{
+								"type": "origins:execute_command",
+								"command": "tp @s ~ ~ ~-10"
+							}
+						}
+					]
+				}
+			]
+		},
+		"condition":{
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:on_block",
+					"block_condition": {
+						"type": "origins:block",
+						"block": "apocalypse_origins:x_block"
+					}
+				},
+				{
+					"type": "origins:on_block",
+					"block_condition": {
+						"type": "origins:block",
+						"block": "apocalypse_origins:y_block"
+					}
+				},
+				{
+					"type": "origins:on_block",
+					"block_condition": {
+						"type": "origins:block",
+						"block": "apocalypse_origins:z_block"
+					}
+				}
+			]
+		},
+		"key": {
+			"key":"key.sneak",
+			"continuous": false
+		}
+	},
+	"geode_on_kill":
+	{
+		"type": "origins:self_action_on_kill",
+		"cooldown": 18000,
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action":{
+			"type": "origins:and",
+			"actions":[
+				{
+					"type": "origins:execute_command",
+					"command": "tellraw @s {\"text\":\"You have found a lucky geode! Give it to a Refractor to crack it open.\",\"color\":\"yellow\"}"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "give @s apocalypse_origins:lucky_gemstone 1"
+				}
+			]
+		},
+		"target_condition":{
+			"type": "origins:or",
+			"conditions":[
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:wither"
+				},
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:elder_guardian"
+				},
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:ender_dragon"
+				},
+				{
+					"type": "origins:entity_type",
+					"entity_type": "minecraft:warden"
+				}
+			]
+		}
+	},
+	"remove_hexbald":
+	{
+		"type": "origins:active_self",
+		"cooldown": 20,
+		"hud_render": {
+			"should_render": false
+		},
+		"entity_action":{
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "tellraw @s {\"text\":\"You have forsaken a hexblade!\",\"color\":\"dark_purple\"}"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "scoreboard players set @s hexhold 999"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "execute as @p[tag=hexblade] run function apocalypse:hexblade_spectate_no"
+				}
+			]
+		},
+		"condition":{
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "mainhand",
+					"item_condition":
+					{
+						"type": "origins:ingredient",
+						"ingredient":
+						{
+							"item": "minecraft:wooden_sword"
+						}
+					}
+				},
+				{
+					"type": "origins:origin",
+					"origin": "apocalypse:hexblade",
+					"layer": "origins:origin",
+					"inverted": true
+				}
+			]
+		},
+		"key": {
+			"key":"key.drop",
+			"continuous": false
+		}
+	},
+	"hidden": true
+}

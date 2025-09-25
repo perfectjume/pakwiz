@@ -1,0 +1,184 @@
+{
+	"type": "origins:action_on_callback",
+	"entity_action_chosen": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s add geneticist"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "give @s apocalypse_origins:syringe"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "give @s apocalypse_origins:stabilizer"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "give @s apocalypse_origins:analyzer"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power grant @s apocalypse:geneticist/genes/starter_boon_granter geneticist"
+			},
+			{
+				"type": "origins:delay",
+				"ticks": 10,
+				"action":{
+					"type": "origins:and",
+					"actions":[
+						{
+							"type": "origins:execute_command",
+							"command": "power grant @s apocalypse:geneticist/genes/starter_boon_granter geneticist"
+						},
+						{
+							"type": "origins:delay",
+							"ticks": 10,
+							"action":{
+								"type": "origins:execute_command",
+								"command": "power grant @s apocalypse:geneticist/genes/starter_boon_granter geneticist"
+							}
+						}
+					]
+				}
+			}
+		]
+	},
+    "entity_action_respawned": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s add geneticist"
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": {
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "apocalypse:geneticist/geneticist_passives_rnabackup_resource",
+							"compare_to": 0
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "power revokeall @s gene"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power revokeall @s sideeffect"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "power revokeall @s mutation"
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "apocalypse:geneticist/geneticist_passives_rnabackup_resource",
+							"compare_to": 1
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @s {\"text\":\"RNA Backup: Lost.\",\"color\":\"green\"}"
+								},
+								{
+									"type": "origins:change_resource",
+									"resource": "apocalypse:geneticist/geneticist_passives_rnabackup_resource",
+									"change": -1
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": {
+							"type": "origins:resource",
+							"comparison": "==",
+							"resource": "apocalypse:geneticist/geneticist_passives_genelock_resource",
+							"compare_to": 1
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:execute_command",
+									"command": "tellraw @s {\"text\":\"Genetic Lock: Deactivated.\",\"color\":\"green\"}"
+								},
+								{
+									"type": "origins:execute_command",
+									"command": "resource change @s apocalypse:geneticist/geneticist_passives_genelock_resource -1"
+								}
+							]
+						}
+					}
+				]
+			}
+		]
+	},
+	"entity_action_lost": {
+		"type": "origins:and",
+		"actions": [
+			{
+				"type": "origins:execute_command",
+				"command": "tag @s remove geneticist"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power revokeall @s gene"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power revokeall @s sideeffect"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power revokeall @s mutation"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power revokeall @s primary"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power revokeall @s secondary"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power revokeall @s primarys"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power revokeall @s secondarys"
+			},
+			{
+				"type": "origins:execute_command",
+				"command": "power revokeall @s innateg"
+			},
+			{
+				"type": "origins:change_resource",
+				"resource": "apocalypse:geneticist/genes/active/active_resource",
+				"change": -1
+			}
+		]
+	},
+	"execute_chosen_when_orb": true,
+	"hidden": true
+}
