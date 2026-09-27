@@ -2,6 +2,10 @@ package dev.grandteleportruntimetest;
 
 import dev.codex.gtaliketeleport.TeleportTransitionController;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.ConnectScreen;
+import net.minecraft.client.gui.screens.TitleScreen;
+import net.minecraft.client.multiplayer.ServerAddress;
+import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -48,6 +52,7 @@ public final class GrandTeleportRuntimeTestClient {
     private DriverState state = DriverState.WAIT_JOIN;
     private int globalTicks;
     private int stateTicks;
+    private boolean connectAttempted;
     private int scenarioIndex;
     private Scenario scenario;
     private Vec3 sourceEye;
@@ -79,10 +84,21 @@ public final class GrandTeleportRuntimeTestClient {
             stateTicks++;
 
             if (state == DriverState.WAIT_JOIN) {
+                if (!connectAttempted && globalTicks >= 140 && mc.player == null && mc.getConnection() == null) {
+                    connectAttempted = true;
+                    trace("CONNECT_ATTEMPT localhost:25565");
+                    String address = "127.0.0.1:25565";
+                    ServerData data = new ServerData("GrandTeleport Runtime Server", address, ServerData.Type.OTHER);
+                    ConnectScreen.startConnecting(new TitleScreen(), mc, ServerAddress.parseString(address), data, false, null);
+                    return;
+                }
                 if (mc.player != null && mc.level != null && mc.getConnection() != null && globalTicks > 100) {
+                    trace("CLIENT_JOINED position=" + fmt(mc.player.position()));
                     Files.deleteIfExists(mc.gameDirectory.toPath().resolve("config/grand_teleport_vertical.properties"));
                     scenarioIndex = 0;
                     startPrepare(mc);
+                } else if (connectAttempted && globalTicks > 500) {
+                    fail(mc, "JOIN_TIMEOUT");
                 }
                 return;
             }
