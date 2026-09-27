@@ -4,7 +4,7 @@ import dev.codex.gtaliketeleport.TeleportTransitionController;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.ConnectScreen;
 import net.minecraft.client.gui.screens.TitleScreen;
-import net.minecraft.client.multiplayer.ServerAddress;
+import net.minecraft.client.multiplayer.resolver.ServerAddress;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
