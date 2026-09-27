@@ -1,0 +1,203 @@
+name: GrandTeleport real Minecraft runtime
+
+on:
+  push:
+    branches: [ chatgpt-grandteleport-runtime-20260927 ]
+    paths:
+      - '.github/workflows/grandteleport-runtime.yml'
+      - 'ci/grandteleport/**'
+      - 'test-assets/grandtp-exact-classes.zip.b64'
+  workflow_dispatch:
+
+jobs:
+  real-runtime:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      LIBGL_ALWAYS_SOFTWARE: "1"
+      MESA_GL_VERSION_OVERRIDE: "4.6"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Install graphical runtime
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb openbox mesa-utils zip unzip
+
+      - name: Reconstruct and verify exact patched classes
+        shell: bash
+        run: |
+          set -euo pipefail
+          base64 -d test-assets/grandtp-exact-classes.zip.b64 > grandtp-exact-classes.zip
+          echo '71435edf0cd2dab0342b25f0eb55234755b945e51ee437b85abdcdae4024cfd0  grandtp-exact-classes.zip' | sha256sum -c -
+          unzip -t grandtp-exact-classes.zip
+          rm -rf exact-patch
+          mkdir exact-patch
+          unzip -q grandtp-exact-classes.zip -d exact-patch
+          echo '6722ed63a5940f5ec52d13a0a4aa027d0f3ceb5e896761712aada1219f9e562a  exact-patch/dev/codex/gtaliketeleport/SafeVerticalZoomConfig.class' | sha256sum -c -
+          echo 'bb0b222231c1d59f6e38d6c6d7e49b8c5ee384f2173cbef6076a30b8408f4ed2  exact-patch/dev/codex/gtaliketeleport/TeleportTransitionController$Phase.class' | sha256sum -c -
+          echo '087daf8a6fba989857ba9c9663792af8290135c8170db708eb417b275b393cf7  exact-patch/dev/codex/gtaliketeleport/TeleportTransitionController.class' | sha256sum -c -
+          echo 'fdda875e66ed4767d63c8303f5a2b96ddc44e77c415597a12142c4346a753bd1  exact-patch/dev/codex/gtaliketeleport/TeleportTransitionController$VerticalPlan.class' | sha256sum -c -
+          echo '4877e133947aa9e36ab93a7aaa727da6bcd38f92ca9ce2f569097b223f7a09e1  exact-patch/dev/codex/gtaliketeleport/TeleportTransitionController$CameraFrame.class' | sha256sum -c -
+
+      - name: Build pinned GrandTeleport 1.0.0 base
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone https://github.com/f65q4fffs/GrandTeleport-NeoForge.git grandtp-src
+          cd grandtp-src
+          git checkout 87548729bbda80ee3eb2fec7b3f322bad93dc4e1
+          grep -q '^mod_version=1.0.0$' gradle.properties
+          chmod +x gradlew
+          ./gradlew build --no-daemon --console=plain
+          cd ..
+          basejar="$(find grandtp-src/build/libs -maxdepth 1 -type f -name '*.jar' ! -name '*sources*' ! -name '*javadoc*' | head -1)"
+          test -f "$basejar"
+          cp "$basejar" GrandTeleport-runtime-patched.jar
+          rm -rf overlay
+          mkdir overlay
+          cp -a exact-patch/dev overlay/
+          (cd overlay && zip -q -u -r ../GrandTeleport-runtime-patched.jar dev)
+          unzip -t GrandTeleport-runtime-patched.jar
+          # Prove the runtime JAR contains the exact patched behavior class bytes.
+          for f in SafeVerticalZoomConfig.class 'TeleportTransitionController$Phase.class' TeleportTransitionController.class 'TeleportTransitionController$VerticalPlan.class' 'TeleportTransitionController$CameraFrame.class'; do
+            unzip -p GrandTeleport-runtime-patched.jar "dev/codex/gtaliketeleport/$f" > "/tmp/$f"
+            cmp "/tmp/$f" "exact-patch/dev/codex/gtaliketeleport/$f"
+          done
+          sha256sum GrandTeleport-runtime-patched.jar | tee runtime-jar.sha256
+
+      - name: Prepare NeoForge 1.21.1 runtime harness
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --depth 1 https://github.com/NeoForgeMDKs/MDK-1.21.1-ModDevGradle.git mdk
+          cd mdk
+          sed -i 's/^neo_version=.*/neo_version=21.1.250/' gradle.properties
+          sed -i 's/^mod_id=.*/mod_id=grandteleportruntimetest/' gradle.properties
+          sed -i 's/^mod_name=.*/mod_name=GrandTeleport Runtime Test/' gradle.properties
+          sed -i 's/^mod_version=.*/mod_version=1.0.0/' gradle.properties
+          sed -i 's/^mod_group_id=.*/mod_group_id=dev.grandteleportruntimetest/' gradle.properties
+          rm -rf src/main/java/com/example
+          mkdir -p src/main/java/dev/grandteleportruntimetest libs run/mods
+          cp ../ci/grandteleport/*.java src/main/java/dev/grandteleportruntimetest/
+          cp ../GrandTeleport-runtime-patched.jar libs/
+          cp ../GrandTeleport-runtime-patched.jar run/mods/
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("build.gradle")
+          s=p.read_text()
+          needle="dependencies {"
+          if needle not in s: raise SystemExit("dependencies block not found")
+          s=s.replace(needle, 'dependencies {\n    compileOnly files("libs/GrandTeleport-runtime-patched.jar")', 1)
+          p.write_text(s)
+          PY
+          printf 'eula=true\n' > run/eula.txt
+          cat > run/server.properties <<'EOF'
+          online-mode=false
+          spawn-protection=0
+          view-distance=8
+          simulation-distance=5
+          allow-flight=true
+          max-tick-time=-1
+          EOF
+          chmod +x gradlew
+          ./gradlew classes --no-daemon --console=plain
+
+      - name: Start real NeoForge dedicated server
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd mdk
+          (./gradlew runServer --no-daemon --console=plain > ../server-console.log 2>&1; echo $? > ../server.exit) &
+          echo $! > ../server.pid
+          cd ..
+          ready=0
+          for i in $(seq 1 220); do
+            if grep -q "Done (" server-console.log 2>/dev/null; then ready=1; break; fi
+            if [ -f server.exit ]; then
+              echo "SERVER EXITED EARLY"
+              tail -400 server-console.log || true
+              exit 1
+            fi
+            sleep 1
+          done
+          if [ "$ready" -ne 1 ]; then
+            echo "SERVER READY TIMEOUT"
+            tail -400 server-console.log || true
+            exit 1
+          fi
+          grep -E "Grand Teleport|grandteleport|Done \(" server-console.log | tail -100 || true
+
+      - name: Run real Minecraft client and execute teleport matrix
+        id: client
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -uo pipefail
+          Xvfb :99 -screen 0 1280x720x24 -ac +extension GLX +render -noreset > xvfb.log 2>&1 &
+          export DISPLAY=:99
+          openbox > openbox.log 2>&1 &
+          sleep 2
+          glxinfo -B > glxinfo.txt 2>&1 || true
+          cd mdk
+          timeout 420s ./gradlew runClient --no-daemon --console=plain --args='--quickPlayMultiplayer localhost:25565 --width 1280 --height 720' 2>&1 | tee ../client-console.log
+          code=${PIPESTATUS[0]}
+          cp run/logs/latest.log ../client-latest.log 2>/dev/null || true
+          cp run/GRANDTP_RUNTIME_TRACE.txt ../GRANDTP_RUNTIME_TRACE.txt 2>/dev/null || true
+          cp run/GRANDTP_RUNTIME_RESULT.txt ../GRANDTP_RUNTIME_RESULT.txt 2>/dev/null || true
+          echo "CLIENT_EXIT=$code" > ../client-exit.txt
+          exit 0
+
+      - name: Stop server
+        if: always()
+        shell: bash
+        run: |
+          if [ -f server.pid ]; then kill "$(cat server.pid)" 2>/dev/null || true; fi
+          pkill -f 'net.minecraft.server.Main' 2>/dev/null || true
+          sleep 2
+
+      - name: Assert runtime behavior
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '=== RESULT ==='
+          cat GRANDTP_RUNTIME_RESULT.txt
+          echo '=== TRACE ==='
+          cat GRANDTP_RUNTIME_TRACE.txt
+          grep -q '^CLIENT_RUNTIME_TEST_RESULT PASS$' GRANDTP_RUNTIME_RESULT.txt
+          for s in open_open low_origin low_destination low_both compressed_both slab_under10 slab_over10 speed_slow speed_fast; do
+            grep -q "^SCENARIO_PASS $s$" GRANDTP_RUNTIME_TRACE.txt
+          done
+          grep -q '^SPEED_COMPARISON_PASS ' GRANDTP_RUNTIME_TRACE.txt
+          ! grep -q 'VIOLATION' GRANDTP_RUNTIME_TRACE.txt
+          ! grep -q 'CLIENT_RUNTIME_TEST_RESULT FAIL' GRANDTP_RUNTIME_TRACE.txt
+          ! grep -qE 'NoClassDefFoundError|NoSuchMethodError|InvalidMixinException|MixinApplyError|ExceptionInInitializerError' client-latest.log
+          echo 'REAL_MINECRAFT_RUNTIME=PASS' | tee runtime-result.txt
+
+      - name: Upload runtime evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: grandteleport-real-runtime-evidence
+          if-no-files-found: warn
+          retention-days: 3
+          path: |
+            runtime-result.txt
+            runtime-jar.sha256
+            client-exit.txt
+            GRANDTP_RUNTIME_RESULT.txt
+            GRANDTP_RUNTIME_TRACE.txt
+            client-console.log
+            client-latest.log
+            server-console.log
+            glxinfo.txt
+            xvfb.log
+            openbox.log
+            mdk/run/crash-reports/
