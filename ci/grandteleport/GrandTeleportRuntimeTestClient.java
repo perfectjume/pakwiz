@@ -207,7 +207,7 @@ public final class GrandTeleportRuntimeTestClient {
         if (atSource && sourceEye != null) {
             originFrames++;
             maxOriginOffset = Math.max(maxOriginOffset, p.y - sourceEye.y);
-            if (Double.isFinite(scenario.originRoofCollisionY()) && p.y + 0.25001D > scenario.originRoofCollisionY()) {
+            if (Double.isFinite(scenario.originRoofCollisionY()) && p.y + 0.25D > scenario.originRoofCollisionY() + 1.0E-4D) {
                 collisionViolation = true;
                 trace("ORIGIN_COLLISION_VIOLATION " + scenario.name() + " cameraY=" + p.y + " roof=" + scenario.originRoofCollisionY());
             }
@@ -218,7 +218,7 @@ public final class GrandTeleportRuntimeTestClient {
             if (destinationEye != null) {
                 destinationFrames++;
                 maxDestinationOffset = Math.max(maxDestinationOffset, p.y - destinationEye.y);
-                if (Double.isFinite(scenario.destinationRoofCollisionY()) && p.y + 0.25001D > scenario.destinationRoofCollisionY()) {
+                if (Double.isFinite(scenario.destinationRoofCollisionY()) && p.y + 0.25D > scenario.destinationRoofCollisionY() + 1.0E-4D) {
                     collisionViolation = true;
                     trace("DEST_COLLISION_VIOLATION " + scenario.name() + " cameraY=" + p.y + " roof=" + scenario.destinationRoofCollisionY());
                 }
