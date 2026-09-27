@@ -95,7 +95,7 @@ jobs:
           needle="dependencies {"
           if needle not in s: raise SystemExit("dependencies block not found")
           s=s.replace(needle, 'dependencies {\n    compileOnly files("libs/GrandTeleport-runtime-patched.jar")', 1)
-          client_needle = "        client {\\n            client()\\n"
+          client_needle = "        client {\n            client()\n"
           client_replacement = """        client {
               client()
               programArgument '--quickPlayMultiplayer'
