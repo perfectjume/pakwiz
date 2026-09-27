@@ -189,6 +189,7 @@ jobs:
           if-no-files-found: warn
           retention-days: 3
           path: |
+            GrandTeleport-runtime-patched.jar
             runtime-result.txt
             runtime-jar.sha256
             client-exit.txt
