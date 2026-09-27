@@ -146,7 +146,7 @@ jobs:
           sleep 2
           glxinfo -B > glxinfo.txt 2>&1 || true
           cd mdk
-          timeout 420s ./gradlew runClient --no-daemon --console=plain --args='--quickPlayMultiplayer localhost:25565 --width 1280 --height 720' 2>&1 | tee ../client-console.log
+          timeout 420s ./gradlew runClient --no-daemon --console=plain 2>&1 | tee ../client-console.log
           code=${PIPESTATUS[0]}
           cp run/logs/latest.log ../client-latest.log 2>/dev/null || true
           cp run/GRANDTP_RUNTIME_TRACE.txt ../GRANDTP_RUNTIME_TRACE.txt 2>/dev/null || true
