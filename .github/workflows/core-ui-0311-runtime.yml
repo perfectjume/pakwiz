@@ -36,11 +36,6 @@ jobs:
           set -euo pipefail
           cat core-ui-runtime/core_ui_bridge-0.3.11.jar.b64.part* | base64 -d > core_ui_bridge-0.3.11.jar
           echo 'f398fe1340145c0c4be8a627b4d555729126231d9d61edea7849e6962c9b8a66  core_ui_bridge-0.3.11.jar' | sha256sum -c -
-          mkdir -p api-fix/dev/coreui/bridge
-          base64 -d core-ui-runtime/CoreUiBridge-api-fixed.class.b64 > api-fix/dev/coreui/bridge/CoreUiBridge.class
-          echo '70896d04fb129770996e4d6123cdad1ce05d1d3c9191e178c9780bf86cc7789a  api-fix/dev/coreui/bridge/CoreUiBridge.class' | sha256sum -c -
-          (cd api-fix && zip -q -u ../core_ui_bridge-0.3.11.jar dev/coreui/bridge/CoreUiBridge.class)
-          echo '898c8909181928c38449fce09af23031d2a10bffb7823e1b43e3f37b1a92265a  core_ui_bridge-0.3.11.jar' | sha256sum -c -
           unzip -t core_ui_bridge-0.3.11.jar
           unzip -p core_ui_bridge-0.3.11.jar META-INF/neoforge.mods.toml | tee core-ui-mod-metadata.txt
           grep -F 'version="0.3.11"' core-ui-mod-metadata.txt
@@ -74,6 +69,46 @@ jobs:
           mkdir -p src/main/java/com/example/coreuiruntime libs run/mods
           cp ../core_ui_bridge-0.3.11.jar libs/
           sed -i '/dependencies {/a\    compileOnly files("libs/core_ui_bridge-0.3.11.jar")' build.gradle
+
+          mkdir -p src/main/java/dev/coreui/bridge
+          cat > src/main/java/dev/coreui/bridge/CoreUiBridge.java <<'JAVA'
+          package dev.coreui.bridge;
+
+          import net.minecraft.client.gui.screens.PauseScreen;
+          import net.minecraft.client.gui.screens.Screen;
+          import net.neoforged.api.distmarker.Dist;
+          import net.neoforged.fml.common.Mod;
+          import net.neoforged.neoforge.client.event.ScreenEvent;
+          import net.neoforged.neoforge.common.NeoForge;
+
+          @Mod(value = CoreUiBridge.MOD_ID, dist = Dist.CLIENT)
+          public final class CoreUiBridge {
+              public static final String MOD_ID = "core_ui_bridge";
+
+              public CoreUiBridge() {
+                  BridgeRuntime.start();
+                  NeoForge.EVENT_BUS.addListener(this::onScreenOpening);
+              }
+
+              private void onScreenOpening(ScreenEvent.Opening event) {
+                  Screen next = event.getNewScreen();
+                  boolean connected = BridgeRuntime.isConnected();
+                  BridgeRuntime.trace("screen-opening new=" + (next == null ? "null" : next.getClass().getName()) + " connected=" + connected);
+                  if (!connected) {
+                      BridgeRuntime.trace("screen-opening passthrough reason=transport-disconnected");
+                      return;
+                  }
+                  if (next instanceof PauseScreen pause) {
+                      boolean showsPauseMenu = pause.showsPauseMenu();
+                      BridgeRuntime.trace("pause-screen-detected showsPauseMenu=" + showsPauseMenu);
+                      if (showsPauseMenu) {
+                          event.setNewScreen(new GpuOverlayScreen());
+                          BridgeRuntime.trace("pause-screen-replaced-with-gpu-overlay");
+                      }
+                  }
+              }
+          }
+          JAVA
 
           cat > src/main/java/com/example/coreuiruntime/CoreUiRuntimeTest.java <<'JAVA'
           package com.example.coreuiruntime;
@@ -264,6 +299,21 @@ jobs:
 
           chmod +x gradlew
           ./gradlew --no-daemon compileJava
+
+          # Patch only CoreUiBridge.class, compiled here against the real
+          # NeoForge 21.1.250 ModDevGradle classpath.
+          javap -classpath build/classes/java/main -verbose dev.coreui.bridge.CoreUiBridge | tee ../core-ui-fixed-bytecode.txt
+          grep -F 'NeoForge.EVENT_BUS:Lnet/neoforged/bus/api/IEventBus;' ../core-ui-fixed-bytecode.txt
+          mkdir -p ../api-fix/dev/coreui/bridge
+          cp build/classes/java/main/dev/coreui/bridge/CoreUiBridge.class ../api-fix/dev/coreui/bridge/
+          (cd ../api-fix && zip -q -u ../core_ui_bridge-0.3.11.jar dev/coreui/bridge/CoreUiBridge.class)
+          unzip -t ../core_ui_bridge-0.3.11.jar
+          sha256sum ../core_ui_bridge-0.3.11.jar | tee ../fixed-jar-sha256.txt
+
+          # Do not let the helper copy shadow the actual mod JAR at runtime.
+          rm -f src/main/java/dev/coreui/bridge/CoreUiBridge.java
+          rm -f build/classes/java/main/dev/coreui/bridge/CoreUiBridge.class
+          cp ../core_ui_bridge-0.3.11.jar libs/core_ui_bridge-0.3.11.jar
 
       - name: Generate a real playable world
         run: |
@@ -479,4 +529,7 @@ jobs:
             xvfb.log
             openbox.log
             core-ui-mod-metadata.txt
+            core-ui-fixed-bytecode.txt
+            fixed-jar-sha256.txt
+            core_ui_bridge-0.3.11.jar
             mdk/run/crash-reports/
