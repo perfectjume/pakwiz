@@ -253,60 +253,58 @@ jobs:
           rm -f run/mods/core_ui_bridge-0.3.11.jar
           mkdir -p run
           echo 'eula=true' > run/eula.txt
+          rm -f ../server-input.fifo ../server-console.log
+          mkfifo ../server-input.fifo
 
-          cat > ../prepare_world.py <<'PY'
-          import subprocess, sys, time
-          cmd = ["./gradlew", "--no-daemon", "runServer", "--console=plain"]
-          with open("../server-console.log", "w", buffering=1) as log:
-              p = subprocess.Popen(
-                  cmd,
-                  stdin=subprocess.PIPE,
-                  stdout=subprocess.PIPE,
-                  stderr=subprocess.STDOUT,
-                  text=True,
-                  bufsize=1,
-              )
-              ready = False
-              deadline = time.time() + 240
-              while time.time() < deadline:
-                  line = p.stdout.readline()
-                  if line:
-                      sys.stdout.write(line)
-                      log.write(line)
-                      if "Done (" in line and "For help" in line:
-                          ready = True
-                          break
-                  elif p.poll() is not None:
-                      break
-              if not ready:
-                  p.terminate()
-                  raise SystemExit("SERVER_WORLD_GENERATION_DID_NOT_REACH_READY")
-              p.stdin.write("stop\n")
-              p.stdin.flush()
-              p.stdin.close()
-              shutdown_deadline = time.time() + 90
-              while time.time() < shutdown_deadline:
-                  line = p.stdout.readline()
-                  if line:
-                      sys.stdout.write(line)
-                      log.write(line)
-                      continue
-                  if p.poll() is not None:
-                      break
-                  time.sleep(0.05)
-              if p.poll() is None:
-                  p.terminate()
-                  try:
-                      p.wait(timeout=20)
-                  except subprocess.TimeoutExpired:
-                      p.kill()
-                      p.wait(timeout=10)
-              code = p.returncode
-              if code != 0:
-                  raise SystemExit(f"SERVER_EXIT={code}")
-          PY
+          ./gradlew --no-daemon runServer --console=plain < ../server-input.fifo > ../server-console.log 2>&1 &
+          server_pid=$!
+          exec 3>../server-input.fifo
 
-          python3 ../prepare_world.py
+          ready=0
+          for i in $(seq 1 360); do
+            if grep -q 'Done (' ../server-console.log 2>/dev/null; then
+              ready=1
+              break
+            fi
+            if ! kill -0 "$server_pid" 2>/dev/null; then
+              break
+            fi
+            sleep 1
+          done
+
+          if [ "$ready" -ne 1 ]; then
+            tail -200 ../server-console.log || true
+            exec 3>&-
+            kill "$server_pid" 2>/dev/null || true
+            wait "$server_pid" 2>/dev/null || true
+            exit 1
+          fi
+
+          echo 'stop' >&3
+          exec 3>&-
+
+          exited=0
+          for i in $(seq 1 90); do
+            if ! kill -0 "$server_pid" 2>/dev/null; then
+              exited=1
+              break
+            fi
+            sleep 1
+          done
+          if [ "$exited" -ne 1 ]; then
+            kill "$server_pid" 2>/dev/null || true
+          fi
+
+          set +e
+          wait "$server_pid"
+          server_code=$?
+          set -e
+          tail -120 ../server-console.log || true
+          if [ "$server_code" -ne 0 ]; then
+            echo "SERVER_EXIT=$server_code"
+            exit "$server_code"
+          fi
+
           test -f run/world/level.dat
           cp run/logs/latest.log ../server-latest.log
           mkdir -p run/saves
