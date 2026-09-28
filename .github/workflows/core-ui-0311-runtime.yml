@@ -1,0 +1,455 @@
+name: CORE UI 0.3.11 Public In-Game Runtime
+
+on:
+  push:
+    branches:
+      - core-ui-runtime-smoke
+    paths:
+      - '.github/workflows/core-ui-0311-runtime.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  ingame-runtime:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: core-ui-runtime-smoke
+
+      - name: Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Install virtual display
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb openbox mesa-utils
+
+      - name: Reconstruct exact 0.3.11 bridge
+        run: |
+          set -euo pipefail
+          cat core-ui-runtime/core_ui_bridge-0.3.11.jar.b64.part* | base64 -d > core_ui_bridge-0.3.11.jar
+          echo 'f398fe1340145c0c4be8a627b4d555729126231d9d61edea7849e6962c9b8a66  core_ui_bridge-0.3.11.jar' | sha256sum -c -
+          unzip -t core_ui_bridge-0.3.11.jar
+          unzip -p core_ui_bridge-0.3.11.jar META-INF/neoforge.mods.toml | tee core-ui-mod-metadata.txt
+          grep -F 'version="0.3.11"' core-ui-mod-metadata.txt
+          grep -F 'versionRange="[21.1.250,21.2)"' core-ui-mod-metadata.txt
+
+      - name: Prepare NeoForge 1.21.1 client runtime
+        run: |
+          set -euo pipefail
+          git clone --depth 1 https://github.com/NeoForgeMDKs/MDK-1.21.1-ModDevGradle.git mdk
+          cd mdk
+          sed -i 's/^neo_version=.*/neo_version=21.1.250/' gradle.properties
+          sed -i 's/^mod_id=.*/mod_id=coreuiruntimetest/' gradle.properties
+          sed -i 's/^mod_name=.*/mod_name=CORE UI Runtime Test/' gradle.properties
+          sed -i 's/^mod_version=.*/mod_version=1.0.0/' gradle.properties
+          sed -i 's/^mod_group_id=.*/mod_group_id=com.example.coreuiruntime/' gradle.properties
+          rm -rf src/main/java/com/example/examplemod
+          mkdir -p src/main/java/com/example/coreuiruntime libs run/mods
+          cp ../core_ui_bridge-0.3.11.jar libs/
+          sed -i '/dependencies {/a\    compileOnly files("libs/core_ui_bridge-0.3.11.jar")' build.gradle
+
+          cat > src/main/java/com/example/coreuiruntime/CoreUiRuntimeTest.java <<'JAVA'
+          package com.example.coreuiruntime;
+
+          import net.minecraft.client.Minecraft;
+          import net.minecraft.client.gui.screens.PauseScreen;
+          import net.minecraft.client.gui.screens.Screen;
+          import net.neoforged.api.distmarker.Dist;
+          import net.neoforged.fml.ModList;
+          import net.neoforged.fml.common.Mod;
+          import net.neoforged.neoforge.client.event.ClientTickEvent;
+          import net.neoforged.neoforge.common.NeoForge;
+
+          import java.nio.file.Files;
+          import java.nio.file.Path;
+          import java.nio.file.StandardOpenOption;
+
+          @Mod(value = CoreUiRuntimeTest.MOD_ID, dist = Dist.CLIENT)
+          public final class CoreUiRuntimeTest {
+              public static final String MOD_ID = "coreuiruntimetest";
+              private int ticks;
+              private int phase;
+              private int phaseTicks;
+              private int cycles;
+              private boolean sawInGame;
+
+              public CoreUiRuntimeTest() {
+                  NeoForge.EVENT_BUS.addListener(this::onTick);
+                  trace("TEST_MOD_CONSTRUCTED");
+              }
+
+              private static boolean overlay(Minecraft mc) {
+                  return mc.screen != null
+                          && mc.screen.getClass().getName().equals("dev.coreui.bridge.GpuOverlayScreen");
+              }
+
+              private void onTick(ClientTickEvent.Post event) {
+                  try {
+                      Minecraft mc = Minecraft.getInstance();
+                      ticks++;
+
+                      if (ticks == 20) {
+                          boolean loaded = ModList.get().isLoaded("core_ui_bridge");
+                          trace("CORE_UI_LOADED=" + loaded);
+                          if (!loaded) fail(mc, "CORE_UI_NOT_LOADED");
+                      }
+
+                      if (phase == 0) {
+                          if (mc.level != null && mc.player != null) {
+                              if (!sawInGame) {
+                                  sawInGame = true;
+                                  trace("IN_GAME=true");
+                                  trace("PLAYER=" + mc.player.getGameProfile().getName());
+                              }
+                              phaseTicks++;
+                              if (phaseTicks >= 40 && mc.screen == null) {
+                                  phase = 1;
+                                  phaseTicks = 0;
+                              }
+                          } else if (ticks > 3600) {
+                              fail(mc, "IN_GAME_TIMEOUT");
+                          }
+                          return;
+                      }
+
+                      if (phase == 1) {
+                          phaseTicks++;
+                          if (phaseTicks < 8) return;
+                          int next = cycles + 1;
+                          trace("OPEN_PAUSE_CYCLE=" + next);
+                          mc.setScreen(new PauseScreen(true));
+                          Screen now = mc.screen;
+                          trace("AFTER_PAUSE_OPEN=" + (now == null ? "null" : now.getClass().getName()));
+                          if (!overlay(mc)) {
+                              fail(mc, "OVERLAY_REPLACEMENT_FAILED_CYCLE_" + next);
+                              return;
+                          }
+                          cycles = next;
+                          trace("OVERLAY_REPLACEMENT_PASS_CYCLE=" + cycles);
+                          phaseTicks = 0;
+                          phase = cycles <= 10 ? 2 : 4;
+                          return;
+                      }
+
+                      if (phase == 2) {
+                          phaseTicks++;
+                          if (!overlay(mc)) {
+                              fail(mc, "OVERLAY_DISAPPEARED_CYCLE_" + cycles);
+                              return;
+                          }
+                          if (phaseTicks >= 8) {
+                              mc.setScreen(null);
+                              trace("CLOSE_PAUSE_CYCLE=" + cycles);
+                              phase = 3;
+                              phaseTicks = 0;
+                          }
+                          return;
+                      }
+
+                      if (phase == 3) {
+                          phaseTicks++;
+                          if (mc.screen != null) {
+                              fail(mc, "SCREEN_NOT_CLOSED_CYCLE_" + cycles);
+                              return;
+                          }
+                          if (phaseTicks >= 8) {
+                              phase = 1;
+                              phaseTicks = 0;
+                          }
+                          return;
+                      }
+
+                      if (phase == 4) {
+                          phaseTicks++;
+                          if (!overlay(mc)) {
+                              fail(mc, "OVERLAY_DISAPPEARED_BEFORE_FULLSCREEN");
+                              return;
+                          }
+                          if (phaseTicks == 20) {
+                              trace("PRE_FULLSCREEN=" + mc.getWindow().isFullscreen());
+                              mc.getWindow().toggleFullScreen();
+                              phase = 5;
+                              phaseTicks = 0;
+                          }
+                          return;
+                      }
+
+                      if (phase == 5) {
+                          phaseTicks++;
+                          if (!overlay(mc)) {
+                              fail(mc, "OVERLAY_DISAPPEARED_IN_FULLSCREEN");
+                              return;
+                          }
+                          if (phaseTicks == 60) {
+                              trace("POST_FULLSCREEN=" + mc.getWindow().isFullscreen());
+                              trace("FULLSCREEN_OVERLAY_SURVIVED=PASS");
+                              mc.getWindow().toggleFullScreen();
+                              phase = 6;
+                              phaseTicks = 0;
+                          }
+                          return;
+                      }
+
+                      if (phase == 6) {
+                          phaseTicks++;
+                          if (!overlay(mc)) {
+                              fail(mc, "OVERLAY_DISAPPEARED_AFTER_FULLSCREEN_EXIT");
+                              return;
+                          }
+                          if (phaseTicks == 60) {
+                              trace("POST_WINDOWED=" + mc.getWindow().isFullscreen());
+                              trace("WINDOWED_OVERLAY_SURVIVED=PASS");
+                              mc.setScreen(null);
+                              trace("TOTAL_PAUSE_CYCLES=" + cycles);
+                              trace("CLIENT_RUNTIME_TEST_RESULT PASS");
+                              phase = 99;
+                              mc.stop();
+                          }
+                      }
+                  } catch (Throwable t) {
+                      trace("EXCEPTION=" + t.getClass().getName() + ":" + String.valueOf(t.getMessage()));
+                      t.printStackTrace();
+                      try { Minecraft.getInstance().stop(); } catch (Throwable ignored) {}
+                      phase = 99;
+                  }
+              }
+
+              private static void fail(Minecraft mc, String reason) {
+                  trace("CLIENT_RUNTIME_TEST_RESULT FAIL " + reason);
+                  try { mc.stop(); } catch (Throwable ignored) {}
+              }
+
+              private static synchronized void trace(String s) {
+                  System.out.println("[CORE-UI-TEST] " + s);
+                  try {
+                      Files.writeString(
+                          Path.of("CORE_UI_RUNTIME_TRACE.txt"),
+                          s + System.lineSeparator(),
+                          StandardOpenOption.CREATE,
+                          StandardOpenOption.APPEND
+                      );
+                  } catch (Exception e) {
+                      throw new RuntimeException(e);
+                  }
+              }
+          }
+          JAVA
+
+          chmod +x gradlew
+          ./gradlew --no-daemon compileJava
+
+      - name: Generate a real playable world
+        run: |
+          set -euo pipefail
+          cd mdk
+          rm -f run/mods/core_ui_bridge-0.3.11.jar
+          mkdir -p run
+          echo 'eula=true' > run/eula.txt
+
+          cat > ../prepare_world.py <<'PY'
+          import subprocess, sys, time
+          cmd = ["./gradlew", "--no-daemon", "runServer", "--console=plain", "--args=nogui"]
+          with open("../server-console.log", "w", buffering=1) as log:
+              p = subprocess.Popen(
+                  cmd,
+                  stdin=subprocess.PIPE,
+                  stdout=subprocess.PIPE,
+                  stderr=subprocess.STDOUT,
+                  text=True,
+                  bufsize=1,
+              )
+              ready = False
+              deadline = time.time() + 240
+              while time.time() < deadline:
+                  line = p.stdout.readline()
+                  if line:
+                      sys.stdout.write(line)
+                      log.write(line)
+                      if "Done (" in line and "For help" in line:
+                          ready = True
+                          break
+                  elif p.poll() is not None:
+                      break
+              if not ready:
+                  p.terminate()
+                  raise SystemExit("SERVER_WORLD_GENERATION_DID_NOT_REACH_READY")
+              p.stdin.write("stop\n")
+              p.stdin.flush()
+              try:
+                  code = p.wait(timeout=60)
+              except subprocess.TimeoutExpired:
+                  p.terminate()
+                  code = p.wait(timeout=20)
+              if code != 0:
+                  raise SystemExit(f"SERVER_EXIT={code}")
+          PY
+
+          python3 ../prepare_world.py
+          test -f run/world/level.dat
+          cp run/logs/latest.log ../server-latest.log
+          mkdir -p run/saves
+          rm -rf run/saves/CORE_UI_TEST_WORLD
+          mv run/world run/saves/CORE_UI_TEST_WORLD
+          cp ../core_ui_bridge-0.3.11.jar run/mods/
+          echo 'WORLD_READY=PASS' > ../world-generation.txt
+
+      - name: Start protocol-11 renderer peer
+        run: |
+          set -euo pipefail
+          cat > mock_renderer.py <<'PY'
+          import socket
+          log = open("mock-renderer.log", "w", buffering=1)
+          s = socket.socket()
+          s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+          s.bind(("127.0.0.1", 37541))
+          s.listen(1)
+          log.write("LISTENING\n")
+          c, a = s.accept()
+          log.write("ACCEPT " + repr(a) + "\n")
+          c.sendall(b'{"type":"ready","protocol":11,"renderer":"runtime-test"}\n')
+          buf = b""
+          c.settimeout(300)
+          try:
+              while True:
+                  data = c.recv(65536)
+                  if not data:
+                      break
+                  buf += data
+                  while b"\n" in buf:
+                      line, buf = buf.split(b"\n", 1)
+                      if line:
+                          log.write(line.decode("utf-8", "replace") + "\n")
+          except Exception as e:
+              log.write("SERVER_END " + repr(e) + "\n")
+          finally:
+              try: c.close()
+              except Exception: pass
+              s.close()
+              log.close()
+          PY
+          python3 mock_renderer.py &
+          echo $! > mock-renderer.pid
+          for i in $(seq 1 50); do
+            grep -q LISTENING mock-renderer.log 2>/dev/null && exit 0
+            sleep .1
+          done
+          exit 1
+
+      - name: Run real Minecraft client and enter world
+        run: |
+          set -uo pipefail
+          cd mdk
+          Xvfb :99 -screen 0 1280x720x24 -ac +extension GLX +render -noreset > ../xvfb.log 2>&1 &
+          export DISPLAY=:99
+          openbox > ../openbox.log 2>&1 &
+          sleep 2
+          glxinfo -B > ../glxinfo.txt 2>&1 || true
+          timeout 300s ./gradlew --no-daemon runClient --console=plain --args='--quickPlaySingleplayer CORE_UI_TEST_WORLD --width 854 --height 480' 2>&1 | tee ../client-console.log
+          code=${PIPESTATUS[0]}
+          cp run/logs/latest.log ../client-latest.log 2>/dev/null || true
+          cp run/CORE_UI_RUNTIME_TRACE.txt ../CORE_UI_RUNTIME_TRACE.txt 2>/dev/null || true
+          find /tmp -maxdepth 2 -name core-ui-bridge.log -print -exec cp {} ../core-ui-bridge-diagnostic.log \; 2>/dev/null || true
+          echo "RUNCLIENT_EXIT=$code" > ../runtime-result.txt
+          exit $code
+
+      - name: Assert in-game runtime behavior
+        if: always()
+        run: |
+          set -euo pipefail
+          test -f CORE_UI_RUNTIME_TRACE.txt
+          cat CORE_UI_RUNTIME_TRACE.txt
+
+          grep -q '^CORE_UI_LOADED=true$' CORE_UI_RUNTIME_TRACE.txt
+          grep -q '^IN_GAME=true$' CORE_UI_RUNTIME_TRACE.txt
+          grep -q '^OVERLAY_REPLACEMENT_PASS_CYCLE=10$' CORE_UI_RUNTIME_TRACE.txt
+          grep -q '^OVERLAY_REPLACEMENT_PASS_CYCLE=11$' CORE_UI_RUNTIME_TRACE.txt
+          grep -q '^FULLSCREEN_OVERLAY_SURVIVED=PASS$' CORE_UI_RUNTIME_TRACE.txt
+          grep -q '^WINDOWED_OVERLAY_SURVIVED=PASS$' CORE_UI_RUNTIME_TRACE.txt
+          grep -q '^TOTAL_PAUSE_CYCLES=11$' CORE_UI_RUNTIME_TRACE.txt
+          grep -q '^CLIENT_RUNTIME_TEST_RESULT PASS$' CORE_UI_RUNTIME_TRACE.txt
+          ! grep -q '^CLIENT_RUNTIME_TEST_RESULT FAIL' CORE_UI_RUNTIME_TRACE.txt
+
+          grep -q '"type":"hello","protocol":11' mock-renderer.log
+
+          python3 - <<'PY'
+          import json
+          pauses = []
+          games = []
+          with open("mock-renderer.log", encoding="utf-8") as f:
+              for raw in f:
+                  raw = raw.strip()
+                  if not raw.startswith("{"):
+                      continue
+                  try:
+                      obj = json.loads(raw)
+                  except Exception:
+                      continue
+                  if obj.get("type") == "state" and obj.get("screen") == "pause":
+                      pauses.append(obj)
+                  if obj.get("type") == "state" and obj.get("screen") == "game":
+                      games.append(obj)
+
+          print("PAUSE_STATE_COUNT", len(pauses))
+          print("GAME_STATE_COUNT", len(games))
+          if len(pauses) < 11:
+              raise SystemExit("Expected >=11 pause states")
+          if len(games) < 11:
+              raise SystemExit("Expected >=11 game states")
+          for i, obj in enumerate(pauses, 1):
+              if int(obj.get("session", 0)) <= 0:
+                  raise SystemExit(f"Pause {i} has invalid session: {obj}")
+              if int(obj.get("generation", 0)) <= 0:
+                  raise SystemExit(f"Pause {i} has invalid generation: {obj}")
+          sessions = [int(x["session"]) for x in pauses]
+          if any(b <= a for a, b in zip(sessions, sessions[1:])):
+              raise SystemExit(f"Pause sessions not strictly increasing: {sessions}")
+          print("PROTOCOL_STATE_SEQUENCE=PASS")
+          PY
+
+          ! grep -qE 'NoClassDefFoundError|UnsatisfiedLinkError|InvalidMixinException|ExceptionInInitializerError' client-latest.log
+          echo 'MINECRAFT_IN_GAME_RUNTIME=PASS' >> runtime-result.txt
+
+          if test -f core-ui-bridge-diagnostic.log; then
+            grep -q 'pause-screen-detected' core-ui-bridge-diagnostic.log
+            grep -q 'pause-screen-replaced-with-gpu-overlay' core-ui-bridge-diagnostic.log
+            grep -q 'begin-pause session=' core-ui-bridge-diagnostic.log
+            grep -q 'socket-write.*"screen":"pause"' core-ui-bridge-diagnostic.log
+            echo 'DIAGNOSTIC_BOUNDARY=PASS' >> runtime-result.txt
+          fi
+
+      - name: Stop renderer peer
+        if: always()
+        run: |
+          if test -f mock-renderer.pid; then
+            kill "$(cat mock-renderer.pid)" 2>/dev/null || true
+          fi
+
+      - name: Upload runtime evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: core-ui-0311-ingame-runtime-evidence
+          if-no-files-found: warn
+          path: |
+            runtime-result.txt
+            world-generation.txt
+            CORE_UI_RUNTIME_TRACE.txt
+            mock-renderer.log
+            core-ui-bridge-diagnostic.log
+            client-console.log
+            client-latest.log
+            server-console.log
+            server-latest.log
+            glxinfo.txt
+            xvfb.log
+            openbox.log
+            core-ui-mod-metadata.txt
+            mdk/run/crash-reports/
