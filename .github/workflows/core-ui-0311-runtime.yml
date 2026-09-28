@@ -70,6 +70,69 @@ jobs:
           cp ../core_ui_bridge-0.3.11.jar libs/
           sed -i '/dependencies {/a\    compileOnly files("libs/core_ui_bridge-0.3.11.jar")' build.gradle
 
+          # Decompile the exact packaged overlay, then move pause-session startup
+          # from added() to init(), where Screen.init(Minecraft, w, h) has supplied
+          # the Minecraft instance. Keep all other overlay behavior unchanged.
+          curl -fL -o ../cfr-0.152.jar https://github.com/leibnitz27/cfr/releases/download/0.152/cfr-0.152.jar
+          rm -rf ../decompiled-overlay
+          mkdir -p ../decompiled-overlay
+          java -jar ../cfr-0.152.jar ../core_ui_bridge-0.3.11.jar --outputdir ../decompiled-overlay --silent true
+          test -f ../decompiled-overlay/dev/coreui/bridge/GpuOverlayScreen.java
+          cp ../decompiled-overlay/dev/coreui/bridge/GpuOverlayScreen.java src/main/java/dev/coreui/bridge/GpuOverlayScreen.java
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path("src/main/java/dev/coreui/bridge/GpuOverlayScreen.java")
+          s = p.read_text()
+
+          signature = "    public void added() {"
+          start = s.find(signature)
+          if start < 0:
+              raise SystemExit("GPU_OVERLAY_ADDED_METHOD_NOT_FOUND")
+
+          brace = s.find("{", start)
+          depth = 0
+          end = None
+          for i in range(brace, len(s)):
+              ch = s[i]
+              if ch == "{":
+                  depth += 1
+              elif ch == "}":
+                  depth -= 1
+                  if depth == 0:
+                      end = i + 1
+                      break
+          if end is None:
+              raise SystemExit("GPU_OVERLAY_ADDED_METHOD_END_NOT_FOUND")
+
+          replacement = """    public void added() {
+              this.openedAtNanos = System.nanoTime();
+              this.pointerSyncPending = true;
+              this.viewportFrameReady = false;
+              this.currentViewportImportAttempted = false;
+              this.readyGeneration = 0L;
+              this.lastReportedGpuError = null;
+          }
+
+          @Override
+          protected void init() {
+              if (this.sessionId == 0L && this.minecraft != null) {
+                  this.lastPixelWidth = this.minecraft.getWindow().getWidth();
+                  this.lastPixelHeight = this.minecraft.getWindow().getHeight();
+                  this.sessionId = BridgeRuntime.beginPauseSession(this.lastPixelWidth, this.lastPixelHeight);
+                  BridgeRuntime.trace("overlay-init begin-pause session=" + this.sessionId + " px=" + this.lastPixelWidth + "x" + this.lastPixelHeight);
+              }
+          }"""
+
+          s = s[:start] + replacement + s[end:]
+          p.write_text(s)
+          print("GPU_OVERLAY_LIFECYCLE_PATCH=APPLIED")
+          PY
+
+          grep -F 'protected void init()' src/main/java/dev/coreui/bridge/GpuOverlayScreen.java
+          grep -F 'overlay-init begin-pause session=' src/main/java/dev/coreui/bridge/GpuOverlayScreen.java
+
           mkdir -p src/main/java/dev/coreui/bridge
           cat > src/main/java/dev/coreui/bridge/CoreUiBridge.java <<'JAVA'
           package dev.coreui.bridge;
@@ -300,19 +363,30 @@ jobs:
           chmod +x gradlew
           ./gradlew --no-daemon compileJava
 
-          # Patch only CoreUiBridge.class, compiled here against the real
-          # NeoForge 21.1.250 ModDevGradle classpath.
-          javap -classpath build/classes/java/main -verbose dev.coreui.bridge.CoreUiBridge | tee ../core-ui-fixed-bytecode.txt
+          # Patch CoreUiBridge.class and GpuOverlayScreen.class, both compiled
+          # against the real NeoForge 21.1.250 / Minecraft 1.21.1 classpath.
+          {
+            echo '=== CoreUiBridge ==='
+            javap -classpath build/classes/java/main -verbose dev.coreui.bridge.CoreUiBridge
+            echo '=== GpuOverlayScreen ==='
+            javap -classpath build/classes/java/main -c -p dev.coreui.bridge.GpuOverlayScreen
+          } | tee ../core-ui-fixed-bytecode.txt
           grep -F 'NeoForge.EVENT_BUS:Lnet/neoforged/bus/api/IEventBus;' ../core-ui-fixed-bytecode.txt
+          grep -F 'BridgeRuntime.beginPauseSession' ../core-ui-fixed-bytecode.txt
+          grep -F 'protected void init();' ../core-ui-fixed-bytecode.txt
+
           mkdir -p ../api-fix/dev/coreui/bridge
           cp build/classes/java/main/dev/coreui/bridge/CoreUiBridge.class ../api-fix/dev/coreui/bridge/
-          (cd ../api-fix && zip -q -u ../core_ui_bridge-0.3.11.jar dev/coreui/bridge/CoreUiBridge.class)
+          cp build/classes/java/main/dev/coreui/bridge/GpuOverlayScreen.class ../api-fix/dev/coreui/bridge/
+          (cd ../api-fix && zip -q -u ../core_ui_bridge-0.3.11.jar dev/coreui/bridge/CoreUiBridge.class dev/coreui/bridge/GpuOverlayScreen.class)
           unzip -t ../core_ui_bridge-0.3.11.jar
           sha256sum ../core_ui_bridge-0.3.11.jar | tee ../fixed-jar-sha256.txt
 
-          # Do not let the helper copy shadow the actual mod JAR at runtime.
+          # Do not let helper copies shadow the actual patched mod JAR at runtime.
           rm -f src/main/java/dev/coreui/bridge/CoreUiBridge.java
+          rm -f src/main/java/dev/coreui/bridge/GpuOverlayScreen.java
           rm -f build/classes/java/main/dev/coreui/bridge/CoreUiBridge.class
+          rm -f build/classes/java/main/dev/coreui/bridge/GpuOverlayScreen.class
           cp ../core_ui_bridge-0.3.11.jar libs/core_ui_bridge-0.3.11.jar
 
       - name: Generate a real playable world
