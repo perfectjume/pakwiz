@@ -1,0 +1,12 @@
+name: CORE UI public runner smoke
+
+on:
+  push:
+    branches:
+      - core-ui-runtime-smoke
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo RUNNER_SMOKE_PASS
