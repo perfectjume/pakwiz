@@ -295,7 +295,8 @@ jobs:
                               fail(mc, "OVERLAY_DISAPPEARED_CYCLE_" + cycles);
                               return;
                           }
-                          if (phaseTicks >= 8) {
+                          int holdTicks = cycles == 1 ? 140 : 8;
+                          if (phaseTicks >= holdTicks) {
                               mc.setScreen(null);
                               trace("CLOSE_PAUSE_CYCLE=" + cycles);
                               phase = 3;
@@ -492,33 +493,68 @@ jobs:
         run: |
           set -euo pipefail
           cat > mock_renderer.py <<'PY'
-          import socket
+          import json, socket, time
           log = open("mock-renderer.log", "w", buffering=1)
           s = socket.socket()
           s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
           s.bind(("127.0.0.1", 37541))
-          s.listen(1)
+          s.listen(5)
+          s.settimeout(300)
           log.write("LISTENING\n")
-          c, a = s.accept()
-          log.write("ACCEPT " + repr(a) + "\n")
-          c.sendall(b'{"type":"ready","protocol":11,"renderer":"runtime-test"}\n')
-          buf = b""
-          c.settimeout(300)
+
+          connection = 0
+          forced = False
+          deadline = time.time() + 300
           try:
-              while True:
-                  data = c.recv(65536)
-                  if not data:
+              while time.time() < deadline:
+                  try:
+                      c, a = s.accept()
+                  except socket.timeout:
                       break
-                  buf += data
-                  while b"\n" in buf:
-                      line, buf = buf.split(b"\n", 1)
-                      if line:
-                          log.write(line.decode("utf-8", "replace") + "\n")
-          except Exception as e:
-              log.write("SERVER_END " + repr(e) + "\n")
+                  connection += 1
+                  log.write(f"CONNECTION {connection} {a!r}\n")
+                  c.settimeout(300)
+                  c.sendall(b'{"type":"ready","protocol":11,"renderer":"runtime-test"}\n')
+                  buf = b""
+                  force_close = False
+                  try:
+                      while True:
+                          data = c.recv(65536)
+                          if not data:
+                              break
+                          buf += data
+                          while b"\n" in buf:
+                              line, buf = buf.split(b"\n", 1)
+                              if not line:
+                                  continue
+                              decoded = line.decode("utf-8", "replace")
+                              log.write(f"C{connection} {decoded}\n")
+                              try:
+                                  msg = json.loads(decoded)
+                              except Exception:
+                                  continue
+                              if (not forced and msg.get("type") == "state"
+                                      and msg.get("screen") == "pause"):
+                                  forced = True
+                                  log.write(
+                                      "FORCED_DISCONNECT "
+                                      f"session={msg.get('session')} "
+                                      f"generation={msg.get('generation')}\n"
+                                  )
+                                  force_close = True
+                                  break
+                          if force_close:
+                              break
+                  except Exception as e:
+                      log.write(f"CONNECTION_END {connection} {e!r}\n")
+                  finally:
+                      try: c.shutdown(socket.SHUT_RDWR)
+                      except Exception: pass
+                      try: c.close()
+                      except Exception: pass
+                  if force_close:
+                      continue
           finally:
-              try: c.close()
-              except Exception: pass
               s.close()
               log.close()
           PY
@@ -567,42 +603,87 @@ jobs:
           grep -q '"type":"hello","protocol":11' mock-renderer.log
 
           python3 - <<'PY'
-          import json
-          pauses = []
-          games = []
+          import json, re
+
+          connection = 0
+          events = []
+          forced = None
           with open("mock-renderer.log", encoding="utf-8") as f:
               for raw in f:
                   raw = raw.strip()
-                  if not raw.startswith("{"):
+                  m = re.match(r"CONNECTION (\\d+) ", raw)
+                  if m:
+                      connection = int(m.group(1))
+                      continue
+                  m = re.match(r"FORCED_DISCONNECT session=(\\d+) generation=(\\d+)", raw)
+                  if m:
+                      forced = (int(m.group(1)), int(m.group(2)))
+                      continue
+                  m = re.match(r"C(\\d+) (\\{.*\\})$", raw)
+                  if not m:
                       continue
                   try:
-                      obj = json.loads(raw)
+                      obj = json.loads(m.group(2))
                   except Exception:
                       continue
-                  if obj.get("type") == "state" and obj.get("screen") == "pause":
-                      pauses.append(obj)
-                  if obj.get("type") == "state" and obj.get("screen") == "game":
-                      games.append(obj)
+                  events.append((int(m.group(1)), obj))
 
+          pauses = [(conn, obj) for conn, obj in events
+                    if obj.get("type") == "state" and obj.get("screen") == "pause"]
+          games = [(conn, obj) for conn, obj in events
+                   if obj.get("type") == "state" and obj.get("screen") == "game"]
+          hellos = [(conn, obj) for conn, obj in events if obj.get("type") == "hello"]
+
+          print("CONNECTION_COUNT", max((c for c, _ in events), default=0))
+          print("HELLO_COUNT", len(hellos))
           print("PAUSE_STATE_COUNT", len(pauses))
           print("GAME_STATE_COUNT", len(games))
-          if len(pauses) < 11:
-              raise SystemExit("Expected >=11 pause states")
+
+          if forced is None:
+              raise SystemExit("Renderer disconnect was never forced")
+          if len(hellos) < 2:
+              raise SystemExit(f"Expected reconnect hello, got {len(hellos)}")
+          if len(pauses) < 12:
+              raise SystemExit(f"Expected >=12 pause states including reconnect resend, got {len(pauses)}")
           if len(games) < 11:
-              raise SystemExit("Expected >=11 game states")
-          for i, obj in enumerate(pauses, 1):
+              raise SystemExit(f"Expected >=11 game states, got {len(games)}")
+
+          first_pause = next((obj for conn, obj in pauses if conn == 1), None)
+          reconnect_pause = next((obj for conn, obj in pauses if conn >= 2), None)
+          if first_pause is None or reconnect_pause is None:
+              raise SystemExit("Missing pause state before or after forced reconnect")
+
+          first_pair = (int(first_pause["session"]), int(first_pause["generation"]))
+          reconnect_pair = (int(reconnect_pause["session"]), int(reconnect_pause["generation"]))
+          if first_pair != forced:
+              raise SystemExit(f"Forced marker mismatch: first={first_pair}, forced={forced}")
+          if reconnect_pair != forced:
+              raise SystemExit(
+                  f"Pause session/generation changed across reconnect: "
+                  f"before={forced}, after={reconnect_pair}"
+              )
+
+          for i, (_, obj) in enumerate(pauses, 1):
               if int(obj.get("session", 0)) <= 0:
                   raise SystemExit(f"Pause {i} has invalid session: {obj}")
               if int(obj.get("generation", 0)) <= 0:
                   raise SystemExit(f"Pause {i} has invalid generation: {obj}")
-          sessions = [int(x["session"]) for x in pauses]
-          if any(b <= a for a, b in zip(sessions, sessions[1:])):
-              raise SystemExit(f"Pause sessions not strictly increasing: {sessions}")
+
+          unique_sessions = []
+          for _, obj in pauses:
+              session = int(obj["session"])
+              if not unique_sessions or unique_sessions[-1] != session:
+                  unique_sessions.append(session)
+          if unique_sessions != list(range(1, 12)):
+              raise SystemExit(f"Unexpected pause session sequence: {unique_sessions}")
+
+          print("RECONNECT_SAME_SESSION_GENERATION=PASS", forced)
           print("PROTOCOL_STATE_SEQUENCE=PASS")
           PY
 
           ! grep -qE 'NoClassDefFoundError|UnsatisfiedLinkError|InvalidMixinException|ExceptionInInitializerError' client-latest.log
           echo 'MINECRAFT_IN_GAME_RUNTIME=PASS' >> runtime-result.txt
+          echo 'FORCED_RECONNECT_RUNTIME=PASS' >> runtime-result.txt
 
           if test -f core-ui-bridge-diagnostic.log; then
             grep -q 'pause-screen-detected' core-ui-bridge-diagnostic.log
