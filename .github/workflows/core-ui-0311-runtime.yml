@@ -57,16 +57,15 @@ jobs:
           sed -i '/dependencies {/a\    compileOnly files("libs/core_ui_bridge-0.3.11.jar")' build.gradle
           python3 - <<'PY'
           from pathlib import Path
+          import re
           p = Path("build.gradle")
           s = p.read_text()
-          old = """client {
-                  client()"""
-          new = """client {
-                  client()
-                  programArguments.addAll '--quickPlaySingleplayer', 'CORE_UI_TEST_WORLD', '--width', '854', '--height', '480'"""
-          if old not in s:
+          pattern = r"(client\s*\{\s*client\(\))"
+          repl = r"\1\n        programArguments.addAll '--quickPlaySingleplayer', 'CORE_UI_TEST_WORLD', '--width', '854', '--height', '480'"
+          s2, n = re.subn(pattern, repl, s, count=1)
+          if n != 1:
               raise SystemExit("client run configuration anchor not found")
-          p.write_text(s.replace(old, new, 1))
+          p.write_text(s2)
           PY
 
           cat > src/main/java/com/example/coreuiruntime/CoreUiRuntimeTest.java <<'JAVA'
