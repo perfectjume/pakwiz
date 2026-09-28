@@ -611,15 +611,15 @@ jobs:
           with open("mock-renderer.log", encoding="utf-8") as f:
               for raw in f:
                   raw = raw.strip()
-                  m = re.match(r"CONNECTION (\\d+) ", raw)
+                  m = re.match(r"CONNECTION (\d+) ", raw)
                   if m:
                       connection = int(m.group(1))
                       continue
-                  m = re.match(r"FORCED_DISCONNECT session=(\\d+) generation=(\\d+)", raw)
+                  m = re.match(r"FORCED_DISCONNECT session=(\d+) generation=(\d+)", raw)
                   if m:
                       forced = (int(m.group(1)), int(m.group(2)))
                       continue
-                  m = re.match(r"C(\\d+) (\\{.*\\})$", raw)
+                  m = re.match(r"C(\d+) (\{.*\})$", raw)
                   if not m:
                       continue
                   try:
