@@ -256,7 +256,7 @@ jobs:
 
           cat > ../prepare_world.py <<'PY'
           import subprocess, sys, time
-          cmd = ["./gradlew", "--no-daemon", "runServer", "--console=plain", "--args=nogui"]
+          cmd = ["./gradlew", "--no-daemon", "runServer", "--console=plain"]
           with open("../server-console.log", "w", buffering=1) as log:
               p = subprocess.Popen(
                   cmd,
