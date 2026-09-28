@@ -51,6 +51,20 @@ jobs:
           sed -i 's/^mod_name=.*/mod_name=CORE UI Runtime Test/' gradle.properties
           sed -i 's/^mod_version=.*/mod_version=1.0.0/' gradle.properties
           sed -i 's/^mod_group_id=.*/mod_group_id=com.example.coreuiruntime/' gradle.properties
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("build.gradle")
+          s = p.read_text()
+          needle = "        client()\n"
+          if needle not in s:
+              raise SystemExit("CLIENT_RUN_BLOCK_NOT_FOUND")
+          s = s.replace(
+              needle,
+              needle + "        programArguments.addAll '--quickPlaySingleplayer', 'CORE_UI_TEST_WORLD', '--width', '854', '--height', '480'\n",
+              1,
+          )
+          p.write_text(s)
+          PY
           rm -rf src/main/java/com/example/examplemod
           mkdir -p src/main/java/com/example/coreuiruntime libs run/mods
           cp ../core_ui_bridge-0.3.11.jar libs/
@@ -360,7 +374,7 @@ jobs:
           openbox > ../openbox.log 2>&1 &
           sleep 2
           glxinfo -B > ../glxinfo.txt 2>&1 || true
-          timeout 300s ./gradlew --no-daemon runClient --console=plain --args='--quickPlaySingleplayer CORE_UI_TEST_WORLD --width 854 --height 480' 2>&1 | tee ../client-console.log
+          timeout 300s ./gradlew --no-daemon runClient --console=plain 2>&1 | tee ../client-console.log
           code=${PIPESTATUS[0]}
           cp run/logs/latest.log ../client-latest.log 2>/dev/null || true
           cp run/CORE_UI_RUNTIME_TRACE.txt ../CORE_UI_RUNTIME_TRACE.txt 2>/dev/null || true
