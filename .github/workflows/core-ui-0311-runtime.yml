@@ -283,11 +283,25 @@ jobs:
                   raise SystemExit("SERVER_WORLD_GENERATION_DID_NOT_REACH_READY")
               p.stdin.write("stop\n")
               p.stdin.flush()
-              try:
-                  code = p.wait(timeout=60)
-              except subprocess.TimeoutExpired:
+              p.stdin.close()
+              shutdown_deadline = time.time() + 90
+              while time.time() < shutdown_deadline:
+                  line = p.stdout.readline()
+                  if line:
+                      sys.stdout.write(line)
+                      log.write(line)
+                      continue
+                  if p.poll() is not None:
+                      break
+                  time.sleep(0.05)
+              if p.poll() is None:
                   p.terminate()
-                  code = p.wait(timeout=20)
+                  try:
+                      p.wait(timeout=20)
+                  except subprocess.TimeoutExpired:
+                      p.kill()
+                      p.wait(timeout=10)
+              code = p.returncode
               if code != 0:
                   raise SystemExit(f"SERVER_EXIT={code}")
           PY
