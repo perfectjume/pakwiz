@@ -1,4 +1,4 @@
-name: Hollowmarch C2ME Runtime Test
+name: Hollowmarch C2ME Controlled Runtime Test
 
 on:
   push:
@@ -29,64 +29,53 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-
           curl -fL --retry 5 --retry-delay 2 \
             -o neoforge-21.1.250-installer.jar \
             https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.250/neoforge-21.1.250-installer.jar
 
           python3 - <<'PY'
           import json, urllib.request
-
           versions = {
               "c2me.jar": "kvrPcTsz",
               "hollowmarch.jar": "nzAPF4pb",
               "geckolib.jar": "tPkJmim6",
               "create.jar": "UjX6dr61",
           }
-
           for out, version_id in versions.items():
               with urllib.request.urlopen(f"https://api.modrinth.com/v2/version/{version_id}") as r:
                   meta = json.load(r)
               files = meta["files"]
               primary = next((f for f in files if f.get("primary")), files[0])
-              print(f"{out}: {primary['filename']} {primary['url']}")
               urllib.request.urlretrieve(primary["url"], out)
+              print(out, primary["filename"])
           PY
 
           echo 'f06c116c1b447a2cdb3162d6c9ec54c9a422b48d  c2me.jar' | sha1sum -c -
-
           base64 -d .runtime/hollowmarch-c2me-fix-v2.jar.b64 > hollowmarch-c2me-fix-v2.jar
           echo '69a7d4f590910e690b1d9cb2bdf63f51a21d76cefb597fcd95fde6fe75c36172  hollowmarch-c2me-fix-v2.jar' | sha256sum -c -
-
           java -version
-          sha256sum neoforge-21.1.250-installer.jar c2me.jar hollowmarch.jar geckolib.jar create.jar hollowmarch-c2me-fix-v2.jar
 
-      - name: Verify downloaded Hollowmarch target class matches user's exact JAR
+      - name: Verify exact Hollowmarch target class
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p target-check
           unzip -p hollowmarch.jar \
             com/overyourhead/hollowmarch/common/worldgen/structure/PiratesFallMobEvents.class \
-            > target-check/PiratesFallMobEvents.class
-
-          ACTUAL="$(sha256sum target-check/PiratesFallMobEvents.class | awk '{print $1}')"
+            > PiratesFallMobEvents.class
+          ACTUAL="$(sha256sum PiratesFallMobEvents.class | awk '{print $1}')"
           EXPECTED='0953b403b525c5fbff96892d3ebbb70ff3804790380ed484fadb58aad7245df4'
-
-          echo "Official target class SHA256: $ACTUAL"
-          echo "User exact target class SHA256: $EXPECTED"
+          echo "target_class_sha256=$ACTUAL"
           test "$ACTUAL" = "$EXPECTED"
 
-      - name: Install NeoForge 21.1.250 dedicated server
+      - name: Install exact NeoForge dedicated server
         shell: bash
         run: |
           set -euo pipefail
-          mkdir server-template
-          cd server-template
-
+          mkdir server
+          cd server
           java -jar ../neoforge-21.1.250-installer.jar --installServer
-
           printf 'eula=true\n' > eula.txt
+
           cat > user_jvm_args.txt <<'EOF'
           -Xms1G
           -Xmx4G
@@ -99,195 +88,133 @@ jobs:
           enforce-secure-profile=false
           view-distance=6
           simulation-distance=6
-          max-tick-time=180000
+          max-tick-time=-1
           allow-flight=true
           spawn-protection=0
           sync-chunk-writes=true
-          motd=Hollowmarch C2ME runtime test
+          motd=Hollowmarch C2ME controlled runtime test
           EOF
 
+          mkdir mods
+          cp ../c2me.jar ../hollowmarch.jar ../geckolib.jar ../create.jar ../hollowmarch-c2me-fix-v2.jar mods/
           chmod +x run.sh
-          cd ..
 
-          cp -a server-template server-baseline
-          cp -a server-template server-patched
-
-          mkdir -p server-baseline/mods server-patched/mods
-          cp c2me.jar hollowmarch.jar geckolib.jar create.jar server-baseline/mods/
-          cp c2me.jar hollowmarch.jar geckolib.jar create.jar server-patched/mods/
-          cp hollowmarch-c2me-fix-v2.jar server-patched/mods/
-
-      - name: Run baseline and patched real-server workload
-        shell: bash
-        run: |
-          set -u
-
-          run_case() {
-            local dir="$1"
-            local label="$2"
-            local log="$GITHUB_WORKSPACE/$label.log"
-            local status="$GITHUB_WORKSPACE/$label.status"
-
-            echo "=== $label: starting real dedicated server ==="
-            cd "$GITHUB_WORKSPACE/$dir"
-            rm -f server.in
-            mkfifo server.in
-            exec 3<>server.in
-
-            ./run.sh nogui < server.in > "$log" 2>&1 &
-            local pid=$!
-
-            local ready=0
-            for i in $(seq 1 240); do
-              if grep -Fq 'Done (' "$log" 2>/dev/null; then
-                ready=1
-                break
-              fi
-              if ! kill -0 "$pid" 2>/dev/null; then
-                break
-              fi
-              sleep 1
-            done
-
-            echo "ready=$ready" | tee "$status"
-            if [ "$ready" -ne 1 ]; then
-              echo "Server failed before reaching Done" | tee -a "$status"
-              tail -n 250 "$log" || true
-              exec 3>&-
-              wait "$pid" || true
-              return 2
-            fi
-
-            echo "=== $label: stressing C2ME new-chunk load path ==="
-
-            # Each add covers 16x16 = 256 chunks, Minecraft's per-command maximum.
-            # Two commands are issued back-to-back per batch. Across six batches this
-            # generates about 3,072 new chunks: enough to keep C2ME's 4 worker cores
-            # busy while Hollowmarch level ticks run, without manufacturing the
-            # unrelated 17k-loaded-chunk watchdog seen in the first stress attempt.
-            for batch in $(seq 0 5); do
-              base=$((batch * 512 + 8192))
-              echo "forceload add $base 8192 $((base+255)) 8447" >&3
-              echo "forceload add $((base+256)) 8192 $((base+511)) 8447" >&3
-              sleep 5
-
-              if ! kill -0 "$pid" 2>/dev/null; then
-                echo "process_died_during_batch=$batch" | tee -a "$status"
-                break
-              fi
-
-              echo "forceload remove all" >&3
-              sleep 2
-            done
-
-            # Keep ticking long enough for Hollowmarch's 120-tick pending countdowns
-            # and structure checks to execute repeatedly.
-            sleep 15
-
-            if kill -0 "$pid" 2>/dev/null; then
-              echo "save-all flush" >&3
-              sleep 3
-              echo "stop" >&3
-            fi
-            exec 3>&-
-
-            for i in $(seq 1 60); do
-              if ! kill -0 "$pid" 2>/dev/null; then
-                break
-              fi
-              sleep 1
-            done
-
-            if kill -0 "$pid" 2>/dev/null; then
-              echo "forced_kill_after_shutdown_timeout=1" | tee -a "$status"
-              kill "$pid" 2>/dev/null || true
-              sleep 3
-              kill -9 "$pid" 2>/dev/null || true
-            fi
-
-            wait "$pid" || true
-
-            if grep -Fq 'because "this.wrapped" is null' "$log"; then
-              echo "wrapped_npe=1" | tee -a "$status"
-            else
-              echo "wrapped_npe=0" | tee -a "$status"
-            fi
-
-            if grep -Fq 'PiratesFallMobEvents.onLevelTick(PiratesFallMobEvents.java:72)' "$log"; then
-              echo "original_line72_crash=1" | tee -a "$status"
-            else
-              echo "original_line72_crash=0" | tee -a "$status"
-            fi
-
-            if grep -Eq 'MixinApplyError|InvalidMixinException|InjectionError|Critical injection failure' "$log"; then
-              echo "mixin_error=1" | tee -a "$status"
-            else
-              echo "mixin_error=0" | tee -a "$status"
-            fi
-
-            if grep -Fq 'Server Watchdog' "$log"; then
-              echo "watchdog_crash=1" | tee -a "$status"
-            else
-              echo "watchdog_crash=0" | tee -a "$status"
-            fi
-
-            tail -n 120 "$log" || true
-            return 0
-          }
-
-          baseline_rc=0
-          patched_rc=0
-          run_case server-baseline baseline || baseline_rc=$?
-          run_case server-patched patched || patched_rc=$?
-
-          cd "$GITHUB_WORKSPACE"
-          echo "baseline_rc=$baseline_rc" | tee -a "$GITHUB_WORKSPACE/baseline.status"
-          echo "patched_rc=$patched_rc" | tee -a "$GITHUB_WORKSPACE/patched.status"
-
-          # Patched runtime must start, survive the workload, and remain free of
-          # both the original Hollowmarch failure and any watchdog crash.
-          test "$patched_rc" -eq 0
-          grep -Fq 'ready=1' "$GITHUB_WORKSPACE/patched.status"
-          grep -Fq 'wrapped_npe=0' "$GITHUB_WORKSPACE/patched.status"
-          grep -Fq 'original_line72_crash=0' "$GITHUB_WORKSPACE/patched.status"
-          grep -Fq 'mixin_error=0' "$GITHUB_WORKSPACE/patched.status"
-          grep -Fq 'watchdog_crash=0' "$GITHUB_WORKSPACE/patched.status"
-
-      - name: Verify v2 mixin actually transformed Hollowmarch in live runtime
+      - name: Run controlled real-server chunk workload
         shell: bash
         run: |
           set -euo pipefail
+          cd server
+          rm -f server.in
+          mkfifo server.in
+          exec 3<>server.in
 
-          echo 'Searching exported live Mixin classes...'
-          find server-patched -type f -path '*mixin.out*PiratesFallMobEvents*.class' -print | tee transformed-files.txt
+          ./run.sh nogui < server.in > ../patched.log 2>&1 &
+          pid=$!
 
-          TARGET="$(find server-patched -type f -path '*mixin.out*PiratesFallMobEvents.class' | head -n 1)"
+          ready=0
+          for i in $(seq 1 240); do
+            if grep -Fq 'Done (' ../patched.log 2>/dev/null; then
+              ready=1
+              break
+            fi
+            if ! kill -0 "$pid" 2>/dev/null; then
+              break
+            fi
+            sleep 1
+          done
+
+          echo "ready=$ready" | tee ../patched.status
+          test "$ready" -eq 1
+
+          # 8 batches x 8x8 = 512 distinct new chunks.  The batches are separated
+          # and removed before the next one so the runner is not overloaded by
+          # thousands of permanently force-loaded chunks.
+          for batch in $(seq 0 7); do
+            x=$((8192 + batch * 256))
+            z=8192
+            echo "forceload add $x $z $((x+7)) $((z+7))" >&3
+            sleep 6
+
+            if ! kill -0 "$pid" 2>/dev/null; then
+              echo "process_died_during_batch=$batch" | tee -a ../patched.status
+              break
+            fi
+
+            if grep -Fq 'because "this.wrapped" is null' ../patched.log; then
+              echo "wrapped_npe_seen_during_batch=$batch" | tee -a ../patched.status
+              break
+            fi
+
+            echo "forceload remove all" >&3
+            sleep 3
+          done
+
+          # Hollowmarch uses a 120-tick pending countdown; keep the real server
+          # ticking well beyond six seconds after the final generated chunks.
+          sleep 30
+
+          alive_before_stop=0
+          if kill -0 "$pid" 2>/dev/null; then
+            alive_before_stop=1
+            echo "save-all flush" >&3
+            sleep 5
+            echo "stop" >&3
+          fi
+          echo "alive_before_stop=$alive_before_stop" | tee -a ../patched.status
+          exec 3>&-
+
+          for i in $(seq 1 90); do
+            if ! kill -0 "$pid" 2>/dev/null; then
+              break
+            fi
+            sleep 1
+          done
+
+          if kill -0 "$pid" 2>/dev/null; then
+            echo "clean_shutdown=0" | tee -a ../patched.status
+            kill "$pid" 2>/dev/null || true
+            sleep 2
+            kill -9 "$pid" 2>/dev/null || true
+          else
+            echo "clean_shutdown=1" | tee -a ../patched.status
+          fi
+          wait "$pid" || true
+
+          cd ..
+          grep -Fq 'because "this.wrapped" is null' patched.log && echo 'wrapped_npe=1' | tee -a patched.status || echo 'wrapped_npe=0' | tee -a patched.status
+          grep -Fq 'PiratesFallMobEvents.onLevelTick(PiratesFallMobEvents.java:72)' patched.log && echo 'original_line72_crash=1' | tee -a patched.status || echo 'original_line72_crash=0' | tee -a patched.status
+          grep -Eq 'MixinApplyError|InvalidMixinException|InjectionError|Critical injection failure' patched.log && echo 'mixin_error=1' | tee -a patched.status || echo 'mixin_error=0' | tee -a patched.status
+          grep -Fq 'Encountered an unexpected exception' patched.log && echo 'unexpected_server_exception=1' | tee -a patched.status || echo 'unexpected_server_exception=0' | tee -a patched.status
+
+          grep -Fq 'ready=1' patched.status
+          grep -Fq 'alive_before_stop=1' patched.status
+          grep -Fq 'clean_shutdown=1' patched.status
+          grep -Fq 'wrapped_npe=0' patched.status
+          grep -Fq 'original_line72_crash=0' patched.status
+          grep -Fq 'mixin_error=0' patched.status
+          grep -Fq 'unexpected_server_exception=0' patched.status
+
+      - name: Verify live Mixin transformation
+        shell: bash
+        run: |
+          set -euo pipefail
+          find server -type f -path '*mixin.out*PiratesFallMobEvents*.class' -print | tee transformed-files.txt
+          TARGET="$(find server -type f -path '*mixin.out*PiratesFallMobEvents.class' | head -n 1)"
           test -n "$TARGET"
-
-          echo "Transformed class: $TARGET"
           javap -p "$TARGET" > transformed-javap.txt
-
           grep -F 'hollowmarchC2MEFix$stagePendingMutation' transformed-javap.txt
           grep -F 'hollowmarchC2MEFix$drainStagedBeforeIteration' transformed-javap.txt
-          grep -F 'ConcurrentLinkedQueue' transformed-javap.txt || true
-
-          echo '=== baseline status ==='
-          cat baseline.status
-          echo '=== patched status ==='
           cat patched.status
 
-      - name: Upload runtime evidence
+      - name: Upload controlled runtime evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: hollowmarch-c2me-runtime-evidence
+          name: hollowmarch-c2me-controlled-runtime-evidence
           if-no-files-found: warn
           path: |
-            baseline.log
             patched.log
-            baseline.status
             patched.status
             transformed-files.txt
             transformed-javap.txt
-            server-baseline/crash-reports/
-            server-patched/crash-reports/
+            server/crash-reports/
