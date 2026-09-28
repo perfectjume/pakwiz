@@ -253,6 +253,12 @@ jobs:
           rm -f run/mods/core_ui_bridge-0.3.11.jar
           mkdir -p run
           echo 'eula=true' > run/eula.txt
+          cat > run/server.properties <<'EOF'
+          online-mode=false
+          view-distance=2
+          simulation-distance=2
+          spawn-protection=0
+          EOF
           rm -f ../server-input.fifo ../server-console.log
           mkfifo ../server-input.fifo
 
@@ -280,11 +286,18 @@ jobs:
             exit 1
           fi
 
-          echo 'stop' >&3
+          # ModDevGradle's runServer task does not reliably forward interactive
+          # stdin to the spawned dedicated server on GitHub's runner. The world
+          # is fully generated once "Done (" is observed. Give it a short flush
+          # window, request a clean stop, then terminate the Gradle wrapper if
+          # it remains alive. Exit 143/-15 is accepted only after level.dat exists.
+          echo 'save-all flush' >&3 || true
+          sleep 3
+          echo 'stop' >&3 || true
           exec 3>&-
 
           exited=0
-          for i in $(seq 1 90); do
+          for i in $(seq 1 15); do
             if ! kill -0 "$server_pid" 2>/dev/null; then
               exited=1
               break
@@ -300,10 +313,13 @@ jobs:
           server_code=$?
           set -e
           tail -120 ../server-console.log || true
-          if [ "$server_code" -ne 0 ]; then
-            echo "SERVER_EXIT=$server_code"
+
+          test -f run/world/level.dat
+          if [ "$server_code" -ne 0 ] && [ "$server_code" -ne 143 ] && [ "$server_code" -ne 15 ]; then
+            echo "UNEXPECTED_SERVER_EXIT=$server_code"
             exit "$server_code"
           fi
+          echo "SERVER_EXIT_ACCEPTED=$server_code"
 
           test -f run/world/level.dat
           cp run/logs/latest.log ../server-latest.log
@@ -364,7 +380,7 @@ jobs:
           openbox > ../openbox.log 2>&1 &
           sleep 2
           glxinfo -B > ../glxinfo.txt 2>&1 || true
-          timeout 300s ./gradlew --no-daemon runClient --console=plain 2>&1 | tee ../client-console.log
+          timeout 300s ./gradlew --no-daemon runClient --console=plain --args='--quickPlaySingleplayer CORE_UI_TEST_WORLD --width 854 --height 480' 2>&1 | tee ../client-console.log
           code=${PIPESTATUS[0]}
           cp run/logs/latest.log ../client-latest.log 2>/dev/null || true
           cp run/CORE_UI_RUNTIME_TRACE.txt ../CORE_UI_RUNTIME_TRACE.txt 2>/dev/null || true
