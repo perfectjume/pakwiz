@@ -149,7 +149,9 @@ jobs:
           if draw_index is None:
               raise SystemExit("GPU_OVERLAY_BEGINDRAW_ASSIGNMENT_NOT_FOUND")
           for i in range(import_index + 1, draw_index):
-              lines[i] = re.sub(r'\\b' + re.escape(oldvar) + r'\\b', 'importOk', lines[i])
+              # oldvar is a CFR-generated local name (observed: n3) and this
+              # bounded range is exactly its boolean lifetime before beginDraw.
+              lines[i] = lines[i].replace(oldvar, 'importOk')
           s = "".join(lines)
           print("GPU_OVERLAY_CFR_IMPORT_LINE_ORIGINAL=" + original_line.strip())
           print("GPU_OVERLAY_CFR_IMPORT_VAR=" + oldvar)
