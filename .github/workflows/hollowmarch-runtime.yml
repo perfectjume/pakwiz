@@ -161,16 +161,15 @@ jobs:
             echo "=== $label: stressing C2ME new-chunk load path ==="
 
             # Each add covers 16x16 = 256 chunks, Minecraft's per-command maximum.
-            # Four commands are issued back-to-back per batch before waiting, so C2ME
-            # has a substantial parallel chunk-generation/load queue while level ticks
-            # continue iterating Hollowmarch's pending map.
-            for batch in $(seq 0 11); do
-              base=$((batch * 1024 + 8192))
+            # Two commands are issued back-to-back per batch. Across six batches this
+            # generates about 3,072 new chunks: enough to keep C2ME's 4 worker cores
+            # busy while Hollowmarch level ticks run, without manufacturing the
+            # unrelated 17k-loaded-chunk watchdog seen in the first stress attempt.
+            for batch in $(seq 0 5); do
+              base=$((batch * 512 + 8192))
               echo "forceload add $base 8192 $((base+255)) 8447" >&3
               echo "forceload add $((base+256)) 8192 $((base+511)) 8447" >&3
-              echo "forceload add $((base+512)) 8192 $((base+767)) 8447" >&3
-              echo "forceload add $((base+768)) 8192 $((base+1023)) 8447" >&3
-              sleep 7
+              sleep 5
 
               if ! kill -0 "$pid" 2>/dev/null; then
                 echo "process_died_during_batch=$batch" | tee -a "$status"
@@ -183,16 +182,16 @@ jobs:
 
             # Keep ticking long enough for Hollowmarch's 120-tick pending countdowns
             # and structure checks to execute repeatedly.
-            sleep 20
+            sleep 15
 
             if kill -0 "$pid" 2>/dev/null; then
               echo "save-all flush" >&3
-              sleep 5
+              sleep 3
               echo "stop" >&3
             fi
             exec 3>&-
 
-            for i in $(seq 1 90); do
+            for i in $(seq 1 60); do
               if ! kill -0 "$pid" 2>/dev/null; then
                 break
               fi
@@ -226,6 +225,12 @@ jobs:
               echo "mixin_error=0" | tee -a "$status"
             fi
 
+            if grep -Fq 'Server Watchdog' "$log"; then
+              echo "watchdog_crash=1" | tee -a "$status"
+            else
+              echo "watchdog_crash=0" | tee -a "$status"
+            fi
+
             tail -n 120 "$log" || true
             return 0
           }
@@ -235,15 +240,18 @@ jobs:
           run_case server-baseline baseline || baseline_rc=$?
           run_case server-patched patched || patched_rc=$?
 
-          echo "baseline_rc=$baseline_rc" | tee -a baseline.status
-          echo "patched_rc=$patched_rc" | tee -a patched.status
+          cd "$GITHUB_WORKSPACE"
+          echo "baseline_rc=$baseline_rc" | tee -a "$GITHUB_WORKSPACE/baseline.status"
+          echo "patched_rc=$patched_rc" | tee -a "$GITHUB_WORKSPACE/patched.status"
 
-          # Patched runtime must start and remain free of the original failure.
+          # Patched runtime must start, survive the workload, and remain free of
+          # both the original Hollowmarch failure and any watchdog crash.
           test "$patched_rc" -eq 0
-          grep -Fq 'ready=1' patched.status
-          grep -Fq 'wrapped_npe=0' patched.status
-          grep -Fq 'original_line72_crash=0' patched.status
-          grep -Fq 'mixin_error=0' patched.status
+          grep -Fq 'ready=1' "$GITHUB_WORKSPACE/patched.status"
+          grep -Fq 'wrapped_npe=0' "$GITHUB_WORKSPACE/patched.status"
+          grep -Fq 'original_line72_crash=0' "$GITHUB_WORKSPACE/patched.status"
+          grep -Fq 'mixin_error=0' "$GITHUB_WORKSPACE/patched.status"
+          grep -Fq 'watchdog_crash=0' "$GITHUB_WORKSPACE/patched.status"
 
       - name: Verify v2 mixin actually transformed Hollowmarch in live runtime
         shell: bash
