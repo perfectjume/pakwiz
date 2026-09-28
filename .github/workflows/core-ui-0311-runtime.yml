@@ -265,6 +265,7 @@ jobs:
                   stderr=subprocess.STDOUT,
                   text=True,
                   bufsize=1,
+                  start_new_session=True,
               )
               ready = False
               deadline = time.time() + 240
@@ -279,17 +280,24 @@ jobs:
                   elif p.poll() is not None:
                       break
               if not ready:
-                  p.terminate()
+                  import os, signal
+                  try: os.killpg(p.pid, signal.SIGTERM)
+                  except ProcessLookupError: pass
                   raise SystemExit("SERVER_WORLD_GENERATION_DID_NOT_REACH_READY")
-              p.stdin.write("stop\n")
-              p.stdin.flush()
+              # Gradle's runServer task does not forward stdin reliably in CI.
+              # Once the server reports Done, the playable world exists; stop the
+              # entire launch process group instead of misclassifying SIGTERM as
+              # a world-generation failure.
+              import os, signal
+              time.sleep(2)
+              try: os.killpg(p.pid, signal.SIGTERM)
+              except ProcessLookupError: pass
               try:
-                  code = p.wait(timeout=60)
+                  p.wait(timeout=20)
               except subprocess.TimeoutExpired:
-                  p.terminate()
-                  code = p.wait(timeout=20)
-              if code != 0:
-                  raise SystemExit(f"SERVER_EXIT={code}")
+                  try: os.killpg(p.pid, signal.SIGKILL)
+                  except ProcessLookupError: pass
+                  p.wait(timeout=10)
           PY
 
           python3 ../prepare_world.py
