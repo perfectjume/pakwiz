@@ -376,6 +376,9 @@ jobs:
           rm -rf run/saves/CORE_UI_TEST_WORLD
           mv run/world run/saves/CORE_UI_TEST_WORLD
           cp ../core_ui_bridge-0.3.11.jar run/mods/
+          # Minecraft 1.21.1 fresh game directories default onboardAccessibility
+          # to true, which blocks quick-play behind AccessibilityOnboardingScreen.
+          printf 'version:3955\nonboardAccessibility:false\n' > run/options.txt
           echo 'WORLD_READY=PASS' > ../world-generation.txt
 
       - name: Start protocol-11 renderer peer
