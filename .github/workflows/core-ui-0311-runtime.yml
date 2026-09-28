@@ -256,7 +256,7 @@ jobs:
 
           cat > ../prepare_world.py <<'PY'
           import subprocess, sys, time
-          cmd = ["./gradlew", "--no-daemon", "runServer", "--console=plain", "--args=nogui"]
+          cmd = ["./gradlew", "--no-daemon", "runServer", "--console=plain"]
           with open("../server-console.log", "w", buffering=1) as log:
               p = subprocess.Popen(
                   cmd,
@@ -352,7 +352,7 @@ jobs:
           openbox > ../openbox.log 2>&1 &
           sleep 2
           glxinfo -B > ../glxinfo.txt 2>&1 || true
-          timeout 300s ./gradlew --no-daemon runClient --console=plain --args='--quickPlaySingleplayer CORE_UI_TEST_WORLD --width 854 --height 480' 2>&1 | tee ../client-console.log
+          timeout 300s ./gradlew --no-daemon runClient --console=plain 2>&1 | tee ../client-console.log
           code=${PIPESTATUS[0]}
           cp run/logs/latest.log ../client-latest.log 2>/dev/null || true
           cp run/CORE_UI_RUNTIME_TRACE.txt ../CORE_UI_RUNTIME_TRACE.txt 2>/dev/null || true
