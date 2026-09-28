@@ -127,8 +127,29 @@ jobs:
           }"""
 
           s = s[:start] + replacement + s[end:]
+
+          # CFR can merge different JVM local-slot types. In this class the same
+          # slot is used first for importFrame(boolean), later for beginDraw(int).
+          # Split only the decompiler-created Java variable so source recompiles
+          # without changing the original control flow.
+          import re
+          m = re.search(r'(?m)^(\\s*)([A-Za-z_$][A-Za-z0-9_$]*)\\s*=\\s*this\\.gpu\\.importFrame\\(frameDescriptor\\);', s)
+          if not m:
+              raise SystemExit("GPU_OVERLAY_IMPORTFRAME_ASSIGNMENT_NOT_FOUND")
+          oldvar = m.group(2)
+          draw_marker = oldvar + " = this.gpu.beginDraw();"
+          draw_pos = s.find(draw_marker, m.end())
+          if draw_pos < 0:
+              raise SystemExit("GPU_OVERLAY_BEGINDRAW_ASSIGNMENT_NOT_FOUND")
+          segment = s[m.start():draw_pos]
+          segment = re.sub(r'\\b' + re.escape(oldvar) + r'\\b', 'importOk', segment)
+          segment = segment.replace("importOk = this.gpu.importFrame(frameDescriptor);",
+                                    "boolean importOk = this.gpu.importFrame(frameDescriptor);", 1)
+          s = s[:m.start()] + segment + s[draw_pos:]
+
           p.write_text(s)
           print("GPU_OVERLAY_LIFECYCLE_PATCH=APPLIED")
+          print("GPU_OVERLAY_CFR_SLOT_SPLIT=APPLIED")
           PY
 
           grep -F 'protected void init()' src/main/java/dev/coreui/bridge/GpuOverlayScreen.java
