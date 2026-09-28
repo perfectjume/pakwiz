@@ -126,13 +126,14 @@ jobs:
           echo "ready=$ready" | tee ../patched.status
           test "$ready" -eq 1
 
-          # 8 batches x 8x8 = 512 distinct new chunks.  The batches are separated
-          # and removed before the next one so the runner is not overloaded by
-          # thousands of permanently force-loaded chunks.
+          # /forceload takes BLOCK coordinates. A 128x128-block rectangle is
+          # exactly 8x8 chunks = 64 chunks. Eight separated batches therefore
+          # generate 512 distinct chunks while keeping only one 64-chunk batch
+          # force-loaded at a time.
           for batch in $(seq 0 7); do
             x=$((8192 + batch * 256))
             z=8192
-            echo "forceload add $x $z $((x+7)) $((z+7))" >&3
+            echo "forceload add $x $z $((x+127)) $((z+127))" >&3
             sleep 6
 
             if ! kill -0 "$pid" 2>/dev/null; then
