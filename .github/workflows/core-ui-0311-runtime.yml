@@ -133,19 +133,26 @@ jobs:
           # Split only the decompiler-created Java variable so source recompiles
           # without changing the original control flow.
           import re
-          m = re.search(r'(?m)^(\\s*)([A-Za-z_$][A-Za-z0-9_$]*)\\s*=\\s*this\\.gpu\\.importFrame\\(frameDescriptor\\);', s)
-          if not m:
+          lines = s.splitlines(keepends=True)
+          import_index = next((i for i, line in enumerate(lines) if "this.gpu.importFrame(" in line), None)
+          if import_index is None:
               raise SystemExit("GPU_OVERLAY_IMPORTFRAME_ASSIGNMENT_NOT_FOUND")
-          oldvar = m.group(2)
-          draw_marker = oldvar + " = this.gpu.beginDraw();"
-          draw_pos = s.find(draw_marker, m.end())
-          if draw_pos < 0:
+          original_line = lines[import_index]
+          if "=" not in original_line:
+              raise SystemExit("GPU_OVERLAY_IMPORTFRAME_LINE_HAS_NO_ASSIGNMENT")
+          lhs, rhs = original_line.split("=", 1)
+          oldvar = lhs.strip().split()[-1]
+          indent = original_line[:len(original_line) - len(original_line.lstrip())]
+          lines[import_index] = indent + "boolean importOk = " + rhs.lstrip()
+          draw_index = next((i for i in range(import_index + 1, len(lines))
+                             if "this.gpu.beginDraw()" in lines[i]), None)
+          if draw_index is None:
               raise SystemExit("GPU_OVERLAY_BEGINDRAW_ASSIGNMENT_NOT_FOUND")
-          segment = s[m.start():draw_pos]
-          segment = re.sub(r'\\b' + re.escape(oldvar) + r'\\b', 'importOk', segment)
-          segment = segment.replace("importOk = this.gpu.importFrame(frameDescriptor);",
-                                    "boolean importOk = this.gpu.importFrame(frameDescriptor);", 1)
-          s = s[:m.start()] + segment + s[draw_pos:]
+          for i in range(import_index + 1, draw_index):
+              lines[i] = re.sub(r'\\b' + re.escape(oldvar) + r'\\b', 'importOk', lines[i])
+          s = "".join(lines)
+          print("GPU_OVERLAY_CFR_IMPORT_LINE_ORIGINAL=" + original_line.strip())
+          print("GPU_OVERLAY_CFR_IMPORT_VAR=" + oldvar)
 
           p.write_text(s)
           print("GPU_OVERLAY_LIFECYCLE_PATCH=APPLIED")
