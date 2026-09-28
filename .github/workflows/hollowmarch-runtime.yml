@@ -40,6 +40,7 @@ jobs:
           versions = {
               "c2me.jar": "kvrPcTsz",
               "hollowmarch.jar": "nzAPF4pb",
+              "geckolib.jar": "tPkJmim6",
           }
 
           for out, version_id in versions.items():
@@ -57,7 +58,7 @@ jobs:
           echo '69a7d4f590910e690b1d9cb2bdf63f51a21d76cefb597fcd95fde6fe75c36172  hollowmarch-c2me-fix-v2.jar' | sha256sum -c -
 
           java -version
-          sha256sum neoforge-21.1.250-installer.jar c2me.jar hollowmarch.jar hollowmarch-c2me-fix-v2.jar
+          sha256sum neoforge-21.1.250-installer.jar c2me.jar hollowmarch.jar geckolib.jar hollowmarch-c2me-fix-v2.jar
 
       - name: Verify downloaded Hollowmarch target class matches user's exact JAR
         shell: bash
@@ -111,8 +112,8 @@ jobs:
           cp -a server-template server-patched
 
           mkdir -p server-baseline/mods server-patched/mods
-          cp c2me.jar hollowmarch.jar server-baseline/mods/
-          cp c2me.jar hollowmarch.jar server-patched/mods/
+          cp c2me.jar hollowmarch.jar geckolib.jar server-baseline/mods/
+          cp c2me.jar hollowmarch.jar geckolib.jar server-patched/mods/
           cp hollowmarch-c2me-fix-v2.jar server-patched/mods/
 
       - name: Run baseline and patched real-server workload
