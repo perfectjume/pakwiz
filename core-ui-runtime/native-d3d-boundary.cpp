@@ -11,7 +11,7 @@ static const wchar_t* hrhex(HRESULT hr, wchar_t* buf, size_t n) {
 }
 
 static D3D_DRIVER_TYPE parse_driver(const wchar_t* s) {
-    return (_wcsicmp(s, L"warp") == 0) ? D3D_DRIVER_TYPE_WARP : D3D_DRIVER_TYPE_HARDWARE;
+    return (_wcsnicmp(s, L"warp", 4) == 0) ? D3D_DRIVER_TYPE_WARP : D3D_DRIVER_TYPE_HARDWARE;
 }
 
 static const wchar_t* driver_name(D3D_DRIVER_TYPE t) {
@@ -325,7 +325,7 @@ static int local_copy_slot47(D3D_DRIVER_TYPE driverType) {
     return 0;
 }
 
-static int parent_main(const wchar_t* exe, D3D_DRIVER_TYPE driverType) {
+static int parent_main(const wchar_t* exe, D3D_DRIVER_TYPE driverType, bool keyedMutex) {
     ID3D11Device* device = nullptr;
     ID3D11DeviceContext* context = nullptr;
     ID3D11Texture2D* texture = nullptr;
@@ -353,8 +353,11 @@ static int parent_main(const wchar_t* exe, D3D_DRIVER_TYPE driverType) {
     desc.SampleDesc.Count = 1;
     desc.Usage = D3D11_USAGE_DEFAULT;
     desc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
-    // Match Electron rgba/bgra OSR shared textures: NT handle, no keyed mutex.
-    desc.MiscFlags = D3D11_RESOURCE_MISC_SHARED_NTHANDLE;
+    // Exact Electron rgba/bgra diagnostic uses NT-handle-only. The optional
+    // keyed mode is a CI compatibility case used to validate DuplicateHandle +
+    // raw OpenSharedResource1/GetDesc/CopyResource ABI slots on hosted GPUs.
+    desc.MiscFlags = D3D11_RESOURCE_MISC_SHARED_NTHANDLE |
+        (keyedMutex ? D3D11_RESOURCE_MISC_SHARED_KEYEDMUTEX : 0);
 
     hr = device->CreateTexture2D(&desc, nullptr, &texture);
     if (FAILED(hr) || !texture) {
@@ -481,8 +484,10 @@ int wmain(int argc, wchar_t** argv) {
 
     D3D_DRIVER_TYPE driver =
         (argc >= 2) ? parse_driver(argv[1]) : D3D_DRIVER_TYPE_WARP;
+    bool keyedMutex =
+        (argc >= 2) && (wcsstr(argv[1], L"keyed") != nullptr);
 
     wchar_t exe[MAX_PATH];
     GetModuleFileNameW(nullptr, exe, MAX_PATH);
-    return parent_main(exe, driver);
+    return parent_main(exe, driver, keyedMutex);
 }
