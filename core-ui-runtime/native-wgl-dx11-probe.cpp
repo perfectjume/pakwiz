@@ -187,8 +187,9 @@ static bool load_interop(HDC dc, bool& unsupported) {
 }
 
 static bool pixel_close(const unsigned char* p, int b, int g, int r, int a) {
-    auto near = [](int x, int y) { return x >= y - 1 && x <= y + 1; };
-    return near(p[0], b) && near(p[1], g) && near(p[2], r) && p[3] == a;
+    auto within_one = [](int x, int y) { return x >= y - 1 && x <= y + 1; };
+    return within_one(p[0], b) && within_one(p[1], g) &&
+           within_one(p[2], r) && p[3] == a;
 }
 
 static bool gl_read_pixel(GLuint texture, unsigned char out[4]) {
