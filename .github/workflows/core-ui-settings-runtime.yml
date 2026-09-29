@@ -1,0 +1,199 @@
+name: CORE UI HTML Settings Runtime
+
+on:
+  push:
+    branches:
+      - core-ui-runtime-smoke
+    paths:
+      - '.github/workflows/core-ui-settings-runtime.yml'
+      - 'core-ui-runtime/settings-api-test/**'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  runtime:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Install virtual display
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb openbox mesa-utils
+
+      - name: Download verified settings API build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p settings-api-artifact
+          gh run download 36600977569 \
+            -n core-ui-settings-api-build \
+            -D settings-api-artifact
+          test -f settings-api-artifact/core_ui_bridge-settings-api.jar
+          echo '7ed017f7237f37c4817420834dcf67f3a7be3ac92730680333f427fbdb84ff31  settings-api-artifact/core_ui_bridge-settings-api.jar' | sha256sum -c -
+          unzip -t settings-api-artifact/core_ui_bridge-settings-api.jar
+          sha256sum settings-api-artifact/core_ui_bridge-settings-api.jar | tee settings-runtime-jar-sha256.txt
+
+      - name: Prepare NeoForge 1.21.1 runtime project
+        run: |
+          set -euo pipefail
+          git clone --depth 1 https://github.com/NeoForgeMDKs/MDK-1.21.1-ModDevGradle.git mdk
+          cd mdk
+          sed -i 's/^neo_version=.*/neo_version=21.1.250/' gradle.properties
+          sed -i 's/^mod_id=.*/mod_id=coreuisettingstest/' gradle.properties
+          sed -i 's/^mod_name=.*/mod_name=CORE UI Settings Runtime Test/' gradle.properties
+          sed -i 's/^mod_version=.*/mod_version=1.0.0/' gradle.properties
+          sed -i 's/^mod_group_id=.*/mod_group_id=dev.coreui.settingstest/' gradle.properties
+
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("build.gradle")
+          s = p.read_text()
+          needle = "        client()\n"
+          if needle not in s:
+              raise SystemExit("CLIENT_RUN_BLOCK_NOT_FOUND")
+          s = s.replace(
+              needle,
+              needle + "        programArguments.addAll '--quickPlaySingleplayer', 'CORE_UI_SETTINGS_WORLD', '--width', '854', '--height', '480'\n",
+              1,
+          )
+          p.write_text(s)
+          PY
+
+          rm -rf src/main/java/com/example/examplemod
+          mkdir -p src/main/java/dev/coreui/settingstest
+          cp ../core-ui-runtime/settings-api-test/SettingsRuntimeTest.java src/main/java/dev/coreui/settingstest/
+
+          chmod +x gradlew
+          ./gradlew --no-daemon compileJava
+
+      - name: Generate real playable world
+        run: |
+          set -euo pipefail
+          cd mdk
+          rm -rf run/mods
+          mkdir -p run
+          echo 'eula=true' > run/eula.txt
+          cp ../core-ui-runtime/settings-api-test/prepare_action_world.py ../prepare_action_world.py
+          python3 ../prepare_action_world.py
+          test -f run/world/level.dat
+          cp run/logs/latest.log ../settings-server-latest.log
+          mkdir -p run/saves
+          rm -rf run/saves/CORE_UI_SETTINGS_WORLD
+          mv run/world run/saves/CORE_UI_SETTINGS_WORLD
+          printf 'version:3955\nonboardAccessibility:false\n' > run/options.txt
+
+      - name: Install verified bridge and start protocol peer
+        run: |
+          set -euo pipefail
+          mkdir -p mdk/run/mods
+          cp settings-api-artifact/core_ui_bridge-settings-api.jar mdk/run/mods/
+          cp core-ui-runtime/settings-api-test/settings_renderer.py settings_renderer.py
+          python3 settings_renderer.py &
+          echo $! > settings-renderer.pid
+          for i in $(seq 1 50); do
+            grep -q LISTENING settings-renderer.log 2>/dev/null && exit 0
+            sleep .1
+          done
+          echo 'Protocol peer did not start' >&2
+          exit 1
+
+      - name: Run real Minecraft client
+        run: |
+          set -uo pipefail
+          cd mdk
+          Xvfb :99 -screen 0 1280x720x24 -ac +extension GLX +render -noreset > ../settings-xvfb.log 2>&1 &
+          export DISPLAY=:99
+          openbox > ../settings-openbox.log 2>&1 &
+          sleep 2
+          glxinfo -B > ../settings-glxinfo.txt 2>&1 || true
+          timeout 300s ./gradlew --no-daemon runClient --console=plain 2>&1 | tee ../settings-client-console.log
+          code=${PIPESTATUS[0]}
+          cp run/logs/latest.log ../settings-client-latest.log 2>/dev/null || true
+          cp run/CORE_UI_SETTINGS_RUNTIME_TRACE.txt ../CORE_UI_SETTINGS_RUNTIME_TRACE.txt 2>/dev/null || true
+          cp run/options.txt ../settings-options-final.txt 2>/dev/null || true
+          echo "RUNCLIENT_EXIT=$code" > ../settings-runtime-result.txt
+          exit $code
+
+      - name: Assert settings runtime
+        if: always()
+        run: |
+          set -euo pipefail
+
+          test -f CORE_UI_SETTINGS_RUNTIME_TRACE.txt
+          cat CORE_UI_SETTINGS_RUNTIME_TRACE.txt
+
+          for marker in \
+            'DIRECT_OPTIONS_MUTATION=PASS' \
+            'DIRECT_OPTIONS_RESTORE=PASS' \
+            'STALE_SETTING_DIRECT_REJECTION=PASS' \
+            'SETTINGS_RUNTIME_TEST_RESULT PASS'
+          do
+            grep -Fqx "$marker" CORE_UI_SETTINGS_RUNTIME_TRACE.txt
+          done
+
+          ! grep -q '^SETTINGS_RUNTIME_TEST_RESULT FAIL' CORE_UI_SETTINGS_RUNTIME_TRACE.txt
+
+          for marker in \
+            'RANGE_PASS fov ' \
+            'RANGE_PASS gui_scale ' \
+            'RANGE_PASS render_distance ' \
+            'RANGE_PASS simulation_distance ' \
+            'RANGE_PASS framerate_limit ' \
+            'MUTATION_PASS subtitles=' \
+            'MUTATION_PASS auto_jump=' \
+            'MUTATION_PASS fov=' \
+            'MUTATION_PASS render_distance=' \
+            'MUTATION_PASS graphics_mode=' \
+            'PERSISTENCE_SUBTITLES=PASS ' \
+            'ALL_RESTORED=PASS' \
+            'STALE_SETTING_PROTOCOL_REJECTION=PASS'
+          do
+            grep -F "$marker" settings-renderer.log
+          done
+
+          ! grep -qE 'CONNECTION_ERROR|Traceback|RuntimeError' settings-renderer.log
+          ! grep -qE 'NoClassDefFoundError|InvalidMixinException|ExceptionInInitializerError' settings-client-latest.log
+
+          echo 'REAL_MINECRAFT_SETTINGS_MUTATION=PASS' >> settings-runtime-result.txt
+          echo 'OPTIONS_SAVE_PERSISTENCE=PASS' >> settings-runtime-result.txt
+          echo 'SETTINGS_STALE_SESSION_REJECTION=PASS' >> settings-runtime-result.txt
+      - name: Stop protocol peer
+        if: always()
+        run: |
+          if test -f settings-renderer.pid; then
+            kill "$(cat settings-renderer.pid)" 2>/dev/null || true
+          fi
+
+      - name: Upload runtime evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: core-ui-settings-runtime
+          if-no-files-found: warn
+          path: |
+            settings-runtime-result.txt
+            settings-runtime-jar-sha256.txt
+            CORE_UI_SETTINGS_RUNTIME_TRACE.txt
+            settings-renderer.log
+            settings-client-console.log
+            settings-client-latest.log
+            settings-server-console.log
+            settings-server-latest.log
+            settings-glxinfo.txt
+            settings-xvfb.log
+            settings-openbox.log
+            core-ui-runtime/settings-api-test/
+
+# Trigger real-client action-router gate after workflow introduction.
