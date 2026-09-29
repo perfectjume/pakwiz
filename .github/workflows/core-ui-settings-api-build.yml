@@ -241,11 +241,6 @@ jobs:
               1
           )
 
-          trace_old = '        return string.contains("\\\\"type\\\\":\\\\"hello\\\\"") || string.contains("\\\\"type\\\\":\\\\"state\\\\"") || string.contains("\\\\"type\\\\":\\\\"viewport\\\\"");'
-          trace_new = '        return string.contains("\\\\"type\\\\":\\\\"hello\\\\"") || string.contains("\\\\"type\\\\":\\\\"state\\\\"") || string.contains("\\\\"type\\\\":\\\\"viewport\\\\"") || string.contains("\\\\"type\\\\":\\\\"settings_state\\\\"");'
-          if trace_old not in s:
-              raise SystemExit("SETTINGS_TRACE_ANCHOR_NOT_FOUND")
-          s = s.replace(trace_old, trace_new, 1)
 
           action_anchor = '        if ("action".equals(string2)) {\n'
           action_pos = s.find(action_anchor)
