@@ -85,7 +85,7 @@ jobs:
           rm -rf run/mods
           mkdir -p run
           echo 'eula=true' > run/eula.txt
-          cp ../core-ui-runtime/settings-api-test/prepare_action_world.py ../prepare_action_world.py
+          cp ../core-ui-runtime/action-router-test/prepare_action_world.py ../prepare_action_world.py
           python3 ../prepare_action_world.py
           test -f run/world/level.dat
           cp run/logs/latest.log ../settings-server-latest.log
