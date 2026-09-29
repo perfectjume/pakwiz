@@ -1,0 +1,189 @@
+name: CORE UI Native Action Router Runtime
+
+on:
+  push:
+    branches:
+      - core-ui-runtime-smoke
+    paths:
+      - '.github/workflows/core-ui-action-router-runtime.yml'
+      - 'core-ui-runtime/action-router-test/**'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  runtime:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Install virtual display
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb openbox mesa-utils
+
+      - name: Download verified action-router build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p action-router-artifact
+          gh run download 36597659639 \
+            -n core-ui-action-router-build \
+            -D action-router-artifact
+          test -f action-router-artifact/core_ui_bridge-action-router.jar
+          echo 'aa90b33ad9e72d14b8ab2cf9f918d0affbc9ab23a86c74c5fb405295f3eb3a21  action-router-artifact/core_ui_bridge-action-router.jar' | sha256sum -c -
+          unzip -t action-router-artifact/core_ui_bridge-action-router.jar
+          sha256sum action-router-artifact/core_ui_bridge-action-router.jar | tee action-router-runtime-jar-sha256.txt
+
+      - name: Prepare NeoForge 1.21.1 runtime project
+        run: |
+          set -euo pipefail
+          git clone --depth 1 https://github.com/NeoForgeMDKs/MDK-1.21.1-ModDevGradle.git mdk
+          cd mdk
+          sed -i 's/^neo_version=.*/neo_version=21.1.250/' gradle.properties
+          sed -i 's/^mod_id=.*/mod_id=coreuiroutertest/' gradle.properties
+          sed -i 's/^mod_name=.*/mod_name=CORE UI Router Runtime Test/' gradle.properties
+          sed -i 's/^mod_version=.*/mod_version=1.0.0/' gradle.properties
+          sed -i 's/^mod_group_id=.*/mod_group_id=dev.coreui.routertest/' gradle.properties
+
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("build.gradle")
+          s = p.read_text()
+          needle = "        client()\n"
+          if needle not in s:
+              raise SystemExit("CLIENT_RUN_BLOCK_NOT_FOUND")
+          s = s.replace(
+              needle,
+              needle + "        programArguments.addAll '--quickPlaySingleplayer', 'CORE_UI_ACTION_WORLD', '--width', '854', '--height', '480'\n",
+              1,
+          )
+          p.write_text(s)
+          PY
+
+          rm -rf src/main/java/com/example/examplemod
+          mkdir -p src/main/java/dev/coreui/routertest
+          cp ../core-ui-runtime/action-router-test/ActionRouterRuntimeTest.java src/main/java/dev/coreui/routertest/
+
+          chmod +x gradlew
+          ./gradlew --no-daemon compileJava
+
+      - name: Generate real playable world
+        run: |
+          set -euo pipefail
+          cd mdk
+          rm -rf run/mods
+          mkdir -p run
+          echo 'eula=true' > run/eula.txt
+          cp ../core-ui-runtime/action-router-test/prepare_action_world.py ../prepare_action_world.py
+          python3 ../prepare_action_world.py
+          test -f run/world/level.dat
+          cp run/logs/latest.log ../action-server-latest.log
+          mkdir -p run/saves
+          rm -rf run/saves/CORE_UI_ACTION_WORLD
+          mv run/world run/saves/CORE_UI_ACTION_WORLD
+          printf 'version:3955\nonboardAccessibility:false\n' > run/options.txt
+
+      - name: Install verified bridge and start protocol peer
+        run: |
+          set -euo pipefail
+          mkdir -p mdk/run/mods
+          cp action-router-artifact/core_ui_bridge-action-router.jar mdk/run/mods/
+          cp core-ui-runtime/action-router-test/action_renderer.py action_renderer.py
+          python3 action_renderer.py &
+          echo $! > action-renderer.pid
+          for i in $(seq 1 50); do
+            grep -q LISTENING action-renderer.log 2>/dev/null && exit 0
+            sleep .1
+          done
+          echo 'Protocol peer did not start' >&2
+          exit 1
+
+      - name: Run real Minecraft client
+        run: |
+          set -uo pipefail
+          cd mdk
+          Xvfb :99 -screen 0 1280x720x24 -ac +extension GLX +render -noreset > ../action-xvfb.log 2>&1 &
+          export DISPLAY=:99
+          openbox > ../action-openbox.log 2>&1 &
+          sleep 2
+          glxinfo -B > ../action-glxinfo.txt 2>&1 || true
+          timeout 300s ./gradlew --no-daemon runClient --console=plain 2>&1 | tee ../action-client-console.log
+          code=${PIPESTATUS[0]}
+          cp run/logs/latest.log ../action-client-latest.log 2>/dev/null || true
+          cp run/CORE_UI_ACTION_ROUTER_TRACE.txt ../CORE_UI_ACTION_ROUTER_TRACE.txt 2>/dev/null || true
+          echo "RUNCLIENT_EXIT=$code" > ../action-runtime-result.txt
+          exit $code
+
+      - name: Assert action-router runtime
+        if: always()
+        run: |
+          set -euo pipefail
+
+          test -f CORE_UI_ACTION_ROUTER_TRACE.txt
+          cat CORE_UI_ACTION_ROUTER_TRACE.txt
+
+          for marker in \
+            'IN_GAME=true' \
+            'OPTIONS_OPEN=PASS' \
+            'OPTIONS_RETURN_OVERLAY=PASS' \
+            'STALE_ACTION_REJECTED=PASS' \
+            'ADVANCEMENTS_OPEN=PASS' \
+            'ADVANCEMENTS_RETURN_OVERLAY=PASS' \
+            'STATISTICS_OPEN=PASS' \
+            'STATISTICS_RETURN_OVERLAY=PASS' \
+            'ACTION_ROUTER_RUNTIME_TEST_RESULT PASS'
+          do
+            grep -Fqx "$marker" CORE_UI_ACTION_ROUTER_TRACE.txt
+          done
+
+          ! grep -q '^ACTION_ROUTER_RUNTIME_TEST_RESULT FAIL' CORE_UI_ACTION_ROUTER_TRACE.txt
+
+          grep -q 'ACTION_SENT options ' action-renderer.log
+          grep -q 'STALE_ACTION_SENT options ' action-renderer.log
+          grep -q 'ACTION_SENT advancements ' action-renderer.log
+          grep -q 'ACTION_SENT statistics ' action-renderer.log
+          grep -q 'PAUSE_PAIR 4 ' action-renderer.log
+
+          ! grep -qE 'NoClassDefFoundError|InvalidMixinException|ExceptionInInitializerError' action-client-latest.log
+
+          echo 'REAL_MINECRAFT_ACTION_ROUTER=PASS' >> action-runtime-result.txt
+          echo 'STALE_SESSION_REJECTION=PASS' >> action-runtime-result.txt
+          echo 'CHILD_SCREEN_RETURN_TO_HTML_OVERLAY=PASS' >> action-runtime-result.txt
+
+      - name: Stop protocol peer
+        if: always()
+        run: |
+          if test -f action-renderer.pid; then
+            kill "$(cat action-renderer.pid)" 2>/dev/null || true
+          fi
+
+      - name: Upload runtime evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: core-ui-action-router-runtime
+          if-no-files-found: warn
+          path: |
+            action-runtime-result.txt
+            action-router-runtime-jar-sha256.txt
+            CORE_UI_ACTION_ROUTER_TRACE.txt
+            action-renderer.log
+            action-client-console.log
+            action-client-latest.log
+            action-server-console.log
+            action-server-latest.log
+            action-glxinfo.txt
+            action-xvfb.log
+            action-openbox.log
+            core-ui-runtime/action-router-test/
