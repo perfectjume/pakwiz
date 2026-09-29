@@ -582,3 +582,5 @@ jobs:
             harness/import-handle.ps1
 
 # Triggered after workflow introduction so GitHub sees an already-existing workflow on push.
+
+# Native boundary source revision: Electron-like NT handle without keyed mutex.
