@@ -322,16 +322,20 @@ jobs:
                   case "render_distance" -> minecraft.options.renderDistance().set(Integer.parseInt(value));
                   case "simulation_distance" -> minecraft.options.simulationDistance().set(Integer.parseInt(value));
                   case "framerate_limit" -> minecraft.options.framerateLimit().set(Integer.parseInt(value));
-                  case "graphics_mode" -> minecraft.options.graphicsMode().set(
-                      net.minecraft.client.GraphicsStatus.valueOf(value.toUpperCase(java.util.Locale.ROOT))
-                  );
+                  case "graphics_mode" -> {
+                      minecraft.options.graphicsMode().set(
+                          net.minecraft.client.GraphicsStatus.valueOf(value.toUpperCase(java.util.Locale.ROOT))
+                      );
+                      minecraft.levelRenderer.allChanged();
+                  }
                   default -> throw new IllegalArgumentException("unsupported setting " + key);
               }
           }
 
           private static int rangeMin(net.minecraft.client.OptionInstance<Integer> option, int fallback) {
               for (int value = 0; value <= 1024; value++) {
-                  if (option.values().validateValue(value).isPresent()) {
+                  java.util.Optional<Integer> validated = option.values().validateValue(value);
+                  if (validated.isPresent() && validated.get().intValue() == value) {
                       return value;
                   }
               }
@@ -340,7 +344,8 @@ jobs:
 
           private static int rangeMax(net.minecraft.client.OptionInstance<Integer> option, int fallback) {
               for (int value = 1024; value >= 0; value--) {
-                  if (option.values().validateValue(value).isPresent()) {
+                  java.util.Optional<Integer> validated = option.values().validateValue(value);
+                  if (validated.isPresent() && validated.get().intValue() == value) {
                       return value;
                   }
               }
