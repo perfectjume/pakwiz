@@ -27,6 +27,8 @@ static int child_main(DWORD sourcePid, uintptr_t sourceHandleValue,
     ID3D11DeviceContext* context = nullptr;
     ID3D11Device1* device1 = nullptr;
     ID3D11Texture2D* texture = nullptr;
+    ID3D11Texture2D* owned = nullptr;
+    ID3D11Texture2D* staging = nullptr;
     wchar_t hbuf[32];
 
     sourceProcess = OpenProcess(PROCESS_DUP_HANDLE, FALSE, sourcePid);
@@ -112,6 +114,74 @@ static int child_main(DWORD sourcePid, uintptr_t sourceHandleValue,
         desc.SampleDesc.Count, static_cast<unsigned>(desc.Format),
         desc.BindFlags, desc.MiscFlags);
 
+    if (ok) {
+        D3D11_TEXTURE2D_DESC ownedDesc = desc;
+        ownedDesc.Usage = D3D11_USAGE_DEFAULT;
+        ownedDesc.CPUAccessFlags = 0;
+        ownedDesc.MiscFlags = 0;
+        ownedDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
+
+        hr = device->CreateTexture2D(&ownedDesc, nullptr, &owned);
+        if (FAILED(hr) || !owned) {
+            std::fwprintf(stderr, L"CHILD_FAIL CreateTexture2D(owned) hr=%ls\n",
+                          hrhex(hr, hbuf, 32));
+            ok = false;
+        }
+    }
+
+    if (ok) {
+        // Mirror CORE UI's raw COM ABI call:
+        // ID3D11DeviceContext::CopyResource at vtable slot 47.
+        using CopyResourceFn =
+            void (STDMETHODCALLTYPE*)(ID3D11DeviceContext*, ID3D11Resource*, ID3D11Resource*);
+        void** contextVtable = *reinterpret_cast<void***>(context);
+        auto copyResource = reinterpret_cast<CopyResourceFn>(contextVtable[47]);
+        copyResource(context, owned, texture);
+
+        D3D11_TEXTURE2D_DESC stagingDesc = desc;
+        stagingDesc.Usage = D3D11_USAGE_STAGING;
+        stagingDesc.BindFlags = 0;
+        stagingDesc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
+        stagingDesc.MiscFlags = 0;
+
+        hr = device->CreateTexture2D(&stagingDesc, nullptr, &staging);
+        if (FAILED(hr) || !staging) {
+            std::fwprintf(stderr, L"CHILD_FAIL CreateTexture2D(staging) hr=%ls\n",
+                          hrhex(hr, hbuf, 32));
+            ok = false;
+        } else {
+            context->CopyResource(staging, owned);
+            D3D11_MAPPED_SUBRESOURCE mapped{};
+            hr = context->Map(staging, 0, D3D11_MAP_READ, 0, &mapped);
+            if (FAILED(hr) || !mapped.pData) {
+                std::fwprintf(stderr, L"CHILD_FAIL Map(staging) hr=%ls\n",
+                              hrhex(hr, hbuf, 32));
+                ok = false;
+            } else {
+                const unsigned char* p =
+                    reinterpret_cast<const unsigned char*>(mapped.pData);
+                // Producer clears BGRA8 to RGBA=(0.25,0.50,0.75,1.00).
+                const int b = p[0], g = p[1], r = p[2], a = p[3];
+                context->Unmap(staging, 0);
+                const bool pixelOk =
+                    b >= 190 && b <= 192 &&
+                    g >= 127 && g <= 128 &&
+                    r >= 63 && r <= 64 &&
+                    a == 255;
+                std::wprintf(L"COPY_SLOT47_PIXEL bgra=%d,%d,%d,%d\n", b, g, r, a);
+                if (!pixelOk) {
+                    std::fwprintf(stderr, L"CHILD_FAIL CopyResource(slot=47) pixel mismatch\n");
+                    ok = false;
+                } else {
+                    std::wprintf(L"NATIVE_CONTEXT_COPYRESOURCE_SLOT47=PASS driver=%ls\n",
+                                 driver_name(driverType));
+                }
+            }
+        }
+    }
+
+    if (staging) staging->Release();
+    if (owned) owned->Release();
     texture->Release();
     device1->Release();
     context->Release();
@@ -169,6 +239,21 @@ static int parent_main(const wchar_t* exe, D3D_DRIVER_TYPE driverType) {
         device->Release();
         return 11;
     }
+
+    ID3D11RenderTargetView* rtv = nullptr;
+    hr = device->CreateRenderTargetView(texture, nullptr, &rtv);
+    if (FAILED(hr) || !rtv) {
+        std::fwprintf(stderr, L"PARENT_FAIL CreateRenderTargetView driver=%ls hr=%ls\n",
+                      driver_name(driverType), hrhex(hr, hbuf, 32));
+        texture->Release();
+        context->Release();
+        device->Release();
+        return 16;
+    }
+    const float clearColor[4] = { 0.25f, 0.50f, 0.75f, 1.00f };
+    context->ClearRenderTargetView(rtv, clearColor);
+    context->Flush();
+    rtv->Release();
 
     hr = texture->QueryInterface(
         __uuidof(IDXGIResource1), reinterpret_cast<void**>(&dxgiResource1));
