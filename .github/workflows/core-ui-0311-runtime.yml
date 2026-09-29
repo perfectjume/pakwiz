@@ -80,6 +80,8 @@ jobs:
           java -jar ../cfr-0.152.jar ../core_ui_bridge-0.3.11.jar --outputdir ../decompiled-overlay --silent true
           test -f ../decompiled-overlay/dev/coreui/bridge/GpuOverlayScreen.java
           cp ../decompiled-overlay/dev/coreui/bridge/GpuOverlayScreen.java src/main/java/dev/coreui/bridge/GpuOverlayScreen.java
+          test -f ../decompiled-overlay/dev/coreui/bridge/GpuInterop.java
+          cp ../decompiled-overlay/dev/coreui/bridge/GpuInterop.java src/main/java/dev/coreui/bridge/GpuInterop.java
 
           python3 - <<'PY'
           from pathlib import Path
@@ -165,6 +167,63 @@ jobs:
 
           grep -F 'protected void init()' src/main/java/dev/coreui/bridge/GpuOverlayScreen.java
           grep -F 'overlay-init begin-pause session=' src/main/java/dev/coreui/bridge/GpuOverlayScreen.java
+
+          # Keep Minecraft's tracked GL texture binding state synchronized with
+          # the native WGL/D3D interop texture. Raw GL11 bind/delete calls bypass
+          # GlStateManager's cache and can leave it stale after texture recreation.
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path("src/main/java/dev/coreui/bridge/GpuInterop.java")
+          s = p.read_text()
+
+          if s.count("GL11.glGenTextures()") != 1:
+              raise SystemExit("GL_GEN_TEXTURES_TARGET_COUNT=" + str(s.count("GL11.glGenTextures()")))
+          s = s.replace(
+              "GL11.glGenTextures()",
+              "com.mojang.blaze3d.platform.GlStateManager._genTexture()",
+              1,
+          )
+
+          targets = [
+              (
+                  ["GL11.glBindTexture((int)3553, (int)this.glTexture)", "GL11.glBindTexture(3553, this.glTexture)"],
+                  "com.mojang.blaze3d.platform.GlStateManager._bindTexture(this.glTexture)",
+                  "BIND_OWNED",
+              ),
+              (
+                  ["GL11.glBindTexture((int)3553, (int)0)", "GL11.glBindTexture(3553, 0)"],
+                  "com.mojang.blaze3d.platform.GlStateManager._bindTexture(0)",
+                  "UNBIND_OWNED",
+              ),
+              (
+                  ["GL11.glDeleteTextures((int)this.glTexture)", "GL11.glDeleteTextures(this.glTexture)"],
+                  "com.mojang.blaze3d.platform.GlStateManager._deleteTexture(this.glTexture)",
+                  "DELETE_OWNED",
+              ),
+          ]
+
+          for needles, replacement, label in targets:
+              matches = [needle for needle in needles if needle in s]
+              if len(matches) != 1:
+                  raise SystemExit(label + "_TARGET_COUNT=" + str(len(matches)))
+              s = s.replace(matches[0], replacement, 1)
+
+          p.write_text(s)
+          for marker in [
+              "GlStateManager._genTexture()",
+              "GlStateManager._bindTexture(this.glTexture)",
+              "GlStateManager._bindTexture(0)",
+              "GlStateManager._deleteTexture(this.glTexture)",
+          ]:
+              if marker not in s:
+                  raise SystemExit("GPU_INTEROP_CACHE_FIX_MISSING " + marker)
+          print("GPU_INTEROP_GL_STATE_CACHE_FIX=APPLIED")
+          PY
+
+          grep -F 'GlStateManager._genTexture()' src/main/java/dev/coreui/bridge/GpuInterop.java
+          grep -F 'GlStateManager._bindTexture(this.glTexture)' src/main/java/dev/coreui/bridge/GpuInterop.java
+          grep -F 'GlStateManager._deleteTexture(this.glTexture)' src/main/java/dev/coreui/bridge/GpuInterop.java
 
           mkdir -p src/main/java/dev/coreui/bridge
           cat > src/main/java/dev/coreui/bridge/CoreUiBridge.java <<'JAVA'
@@ -404,23 +463,31 @@ jobs:
             javap -classpath build/classes/java/main -verbose dev.coreui.bridge.CoreUiBridge
             echo '=== GpuOverlayScreen ==='
             javap -classpath build/classes/java/main -c -p dev.coreui.bridge.GpuOverlayScreen
+            echo '=== GpuInterop ==='
+            javap -classpath build/classes/java/main -c -p dev.coreui.bridge.GpuInterop
           } | tee ../core-ui-fixed-bytecode.txt
           grep -F 'NeoForge.EVENT_BUS:Lnet/neoforged/bus/api/IEventBus;' ../core-ui-fixed-bytecode.txt
           grep -F 'BridgeRuntime.beginPauseSession' ../core-ui-fixed-bytecode.txt
           grep -F 'protected void init();' ../core-ui-fixed-bytecode.txt
+          grep -F 'GlStateManager._genTexture' ../core-ui-fixed-bytecode.txt
+          grep -F 'GlStateManager._bindTexture' ../core-ui-fixed-bytecode.txt
+          grep -F 'GlStateManager._deleteTexture' ../core-ui-fixed-bytecode.txt
 
           mkdir -p ../api-fix/dev/coreui/bridge
           cp build/classes/java/main/dev/coreui/bridge/CoreUiBridge.class ../api-fix/dev/coreui/bridge/
           cp build/classes/java/main/dev/coreui/bridge/GpuOverlayScreen.class ../api-fix/dev/coreui/bridge/
-          (cd ../api-fix && zip -q -u ../core_ui_bridge-0.3.11.jar dev/coreui/bridge/CoreUiBridge.class dev/coreui/bridge/GpuOverlayScreen.class)
+          cp build/classes/java/main/dev/coreui/bridge/GpuInterop.class ../api-fix/dev/coreui/bridge/
+          (cd ../api-fix && zip -q -u ../core_ui_bridge-0.3.11.jar dev/coreui/bridge/CoreUiBridge.class dev/coreui/bridge/GpuOverlayScreen.class dev/coreui/bridge/GpuInterop.class)
           unzip -t ../core_ui_bridge-0.3.11.jar
           sha256sum ../core_ui_bridge-0.3.11.jar | tee ../fixed-jar-sha256.txt
 
           # Do not let helper copies shadow the actual patched mod JAR at runtime.
           rm -f src/main/java/dev/coreui/bridge/CoreUiBridge.java
           rm -f src/main/java/dev/coreui/bridge/GpuOverlayScreen.java
+          rm -f src/main/java/dev/coreui/bridge/GpuInterop.java
           rm -f build/classes/java/main/dev/coreui/bridge/CoreUiBridge.class
           rm -f build/classes/java/main/dev/coreui/bridge/GpuOverlayScreen.class
+          rm -f build/classes/java/main/dev/coreui/bridge/GpuInterop.class
           cp ../core_ui_bridge-0.3.11.jar libs/core_ui_bridge-0.3.11.jar
 
       - name: Generate a real playable world
