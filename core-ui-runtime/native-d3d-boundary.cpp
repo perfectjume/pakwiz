@@ -227,9 +227,8 @@ static int parent_main(const wchar_t* exe, D3D_DRIVER_TYPE driverType) {
     desc.SampleDesc.Count = 1;
     desc.Usage = D3D11_USAGE_DEFAULT;
     desc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
-    desc.MiscFlags =
-        D3D11_RESOURCE_MISC_SHARED_NTHANDLE |
-        D3D11_RESOURCE_MISC_SHARED_KEYEDMUTEX;
+    // Match Electron rgba/bgra OSR shared textures: NT handle, no keyed mutex.
+    desc.MiscFlags = D3D11_RESOURCE_MISC_SHARED_NTHANDLE;
 
     hr = device->CreateTexture2D(&desc, nullptr, &texture);
     if (FAILED(hr) || !texture) {
