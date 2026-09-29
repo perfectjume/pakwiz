@@ -212,17 +212,20 @@ jobs:
           # enclosing handshake local name "string". Java source cannot redeclare
           # an enclosing local inside a lambda, though the original bytecode uses
           # a separate synthetic method. Rename only this decompiler-created local.
-          reader_old = """                        String string;
-                        while ((string = bufferedReader.readLine()) != null) {
-                            BridgeRuntime.handleRendererLine(string);
-                        }"""
-          reader_new = """                        String readerLine;
-                        while ((readerLine = bufferedReader.readLine()) != null) {
-                            BridgeRuntime.handleRendererLine(readerLine);
-                        }"""
-          if reader_old not in s:
-              raise SystemExit("BRIDGE_CFR_READER_LOCAL_COLLISION_NOT_FOUND")
-          s = s.replace(reader_old, reader_new, 1)
+          reader_pattern = re.compile(
+              r'(?m)^(\s*)String string;\n'
+              r'(\s*)while \(\(string = bufferedReader\.readLine\(\)\) != null\) \{\n'
+              r'(\s*)BridgeRuntime\.handleRendererLine\(string\);'
+          )
+          s, reader_count = reader_pattern.subn(
+              r'\1String readerLine;\n'
+              r'\2while ((readerLine = bufferedReader.readLine()) != null) {\n'
+              r'\3BridgeRuntime.handleRendererLine(readerLine);',
+              s,
+              count=1
+          )
+          if reader_count != 1:
+              raise SystemExit(f"BRIDGE_CFR_READER_LOCAL_COLLISION_COUNT={reader_count}")
           print("BRIDGE_CFR_READER_LOCAL_COLLISION=FIXED")
           p.write_text(s)
           print("ACTION_ROUTER_PATCH=APPLIED")
