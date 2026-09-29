@@ -1,0 +1,474 @@
+name: CORE UI HTML Settings API Build
+
+on:
+  push:
+    branches:
+      - core-ui-runtime-smoke
+    paths:
+      - '.github/workflows/core-ui-settings-api-build.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build-settings-api:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Reconstruct exact tested bridge baseline
+        run: |
+          set -euo pipefail
+          cat core-ui-runtime/core_ui_bridge-0.3.11.jar.b64.part* | base64 -d > core_ui_bridge-0.3.11.jar
+          echo 'f398fe1340145c0c4be8a627b4d555729126231d9d61edea7849e6962c9b8a66  core_ui_bridge-0.3.11.jar' | sha256sum -c -
+          unzip -t core_ui_bridge-0.3.11.jar
+
+      - name: Prepare exact NeoForge 1.21.1 compile environment
+        run: |
+          set -euo pipefail
+          git clone --depth 1 https://github.com/NeoForgeMDKs/MDK-1.21.1-ModDevGradle.git mdk
+          cd mdk
+          sed -i 's/^neo_version=.*/neo_version=21.1.250/' gradle.properties
+          sed -i 's/^mod_id=.*/mod_id=coreuiroutertest/' gradle.properties
+          sed -i 's/^mod_name=.*/mod_name=CORE UI Router Test/' gradle.properties
+          sed -i 's/^mod_version=.*/mod_version=1.0.0/' gradle.properties
+          sed -i 's/^mod_group_id=.*/mod_group_id=dev.coreui.routertest/' gradle.properties
+
+          mkdir -p libs src/main/java/dev/coreui/bridge
+          cp ../core_ui_bridge-0.3.11.jar libs/
+          sed -i '/dependencies {/a\    compileOnly files("libs/core_ui_bridge-0.3.11.jar")' build.gradle
+
+          curl -fL -o ../cfr-0.152.jar https://github.com/leibnitz27/cfr/releases/download/0.152/cfr-0.152.jar
+          rm -rf ../decompiled
+          mkdir -p ../decompiled
+          java -jar ../cfr-0.152.jar ../core_ui_bridge-0.3.11.jar --outputdir ../decompiled --silent true
+
+          cp ../decompiled/dev/coreui/bridge/GpuOverlayScreen.java src/main/java/dev/coreui/bridge/GpuOverlayScreen.java
+          cp ../decompiled/dev/coreui/bridge/BridgeRuntime.java src/main/java/dev/coreui/bridge/BridgeRuntime.java
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          # Reproduce the already-confirmed 0.3.12 lifecycle patch.
+          p = Path("src/main/java/dev/coreui/bridge/GpuOverlayScreen.java")
+          s = p.read_text()
+          sig = "    public void added() {"
+          start = s.find(sig)
+          if start < 0:
+              raise SystemExit("GPU_OVERLAY_ADDED_METHOD_NOT_FOUND")
+          brace = s.find("{", start)
+          depth = 0
+          end = None
+          for i in range(brace, len(s)):
+              if s[i] == "{": depth += 1
+              elif s[i] == "}":
+                  depth -= 1
+                  if depth == 0:
+                      end = i + 1
+                      break
+          if end is None:
+              raise SystemExit("GPU_OVERLAY_ADDED_METHOD_END_NOT_FOUND")
+
+          replacement = """    public void added() {
+              this.openedAtNanos = System.nanoTime();
+              this.pointerSyncPending = true;
+              this.viewportFrameReady = false;
+              this.currentViewportImportAttempted = false;
+              this.readyGeneration = 0L;
+              this.lastReportedGpuError = null;
+          }
+
+          @Override
+          protected void init() {
+              if (this.sessionId == 0L && this.minecraft != null) {
+                  this.lastPixelWidth = this.minecraft.getWindow().getWidth();
+                  this.lastPixelHeight = this.minecraft.getWindow().getHeight();
+                  this.sessionId = BridgeRuntime.beginPauseSession(this.lastPixelWidth, this.lastPixelHeight);
+                  BridgeRuntime.trace("overlay-init begin-pause session=" + this.sessionId + " px=" + this.lastPixelWidth + "x" + this.lastPixelHeight);
+              }
+          }"""
+          s = s[:start] + replacement + s[end:]
+
+          # Split the CFR-created mixed boolean/int local exactly as the green runtime harness does.
+          lines = s.splitlines(keepends=True)
+          import_index = next((i for i, line in enumerate(lines) if "this.gpu.importFrame(" in line), None)
+          if import_index is None:
+              raise SystemExit("GPU_OVERLAY_IMPORTFRAME_ASSIGNMENT_NOT_FOUND")
+          original_line = lines[import_index]
+          lhs, rhs = original_line.split("=", 1)
+          oldvar = lhs.strip().split()[-1]
+          indent = original_line[:len(original_line) - len(original_line.lstrip())]
+          lines[import_index] = indent + "boolean importOk = " + rhs.lstrip()
+          draw_index = next((i for i in range(import_index + 1, len(lines)) if "this.gpu.beginDraw()" in lines[i]), None)
+          if draw_index is None:
+              raise SystemExit("GPU_OVERLAY_BEGINDRAW_ASSIGNMENT_NOT_FOUND")
+          for i in range(import_index + 1, draw_index):
+              lines[i] = lines[i].replace(oldvar, "importOk")
+              lines[i] = lines[i].replace("importOk != 0", "importOk")
+              lines[i] = lines[i].replace("importOk == 0", "!importOk")
+          p.write_text("".join(lines))
+
+          # Extend only the renderer action lambda. All socket/session/frame logic stays unchanged.
+          p = Path("src/main/java/dev/coreui/bridge/BridgeRuntime.java")
+          s = p.read_text()
+          # CFR usually inlines the synthetic Runnable lambda into handleRendererLine.
+          # Locate the exact resume/quit execute lambda, then preserve the real
+          # captured local names emitted by this exact CFR/version combination.
+          import re
+          resume_pos = s.find('"resume".equals(')
+          if resume_pos < 0:
+              raise SystemExit("BRIDGE_RESUME_ACTION_NOT_FOUND")
+          execute_token = ".execute(() -> {"
+          start = s.rfind(execute_token, 0, resume_pos)
+          if start < 0:
+              raise SystemExit("BRIDGE_ACTION_EXECUTE_LAMBDA_NOT_FOUND")
+          line_start = s.rfind("\n", 0, start) + 1
+
+          # The receiver directly before .execute is the Minecraft local.
+          receiver_text = s[line_start:start].strip()
+          mc_match = re.search(r'([A-Za-z_$][A-Za-z0-9_$]*)$', receiver_text)
+          if not mc_match:
+              raise SystemExit("BRIDGE_MINECRAFT_CAPTURE_NOT_FOUND")
+          minecraft = mc_match.group(1)
+
+          brace = s.find("{", start)
+          depth = 0
+          body_end = None
+          for i in range(brace, len(s)):
+              if s[i] == "{":
+                  depth += 1
+              elif s[i] == "}":
+                  depth -= 1
+                  if depth == 0:
+                      body_end = i + 1
+                      break
+          if body_end is None:
+              raise SystemExit("BRIDGE_ACTION_LAMBDA_END_NOT_FOUND")
+          call_end = s.find(");", body_end)
+          if call_end < 0:
+              raise SystemExit("BRIDGE_ACTION_EXECUTE_CALL_END_NOT_FOUND")
+          call_end += 2
+
+          old_block = s[line_start:call_end]
+          active_match = re.search(r'BridgeRuntime\.isActive\(([^,]+),\s*([^)]+)\)', old_block)
+          action_match = re.search(r'"resume"\.equals\(([^)]+)\)', old_block)
+          if not active_match or not action_match:
+              raise SystemExit("BRIDGE_ACTION_CAPTURE_VARIABLES_NOT_FOUND")
+          session = active_match.group(1).strip()
+          generation = active_match.group(2).strip()
+          action = action_match.group(1).strip()
+          line_prefix = s[line_start:start]
+          indent = line_prefix[:len(line_prefix) - len(line_prefix.lstrip())]
+
+          replacement = f"""{indent}{minecraft}.execute(() -> {{
+          {indent}    if (!BridgeRuntime.isActive({session}, {generation})) {{
+          {indent}        return;
+          {indent}    }}
+          {indent}    if (!({minecraft}.screen instanceof GpuOverlayScreen)) {{
+          {indent}        return;
+          {indent}    }}
+          {indent}    net.minecraft.client.gui.screens.Screen parent = {minecraft}.screen;
+          {indent}    switch ({action}) {{
+          {indent}        case "resume" -> {minecraft}.setScreen(null);
+          {indent}        case "quit" -> {minecraft}.stop();
+          {indent}        case "options" -> {minecraft}.setScreen(
+          {indent}            new net.minecraft.client.gui.screens.options.OptionsScreen(parent, {minecraft}.options)
+          {indent}        );
+          {indent}        case "advancements" -> {{
+          {indent}            if ({minecraft}.player != null) {{
+          {indent}                {minecraft}.setScreen(
+          {indent}                    new net.minecraft.client.gui.screens.advancements.AdvancementsScreen(
+          {indent}                        {minecraft}.player.connection.getAdvancements(),
+          {indent}                        parent
+          {indent}                    )
+          {indent}                );
+          {indent}            }}
+          {indent}        }}
+          {indent}        case "statistics" -> {{
+          {indent}            if ({minecraft}.player != null) {{
+          {indent}                {minecraft}.setScreen(
+          {indent}                    new net.minecraft.client.gui.screens.achievement.StatsScreen(
+          {indent}                        parent,
+          {indent}                        {minecraft}.player.getStats()
+          {indent}                    )
+          {indent}                );
+          {indent}            }}
+          {indent}        }}
+          {indent}        default -> BridgeRuntime.trace("ignored unsupported renderer action=" + {action});
+          {indent}    }}
+          {indent}}});"""
+          s = s[:line_start] + replacement + s[call_end:]
+          print("ACTION_ROUTER_CAPTURE", session, generation, action, minecraft)
+
+          # CFR inlines the reader synthetic lambda into runLoop(), but reuses the
+          # enclosing handshake local name "string". Java source cannot redeclare
+          # an enclosing local inside a lambda, though the original bytecode uses
+          # a separate synthetic method. Rename only this decompiler-created local.
+          reader_pattern = re.compile(
+              r'(?m)^(\s*)String string;\n'
+              r'(\s*)while \(\(string = bufferedReader\.readLine\(\)\) != null\) \{\n'
+              r'(\s*)BridgeRuntime\.handleRendererLine\(string\);'
+          )
+          s, reader_count = reader_pattern.subn(
+              r'\1String readerLine;\n'
+              r'\2while ((readerLine = bufferedReader.readLine()) != null) {\n'
+              r'\3BridgeRuntime.handleRendererLine(readerLine);',
+              s,
+              count=1
+          )
+          if reader_count != 1:
+              raise SystemExit(f"BRIDGE_CFR_READER_LOCAL_COLLISION_COUNT={reader_count}")
+          print("BRIDGE_CFR_READER_LOCAL_COLLISION=FIXED")
+
+          # Extend the exact tested action-router BridgeRuntime with a narrow,
+          # session/generation-gated settings API. No GPU/render classes change.
+          generation_decl = '    private static final Pattern GENERATION = Pattern.compile("\\\\\\"generation\\\\\\"\\\\s*:\\\\s*(\\\\d+)");\n'
+          if generation_decl not in s:
+              raise SystemExit("SETTINGS_GENERATION_PATTERN_ANCHOR_NOT_FOUND")
+          s = s.replace(
+              generation_decl,
+              generation_decl +
+              '    private static final Pattern KEY = Pattern.compile("\\\\\\"key\\\\\\"\\\\s*:\\\\s*\\\\\\"([a-z_]+)\\\\\\"");\n' +
+              '    private static final Pattern VALUE = Pattern.compile("\\\\\\"value\\\\\\"\\\\s*:\\\\s*\\\\\\"([^\\\\\\"]*)\\\\\\"");\n',
+              1
+          )
+
+          trace_old = '        return string.contains("\\\\"type\\\\":\\\\"hello\\\\"") || string.contains("\\\\"type\\\\":\\\\"state\\\\"") || string.contains("\\\\"type\\\\":\\\\"viewport\\\\"");'
+          trace_new = '        return string.contains("\\\\"type\\\\":\\\\"hello\\\\"") || string.contains("\\\\"type\\\\":\\\\"state\\\\"") || string.contains("\\\\"type\\\\":\\\\"viewport\\\\"") || string.contains("\\\\"type\\\\":\\\\"settings_state\\\\"");'
+          if trace_old not in s:
+              raise SystemExit("SETTINGS_TRACE_ANCHOR_NOT_FOUND")
+          s = s.replace(trace_old, trace_new, 1)
+
+          action_anchor = '        if ("action".equals(string2)) {\n'
+          action_pos = s.find(action_anchor)
+          if action_pos < 0:
+              raise SystemExit("SETTINGS_ACTION_ANCHOR_NOT_FOUND")
+
+          settings_handlers = r'''        if ("settings_request".equals(string2)) {
+              try {
+                  long session = Long.parseUnsignedLong(BridgeRuntime.require(SESSION, string));
+                  long generation = Long.parseUnsignedLong(BridgeRuntime.require(GENERATION, string));
+                  if (!BridgeRuntime.isActive(session, generation)) {
+                      return;
+                  }
+                  Minecraft minecraft = Minecraft.getInstance();
+                  minecraft.execute(() -> {
+                      if (!BridgeRuntime.isActive(session, generation)) {
+                          return;
+                      }
+                      if (!(minecraft.screen instanceof GpuOverlayScreen)) {
+                          return;
+                      }
+                      BridgeRuntime.sendSettingsState(minecraft, "request");
+                  });
+              }
+              catch (RuntimeException runtimeException) {
+                  System.err.println("[CORE UI] Bad settings_request message: " + runtimeException.getMessage());
+              }
+              return;
+          }
+          if ("setting_set".equals(string2)) {
+              try {
+                  String key = BridgeRuntime.require(KEY, string);
+                  String value = BridgeRuntime.require(VALUE, string);
+                  long session = Long.parseUnsignedLong(BridgeRuntime.require(SESSION, string));
+                  long generation = Long.parseUnsignedLong(BridgeRuntime.require(GENERATION, string));
+                  if (!BridgeRuntime.isActive(session, generation)) {
+                      return;
+                  }
+                  Minecraft minecraft = Minecraft.getInstance();
+                  minecraft.execute(() -> {
+                      if (!BridgeRuntime.isActive(session, generation)) {
+                          return;
+                      }
+                      if (!(minecraft.screen instanceof GpuOverlayScreen)) {
+                          return;
+                      }
+                      try {
+                          BridgeRuntime.applySetting(minecraft, key, value);
+                          minecraft.options.save();
+                          BridgeRuntime.sendSettingsState(minecraft, "set-" + key);
+                      }
+                      catch (RuntimeException runtimeException) {
+                          BridgeRuntime.trace("setting-set-rejected key=" + key + " value=" + value + " error=" + runtimeException.getMessage());
+                          BridgeRuntime.sendSettingsState(minecraft, "reject-" + key);
+                      }
+                  });
+              }
+              catch (RuntimeException runtimeException) {
+                  System.err.println("[CORE UI] Bad setting_set message: " + runtimeException.getMessage());
+              }
+              return;
+          }
+          '''
+          s = s[:action_pos] + settings_handlers + s[action_pos:]
+
+          fallback_anchor = '    private static void fallbackToVanillaPause() {\n'
+          fallback_pos = s.find(fallback_anchor)
+          if fallback_pos < 0:
+              raise SystemExit("SETTINGS_HELPER_ANCHOR_NOT_FOUND")
+
+          settings_helpers = r'''    private static void applySetting(Minecraft minecraft, String key, String value) {
+              switch (key) {
+                  case "fullscreen" -> minecraft.options.fullscreen().set(Boolean.parseBoolean(value));
+                  case "vsync" -> minecraft.options.enableVsync().set(Boolean.parseBoolean(value));
+                  case "subtitles" -> minecraft.options.showSubtitles().set(Boolean.parseBoolean(value));
+                  case "auto_jump" -> minecraft.options.autoJump().set(Boolean.parseBoolean(value));
+                  case "fov" -> minecraft.options.fov().set(Integer.parseInt(value));
+                  case "gui_scale" -> minecraft.options.guiScale().set(Integer.parseInt(value));
+                  case "render_distance" -> minecraft.options.renderDistance().set(Integer.parseInt(value));
+                  case "simulation_distance" -> minecraft.options.simulationDistance().set(Integer.parseInt(value));
+                  case "framerate_limit" -> minecraft.options.framerateLimit().set(Integer.parseInt(value));
+                  case "graphics_mode" -> minecraft.options.graphicsMode().set(
+                      net.minecraft.client.GraphicsStatus.valueOf(value.toUpperCase(java.util.Locale.ROOT))
+                  );
+                  default -> throw new IllegalArgumentException("unsupported setting " + key);
+              }
+          }
+
+          private static int rangeMin(net.minecraft.client.OptionInstance<Integer> option, int fallback) {
+              net.minecraft.client.OptionInstance.ValueSet<Integer> values = option.values();
+              if (values instanceof net.minecraft.client.OptionInstance.IntRangeBase range) {
+                  return range.minInclusive();
+              }
+              return fallback;
+          }
+
+          private static int rangeMax(net.minecraft.client.OptionInstance<Integer> option, int fallback) {
+              net.minecraft.client.OptionInstance.ValueSet<Integer> values = option.values();
+              if (values instanceof net.minecraft.client.OptionInstance.IntRangeBase range) {
+                  return range.maxInclusive();
+              }
+              return fallback;
+          }
+
+          private static void sendSettingsState(Minecraft minecraft, String reason) {
+              long session = activeSession;
+              long generation = activeGeneration;
+              if (!connected || session <= 0L || generation <= 0L || !(minecraft.screen instanceof GpuOverlayScreen)) {
+                  return;
+              }
+              net.minecraft.client.Options options = minecraft.options;
+              String graphics = options.graphicsMode().get().name().toLowerCase(java.util.Locale.ROOT);
+              String message = "{\"type\":\"settings_state\",\"session\":" + session +
+                  ",\"generation\":" + generation +
+                  ",\"reason\":\"" + BridgeRuntime.jsonEscape(reason) + "\"" +
+                  ",\"fullscreen\":" + options.fullscreen().get() +
+                  ",\"vsync\":" + options.enableVsync().get() +
+                  ",\"subtitles\":" + options.showSubtitles().get() +
+                  ",\"auto_jump\":" + options.autoJump().get() +
+                  ",\"fov\":" + options.fov().get() +
+                  ",\"fov_min\":" + BridgeRuntime.rangeMin(options.fov(), 30) +
+                  ",\"fov_max\":" + BridgeRuntime.rangeMax(options.fov(), 110) +
+                  ",\"gui_scale\":" + options.guiScale().get() +
+                  ",\"gui_scale_min\":" + BridgeRuntime.rangeMin(options.guiScale(), 0) +
+                  ",\"gui_scale_max\":" + BridgeRuntime.rangeMax(options.guiScale(), 4) +
+                  ",\"render_distance\":" + options.renderDistance().get() +
+                  ",\"render_distance_min\":" + BridgeRuntime.rangeMin(options.renderDistance(), 2) +
+                  ",\"render_distance_max\":" + BridgeRuntime.rangeMax(options.renderDistance(), 32) +
+                  ",\"simulation_distance\":" + options.simulationDistance().get() +
+                  ",\"simulation_distance_min\":" + BridgeRuntime.rangeMin(options.simulationDistance(), 5) +
+                  ",\"simulation_distance_max\":" + BridgeRuntime.rangeMax(options.simulationDistance(), 32) +
+                  ",\"framerate_limit\":" + options.framerateLimit().get() +
+                  ",\"framerate_limit_min\":" + BridgeRuntime.rangeMin(options.framerateLimit(), 10) +
+                  ",\"framerate_limit_max\":" + BridgeRuntime.rangeMax(options.framerateLimit(), 260) +
+                  ",\"graphics_mode\":\"" + graphics + "\"}\n";
+              OUTBOUND.offer(message);
+              BridgeRuntime.trace("queued settings-state reason=" + reason + " session=" + session + "/" + generation);
+          }
+
+          '''
+          s = s[:fallback_pos] + settings_helpers + s[fallback_pos:]
+
+          p.write_text(s)
+          print("ACTION_ROUTER_AND_SETTINGS_API_PATCH=APPLIED")
+          PY
+
+          cat > src/main/java/dev/coreui/bridge/CoreUiBridge.java <<'JAVA'
+          package dev.coreui.bridge;
+
+          import net.minecraft.client.gui.screens.PauseScreen;
+          import net.minecraft.client.gui.screens.Screen;
+          import net.neoforged.api.distmarker.Dist;
+          import net.neoforged.fml.common.Mod;
+          import net.neoforged.neoforge.client.event.ScreenEvent;
+          import net.neoforged.neoforge.common.NeoForge;
+
+          @Mod(value = CoreUiBridge.MOD_ID, dist = Dist.CLIENT)
+          public final class CoreUiBridge {
+              public static final String MOD_ID = "core_ui_bridge";
+
+              public CoreUiBridge() {
+                  BridgeRuntime.start();
+                  NeoForge.EVENT_BUS.addListener(this::onScreenOpening);
+              }
+
+              private void onScreenOpening(ScreenEvent.Opening event) {
+                  Screen next = event.getNewScreen();
+                  boolean connected = BridgeRuntime.isConnected();
+                  BridgeRuntime.trace("screen-opening new=" + (next == null ? "null" : next.getClass().getName()) + " connected=" + connected);
+                  if (!connected) {
+                      BridgeRuntime.trace("screen-opening passthrough reason=transport-disconnected");
+                      return;
+                  }
+                  if (next instanceof PauseScreen pause) {
+                      boolean showsPauseMenu = pause.showsPauseMenu();
+                      BridgeRuntime.trace("pause-screen-detected showsPauseMenu=" + showsPauseMenu);
+                      if (showsPauseMenu) {
+                          event.setNewScreen(new GpuOverlayScreen());
+                          BridgeRuntime.trace("pause-screen-replaced-with-gpu-overlay");
+                      }
+                  }
+              }
+          }
+          JAVA
+
+          echo '=== BridgeRuntime CFR runLoop collision context ==='
+          nl -ba src/main/java/dev/coreui/bridge/BridgeRuntime.java | sed -n '285,335p'
+          echo '=== BridgeRuntime patched action context ==='
+          nl -ba src/main/java/dev/coreui/bridge/BridgeRuntime.java | sed -n '450,520p'
+
+          chmod +x gradlew
+          ./gradlew --no-daemon compileJava
+
+          javap -classpath build/classes/java/main -c -p dev.coreui.bridge.BridgeRuntime | tee ../BridgeRuntime-settings.javap.txt
+          grep -F 'OptionsScreen' ../BridgeRuntime-settings.javap.txt
+          grep -F 'AdvancementsScreen' ../BridgeRuntime-settings.javap.txt
+          grep -F 'StatsScreen' ../BridgeRuntime-settings.javap.txt
+          grep -F 'getStats' ../BridgeRuntime-settings.javap.txt
+          grep -F 'getAdvancements' ../BridgeRuntime-settings.javap.txt
+          grep -F 'settings_request' ../BridgeRuntime-settings.javap.txt
+          grep -F 'setting_set' ../BridgeRuntime-settings.javap.txt
+          grep -F 'getFov' ../BridgeRuntime-settings.javap.txt || true
+          grep -F 'GraphicsStatus' ../BridgeRuntime-settings.javap.txt
+          grep -F 'Options.save' ../BridgeRuntime-settings.javap.txt || true
+
+          mkdir -p ../patch/dev/coreui/bridge
+          cp build/classes/java/main/dev/coreui/bridge/CoreUiBridge.class ../patch/dev/coreui/bridge/
+          cp build/classes/java/main/dev/coreui/bridge/GpuOverlayScreen.class ../patch/dev/coreui/bridge/
+          cp build/classes/java/main/dev/coreui/bridge/BridgeRuntime.class ../patch/dev/coreui/bridge/
+
+          cp ../core_ui_bridge-0.3.11.jar ../core_ui_bridge-settings-api.jar
+          (cd ../patch && zip -q -u ../core_ui_bridge-settings-api.jar dev/coreui/bridge/CoreUiBridge.class dev/coreui/bridge/GpuOverlayScreen.class dev/coreui/bridge/BridgeRuntime.class)
+          unzip -t ../core_ui_bridge-settings-api.jar
+          sha256sum ../core_ui_bridge-settings-api.jar | tee ../settings-api-sha256.txt
+
+      - name: Upload build evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: core-ui-settings-api-build
+          path: |
+            core_ui_bridge-settings-api.jar
+            settings-api-sha256.txt
+            BridgeRuntime-settings.javap.txt
+            mdk/src/main/java/dev/coreui/bridge/BridgeRuntime.java
+            mdk/src/main/java/dev/coreui/bridge/GpuOverlayScreen.java
