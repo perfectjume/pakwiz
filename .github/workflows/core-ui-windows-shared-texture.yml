@@ -58,6 +58,28 @@ jobs:
           'NATIVE_CONTEXT_COPYRESOURCE_SLOT47_HARDWARE=PASS' |
             Set-Content native-d3d-result.txt
 
+          # Mandatory synthetic cross-process NT-handle path. Hosted runners do
+          # not expose Electron D3D shared images, so use the documented
+          # SHARED_NTHANDLE + SHARED_KEYEDMUTEX compatibility form to validate
+          # DuplicateHandle and CORE UI's raw COM ABI slots 48 -> 10 -> 47.
+          & $exe warp-keyed 2>&1 | Tee-Object native-d3d-warp.log
+          $warpExit = $LASTEXITCODE
+          if ($warpExit -ne 0) {
+            throw "WARP keyed cross-process D3D test failed: $warpExit"
+          }
+          $warp = Get-Content native-d3d-warp.log -Raw
+          if ($warp -notmatch 'NATIVE_DUPLICATE_OPEN_SLOT48_GETDESC_SLOT10=PASS driver=WARP') {
+            throw 'WARP raw OpenSharedResource1/GetDesc slots 48/10 did not pass'
+          }
+          if ($warp -notmatch 'NATIVE_CONTEXT_COPYRESOURCE_SLOT47=PASS driver=WARP') {
+            throw 'WARP cross-process CopyResource slot 47 did not pass'
+          }
+          if ($warp -notmatch 'NATIVE_CROSS_PROCESS_D3D_NTHANDLE=PASS driver=WARP') {
+            throw 'WARP cross-process NT-handle test did not pass'
+          }
+          'NATIVE_D3D_CROSS_PROCESS_KEYED_WARP=PASS slots=48,10,47' |
+            Add-Content native-d3d-result.txt
+
           # Capability diagnostic: exact Electron rgba/bgra-style NT-handle-only
           # resource flags. The current hosted adapter is known to reject this
           # at CreateTexture2D, while Electron reports supportsD3dSharedImages=false.
@@ -86,6 +108,10 @@ jobs:
             "NATIVE_D3D_HARDWARE_ELECTRON_FLAGS=UNSUPPORTED_HOSTED_ADAPTER exit=$hardwareExit" |
               Add-Content native-d3d-result.txt
           }
+
+          # Do not leak the optional capability probe's nonzero native exit code
+          # into the PowerShell host process after it has been classified above.
+          exit 0
 
       - name: Upload native D3D evidence
         if: always()
