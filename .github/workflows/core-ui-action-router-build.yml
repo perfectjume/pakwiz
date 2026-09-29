@@ -119,63 +119,164 @@ jobs:
           # Extend only the renderer action lambda. All socket/session/frame logic stays unchanged.
           p = Path("src/main/java/dev/coreui/bridge/BridgeRuntime.java")
           s = p.read_text()
-          marker = "lambda$handleRendererLine$2"
-          start = s.find(marker)
+          # CFR usually inlines the synthetic Runnable lambda into handleRendererLine.
+          # Find the exact existing resume/quit action lambda and preserve its captured
+          # local variable names rather than depending on a synthetic lambda method name.
+          import re
+          resume_pos = s.find('"resume".equals(')
+          if resume_pos < 0:
+              raise SystemExit("BRIDGE_RESUME_ACTION_NOT_FOUND")
+          start = s.rfind(".execute(() -> {", 0, resume_pos)
           if start < 0:
-              raise SystemExit("BRIDGE_ACTION_LAMBDA_NOT_FOUND")
-          start = s.rfind("    ", 0, start)
+              raise SystemExit("BRIDGE_ACTION_EXECUTE_LAMBDA_NOT_FOUND")
+          line_start = s.rfind("\n", 0, start) + 1
+          execute_prefix = s[line_start:start]
+          mc_match = re.search(r'([A-Za-z_$][A-Za-z0-9_$]*)
+          p.write_text(s)
+          print("ACTION_ROUTER_PATCH=APPLIED")
+          PY
+
+          cat > src/main/java/dev/coreui/bridge/CoreUiBridge.java <<'JAVA'
+          package dev.coreui.bridge;
+
+          import net.minecraft.client.gui.screens.PauseScreen;
+          import net.minecraft.client.gui.screens.Screen;
+          import net.neoforged.api.distmarker.Dist;
+          import net.neoforged.fml.common.Mod;
+          import net.neoforged.neoforge.client.event.ScreenEvent;
+          import net.neoforged.neoforge.common.NeoForge;
+
+          @Mod(value = CoreUiBridge.MOD_ID, dist = Dist.CLIENT)
+          public final class CoreUiBridge {
+              public static final String MOD_ID = "core_ui_bridge";
+
+              public CoreUiBridge() {
+                  BridgeRuntime.start();
+                  NeoForge.EVENT_BUS.addListener(this::onScreenOpening);
+              }
+
+              private void onScreenOpening(ScreenEvent.Opening event) {
+                  Screen next = event.getNewScreen();
+                  boolean connected = BridgeRuntime.isConnected();
+                  BridgeRuntime.trace("screen-opening new=" + (next == null ? "null" : next.getClass().getName()) + " connected=" + connected);
+                  if (!connected) {
+                      BridgeRuntime.trace("screen-opening passthrough reason=transport-disconnected");
+                      return;
+                  }
+                  if (next instanceof PauseScreen pause) {
+                      boolean showsPauseMenu = pause.showsPauseMenu();
+                      BridgeRuntime.trace("pause-screen-detected showsPauseMenu=" + showsPauseMenu);
+                      if (showsPauseMenu) {
+                          event.setNewScreen(new GpuOverlayScreen());
+                          BridgeRuntime.trace("pause-screen-replaced-with-gpu-overlay");
+                      }
+                  }
+              }
+          }
+          JAVA
+
+          chmod +x gradlew
+          ./gradlew --no-daemon compileJava
+
+          javap -classpath build/classes/java/main -c -p dev.coreui.bridge.BridgeRuntime | tee ../BridgeRuntime-router.javap.txt
+          grep -F 'OptionsScreen' ../BridgeRuntime-router.javap.txt
+          grep -F 'AdvancementsScreen' ../BridgeRuntime-router.javap.txt
+          grep -F 'StatsScreen' ../BridgeRuntime-router.javap.txt
+          grep -F 'getStats' ../BridgeRuntime-router.javap.txt
+          grep -F 'getAdvancements' ../BridgeRuntime-router.javap.txt
+
+          mkdir -p ../patch/dev/coreui/bridge
+          cp build/classes/java/main/dev/coreui/bridge/CoreUiBridge.class ../patch/dev/coreui/bridge/
+          cp build/classes/java/main/dev/coreui/bridge/GpuOverlayScreen.class ../patch/dev/coreui/bridge/
+          cp build/classes/java/main/dev/coreui/bridge/BridgeRuntime.class ../patch/dev/coreui/bridge/
+
+          cp ../core_ui_bridge-0.3.11.jar ../core_ui_bridge-action-router.jar
+          (cd ../patch && zip -q -u ../core_ui_bridge-action-router.jar dev/coreui/bridge/CoreUiBridge.class dev/coreui/bridge/GpuOverlayScreen.class dev/coreui/bridge/BridgeRuntime.class)
+          unzip -t ../core_ui_bridge-action-router.jar
+          sha256sum ../core_ui_bridge-action-router.jar | tee ../action-router-sha256.txt
+
+      - name: Upload build evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: core-ui-action-router-build
+          path: |
+            core_ui_bridge-action-router.jar
+            action-router-sha256.txt
+            BridgeRuntime-router.javap.txt
+            mdk/src/main/java/dev/coreui/bridge/BridgeRuntime.java
+            mdk/src/main/java/dev/coreui/bridge/GpuOverlayScreen.java
+, execute_prefix.strip())
+          if not mc_match:
+              raise SystemExit("BRIDGE_MINECRAFT_CAPTURE_NOT_FOUND")
+          minecraft = mc_match.group(1)
+
           brace = s.find("{", start)
           depth = 0
-          end = None
+          body_end = None
           for i in range(brace, len(s)):
-              if s[i] == "{": depth += 1
+              if s[i] == "{":
+                  depth += 1
               elif s[i] == "}":
                   depth -= 1
                   if depth == 0:
-                      end = i + 1
+                      body_end = i + 1
                       break
-          if end is None:
+          if body_end is None:
               raise SystemExit("BRIDGE_ACTION_LAMBDA_END_NOT_FOUND")
+          call_end = s.find(");", body_end)
+          if call_end < 0:
+              raise SystemExit("BRIDGE_ACTION_EXECUTE_CALL_END_NOT_FOUND")
+          call_end += 2
 
-          replacement = """    private static void lambda$handleRendererLine$2(long session, long generation, String action, net.minecraft.client.Minecraft minecraft) {
-              if (!BridgeRuntime.isActive(session, generation)) {
-                  return;
-              }
-              if (!(minecraft.screen instanceof GpuOverlayScreen)) {
-                  return;
-              }
+          old_block = s[line_start:call_end]
+          active_match = re.search(r'BridgeRuntime\.isActive\(([^,]+),\s*([^)]+)\)', old_block)
+          action_match = re.search(r'"resume"\.equals\(([^)]+)\)', old_block)
+          if not active_match or not action_match:
+              raise SystemExit("BRIDGE_ACTION_CAPTURE_VARIABLES_NOT_FOUND")
+          session = active_match.group(1).strip()
+          generation = active_match.group(2).strip()
+          action = action_match.group(1).strip()
+          indent = s[line_start:start]
 
-              net.minecraft.client.gui.screens.Screen parent = minecraft.screen;
-              switch (action) {
-                  case "resume" -> minecraft.setScreen(null);
-                  case "quit" -> minecraft.stop();
-                  case "options" -> minecraft.setScreen(
-                      new net.minecraft.client.gui.screens.options.OptionsScreen(parent, minecraft.options)
-                  );
-                  case "advancements" -> {
-                      if (minecraft.player != null) {
-                          minecraft.setScreen(
-                              new net.minecraft.client.gui.screens.advancements.AdvancementsScreen(
-                                  minecraft.player.connection.getAdvancements(),
-                                  parent
-                              )
-                          );
-                      }
-                  }
-                  case "statistics" -> {
-                      if (minecraft.player != null) {
-                          minecraft.setScreen(
-                              new net.minecraft.client.gui.screens.achievement.StatsScreen(
-                                  parent,
-                                  minecraft.player.getStats()
-                              )
-                          );
-                      }
-                  }
-                  default -> BridgeRuntime.trace("ignored unsupported renderer action=" + action);
-              }
-          }"""
-          s = s[:start] + replacement + s[end:]
+          replacement = f"""{{indent}}{minecraft}.execute(() -> {{
+          {{indent}}    if (!BridgeRuntime.isActive({session}, {generation})) {{
+          {{indent}}        return;
+          {{indent}}    }}
+          {{indent}}    if (!({minecraft}.screen instanceof GpuOverlayScreen)) {{
+          {{indent}}        return;
+          {{indent}}    }}
+          {{indent}}    net.minecraft.client.gui.screens.Screen parent = {minecraft}.screen;
+          {{indent}}    switch ({action}) {{
+          {{indent}}        case "resume" -> {minecraft}.setScreen(null);
+          {{indent}}        case "quit" -> {minecraft}.stop();
+          {{indent}}        case "options" -> {minecraft}.setScreen(
+          {{indent}}            new net.minecraft.client.gui.screens.options.OptionsScreen(parent, {minecraft}.options)
+          {{indent}}        );
+          {{indent}}        case "advancements" -> {{
+          {{indent}}            if ({minecraft}.player != null) {{
+          {{indent}}                {minecraft}.setScreen(
+          {{indent}}                    new net.minecraft.client.gui.screens.advancements.AdvancementsScreen(
+          {{indent}}                        {minecraft}.player.connection.getAdvancements(),
+          {{indent}}                        parent
+          {{indent}}                    )
+          {{indent}}                );
+          {{indent}}            }}
+          {{indent}}        }}
+          {{indent}}        case "statistics" -> {{
+          {{indent}}            if ({minecraft}.player != null) {{
+          {{indent}}                {minecraft}.setScreen(
+          {{indent}}                    new net.minecraft.client.gui.screens.achievement.StatsScreen(
+          {{indent}}                        parent,
+          {{indent}}                        {minecraft}.player.getStats()
+          {{indent}}                    )
+          {{indent}}                );
+          {{indent}}            }}
+          {{indent}}        }}
+          {{indent}}        default -> BridgeRuntime.trace("ignored unsupported renderer action=" + {action});
+          {{indent}}    }}
+          {{indent}}}}});"""
+          s = s[:line_start] + replacement + s[call_end:]
+          print("ACTION_ROUTER_CAPTURE", session, generation, action, minecraft)
           p.write_text(s)
           print("ACTION_ROUTER_PATCH=APPLIED")
           PY
