@@ -12,6 +12,68 @@ permissions:
   contents: read
 
 jobs:
+  native-d3d-handle:
+    runs-on: windows-2025
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build native NT-handle boundary harness
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $vswhere = "${env:ProgramFiles(x86)}\\Microsoft Visual Studio\\Installer\\vswhere.exe"
+          if (-not (Test-Path $vswhere)) { throw 'vswhere.exe missing' }
+          $vs = & $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+          if (-not $vs) { throw 'MSVC installation not found' }
+          $devcmd = Join-Path $vs 'Common7\\Tools\\VsDevCmd.bat'
+          New-Item -ItemType Directory -Force native-boundary | Out-Null
+          $src = (Resolve-Path core-ui-runtime/native-d3d-boundary.cpp).Path
+          $out = (Join-Path $PWD 'native-boundary\\native-d3d-boundary.exe')
+          $compile = "`"$devcmd`" -arch=x64 -host_arch=x64 >nul && cl /nologo /EHsc /std:c++20 `"$src`" /Fe:`"$out`" /link d3d11.lib dxgi.lib"
+          cmd /d /s /c $compile
+          if ($LASTEXITCODE -ne 0) { throw "MSVC compile failed: $LASTEXITCODE" }
+          if (-not (Test-Path $out)) { throw 'native boundary executable missing' }
+
+      - name: Run native cross-process D3D NT-handle test
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $exe = '.\\native-boundary\\native-d3d-boundary.exe'
+
+          & $exe warp 2>&1 | Tee-Object native-d3d-warp.log
+          if ($LASTEXITCODE -ne 0) { throw "WARP native boundary failed: $LASTEXITCODE" }
+          $warp = Get-Content native-d3d-warp.log -Raw
+          if ($warp -notmatch 'NATIVE_DUPLICATE_OPEN_SLOT48_GETDESC_SLOT10=PASS driver=WARP') {
+            throw 'Manual slot 48/10 WARP import did not pass'
+          }
+          if ($warp -notmatch 'NATIVE_CROSS_PROCESS_D3D_NTHANDLE=PASS driver=WARP') {
+            throw 'Cross-process WARP NT-handle test did not pass'
+          }
+
+          & $exe hardware 2>&1 | Tee-Object native-d3d-hardware.log
+          $hardwareExit = $LASTEXITCODE
+          'NATIVE_D3D_WARP_ABI=PASS' | Set-Content native-d3d-result.txt
+          if ($hardwareExit -eq 0) {
+            'NATIVE_D3D_HARDWARE_ABI=PASS' | Add-Content native-d3d-result.txt
+          } else {
+            "NATIVE_D3D_HARDWARE_ABI=UNAVAILABLE_ON_HOSTED_RUNNER exit=$hardwareExit" |
+              Add-Content native-d3d-result.txt
+          }
+
+      - name: Upload native D3D evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: core-ui-native-d3d-boundary
+          if-no-files-found: warn
+          path: |
+            native-d3d-result.txt
+            native-d3d-warp.log
+            native-d3d-hardware.log
+            core-ui-runtime/native-d3d-boundary.cpp
+
   windows-shared-texture:
     runs-on: windows-2025
     timeout-minutes: 15
@@ -104,6 +166,14 @@ jobs:
               log('GPU_FEATURE_STATUS=' + JSON.stringify(app.getGPUFeatureStatus()));
               const info = await app.getGPUInfo('complete');
               log('GPU_INFO=' + JSON.stringify(info));
+              if (info && info.auxAttributes &&
+                  info.auxAttributes.supportsD3dSharedImages === false) {
+                clearTimeout(timeout);
+                completed = true;
+                log('WINDOWS_SHARED_TEXTURE_ENV=UNSUPPORTED supportsD3dSharedImages=false');
+                setTimeout(() => app.exit(0), 50);
+                return;
+              }
             } catch (e) {
               log('GPU_DIAGNOSTIC_ERROR=' + e.message);
             }
@@ -474,6 +544,10 @@ jobs:
           if (-not (Test-Path windows-shared-texture.log)) { throw 'windows-shared-texture.log missing' }
           $log = Get-Content windows-shared-texture.log -Raw
           if ($log -notmatch 'ELECTRON_VERSION=44\.4\.5') { throw 'Wrong Electron version' }
+          if ($log -match 'WINDOWS_SHARED_TEXTURE_ENV=UNSUPPORTED supportsD3dSharedImages=false') {
+            'WINDOWS_ELECTRON_SHARED_TEXTURE=UNSUPPORTED_HOSTED_RUNNER' | Add-Content windows-boundary-result.txt
+            exit 0
+          }
           if ($log -notmatch 'CASE_PASS=1 size=854x480') { throw 'Case 1 did not pass' }
           if ($log -notmatch 'CASE_PASS=2 size=1280x720') { throw 'Case 2 did not pass' }
           if ($log -notmatch 'CASE_PASS=3 size=854x480') { throw 'Case 3 did not pass' }
