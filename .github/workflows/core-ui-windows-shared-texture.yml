@@ -1,6 +1,7 @@
 name: CORE UI Windows Shared Texture Boundary
 
 on:
+  workflow_call:
   push:
     branches:
       - core-ui-runtime-smoke
