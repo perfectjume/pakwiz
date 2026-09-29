@@ -37,11 +37,11 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p settings-api-artifact
-          gh run download 36600977569 \
+          gh run download 36602657334 \
             -n core-ui-settings-api-build \
             -D settings-api-artifact
           test -f settings-api-artifact/core_ui_bridge-settings-api.jar
-          echo '7ed017f7237f37c4817420834dcf67f3a7be3ac92730680333f427fbdb84ff31  settings-api-artifact/core_ui_bridge-settings-api.jar' | sha256sum -c -
+          echo '44592adfb61295c50ce95beb1c646472907a4c9754e2c71d5468d16d05cd9843  settings-api-artifact/core_ui_bridge-settings-api.jar' | sha256sum -c -
           unzip -t settings-api-artifact/core_ui_bridge-settings-api.jar
           sha256sum settings-api-artifact/core_ui_bridge-settings-api.jar | tee settings-runtime-jar-sha256.txt
 
