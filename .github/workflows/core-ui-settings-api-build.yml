@@ -471,3 +471,5 @@ jobs:
             mdk/src/main/java/dev/coreui/bridge/GpuOverlayScreen.java
 
 # Trigger settings API build after workflow introduction.
+
+# Retry settings API compile with public ValueSet validation.
