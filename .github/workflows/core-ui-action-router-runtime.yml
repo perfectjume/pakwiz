@@ -187,3 +187,5 @@ jobs:
             action-xvfb.log
             action-openbox.log
             core-ui-runtime/action-router-test/
+
+# Trigger real-client action-router gate after workflow introduction.
