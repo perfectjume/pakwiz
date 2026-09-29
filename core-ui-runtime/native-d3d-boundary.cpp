@@ -466,6 +466,7 @@ static int parent_main(const wchar_t* exe, D3D_DRIVER_TYPE driverType, bool keye
     if (FAILED(hr) || !dxgiResource1) {
         std::fwprintf(stderr, L"PARENT_FAIL QueryInterface(IDXGIResource1) hr=%ls\n",
                       hrhex(hr, hbuf, 32));
+        if (keyed) keyed->Release();
         texture->Release();
         context->Release();
         device->Release();
@@ -481,6 +482,7 @@ static int parent_main(const wchar_t* exe, D3D_DRIVER_TYPE driverType, bool keye
         std::fwprintf(stderr, L"PARENT_FAIL CreateSharedHandle driver=%ls hr=%ls\n",
                       driver_name(driverType), hrhex(hr, hbuf, 32));
         dxgiResource1->Release();
+        if (keyed) keyed->Release();
         texture->Release();
         context->Release();
         device->Release();
@@ -510,6 +512,7 @@ static int parent_main(const wchar_t* exe, D3D_DRIVER_TYPE driverType, bool keye
         std::fwprintf(stderr, L"PARENT_FAIL CreateProcess Win32=%lu\n", GetLastError());
         CloseHandle(sharedHandle);
         dxgiResource1->Release();
+        if (keyed) keyed->Release();
         texture->Release();
         context->Release();
         device->Release();
