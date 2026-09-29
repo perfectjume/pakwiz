@@ -250,6 +250,11 @@ jobs:
           }
           JAVA
 
+          echo '=== BridgeRuntime CFR runLoop collision context ==='
+          nl -ba src/main/java/dev/coreui/bridge/BridgeRuntime.java | sed -n '285,335p'
+          echo '=== BridgeRuntime patched action context ==='
+          nl -ba src/main/java/dev/coreui/bridge/BridgeRuntime.java | sed -n '450,520p'
+
           chmod +x gradlew
           ./gradlew --no-daemon compileJava
 
@@ -271,6 +276,7 @@ jobs:
           sha256sum ../core_ui_bridge-action-router.jar | tee ../action-router-sha256.txt
 
       - name: Upload build evidence
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: core-ui-action-router-build
