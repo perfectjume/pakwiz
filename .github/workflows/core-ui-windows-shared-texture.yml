@@ -502,3 +502,5 @@ jobs:
             computer-info.txt
             harness/main.js
             harness/import-handle.ps1
+
+# Triggered after workflow introduction so GitHub sees an already-existing workflow on push.
