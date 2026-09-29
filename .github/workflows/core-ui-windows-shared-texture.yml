@@ -51,6 +51,9 @@ jobs:
           if ($warp -notmatch 'NATIVE_CROSS_PROCESS_D3D_NTHANDLE=PASS driver=WARP') {
             throw 'Cross-process WARP NT-handle test did not pass'
           }
+          if ($warp -notmatch 'NATIVE_CONTEXT_COPYRESOURCE_SLOT47=PASS driver=WARP') {
+            throw 'Manual slot 47 CopyResource WARP test did not pass'
+          }
 
           & $exe hardware 2>&1 | Tee-Object native-d3d-hardware.log
           $hardwareExit = $LASTEXITCODE
