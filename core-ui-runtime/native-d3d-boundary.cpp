@@ -301,6 +301,16 @@ static int local_copy_slot47(D3D_DRIVER_TYPE driverType) {
     auto copyResource = reinterpret_cast<CopyResourceFn>(contextVtable[47]);
     copyResource(context, destination, source);
 
+    // Mirror CORE UI's lifetime pattern: after CopyResource has been queued,
+    // drop every application-held reference to the source immediately. The
+    // later Map on a copy of the destination is the synchronization/readback
+    // that proves the queued copy did not depend on our source COM reference.
+    rtv->Release();
+    rtv = nullptr;
+    source->Release();
+    source = nullptr;
+    std::wprintf(L"LOCAL_SOURCE_RELEASED_IMMEDIATELY_AFTER_COPY=PASS\n");
+
     D3D11_TEXTURE2D_DESC stagingDesc = desc;
     stagingDesc.Usage = D3D11_USAGE_STAGING;
     stagingDesc.BindFlags = 0;
@@ -309,9 +319,9 @@ static int local_copy_slot47(D3D_DRIVER_TYPE driverType) {
     if (FAILED(hr) || !staging) {
         std::fwprintf(stderr, L"LOCAL_COPY_FAIL CreateTexture2D(staging) hr=%ls\n",
                       hrhex(hr, hbuf, 32));
-        rtv->Release();
+        if (rtv) rtv->Release();
         destination->Release();
-        source->Release();
+        if (source) source->Release();
         context->Release();
         device->Release();
         return 34;
@@ -323,9 +333,9 @@ static int local_copy_slot47(D3D_DRIVER_TYPE driverType) {
     if (FAILED(hr) || !mapped.pData) {
         std::fwprintf(stderr, L"LOCAL_COPY_FAIL Map hr=%ls\n", hrhex(hr, hbuf, 32));
         staging->Release();
-        rtv->Release();
+        if (rtv) rtv->Release();
         destination->Release();
-        source->Release();
+        if (source) source->Release();
         context->Release();
         device->Release();
         return 35;
@@ -343,9 +353,9 @@ static int local_copy_slot47(D3D_DRIVER_TYPE driverType) {
     std::wprintf(L"LOCAL_COPY_SLOT47_PIXEL bgra=%d,%d,%d,%d\n", b, g, r, a);
 
     staging->Release();
-    rtv->Release();
+    if (rtv) rtv->Release();
     destination->Release();
-    source->Release();
+    if (source) source->Release();
     context->Release();
     device->Release();
 
