@@ -330,17 +330,19 @@ jobs:
           }
 
           private static int rangeMin(net.minecraft.client.OptionInstance<Integer> option, int fallback) {
-              net.minecraft.client.OptionInstance.ValueSet<Integer> values = option.values();
-              if (values instanceof net.minecraft.client.OptionInstance.IntRangeBase range) {
-                  return range.minInclusive();
+              for (int value = 0; value <= 1024; value++) {
+                  if (option.values().validateValue(value).isPresent()) {
+                      return value;
+                  }
               }
               return fallback;
           }
 
           private static int rangeMax(net.minecraft.client.OptionInstance<Integer> option, int fallback) {
-              net.minecraft.client.OptionInstance.ValueSet<Integer> values = option.values();
-              if (values instanceof net.minecraft.client.OptionInstance.IntRangeBase range) {
-                  return range.maxInclusive();
+              for (int value = 1024; value >= 0; value--) {
+                  if (option.values().validateValue(value).isPresent()) {
+                      return value;
+                  }
               }
               return fallback;
           }
