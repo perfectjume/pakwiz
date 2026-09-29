@@ -207,6 +207,23 @@ jobs:
           {indent}}});"""
           s = s[:line_start] + replacement + s[call_end:]
           print("ACTION_ROUTER_CAPTURE", session, generation, action, minecraft)
+
+          # CFR inlines the reader synthetic lambda into runLoop(), but reuses the
+          # enclosing handshake local name "string". Java source cannot redeclare
+          # an enclosing local inside a lambda, though the original bytecode uses
+          # a separate synthetic method. Rename only this decompiler-created local.
+          reader_old = """                        String string;
+                        while ((string = bufferedReader.readLine()) != null) {
+                            BridgeRuntime.handleRendererLine(string);
+                        }"""
+          reader_new = """                        String readerLine;
+                        while ((readerLine = bufferedReader.readLine()) != null) {
+                            BridgeRuntime.handleRendererLine(readerLine);
+                        }"""
+          if reader_old not in s:
+              raise SystemExit("BRIDGE_CFR_READER_LOCAL_COLLISION_NOT_FOUND")
+          s = s.replace(reader_old, reader_new, 1)
+          print("BRIDGE_CFR_READER_LOCAL_COLLISION=FIXED")
           p.write_text(s)
           print("ACTION_ROUTER_PATCH=APPLIED")
           PY
