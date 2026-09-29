@@ -39,29 +39,36 @@ jobs:
       - name: Run native cross-process D3D NT-handle test
         shell: pwsh
         run: |
-          $ErrorActionPreference = 'Stop'
+          $ErrorActionPreference = 'Continue'
           $exe = '.\\native-boundary\\native-d3d-boundary.exe'
 
-          & $exe warp 2>&1 | Tee-Object native-d3d-warp.log
-          if ($LASTEXITCODE -ne 0) { throw "WARP native boundary failed: $LASTEXITCODE" }
-          $warp = Get-Content native-d3d-warp.log -Raw
-          if ($warp -notmatch 'NATIVE_DUPLICATE_OPEN_SLOT48_GETDESC_SLOT10=PASS driver=WARP') {
-            throw 'Manual slot 48/10 WARP import did not pass'
-          }
-          if ($warp -notmatch 'NATIVE_CROSS_PROCESS_D3D_NTHANDLE=PASS driver=WARP') {
-            throw 'Cross-process WARP NT-handle test did not pass'
-          }
-          if ($warp -notmatch 'NATIVE_CONTEXT_COPYRESOURCE_SLOT47=PASS driver=WARP') {
-            throw 'Manual slot 47 CopyResource WARP test did not pass'
-          }
-
+          # Primary test: this matches CORE UI / Electron's Windows hardware-D3D path.
           & $exe hardware 2>&1 | Tee-Object native-d3d-hardware.log
           $hardwareExit = $LASTEXITCODE
-          'NATIVE_D3D_WARP_ABI=PASS' | Set-Content native-d3d-result.txt
-          if ($hardwareExit -eq 0) {
-            'NATIVE_D3D_HARDWARE_ABI=PASS' | Add-Content native-d3d-result.txt
+          if ($hardwareExit -ne 0) {
+            throw "Hardware native boundary failed: $hardwareExit"
+          }
+          $hardware = Get-Content native-d3d-hardware.log -Raw
+          if ($hardware -notmatch 'NATIVE_DUPLICATE_OPEN_SLOT48_GETDESC_SLOT10=PASS driver=HARDWARE') {
+            throw 'Manual slot 48/10 hardware import did not pass'
+          }
+          if ($hardware -notmatch 'NATIVE_CONTEXT_COPYRESOURCE_SLOT47=PASS driver=HARDWARE') {
+            throw 'Manual slot 47 CopyResource hardware test did not pass'
+          }
+          if ($hardware -notmatch 'NATIVE_CROSS_PROCESS_D3D_NTHANDLE=PASS driver=HARDWARE') {
+            throw 'Cross-process hardware NT-handle test did not pass'
+          }
+
+          'NATIVE_D3D_HARDWARE_ELECTRON_FLAGS=PASS' | Set-Content native-d3d-result.txt
+          'NATIVE_D3D_SLOTS=48,10,47 PASS' | Add-Content native-d3d-result.txt
+
+          # Secondary diagnostic only. WARP may reject NTHANDLE-only resources.
+          & $exe warp 2>&1 | Tee-Object native-d3d-warp.log
+          $warpExit = $LASTEXITCODE
+          if ($warpExit -eq 0) {
+            'NATIVE_D3D_WARP_ELECTRON_FLAGS=PASS' | Add-Content native-d3d-result.txt
           } else {
-            "NATIVE_D3D_HARDWARE_ABI=UNAVAILABLE_ON_HOSTED_RUNNER exit=$hardwareExit" |
+            "NATIVE_D3D_WARP_ELECTRON_FLAGS=UNSUPPORTED exit=$warpExit" |
               Add-Content native-d3d-result.txt
           }
 
