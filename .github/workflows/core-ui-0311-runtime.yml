@@ -724,3 +724,6 @@ jobs:
             fixed-jar-sha256.txt
             core_ui_bridge-0.3.11.jar
             mdk/run/crash-reports/
+
+  windows-shared-texture-boundary:
+    uses: ./.github/workflows/core-ui-windows-shared-texture.yml
