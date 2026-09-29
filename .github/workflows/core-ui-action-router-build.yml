@@ -165,7 +165,8 @@ jobs:
           session = active_match.group(1).strip()
           generation = active_match.group(2).strip()
           action = action_match.group(1).strip()
-          indent = s[line_start:start]
+          line_prefix = s[line_start:start]
+          indent = line_prefix[:len(line_prefix) - len(line_prefix.lstrip())]
 
           replacement = f"""{indent}{minecraft}.execute(() -> {{
           {indent}    if (!BridgeRuntime.isActive({session}, {generation})) {{
