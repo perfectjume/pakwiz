@@ -9,6 +9,7 @@ on:
       - '.github/workflows/core-ui-windows-shared-texture.yml'
       - 'core-ui-runtime/native-d3d-boundary.cpp'
       - 'core-ui-runtime/native-wgl-dx11-probe.cpp'
+      - 'core-ui-runtime/core-ui-target-renderer-probe.cpp'
 
 permissions:
   contents: read
@@ -704,6 +705,41 @@ jobs:
           'WGL_NV_DX_INTEROP2_D3D11_PIXEL_PATH=PASS' |
             Add-Content wgl-dx11-result.txt
 
+      - name: Build exact 0.3.12 target renderer probe
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+          $vs = & $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+          if (-not $vs) { throw 'MSVC installation not found' }
+          $devcmd = Join-Path $vs 'Common7\Tools\VsDevCmd.bat'
+          $src = (Resolve-Path core-ui-runtime/core-ui-target-renderer-probe.cpp).Path
+          $out = (Join-Path $PWD 'wgl-probe\core-ui-target-renderer-probe.exe')
+          $compile = "`"$devcmd`" -arch=x64 -host_arch=x64 >nul && cl /nologo /EHsc /std:c++20 `"$src`" /Fe:`"$out`" /link d3d11.lib dxgi.lib opengl32.lib user32.lib gdi32.lib ws2_32.lib"
+          cmd /d /s /c $compile
+          if ($LASTEXITCODE -ne 0) { throw "Target renderer probe compile failed: $LASTEXITCODE" }
+          if (-not (Test-Path $out)) { throw 'Target renderer probe executable missing' }
+
+      - name: Capability-run target renderer probe
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Continue'
+          & .\wgl-probe\core-ui-target-renderer-probe.exe 2>&1 | Tee-Object target-renderer-probe-ci.log
+          $code = $LASTEXITCODE
+          "TARGET_PROBE_CI_EXIT=$code" | Set-Content target-renderer-probe-ci-result.txt
+          $log = Get-Content target-renderer-probe-ci.log -Raw
+          if ($code -eq 2 -and $log -match 'TARGET_ENV_UNSUPPORTED missing=WGL_NV_DX_interop2') {
+            'TARGET_PROBE_BUILD=PASS' | Add-Content target-renderer-probe-ci-result.txt
+            'TARGET_PROBE_RUNTIME=UNSUPPORTED_HOSTED_RUNNER' | Add-Content target-renderer-probe-ci-result.txt
+            exit 0
+          }
+          if ($code -eq 14 -and $log -match 'WGL_INTEROP_ENTRYPOINTS=PASS') {
+            'TARGET_PROBE_BUILD=PASS' | Add-Content target-renderer-probe-ci-result.txt
+            'TARGET_PROBE_RUNTIME=INTEROP_AVAILABLE_RENDERER_NOT_STARTED' | Add-Content target-renderer-probe-ci-result.txt
+            exit 0
+          }
+          if ($code -ne 0) { throw "Unexpected target probe CI result: $code" }
+          throw 'Target probe unexpectedly completed full renderer test in CI without starting renderer'
       - name: Upload WGL probe
         if: always()
         uses: actions/upload-artifact@v4
@@ -714,4 +750,8 @@ jobs:
             wgl-dx11-result.txt
             wgl-dx11-probe.log
             wgl-probe/core-ui-wgl-dx11-probe.exe
+            wgl-probe/core-ui-target-renderer-probe.exe
+            target-renderer-probe-ci.log
+            target-renderer-probe-ci-result.txt
             core-ui-runtime/native-wgl-dx11-probe.cpp
+            core-ui-runtime/core-ui-target-renderer-probe.cpp
