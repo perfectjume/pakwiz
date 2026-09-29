@@ -1,0 +1,504 @@
+name: CORE UI Windows Shared Texture Boundary
+
+on:
+  push:
+    branches:
+      - core-ui-runtime-smoke
+    paths:
+      - '.github/workflows/core-ui-windows-shared-texture.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  windows-shared-texture:
+    runs-on: windows-2025
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download exact Electron 44.4.5 runtime
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $version = '44.4.5'
+          $expected = '11c395820a5aaa8ebcc0686b476d0ac98a730274ebfbdc8cf5538a7c2815cb5d'
+          $url = "https://github.com/electron/electron/releases/download/v$version/electron-v$version-win32-x64.zip"
+          Invoke-WebRequest -Uri $url -OutFile electron.zip
+          $actual = (Get-FileHash -Algorithm SHA256 electron.zip).Hash.ToLowerInvariant()
+          "ELECTRON_ZIP_SHA256=$actual" | Tee-Object windows-boundary-result.txt
+          if ($actual -ne $expected) { throw "Electron checksum mismatch: $actual" }
+          Expand-Archive electron.zip -DestinationPath electron -Force
+          if (-not (Test-Path electron/electron.exe)) { throw 'electron.exe missing after extract' }
+
+      - name: Create Windows shared-texture importer harness
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          New-Item -ItemType Directory -Force harness | Out-Null
+
+          @'
+          {"name":"core-ui-windows-boundary","version":"1.0.0","main":"main.js"}
+          '@ | Set-Content harness/package.json -Encoding utf8
+
+          @'
+          'use strict';
+          const { app, BrowserWindow } = require('electron');
+          const { spawnSync } = require('child_process');
+          const fs = require('fs');
+          const path = require('path');
+
+          app.commandLine.appendSwitch('force_high_performance_gpu');
+
+          const out = path.join(process.cwd(), 'windows-shared-texture.log');
+          const helper = path.join(process.cwd(), 'harness', 'import-handle.ps1');
+          const cases = [
+            { width: 854, height: 480 },
+            { width: 1280, height: 720 },
+            { width: 854, height: 480 }
+          ];
+
+          let win = null;
+          let index = 0;
+          let busy = false;
+          let completed = false;
+
+          function log(message) {
+            const line = '[' + new Date().toISOString() + '] ' + message;
+            fs.appendFileSync(out, line + '\n');
+            console.log(line);
+          }
+
+          function fail(message) {
+            if (completed) return;
+            completed = true;
+            log('WINDOWS_SHARED_TEXTURE_D3D_IMPORT=FAIL ' + message);
+            setTimeout(() => app.exit(1), 50);
+          }
+
+          function handleDecimal(buffer) {
+            if (!Buffer.isBuffer(buffer)) throw new Error('ntHandle is not a Buffer');
+            if (buffer.length === 8) return buffer.readBigUInt64LE(0).toString(10);
+            if (buffer.length === 4) return BigInt(buffer.readUInt32LE(0)).toString(10);
+            throw new Error('unexpected ntHandle byte length ' + buffer.length);
+          }
+
+          function requestExpectedSize(reason) {
+            if (!win || win.isDestroyed() || completed) return;
+            const c = cases[index];
+            log('REQUEST_SIZE case=' + (index + 1) + ' size=' + c.width + 'x' + c.height + ' reason=' + reason);
+            win.setContentSize(c.width, c.height, false);
+            setTimeout(() => {
+              try { win.webContents.invalidate(); } catch (_) {}
+            }, 100);
+          }
+
+          const timeout = setTimeout(() => fail('timeout waiting for Windows shared texture'), 90000);
+
+          app.whenReady().then(async () => {
+            log('ELECTRON_VERSION=' + process.versions.electron);
+            log('PLATFORM=' + process.platform + ' ARCH=' + process.arch);
+            try {
+              log('GPU_FEATURE_STATUS=' + JSON.stringify(app.getGPUFeatureStatus()));
+              const info = await app.getGPUInfo('complete');
+              log('GPU_INFO=' + JSON.stringify(info));
+            } catch (e) {
+              log('GPU_DIAGNOSTIC_ERROR=' + e.message);
+            }
+
+            const c = cases[0];
+            win = new BrowserWindow({
+              show: false,
+              frame: false,
+              transparent: true,
+              backgroundColor: '#00000000',
+              width: c.width,
+              height: c.height,
+              webPreferences: {
+                contextIsolation: true,
+                nodeIntegration: false,
+                sandbox: true,
+                backgroundThrottling: false,
+                offscreen: {
+                  useSharedTexture: true,
+                  sharedTexturePixelFormat: 'argb',
+                  deviceScaleFactor: 1
+                }
+              }
+            });
+
+            win.webContents.setFrameRate(144);
+
+            win.webContents.on('paint', event => {
+              const texture = event.texture;
+              if (completed) {
+                try { texture?.release?.(); } catch (_) {}
+                return;
+              }
+              if (busy) {
+                try { texture?.release?.(); } catch (_) {}
+                return;
+              }
+              if (!texture || typeof texture.release !== 'function' || !texture.textureInfo) {
+                log('PLACEHOLDER_PAINT');
+                setTimeout(() => win?.webContents.invalidate(), 25);
+                return;
+              }
+
+              const info = texture.textureInfo;
+              const coded = info.codedSize || {};
+              const width = Math.trunc(coded.width || 0);
+              const height = Math.trunc(coded.height || 0);
+              const format = String(info.pixelFormat || '').toLowerCase();
+              const ntHandle = info.handle && info.handle.ntHandle;
+              const expected = cases[index];
+
+              if (!Buffer.isBuffer(ntHandle)) {
+                try { texture.release(); } catch (_) {}
+                log('PAINT_WITHOUT_NT_HANDLE format=' + format + ' size=' + width + 'x' + height);
+                setTimeout(() => win?.webContents.invalidate(), 25);
+                return;
+              }
+
+              if (width !== expected.width || height !== expected.height) {
+                try { texture.release(); } catch (_) {}
+                log('DISCARD_STALE_TEXTURE got=' + width + 'x' + height + ' expected=' + expected.width + 'x' + expected.height);
+                setTimeout(() => win?.webContents.invalidate(), 25);
+                return;
+              }
+
+              if (format !== 'rgba' && format !== 'bgra') {
+                try { texture.release(); } catch (_) {}
+                fail('unsupported Electron texture format ' + format);
+                return;
+              }
+
+              busy = true;
+              let handle;
+              try {
+                handle = handleDecimal(ntHandle);
+                log('FRAME case=' + (index + 1) + ' pid=' + process.pid + ' handle=' + handle +
+                    ' size=' + width + 'x' + height + ' format=' + format);
+
+                const result = spawnSync('pwsh', [
+                  '-NoProfile',
+                  '-ExecutionPolicy', 'Bypass',
+                  '-File', helper,
+                  '-SourcePid', String(process.pid),
+                  '-SourceHandle', handle,
+                  '-ExpectedWidth', String(width),
+                  '-ExpectedHeight', String(height)
+                ], {
+                  cwd: process.cwd(),
+                  encoding: 'utf8',
+                  timeout: 30000
+                });
+
+                if (result.stdout) log('IMPORTER_STDOUT=' + result.stdout.trim().replace(/\r?\n/g, ' | '));
+                if (result.stderr) log('IMPORTER_STDERR=' + result.stderr.trim().replace(/\r?\n/g, ' | '));
+                if (result.error) throw result.error;
+                if (result.status !== 0) throw new Error('importer exit=' + result.status);
+
+                log('CASE_PASS=' + (index + 1) + ' size=' + width + 'x' + height);
+              } catch (e) {
+                try { texture.release(); } catch (_) {}
+                busy = false;
+                fail(e.message);
+                return;
+              }
+
+              try { texture.release(); } catch (e) { log('TEXTURE_RELEASE_ERROR=' + e.message); }
+              busy = false;
+              index++;
+
+              if (index >= cases.length) {
+                clearTimeout(timeout);
+                completed = true;
+                log('WINDOWS_SHARED_TEXTURE_D3D_IMPORT=PASS');
+                setTimeout(() => app.exit(0), 100);
+                return;
+              }
+
+              requestExpectedSize('next-case');
+            });
+
+            win.webContents.on('did-finish-load', () => {
+              log('HTML_LOADED');
+              win.webContents.startPainting();
+              requestExpectedSize('initial-load');
+            });
+
+            win.webContents.on('render-process-gone', (_event, details) => {
+              fail('Chromium renderer exited: ' + details.reason);
+            });
+
+            await win.loadURL(
+              'data:text/html;charset=utf-8,' +
+              encodeURIComponent('<!doctype html><html><body style="margin:0;background:rgba(20,30,40,.85);overflow:hidden">' +
+              '<div id="x" style="width:200px;height:100px;background:#d9b85b;transform:translate(20px,20px)"></div>' +
+              '<script>let n=0;setInterval(function(){n=(n+7)%500;document.getElementById("x").style.transform="translate("+n+"px,20px)"},16)</script>' +
+              '</body></html>')
+            );
+          }).catch(e => fail(e.stack || e.message));
+          '@ | Set-Content harness/main.js -Encoding utf8
+
+          @'
+          param(
+            [Parameter(Mandatory=$true)][int]$SourcePid,
+            [Parameter(Mandatory=$true)][string]$SourceHandle,
+            [Parameter(Mandatory=$true)][int]$ExpectedWidth,
+            [Parameter(Mandatory=$true)][int]$ExpectedHeight
+          )
+
+          $ErrorActionPreference = 'Stop'
+
+          $source = @"
+          using System;
+          using System.Runtime.InteropServices;
+
+          public static class CoreUiWindowsBoundary
+          {
+              private const uint PROCESS_DUP_HANDLE = 0x0040;
+              private const uint DUPLICATE_SAME_ACCESS = 0x00000002;
+              private const int D3D_DRIVER_TYPE_HARDWARE = 1;
+              private const uint D3D11_CREATE_DEVICE_BGRA_SUPPORT = 0x20;
+              private const uint D3D11_SDK_VERSION = 7;
+
+              [DllImport("kernel32.dll", SetLastError=true)]
+              private static extern IntPtr OpenProcess(uint access, bool inherit, uint processId);
+
+              [DllImport("kernel32.dll", SetLastError=true)]
+              private static extern IntPtr GetCurrentProcess();
+
+              [DllImport("kernel32.dll", SetLastError=true)]
+              [return: MarshalAs(UnmanagedType.Bool)]
+              private static extern bool DuplicateHandle(
+                  IntPtr sourceProcess,
+                  IntPtr sourceHandle,
+                  IntPtr targetProcess,
+                  out IntPtr targetHandle,
+                  uint desiredAccess,
+                  bool inheritHandle,
+                  uint options);
+
+              [DllImport("kernel32.dll", SetLastError=true)]
+              [return: MarshalAs(UnmanagedType.Bool)]
+              private static extern bool CloseHandle(IntPtr handle);
+
+              [DllImport("d3d11.dll", CallingConvention=CallingConvention.StdCall)]
+              private static extern int D3D11CreateDevice(
+                  IntPtr adapter,
+                  int driverType,
+                  IntPtr software,
+                  uint flags,
+                  IntPtr featureLevels,
+                  uint featureLevelsCount,
+                  uint sdkVersion,
+                  out IntPtr device,
+                  out uint featureLevel,
+                  out IntPtr immediateContext);
+
+              [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+              private delegate int QueryInterfaceDelegate(IntPtr self, ref Guid iid, out IntPtr result);
+
+              [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+              private delegate uint ReleaseDelegate(IntPtr self);
+
+              [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+              private delegate int OpenSharedResource1Delegate(IntPtr self, IntPtr handle, ref Guid iid, out IntPtr resource);
+
+              [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+              private delegate void GetDescDelegate(IntPtr self, out Texture2DDesc desc);
+
+              [StructLayout(LayoutKind.Sequential)]
+              public struct Texture2DDesc
+              {
+                  public uint Width;
+                  public uint Height;
+                  public uint MipLevels;
+                  public uint ArraySize;
+                  public uint Format;
+                  public uint SampleCount;
+                  public uint SampleQuality;
+                  public uint Usage;
+                  public uint BindFlags;
+                  public uint CPUAccessFlags;
+                  public uint MiscFlags;
+              }
+
+              private static T VFunc<T>(IntPtr obj, int index) where T : Delegate
+              {
+                  IntPtr vtable = Marshal.ReadIntPtr(obj);
+                  IntPtr fn = Marshal.ReadIntPtr(vtable, index * IntPtr.Size);
+                  return Marshal.GetDelegateForFunctionPointer<T>(fn);
+              }
+
+              private static void Release(ref IntPtr ptr)
+              {
+                  if (ptr == IntPtr.Zero) return;
+                  try { VFunc<ReleaseDelegate>(ptr, 2)(ptr); }
+                  finally { ptr = IntPtr.Zero; }
+              }
+
+              private static string Hr(int hr)
+              {
+                  return "0x" + unchecked((uint)hr).ToString("x8");
+              }
+
+              public static string Run(uint sourcePid, ulong sourceHandleValue, uint expectedWidth, uint expectedHeight)
+              {
+                  IntPtr sourceProcess = IntPtr.Zero;
+                  IntPtr duplicated = IntPtr.Zero;
+                  IntPtr device = IntPtr.Zero;
+                  IntPtr context = IntPtr.Zero;
+                  IntPtr device1 = IntPtr.Zero;
+                  IntPtr texture = IntPtr.Zero;
+
+                  try
+                  {
+                      sourceProcess = OpenProcess(PROCESS_DUP_HANDLE, false, sourcePid);
+                      if (sourceProcess == IntPtr.Zero)
+                          throw new Exception("OpenProcess(PROCESS_DUP_HANDLE) failed Win32=" + Marshal.GetLastWin32Error());
+
+                      IntPtr sourceHandle = new IntPtr(unchecked((long)sourceHandleValue));
+                      if (!DuplicateHandle(
+                          sourceProcess,
+                          sourceHandle,
+                          GetCurrentProcess(),
+                          out duplicated,
+                          0,
+                          false,
+                          DUPLICATE_SAME_ACCESS))
+                      {
+                          throw new Exception("DuplicateHandle failed Win32=" + Marshal.GetLastWin32Error());
+                      }
+
+                      uint featureLevel;
+                      int hr = D3D11CreateDevice(
+                          IntPtr.Zero,
+                          D3D_DRIVER_TYPE_HARDWARE,
+                          IntPtr.Zero,
+                          D3D11_CREATE_DEVICE_BGRA_SUPPORT,
+                          IntPtr.Zero,
+                          0,
+                          D3D11_SDK_VERSION,
+                          out device,
+                          out featureLevel,
+                          out context);
+                      if (hr < 0)
+                          throw new Exception("D3D11CreateDevice failed " + Hr(hr));
+                      if (device == IntPtr.Zero || context == IntPtr.Zero)
+                          throw new Exception("D3D11CreateDevice returned null device/context");
+
+                      Guid iidDevice1 = new Guid("a04bfb29-08ef-43d6-a49c-a9bdbdcbe686");
+                      hr = VFunc<QueryInterfaceDelegate>(device, 0)(device, ref iidDevice1, out device1);
+                      if (hr < 0 || device1 == IntPtr.Zero)
+                          throw new Exception("QueryInterface(ID3D11Device1) failed " + Hr(hr));
+
+                      Guid iidTexture2D = new Guid("6f15aaf2-d208-4e89-9ab4-489535d34f9c");
+                      hr = VFunc<OpenSharedResource1Delegate>(device1, 48)(
+                          device1, duplicated, ref iidTexture2D, out texture);
+                      if (hr < 0 || texture == IntPtr.Zero)
+                          throw new Exception("OpenSharedResource1 failed " + Hr(hr));
+
+                      Texture2DDesc desc;
+                      VFunc<GetDescDelegate>(texture, 10)(texture, out desc);
+
+                      if (desc.Width != expectedWidth || desc.Height != expectedHeight)
+                          throw new Exception(
+                              "D3D texture size mismatch expected=" + expectedWidth + "x" + expectedHeight +
+                              " actual=" + desc.Width + "x" + desc.Height);
+
+                      if (desc.MipLevels != 1 || desc.ArraySize != 1 || desc.SampleCount != 1)
+                          throw new Exception(
+                              "Unsupported D3D texture shape mip=" + desc.MipLevels +
+                              " array=" + desc.ArraySize + " samples=" + desc.SampleCount);
+
+                      return "D3D_IMPORT_PASS featureLevel=0x" + featureLevel.ToString("x") +
+                          " size=" + desc.Width + "x" + desc.Height +
+                          " format=" + desc.Format +
+                          " bindFlags=0x" + desc.BindFlags.ToString("x") +
+                          " miscFlags=0x" + desc.MiscFlags.ToString("x");
+                  }
+                  finally
+                  {
+                      Release(ref texture);
+                      Release(ref device1);
+                      Release(ref context);
+                      Release(ref device);
+                      if (duplicated != IntPtr.Zero) CloseHandle(duplicated);
+                      if (sourceProcess != IntPtr.Zero) CloseHandle(sourceProcess);
+                  }
+              }
+          }
+          "@
+
+          Add-Type -TypeDefinition $source -Language CSharp
+
+          try {
+            $h = [UInt64]::Parse($SourceHandle, [Globalization.CultureInfo]::InvariantCulture)
+            $result = [CoreUiWindowsBoundary]::Run(
+              [uint32]$SourcePid,
+              $h,
+              [uint32]$ExpectedWidth,
+              [uint32]$ExpectedHeight
+            )
+            Write-Output $result
+            exit 0
+          }
+          catch {
+            Write-Error $_.Exception.Message
+            exit 1
+          }
+          '@ | Set-Content harness/import-handle.ps1 -Encoding utf8
+
+      - name: Run exact Electron Windows D3D boundary
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Continue'
+          & .\electron\electron.exe .\harness 2>&1 | Tee-Object electron-console.log
+          $code = $LASTEXITCODE
+          "ELECTRON_EXIT=$code" | Add-Content windows-boundary-result.txt
+          if (Test-Path windows-shared-texture.log) {
+            Get-Content windows-shared-texture.log | Tee-Object -FilePath windows-shared-texture-copy.log
+          }
+          if ($code -ne 0) { exit $code }
+
+      - name: Assert Windows shared-texture boundary
+        if: always()
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if (-not (Test-Path windows-shared-texture.log)) { throw 'windows-shared-texture.log missing' }
+          $log = Get-Content windows-shared-texture.log -Raw
+          if ($log -notmatch 'ELECTRON_VERSION=44\.4\.5') { throw 'Wrong Electron version' }
+          if ($log -notmatch 'CASE_PASS=1 size=854x480') { throw 'Case 1 did not pass' }
+          if ($log -notmatch 'CASE_PASS=2 size=1280x720') { throw 'Case 2 did not pass' }
+          if ($log -notmatch 'CASE_PASS=3 size=854x480') { throw 'Case 3 did not pass' }
+          if ($log -notmatch 'WINDOWS_SHARED_TEXTURE_D3D_IMPORT=PASS') { throw 'Windows D3D import boundary did not pass' }
+          'WINDOWS_SHARED_TEXTURE_D3D_IMPORT=PASS' | Add-Content windows-boundary-result.txt
+          'WINDOWS_RESIZE_SEQUENCE=854x480->1280x720->854x480 PASS' | Add-Content windows-boundary-result.txt
+
+      - name: Capture Windows graphics diagnostics
+        if: always()
+        shell: pwsh
+        run: |
+          try { dxdiag /t "$PWD\dxdiag.txt" | Out-Null; Start-Sleep -Seconds 3 } catch {}
+          Get-ComputerInfo | Out-File computer-info.txt
+
+      - name: Upload Windows boundary evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: core-ui-windows-shared-texture-boundary
+          if-no-files-found: warn
+          path: |
+            windows-boundary-result.txt
+            windows-shared-texture.log
+            windows-shared-texture-copy.log
+            electron-console.log
+            dxdiag.txt
+            computer-info.txt
+            harness/main.js
+            harness/import-handle.ps1
