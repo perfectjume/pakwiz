@@ -199,6 +199,132 @@ static int child_main(DWORD sourcePid, uintptr_t sourceHandleValue,
     return 0;
 }
 
+
+static int local_copy_slot47(D3D_DRIVER_TYPE driverType) {
+    ID3D11Device* device = nullptr;
+    ID3D11DeviceContext* context = nullptr;
+    ID3D11Texture2D* source = nullptr;
+    ID3D11Texture2D* destination = nullptr;
+    ID3D11Texture2D* staging = nullptr;
+    ID3D11RenderTargetView* rtv = nullptr;
+    wchar_t hbuf[32];
+
+    D3D_FEATURE_LEVEL featureLevel{};
+    HRESULT hr = D3D11CreateDevice(
+        nullptr, driverType, nullptr, D3D11_CREATE_DEVICE_BGRA_SUPPORT,
+        nullptr, 0, D3D11_SDK_VERSION,
+        &device, &featureLevel, &context);
+    if (FAILED(hr)) {
+        std::fwprintf(stderr, L"LOCAL_COPY_FAIL D3D11CreateDevice driver=%ls hr=%ls\n",
+                      driver_name(driverType), hrhex(hr, hbuf, 32));
+        return 30;
+    }
+
+    D3D11_TEXTURE2D_DESC desc{};
+    desc.Width = 64;
+    desc.Height = 64;
+    desc.MipLevels = 1;
+    desc.ArraySize = 1;
+    desc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
+    desc.SampleDesc.Count = 1;
+    desc.Usage = D3D11_USAGE_DEFAULT;
+    desc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
+
+    hr = device->CreateTexture2D(&desc, nullptr, &source);
+    if (FAILED(hr) || !source) {
+        std::fwprintf(stderr, L"LOCAL_COPY_FAIL CreateTexture2D(source) hr=%ls\n",
+                      hrhex(hr, hbuf, 32));
+        context->Release();
+        device->Release();
+        return 31;
+    }
+    hr = device->CreateTexture2D(&desc, nullptr, &destination);
+    if (FAILED(hr) || !destination) {
+        std::fwprintf(stderr, L"LOCAL_COPY_FAIL CreateTexture2D(destination) hr=%ls\n",
+                      hrhex(hr, hbuf, 32));
+        source->Release();
+        context->Release();
+        device->Release();
+        return 32;
+    }
+    hr = device->CreateRenderTargetView(source, nullptr, &rtv);
+    if (FAILED(hr) || !rtv) {
+        std::fwprintf(stderr, L"LOCAL_COPY_FAIL CreateRenderTargetView hr=%ls\n",
+                      hrhex(hr, hbuf, 32));
+        destination->Release();
+        source->Release();
+        context->Release();
+        device->Release();
+        return 33;
+    }
+
+    const float clearColor[4] = { 0.25f, 0.50f, 0.75f, 1.00f };
+    context->ClearRenderTargetView(rtv, clearColor);
+
+    using CopyResourceFn =
+        void (STDMETHODCALLTYPE*)(ID3D11DeviceContext*, ID3D11Resource*, ID3D11Resource*);
+    void** contextVtable = *reinterpret_cast<void***>(context);
+    auto copyResource = reinterpret_cast<CopyResourceFn>(contextVtable[47]);
+    copyResource(context, destination, source);
+
+    D3D11_TEXTURE2D_DESC stagingDesc = desc;
+    stagingDesc.Usage = D3D11_USAGE_STAGING;
+    stagingDesc.BindFlags = 0;
+    stagingDesc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
+    hr = device->CreateTexture2D(&stagingDesc, nullptr, &staging);
+    if (FAILED(hr) || !staging) {
+        std::fwprintf(stderr, L"LOCAL_COPY_FAIL CreateTexture2D(staging) hr=%ls\n",
+                      hrhex(hr, hbuf, 32));
+        rtv->Release();
+        destination->Release();
+        source->Release();
+        context->Release();
+        device->Release();
+        return 34;
+    }
+
+    context->CopyResource(staging, destination);
+    D3D11_MAPPED_SUBRESOURCE mapped{};
+    hr = context->Map(staging, 0, D3D11_MAP_READ, 0, &mapped);
+    if (FAILED(hr) || !mapped.pData) {
+        std::fwprintf(stderr, L"LOCAL_COPY_FAIL Map hr=%ls\n", hrhex(hr, hbuf, 32));
+        staging->Release();
+        rtv->Release();
+        destination->Release();
+        source->Release();
+        context->Release();
+        device->Release();
+        return 35;
+    }
+
+    const unsigned char* p = reinterpret_cast<const unsigned char*>(mapped.pData);
+    const int b = p[0], g = p[1], r = p[2], a = p[3];
+    context->Unmap(staging, 0);
+    const bool pixelOk =
+        b >= 190 && b <= 192 &&
+        g >= 127 && g <= 128 &&
+        r >= 63 && r <= 64 &&
+        a == 255;
+
+    std::wprintf(L"LOCAL_COPY_SLOT47_PIXEL bgra=%d,%d,%d,%d\n", b, g, r, a);
+
+    staging->Release();
+    rtv->Release();
+    destination->Release();
+    source->Release();
+    context->Release();
+    device->Release();
+
+    if (!pixelOk) {
+        std::fwprintf(stderr, L"LOCAL_COPY_FAIL slot47 pixel mismatch\n");
+        return 36;
+    }
+
+    std::wprintf(L"LOCAL_CONTEXT_COPYRESOURCE_SLOT47=PASS driver=%ls featureLevel=0x%X\n",
+                 driver_name(driverType), static_cast<unsigned>(featureLevel));
+    return 0;
+}
+
 static int parent_main(const wchar_t* exe, D3D_DRIVER_TYPE driverType) {
     ID3D11Device* device = nullptr;
     ID3D11DeviceContext* context = nullptr;
@@ -339,6 +465,10 @@ static int parent_main(const wchar_t* exe, D3D_DRIVER_TYPE driverType) {
 }
 
 int wmain(int argc, wchar_t** argv) {
+    if (argc >= 3 && _wcsicmp(argv[1], L"--local-copy") == 0) {
+        return local_copy_slot47(parse_driver(argv[2]));
+    }
+
     if (argc >= 7 && _wcsicmp(argv[1], L"--child") == 0) {
         DWORD pid = static_cast<DWORD>(_wcstoui64(argv[2], nullptr, 10));
         uintptr_t handleValue =
