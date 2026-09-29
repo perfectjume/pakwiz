@@ -7,6 +7,7 @@ on:
       - core-ui-runtime-smoke
     paths:
       - '.github/workflows/core-ui-windows-shared-texture.yml'
+      - 'core-ui-runtime/native-d3d-boundary.cpp'
 
 permissions:
   contents: read
@@ -76,6 +77,12 @@ jobs:
           }
           if ($warp -notmatch 'NATIVE_CROSS_PROCESS_D3D_NTHANDLE=PASS driver=WARP') {
             throw 'WARP cross-process NT-handle test did not pass'
+          }
+          if ($warp -notmatch 'PARENT_KEYED_ACQUIRE=PASS key=0' -or
+              $warp -notmatch 'PARENT_KEYED_RELEASE=PASS key=1' -or
+              $warp -notmatch 'CHILD_KEYED_ACQUIRE=PASS key=1' -or
+              $warp -notmatch 'CHILD_KEYED_RELEASE=PASS key=0') {
+            throw 'WARP keyed-mutex handoff markers missing'
           }
           'NATIVE_D3D_CROSS_PROCESS_KEYED_WARP=PASS slots=48,10,47' |
             Add-Content native-d3d-result.txt
