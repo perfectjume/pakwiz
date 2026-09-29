@@ -352,6 +352,21 @@ jobs:
               return fallback;
           }
 
+          private static int rangeStep(net.minecraft.client.OptionInstance<Integer> option, int min, int max, int fallback) {
+              Integer previous = null;
+              for (int value = min; value <= max; value++) {
+                  java.util.Optional<Integer> validated = option.values().validateValue(value);
+                  if (validated.isPresent() && validated.get().intValue() == value) {
+                      if (previous != null) {
+                          int step = value - previous.intValue();
+                          return step > 0 ? step : fallback;
+                      }
+                      previous = value;
+                  }
+              }
+              return fallback;
+          }
+
           private static void sendSettingsState(Minecraft minecraft, String reason) {
               long session = activeSession;
               long generation = activeGeneration;
@@ -370,18 +385,23 @@ jobs:
                   ",\"fov\":" + options.fov().get() +
                   ",\"fov_min\":" + BridgeRuntime.rangeMin(options.fov(), 30) +
                   ",\"fov_max\":" + BridgeRuntime.rangeMax(options.fov(), 110) +
+                  ",\"fov_step\":" + BridgeRuntime.rangeStep(options.fov(), BridgeRuntime.rangeMin(options.fov(), 30), BridgeRuntime.rangeMax(options.fov(), 110), 1) +
                   ",\"gui_scale\":" + options.guiScale().get() +
                   ",\"gui_scale_min\":" + BridgeRuntime.rangeMin(options.guiScale(), 0) +
                   ",\"gui_scale_max\":" + BridgeRuntime.rangeMax(options.guiScale(), 4) +
+                  ",\"gui_scale_step\":" + BridgeRuntime.rangeStep(options.guiScale(), BridgeRuntime.rangeMin(options.guiScale(), 0), BridgeRuntime.rangeMax(options.guiScale(), 4), 1) +
                   ",\"render_distance\":" + options.renderDistance().get() +
                   ",\"render_distance_min\":" + BridgeRuntime.rangeMin(options.renderDistance(), 2) +
                   ",\"render_distance_max\":" + BridgeRuntime.rangeMax(options.renderDistance(), 32) +
+                  ",\"render_distance_step\":" + BridgeRuntime.rangeStep(options.renderDistance(), BridgeRuntime.rangeMin(options.renderDistance(), 2), BridgeRuntime.rangeMax(options.renderDistance(), 32), 1) +
                   ",\"simulation_distance\":" + options.simulationDistance().get() +
                   ",\"simulation_distance_min\":" + BridgeRuntime.rangeMin(options.simulationDistance(), 5) +
                   ",\"simulation_distance_max\":" + BridgeRuntime.rangeMax(options.simulationDistance(), 32) +
+                  ",\"simulation_distance_step\":" + BridgeRuntime.rangeStep(options.simulationDistance(), BridgeRuntime.rangeMin(options.simulationDistance(), 5), BridgeRuntime.rangeMax(options.simulationDistance(), 32), 1) +
                   ",\"framerate_limit\":" + options.framerateLimit().get() +
                   ",\"framerate_limit_min\":" + BridgeRuntime.rangeMin(options.framerateLimit(), 10) +
                   ",\"framerate_limit_max\":" + BridgeRuntime.rangeMax(options.framerateLimit(), 260) +
+                  ",\"framerate_limit_step\":" + BridgeRuntime.rangeStep(options.framerateLimit(), BridgeRuntime.rangeMin(options.framerateLimit(), 10), BridgeRuntime.rangeMax(options.framerateLimit(), 260), 10) +
                   ",\"graphics_mode\":\"" + graphics + "\"}\n";
               OUTBOUND.offer(message);
               BridgeRuntime.trace("queued settings-state reason=" + reason + " session=" + session + "/" + generation);
