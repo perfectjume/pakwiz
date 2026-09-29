@@ -197,3 +197,5 @@ jobs:
             core-ui-runtime/settings-api-test/
 
 # Trigger real-client action-router gate after workflow introduction.
+
+# Trigger real-client settings gate after workflow introduction.
