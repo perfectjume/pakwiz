@@ -20,7 +20,7 @@ static const wchar_t* driver_name(D3D_DRIVER_TYPE t) {
 
 static int child_main(DWORD sourcePid, uintptr_t sourceHandleValue,
                       UINT expectedWidth, UINT expectedHeight,
-                      D3D_DRIVER_TYPE driverType) {
+                      D3D_DRIVER_TYPE driverType, bool keyedMutex) {
     HANDLE sourceProcess = nullptr;
     HANDLE duplicated = nullptr;
     ID3D11Device* device = nullptr;
@@ -29,6 +29,8 @@ static int child_main(DWORD sourcePid, uintptr_t sourceHandleValue,
     ID3D11Texture2D* texture = nullptr;
     ID3D11Texture2D* owned = nullptr;
     ID3D11Texture2D* staging = nullptr;
+    IDXGIKeyedMutex* keyed = nullptr;
+    bool keyedOwned = false;
     wchar_t hbuf[32];
 
     sourceProcess = OpenProcess(PROCESS_DUP_HANDLE, FALSE, sourcePid);
@@ -114,6 +116,26 @@ static int child_main(DWORD sourcePid, uintptr_t sourceHandleValue,
         desc.SampleDesc.Count, static_cast<unsigned>(desc.Format),
         desc.BindFlags, desc.MiscFlags);
 
+    if (ok && keyedMutex) {
+        hr = texture->QueryInterface(
+            __uuidof(IDXGIKeyedMutex), reinterpret_cast<void**>(&keyed));
+        if (FAILED(hr) || !keyed) {
+            std::fwprintf(stderr, L"CHILD_FAIL QueryInterface(IDXGIKeyedMutex) hr=%ls\n",
+                          hrhex(hr, hbuf, 32));
+            ok = false;
+        } else {
+            hr = keyed->AcquireSync(1, 5000);
+            if (FAILED(hr)) {
+                std::fwprintf(stderr, L"CHILD_FAIL AcquireSync(key=1) hr=%ls\n",
+                              hrhex(hr, hbuf, 32));
+                ok = false;
+            } else {
+                keyedOwned = true;
+                std::wprintf(L"CHILD_KEYED_ACQUIRE=PASS key=1\n");
+            }
+        }
+    }
+
     if (ok) {
         D3D11_TEXTURE2D_DESC ownedDesc = desc;
         ownedDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -180,6 +202,18 @@ static int child_main(DWORD sourcePid, uintptr_t sourceHandleValue,
         }
     }
 
+    if (keyedOwned && keyed) {
+        HRESULT releaseHr = keyed->ReleaseSync(0);
+        if (FAILED(releaseHr)) {
+            std::fwprintf(stderr, L"CHILD_FAIL ReleaseSync(key=0) hr=%ls\n",
+                          hrhex(releaseHr, hbuf, 32));
+            ok = false;
+        } else {
+            std::wprintf(L"CHILD_KEYED_RELEASE=PASS key=0\n");
+        }
+        keyedOwned = false;
+    }
+    if (keyed) keyed->Release();
     if (staging) staging->Release();
     if (owned) owned->Release();
     texture->Release();
@@ -330,6 +364,8 @@ static int parent_main(const wchar_t* exe, D3D_DRIVER_TYPE driverType, bool keye
     ID3D11DeviceContext* context = nullptr;
     ID3D11Texture2D* texture = nullptr;
     IDXGIResource1* dxgiResource1 = nullptr;
+    IDXGIKeyedMutex* keyed = nullptr;
+    bool keyedOwned = false;
     HANDLE sharedHandle = nullptr;
     wchar_t hbuf[32];
 
@@ -368,11 +404,38 @@ static int parent_main(const wchar_t* exe, D3D_DRIVER_TYPE driverType, bool keye
         return 11;
     }
 
+    if (keyedMutex) {
+        hr = texture->QueryInterface(
+            __uuidof(IDXGIKeyedMutex), reinterpret_cast<void**>(&keyed));
+        if (FAILED(hr) || !keyed) {
+            std::fwprintf(stderr, L"PARENT_FAIL QueryInterface(IDXGIKeyedMutex) hr=%ls\n",
+                          hrhex(hr, hbuf, 32));
+            texture->Release();
+            context->Release();
+            device->Release();
+            return 17;
+        }
+        hr = keyed->AcquireSync(0, 5000);
+        if (FAILED(hr)) {
+            std::fwprintf(stderr, L"PARENT_FAIL AcquireSync(key=0) hr=%ls\n",
+                          hrhex(hr, hbuf, 32));
+            keyed->Release();
+            texture->Release();
+            context->Release();
+            device->Release();
+            return 18;
+        }
+        keyedOwned = true;
+        std::wprintf(L"PARENT_KEYED_ACQUIRE=PASS key=0\n");
+    }
+
     ID3D11RenderTargetView* rtv = nullptr;
     hr = device->CreateRenderTargetView(texture, nullptr, &rtv);
     if (FAILED(hr) || !rtv) {
         std::fwprintf(stderr, L"PARENT_FAIL CreateRenderTargetView driver=%ls hr=%ls\n",
                       driver_name(driverType), hrhex(hr, hbuf, 32));
+        if (keyedOwned && keyed) keyed->ReleaseSync(0);
+        if (keyed) keyed->Release();
         texture->Release();
         context->Release();
         device->Release();
@@ -382,6 +445,21 @@ static int parent_main(const wchar_t* exe, D3D_DRIVER_TYPE driverType, bool keye
     context->ClearRenderTargetView(rtv, clearColor);
     context->Flush();
     rtv->Release();
+
+    if (keyedOwned && keyed) {
+        hr = keyed->ReleaseSync(1);
+        if (FAILED(hr)) {
+            std::fwprintf(stderr, L"PARENT_FAIL ReleaseSync(key=1) hr=%ls\n",
+                          hrhex(hr, hbuf, 32));
+            keyed->Release();
+            texture->Release();
+            context->Release();
+            device->Release();
+            return 19;
+        }
+        keyedOwned = false;
+        std::wprintf(L"PARENT_KEYED_RELEASE=PASS key=1\n");
+    }
 
     hr = texture->QueryInterface(
         __uuidof(IDXGIResource1), reinterpret_cast<void**>(&dxgiResource1));
@@ -417,10 +495,11 @@ static int parent_main(const wchar_t* exe, D3D_DRIVER_TYPE driverType, bool keye
 
     wchar_t cmd[4096];
     swprintf_s(
-        cmd, L"\"%ls\" --child %lu %llu %u %u %ls",
+        cmd, L"\"%ls\" --child %lu %llu %u %u %ls %ls",
         exe, GetCurrentProcessId(),
         static_cast<unsigned long long>(reinterpret_cast<uintptr_t>(sharedHandle)),
-        desc.Width, desc.Height, driver_name(driverType));
+        desc.Width, desc.Height, driver_name(driverType),
+        keyedMutex ? L"keyed" : L"nokey");
 
     STARTUPINFOW si{};
     si.cb = sizeof(si);
@@ -447,6 +526,7 @@ static int parent_main(const wchar_t* exe, D3D_DRIVER_TYPE driverType, bool keye
 
     CloseHandle(sharedHandle);
     dxgiResource1->Release();
+    if (keyed) keyed->Release();
     texture->Release();
     context->Release();
     device->Release();
@@ -472,14 +552,15 @@ int wmain(int argc, wchar_t** argv) {
         return local_copy_slot47(parse_driver(argv[2]));
     }
 
-    if (argc >= 7 && _wcsicmp(argv[1], L"--child") == 0) {
+    if (argc >= 8 && _wcsicmp(argv[1], L"--child") == 0) {
         DWORD pid = static_cast<DWORD>(_wcstoui64(argv[2], nullptr, 10));
         uintptr_t handleValue =
             static_cast<uintptr_t>(_wcstoui64(argv[3], nullptr, 10));
         UINT width = static_cast<UINT>(_wcstoui64(argv[4], nullptr, 10));
         UINT height = static_cast<UINT>(_wcstoui64(argv[5], nullptr, 10));
         D3D_DRIVER_TYPE driver = parse_driver(argv[6]);
-        return child_main(pid, handleValue, width, height, driver);
+        bool keyedMutex = _wcsicmp(argv[7], L"keyed") == 0;
+        return child_main(pid, handleValue, width, height, driver, keyedMutex);
     }
 
     D3D_DRIVER_TYPE driver =
