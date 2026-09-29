@@ -472,3 +472,5 @@ jobs:
             BridgeRuntime-settings.javap.txt
             mdk/src/main/java/dev/coreui/bridge/BridgeRuntime.java
             mdk/src/main/java/dev/coreui/bridge/GpuOverlayScreen.java
+
+# Trigger settings API build after workflow introduction.
